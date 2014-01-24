@@ -1,0 +1,60 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formDynVolHis">
+    <!-- <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.viewDates}"  />
+      <p:calendar id="popupButtonCal1" value="#{basedateBean.stDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleStartDateSelect}" update="@(.ui-datatable)" />
+      </p:calendar>
+      <h:outputText value=" ~ " />
+      <p:calendar id="popupButtonCal2" value="#{basedateBean.endDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleEndDateSelect}" update="@(form)" />
+      </p:calendar>
+      <p:commandButton value="#{messages.clearSortAndFilter}" action="#{tableVolatilityHistoryInit.resetTable()}" update="@(.ui-datatable)"/>
+    </p:panelGrid> -->
+
+    
+    <p:dataTable id="tableDynVolHis" value="#{tableDynVolatiltiyHisInit.pivotTableContent}" var="_volHis"
+      emptyMessage="No History Data found with given criteria. Change the Dates"
+      selection="#{tableVolatilityHistoryInit.selLazyModelVolHis}" selectionMode="single" 
+      rowKey="#{_volHis.data}"
+      sortMode="multiple"
+      resizableColumns="true" 
+      paginator="true" paginatorPosition="bottom" rows="15"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="15,25,50" 
+      style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
+      
+      <p:columns value="#{tableDynVolatiltiyHisInit.pivotTableHeader}" var="column" columnIndexVar="colIndex" width="80"
+       sortBy="#{_volHis.contentMap[column].stringValue}"
+       filterBy="#{_volHis.contentMap[column].stringValue}" filterMatchMode="contains"
+       >
+        <f:facet name="header">  
+                <h:outputText value="#{column.colName}" />  
+         </f:facet>
+        <h:outputText value="#{_volHis.contentMap[column].stringValue}" style="float:right" >
+        </h:outputText>
+      </p:columns>
+
+    </p:dataTable>
+    
+  <!--  <p:contextMenu for="formDynVolHis">
+      <p:menuitem value="#{messages.showChart}" id="qqqa" />
+      <p:menuitem >
+       <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
+        <p:graphicImage value="/img/primefaces/excel.png" />
+        <p:dataExporter type="xls" target="tableDynVolHis" fileName="#{messages.volHis}" />
+      </h:commandLink>
+      </p:menuitem>
+      <p:menuitem value="#{messages.viewIrcDetail1}" action="#{tableVolatilityHistoryInit.dataTableView()}" />
+    </p:contextMenu> -->
+        
+      
+  </h:form>
+</ui:composition>

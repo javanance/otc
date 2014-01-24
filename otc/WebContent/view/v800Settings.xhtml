@@ -1,0 +1,183 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/templatePrimeTop.xhtml">
+
+  <ui:define name="layoutCenter">
+    <h:form id="formSettings">
+
+      <!-- <p:contextMenu for="tabviewSettings:acordionId:xxx">
+        <p:menuitem value="View" onclick="portListDialog3.show();" icon="ui-icon-search" />
+      </p:contextMenu> -->
+
+      <p:tabView id="tabviewSettings" orientation="top">
+        <!--         <p:tab title="#{messages.generalSettings} ">
+          <p:panelGrid columns="4">
+            <p:row>
+              <h:outputText value="#{messages.theme}" />
+
+              <p:themeSwitcher id="defaultSwitcher" value="#{themeSwitcher.theme}" style="width:200px">
+                <f:selectItem itemLabel="#{messages.selectTheme}" itemValue="" />
+                <f:selectItems value="#{themeSwitcher.themes}" var="_theme" itemLabel="#{_theme.name}"
+                  itemValue="#{_theme}" />
+                <p:ajax listener="#{themeSwitcher.saveTheme}" />
+              </p:themeSwitcher>
+            </p:row>
+
+            <h:outputText value=" #{messages.language} " />
+            <p:selectOneMenu value="#{localeSelector.localeString}" style="width:200px">
+              <f:selectItems value="#{localeSelector.supportedLocales}" />
+            </p:selectOneMenu>
+            <h:commandButton action="#{localeSelector.select}" value="#{messages.ChangeLanguage}" />
+
+            <p:outputLabel value="#{messages.baseDate}" style="width:30px ;" />
+            <p:calendar id="popupButtonCal0" value="#{basedateSession.baseDate}" showButtonPanel="true"
+              pattern="yyyy/MM/dd" navigator="true">
+              <p:ajax event="dateSelect" listener="#{basedateSession.handleDateSelect}" update="@(form)" />
+            </p:calendar>
+          </p:panelGrid>
+
+          <p:panelGrid columns="4">
+            <p:outputLabel value="#{messages.intervalForHistoryData}" style="width:30px" />
+            <p:outputLabel value="#{messages.startDate}" />
+            <p:calendar id="popupButtonCal1" value="#{basedateSession.stDate}" showButtonPanel="true"
+              pattern="yyyy/MM/dd" navigator="true">
+              <p:ajax event="dateSelect" listener="#{basedateSession.handleStartDateSelect}" update="@(form)" />
+            </p:calendar>
+            <p:outputLabel value="~" />
+            <p:outputLabel value="#{messages.endDates}" />
+            <p:calendar id="popupButtonCal2" value="#{basedateSession.endDate}" showButtonPanel="true"
+              pattern="yyyy/MM/dd" navigator="true">
+              <p:ajax event="dateSelect" listener="#{basedateSession.handleEndDateSelect}" update="@(form)" />
+            </p:calendar>
+          </p:panelGrid>
+
+
+
+          <p:panelGrid columns="2" cellpadding="100">
+
+            <p:selectOneRadio id="customRadio" value="#{flagBean.flagInterval}" layout="lineDirection" plain="true">
+              <f:selectItem itemLabel="#{messages.oneMonth}" itemValue="M01" />
+              <f:selectItem itemLabel="#{messages.threeMonth}" itemValue="2" />
+              <f:selectItem itemLabel="#{messages.sixMonth}" itemValue="3" />
+              <f:selectItem itemLabel="#{messages.oneYear}" itemValue="4" />
+              <p:ajax event="valueChange" process="@this" update="@(form)"
+                listener="#{basedateSession.handleStartDateSelect}" />
+            </p:selectOneRadio>
+
+            <f:facet name="footer">
+              <h:commandButton value="Save" icon="ui-icon-check" action="#{localeSelector.select}" style="margin:0" />
+            </f:facet>
+          </p:panelGrid>
+        </p:tab> -->
+
+
+        <p:tab title="#{messages.generalSettings} ">
+          <p:panelGrid>
+            <p:row>
+              <p:column colspan="1">#{messages.theme}</p:column>
+              <p:column colspan="3">
+                <p:themeSwitcher id="defaultSwitcher" value="#{themeSwitcher.theme}" style="width:200px">
+                  <f:selectItem itemLabel="#{messages.selectTheme}" itemValue="" />
+                  <f:selectItems value="#{themeSwitcher.themes}" var="_theme" itemLabel="#{_theme.name}"
+                    itemValue="#{_theme}" />
+                  <p:ajax listener="#{themeSwitcher.saveTheme}" />
+                </p:themeSwitcher>
+              </p:column>
+            </p:row>
+
+            <p:row>
+              <p:column>#{messages.language}</p:column>
+              <p:column colspan="3">
+                <p:selectOneMenu value="#{localeSelector.localeString}" style="width:200px">
+                  <f:selectItems value="#{localeSelector.supportedLocales}" />
+                </p:selectOneMenu>
+              </p:column>
+            </p:row>
+            <p:row>
+              <p:column colspan="4">
+                <p:separator />
+              </p:column>
+            </p:row>
+            <p:row>
+              <p:column colspan="1">#{messages.baseDate}</p:column>
+
+              <p:column colspan="3">
+                <p:calendar id="popupButtonCal0" value="#{basedateSession.baseDate}" showButtonPanel="true"
+                  pattern="yyyy/MM/dd" navigator="true">
+                  <p:ajax event="dateSelect" listener="#{basedateSession.handleDateSelect}" update="@(form)" />
+                </p:calendar>
+              </p:column>
+            </p:row>
+
+            <p:row>
+              <p:column>#{messages.availableDates}</p:column>
+              <p:column>
+                <p:calendar id="popupButtonCal1" value="#{basedateSession.stDate}" showButtonPanel="true"
+                  pattern="yyyy/MM/dd" navigator="true">
+                  <p:ajax event="dateSelect" listener="#{basedateSession.handleStartDateSelect}" update="@(form)" />
+                </p:calendar>
+              </p:column> ~              <p:column>
+              </p:column>
+              <p:column>
+                <p:calendar id="popupButtonCal2" value="#{basedateSession.endDate}" showButtonPanel="true"
+                  pattern="yyyy/MM/dd" navigator="true">
+                  <p:ajax event="dateSelect" listener="#{basedateSession.handleEndDateSelect}" update="@(form)" />
+                </p:calendar>
+              </p:column>
+            </p:row>
+
+            <p:row>
+              <p:column colspan="4">
+                <p:selectOneRadio id="customRadio" value="#{flagBean.flagInterval}" layout="lineDirection" plain="true">
+                  <f:selectItem itemLabel="#{messages.oneMonth}" itemValue="M01" />
+                  <f:selectItem itemLabel="#{messages.threeMonth}" itemValue="2" />
+                  <f:selectItem itemLabel="#{messages.sixMonth}" itemValue="3" />
+                  <f:selectItem itemLabel="#{messages.oneYear}" itemValue="4" />
+                  <p:ajax event="valueChange" process="@this" update="@(form)"
+                    listener="#{basedateSession.handleStartDateSelect}" />
+                </p:selectOneRadio>
+              </p:column>
+
+            </p:row>
+            <!-- <p:row>
+              <p:column colspan="4" styleClass="ui-widget-header">
+                <p:separator style="height: 10px"></p:separator>
+              </p:column>
+            </p:row> -->
+            <f:facet name="footer">
+              <p:row>
+                <p:column>
+                  <h:commandButton value="Save" icon="ui-icon-check" action="#{localeSelector.select}" style="margin:0" />
+                </p:column>
+              </p:row>
+            </f:facet>
+          </p:panelGrid>
+        </p:tab>
+        <!-- ********************************************************************** -->
+        <p:tab title="#{messages.aaa}">
+          <p:commandButton id="basiczzz" value="Basic" onclick="portListDialog3.show();" type="button" />
+        </p:tab>
+        <p:tab id="tabzzzz" title="Test Accordion">
+          <p:accordionPanel id="acordionId" multiple="true">
+            <p:tab title="#{messages.userDefined}" disabled="#{not identity.loggedIn}">
+              <p:outputLabel id="xyz" value="AAAA" />
+              <s:link value="BBB" onclick="portListDialog3.show();" />
+              <h:outputLink value="javascript:void(0)" onclick="portListDialog3.show();">CCC </h:outputLink>
+            </p:tab>
+            <p:tab id="xxx" title="#{messages.userDefined}" disabled="#{not identity.loggedIn}">
+              <p:commandButton type="button" value="AAA222" onclick="portListDialog3.show();" />
+            </p:tab>
+          </p:accordionPanel>
+        </p:tab>
+      </p:tabView>
+
+      <p:dialog header="Taaa" widgetVar="portListDialog3">
+        <h:outputText value="AAA" />
+      </p:dialog>
+
+    </h:form>
+  </ui:define>
+</ui:composition>

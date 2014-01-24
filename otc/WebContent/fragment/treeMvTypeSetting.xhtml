@@ -1,0 +1,33 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   
+  <h:form id="formMvTypeSetting" style="width:100%; height:100%">
+      <p:growl id="messages" showDetail="true" />
+      
+        <p:tree id="treeMvSetting" value="#{treeMvTypeInit.superNode}" var="_node" 
+          animate="true" highlight="true" orientation="vertical" 
+          selectionMode="single"  
+          selection="#{treeMvTypeInit.selectNode}"
+          draggable="false" droppable="false" 
+          style="width:100%;height:100%" styleClass="takion77-treeContainer">
+          
+          <!-- <p:ajax event="dragdrop" update="@(form)" /> --> 
+          <p:ajax event="select" listener="#{treeMvTypeInit.onNodeSelect}" update="@(.ui-datatable)" />
+
+<!--           <p:treeNode >
+            <h:outputText value="#{_node}"  />
+          </p:treeNode>
+ -->          
+          <p:treeNode type="root" icon="ui-icon-document">
+            <h:outputText value="#{_node.mvType}"  />
+          </p:treeNode>
+          
+          <p:treeNode type="sub" icon="ui-icon-video">
+            <h:outputText value="#{_node.mvType}"  />
+          </p:treeNode>
+        </p:tree>
+  </h:form>
+</ui:composition>

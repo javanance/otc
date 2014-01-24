@@ -1,0 +1,98 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveEdit">
+    <p:growl id ="growl" showDetail="true" sticky="false"  life="2000"/>
+    <p:remoteCommand name ="rcSelectDefault" action="#{tableHifiveInit.selectDefault}" update="@(.ui-datatable)"/>
+    <p:remoteCommand name ="rcCellEdit" action="#{tableHifiveInit.onCpartyChange}"/>
+    
+    
+    <p:contextMenu for="tableHifive" widgetVar="hifiveCmenu">
+      <p:menuitem value="#{messages.insertHifive}" action="#{tableHifiveInit.addHifive}" update="growl, @(.ui-datatable)" />
+      <p:separator/>
+      <p:menuitem value="#{messages.deleteHifive}" action="#{tableHifiveInit.removeHifive}"  oncomplete="rcSelectDefault()"  >
+        <!-- <f:param value="#{tableHifiveInit.selectHifive.prodId}"/> -->
+      </p:menuitem>  
+    </p:contextMenu>
+        
+    <p:dataTable id="tableHifive" var="_hifive" value="#{tableHifiveInit.hifiveList}" 
+      widgetVar="wgTableHifive"
+      emptyMessage="#{messages.noDataFound}"
+      selection="#{tableHifiveInit.selectHifive}" selectionMode="single"
+      rowKey="#{_hifive.prodId}"
+      editable="true" editMode="cell"  rowIndexVar="rowIndex" 
+ >
+
+      <!-- <p:ajax event="rowSelect" update="@(.ui-datatable)" /> -->
+      <!-- <p:ajax event="rowSelect"  update="@namingcontainer:@next:datatable"/> -->
+      <p:ajax event="rowSelect"  update="@(.dynamicTableId)"/>
+      <!-- <p:ajax  event="filter" listener="#{tableHifiveInit.selectDefault}"  update="tableHifive"/> -->
+      <p:ajax event="filter" oncomplete="rcSelectDefault()"  />
+
+      <!-- <p:ajax event="rowSelect" update="@(.ui-datatable)" /> -->
+      <!-- <p:ajax  event="filter" listener="#{tableHifiveInit.selectDefault}"  update="tableHifive"/> -->
+      <!-- <p:ajax event="filter" oncomplete="rcSelectDefault()"  /> -->
+      <!-- <p:ajax event="sort" oncomplete="rcSelectDefault()"/> -->
+      <!-- <p:ajax event ="cellEdit" listener="#{tableHifiveInit.onCpartyChange}"  /> -->
+      <p:ajax event ="rowEdit" listener="#{tableHifiveInit.onRowEdit}" update="@parent:growl"  />
+      <!-- <p:ajax event ="cellEdit" oncomplete="rcCellEdit()" /> -->
+      <!-- <p:ajax event="rowSelect" listener="#{tableHifiveStrikeInit.loadPivotTable1}" update="@(.ui-datatable)" /> -->
+      
+      <p:column   headerText="#{messages.edit}" exportable="false" width="6">
+        <p:rowEditor rendered="#{_hifive.virtual}"/>
+      </p:column>
+      <p:column selectionMode="single" headerText="#{messages.all}" exportable="false" width="6" />
+      
+      <p:column id="colProdName" width="100" sortBy="#{_hifive.virtual}"
+          filterBy="#{_hifive.virtual}" filterMatchMode="contains"  >
+        <f:facet name="header">#{messages.productName}</f:facet>
+        <p:cellEditor >
+          <f:facet name="output"> <h:outputText value="#{_hifive.prodName}" />  </f:facet>
+          <f:facet name="input"> <p:inputText id="inputProdName" value="#{_hifive.prodName}" /></f:facet>
+        </p:cellEditor>
+        <!-- <h:outputText value="#{_hifive.prodName}"  rendered="#{! _hifive.virtual}"/> -->
+      </p:column>
+
+
+      <p:column id="colIssueDate" headerText="#{messages.getIssueDate}">
+        <p:cellEditor >
+        <f:facet name="output">
+          <h:outputText value="#{_hifive.issueDate}" />
+        </f:facet>
+        <f:facet name="input">
+          <p:inputText id="inputIssueDate" value="#{_hifive.issueDate}" />
+        </f:facet>
+        </p:cellEditor>
+        <!-- <h:outputText value="#{_hifive.issueDate}"  rendered="#{! _hifive.virtual}"/> -->
+      </p:column>
+      
+      <p:column id="colCntPartyId" header="#{messages.countPartyId}" sortBy="#{_hifive.cpartyId}"
+        filterBy="#{_hifive.cpartyId}" filterMatchMode="contains" width="100">
+        <!-- <f:facet name="header">
+          <h:outputText id="fheader" value="#{messages.countPartyId}" />
+        </f:facet> -->
+        <p:cellEditor rendered="#{_hifive.virtual}">
+        <f:facet name="output">
+          <h:outputText value="#{_hifive.cpartyId}" />
+        </f:facet>
+        <f:facet name="input">
+          <!-- <p:inputText id="inputCntPartyId" value="#{_hifive.cpartyId}" /> -->
+          <!-- <p:autoComplete id="inputCntPartyId" value="#{counterpartyList.resultList}" 
+             completeMethod="#{counterpartyList.complete}" process ="@this" var="cparty"
+             itemLabel="#{cparty.counterpartyName}">
+          
+          </p:autoComplete> -->
+          <p:autoComplete id="innputCntPartyId" value="#{_hifive.cpartyId}"
+            completeMethod="#{tableHifiveInit.completeCparty}"  var="cparty"  itemLabel="#{cparty}"
+            itemValue="#{cparty}" 
+          />
+        </f:facet>
+        </p:cellEditor>
+        <h:outputText value="#{_hifive.cpartyId}"  rendered="#{! _hifive.virtual}"/>        
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

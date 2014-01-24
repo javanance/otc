@@ -1,0 +1,33 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formIrcBucket">
+
+    <p:dataTable id="tableIrcBucket" var="_irc" value="#{selectedIrCurve.ircBucketList}" widgetVar="wgTableIrcBucket"
+      emptyMessage="#{messages.noDataFound}" resizableColumns="true" liveResize="false" style="height :100%;">
+
+
+      <p:column id="colIrcId" width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.ircId}" />  
+         </f:facet>
+        <h:outputText value="#{_irc.ircId.ircId}" />
+      </p:column>
+      <p:column id="colMaturity" width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.maturity}" />  
+         </f:facet>
+        <h:outputText value="#{_irc.maturityId}" />
+      </p:column>
+      <p:column id="colIntRateId" width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.intRate}" />  
+         </f:facet>
+        <h:outputText value="#{_irc.intRate.irId}" />
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

@@ -1,0 +1,92 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+   
+   <p:panelGrid columns="2" >
+      <p:commandButton value="#{messages.save}" action="#{marketVariableSetting.save}" update="growl"/>
+   </p:panelGrid>
+    
+  <h:form id="formLazyMarketVariableSetting">
+    <p:dataTable id="tableLazyMarketVariables" value="#{paraLazyModels}" var="_mv"
+      widgetVar="wgTableLazyMarketVariables" lazy="true" emptyMessage="#{messages.noDataFound}" 
+      selectionMode="single"
+      rowKey="#{_mv.mvId}" selection="#{selectedMarketVariable}" 
+      editable="true" editMode="cell"
+      resizableColumns="true" sortMode="single"
+      draggableColumns="true"
+      paginator="true"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+      rowsPerPageTemplate="15,30,50"
+      paginatorPosition="bottom" rows="15"
+      style="height : 100%; width :100%; border-top-left-radius: 8px ;border-top-right-radius: 8px">
+
+      <!--       <p:ajax event="rowSelect" listener="#{tableLazyMarketVariableAction.onRowSelect}" update="@(form, .ui-tabs)" disabled="#{not flagUpdateFull}"/>
+      <p:ajax event="rowSelect" listener="#{tableLazyMarketVariableAction.onRowSelect}" update="@(.ui-datatable)" disabled="#{flagUpdateFull}"/> -->
+      <!-- <p:ajax event="rowSelect" listener="#{tableMvHisDataAction.onMvSelection}" update="@(.ui-datatable)" /> -->
+      <!-- <p:ajax event="rowSelect" listener="#{tablePositionAction.onMvSelection}" update="@(form)" disabled="#{flagDisablePosition}"/> -->
+
+      <p:column id="colMvType" sortBy="#{_mv.mvType}" filterBy="#{_mv.mvType}" filterMatchMode="contains"
+        filterOptions="#{paraSelectOneMvType}" rendered="#{typeRenderer}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableType}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvType}" />
+      </p:column>
+
+      <p:column id="colMvId" sortBy="#{_mv.mvId}" filterBy="#{_mv.mvId}" filterMatchMode="contains"  >
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableId}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvId}" />
+      </p:column>
+
+      <p:column id="colMvName" sortBy="#{_mv.mvName}" filterBy="#{_mv.mvName}" filterMatchMode="contains">
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableName}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvName}" />
+      </p:column>
+      
+     <p:column id="colProductYN" sortBy="#{_mv.productYN}" filterBy="#{_mv.productYN}" filterMatchMode="contains">
+        <f:facet name="header">
+          <h:outputText value="#{messages.productYN}" />
+        </f:facet>
+        <h:outputText value="#{_mv.productYN}" />
+      </p:column>
+
+     <p:column id="colRfYN" sortBy="#{_mv.riskFactorYN}" filterBy="#{_mv.riskFactorYN}" filterMatchMode="contains">
+        <f:facet name="header">
+          <h:outputText value="#{messages.riskFactorYN}" />
+        </f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_mv.riskFactorYN}" /></f:facet>
+          <f:facet name="input">
+            <p:inputText value="#{_mv.riskFactorYN}" style="width:100%"> 
+              <p:ajax event="keyup" listener="#{marketVariableSetting.addDirty(_mv)}"/>
+            </p:inputText>  
+          </f:facet>
+        </p:cellEditor>
+        
+      </p:column>
+      
+    
+      <p:column id="colUnderYN" sortBy="#{_mv.underlyingYN}" filterBy="#{_mv.underlyingYN}"  filterMatchMode="contains"
+        filterOptions="#{mvTypeOptionAction.booleanType}" >
+        <f:facet name="header">
+          <h:outputText value="#{messages.underlyingYN}" />
+        </f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_mv.underlyingYN}" /></f:facet>
+          <f:facet name="input">
+            <p:inputText value="#{_mv.underlyingYN}" style="width:100%" >
+              <p:ajax event="keyup" listener="#{marketVariableSetting.addDirty(_mv)}"/>
+            </p:inputText>
+          </f:facet>
+        </p:cellEditor>
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

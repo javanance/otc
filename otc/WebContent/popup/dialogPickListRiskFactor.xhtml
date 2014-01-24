@@ -1,0 +1,32 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formDlgRfSelect">
+    <p:growl id="msg" showDetail="true" escape="false" />
+
+    <p:dialog id="dialogRfSelect" widgetVar="wgDlgRfSelect" header="#{messages.selectRiskFactor}" 
+      resizable="false" closeOnEscape="true"
+      showEffect="fade" hideEffect="explode" 
+      maximizable="false" minimizable="false"
+      appendToBody="false"
+      modal="false"
+      dynamic="true"
+      width="580" height="400" 
+      style="border:none" >
+
+      <ui:include src="/fragment/panelStringPickList.xhtml">
+        <ui:param name="pickList" value="#{pickListRfAction.pickModelRf}" />
+      </ui:include>
+    
+      <p:separator />
+
+      <p:commandButton value="#{messages.submitButton}" action="#{pickListRfAction.afterPick}" 
+        onclick="wgDlgRfSelect.hide()" update=":tabViewVcv:formVcvMatrix:tableVcvMatrix" 
+        style="float:right" />
+        
+    </p:dialog>
+  </h:form>
+</ui:composition>

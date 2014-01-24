@@ -1,0 +1,58 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/templatePrimeTopWithNoti.xhtml">
+
+<!--   <ui:define name="layoutLeft">
+    <ui:include src="/fragment/tableLazyMarketVariables.xhtml" >
+    <ui:param name="paraLazyModels" value="#{lazyModelMarketVariable}" />
+      <ui:param name="paraSelectOneMvType" value="#{currentMvTypeOption}"/>
+      <ui:param name="flagContext" value="true" />
+      <ui:param name="flagUpdateFull" value="true" />
+      <ui:param name="flagDisablePosition" value="true" />
+    </ui:include>
+  </ui:define>
+ -->
+  <ui:define name="layoutCenter">
+    <p:tabView id="tabViewVcv" dynamic="false">
+    <p:tab id="tabVcvMatrix" title="#{messages.tabVcvMatrix}" >
+      <ui:include src="/fragment/tableVcvMatrix.xhtml" >
+        <!-- <ui:param name="pivotList1" value="#{tableRfVcvMatrixInit.pivotTableContent}" />
+        <ui:param name="dynCol" value="#{tableRfVcvMatrixInit.pivotTableHeader}" /> -->
+        <!-- <ui:param name="dynCol" value="#{vcvMatrixColumns}" /> -->
+        <!-- <ui:param name="pivotList1" value="#{pivotList}" /> -->
+      </ui:include> 
+       <ui:include src="/popup/dialogPickListRiskFactor.xhtml"/>
+    </p:tab>
+
+    <p:tab id="tabVcvHis" title="#{messages.tabVcvHis}"  >
+      <!-- <ui:include src="/fragment/tableVolatilityHistory.xhtml" /> -->
+      <ui:include src="/fragment/tableLazyVolatilityHistory.xhtml" />
+    </p:tab>
+    
+    </p:tabView>
+<!--     <p:notificationBar position="bottom" effect="slide" widgetVar="bar" autoDisplay="false" styleClass=".ui-notificationbar" >  
+      <p:panel header="AAA" style="border:none" >
+        <f:facet name="actions">
+          
+          <p:commandButton  icon="ui-icon-closethick" value="Close" onclick="PF('bar').hide()" style="float:right"/>
+          <p:commandButton  icon="ui-icon-pin-s" value="Fix" onfocus="PF('bar').show()" style="float:right"/>
+          <p:menu>
+            <p:menuitem value="Hide" onclick="bar.hide()"/>
+          </p:menu>
+        </f:facet>
+         <f:facet name="options">
+          <p:menuButton value="AAAA">
+            <p:menuitem value="Hide" onclick="bar.hide()"/>
+          </p:menuButton>>
+        </f:facet>
+          <h:outputText value="What PrimeFaces has so far is just the beginning!" style="color:#FFCC00;font-size:36px;" />
+      </p:panel>
+    </p:notificationBar> -->
+    <!-- <p:commandButton  value="Show" onclick="PF('bar').show()" onmouseover="PF('bar').show()" onmouseout="PF('bar').hide()"/> -->
+    
+  </ui:define>
+
+</ui:composition>

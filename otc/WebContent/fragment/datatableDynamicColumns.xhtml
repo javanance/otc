@@ -1,0 +1,61 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+
+
+
+
+  <h:form id="form">
+
+<h:panelGrid id="grid" columns="3" style="margin-bottom:10px">
+                    <h:outputLabel for="template" value="Template:" style="font-weight:bold"/>
+                    <p:inputText id="template" value="#{tableBean.columnTemplate}" size="50"/>
+                    <p:commandButton id="btn" update="@(form)" action="#{tableBean.updateColumns}" value="Update" 
+                                     onclick="carsTable.clearFilters()" ajax="true"/>
+
+                </h:panelGrid>
+
+    <p:dataTable id="cars" var="car" value="#{tableBean.dynCarsString}" widgetVar="carsTable"
+    filteredValue="#{tableBean.filterdynCarsString}"
+    selection="#{tableBean.seldynCarsString}" rowKey="#{car['model']}" selectionMode="single"
+      >
+       <p:ajax event="rowSelect" listener="#{tableBean.aaaa}"/>
+       <p:columns value="#{tableBean.columns}" var="column"  sortBy="#{column.property}"
+        filterBy="#{column.property}" filterMatchMode="contains">
+        <f:facet name="header">
+                            #{column.header}
+                        </f:facet>
+
+                        #{car[column.property]}
+                    </p:columns>
+
+
+    </p:dataTable>
+<!--       <p:columns value="#{tableBean.columns}" var="column"  sortBy="#{column.property}"
+        filterBy="#{column.property}" filterMatchMode="contains">
+        <f:facet name="header">
+                            #{column.header}
+                        </f:facet>
+
+                        #{car[column.property]}
+                    </p:columns>
+
+    </p:dataTable> -->
+<!--     <p:dataTable id="cars" var="car" value="#{tableBean.carsSmall}" widgetVar="carsTable"
+      filteredValue="#{tableBean.filteredCars}">
+      <p:columns value="#{tableBean.columns}" var="column"  sortBy="#{column.property}"
+        filterBy="#{column.property}" filterMatchMode="contains">
+        <f:facet name="header">
+                            #{column.header}
+                        </f:facet>
+
+                        #{car[column.property]}
+                    </p:columns>
+
+    </p:dataTable> -->
+  </h:form>
+
+</ui:composition>

@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formTermStructure">
+    <p:contextMenu for="formTermStructure">
+      <p:menuitem >
+        <s:link id="menuAllMarketVariables" view="/view/v145IrCurveHis.xhtml" value="#{messages.menuitemViewTsHis}"
+          propagation="join" styleClass="ui-menuitem-link ui-corner-all" action="#{tableIrCurveHisAction.onIrcSelection()}" >
+          <!-- <f:param name="selectedTableModel1" value="#{tableIrCurveHisAction.selectedTableModel}" /> -->
+        </s:link>
+      </p:menuitem>
+      <p:menuitem value="#{messages.viewDetailInfo}" icon="ui-icon-search" oncomplete="wgDlgIrcDetail.show()" />
+      
+    </p:contextMenu>
+
+    <p:dataTable id="tableTermStructure" var="_irc" value="#{tableTermStructureInit.pivotTableContent}"
+      widgetVar="wgTableTs" emptyMessage="#{messages.noDataFound}" resizableColumns="true" liveResize="false"
+      selection="#{tableIrCurveHisAction.selectedTableModel}"
+      rowKey="#{_irc.data.ircId}"
+      filteredValue="#{tableTermStructureInit.filterPivotTableContent}"
+      paginator="true"
+      paginatorPosition="bottom" rows="15"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="15,25,50">
+
+      <!-- <p:ajax event="rowDblselect" listener="#{tableIrCurveHisAction.onDblClikSelect}" update="@(form)" /> -->
+      <p:ajax event="rowSelectCheckbox" listener="#{chartIrcHisAction.loadChart()}" update="@(form)" />
+      <p:ajax event="rowUnselectCheckbox" listener="#{chartIrcHisAction.loadChart()}" update="@(form)" />
+      <p:ajax event="toggleSelect" listener="#{chartIrcHisAction.loadChart()}" update="@(form)" />
+      <p:ajax event="rowSelect" listener="#{chartIrcHisAction.loadChart()}" update="@(form)"/>
+      <p:ajax event="rowUnselect" listener="#{chartIrcHisAction.loadChart()}" update="@(form)"/>
+      <!-- <p:ajax event="contextMenu" listener="#{chartIrcHisAction.loadChart()}" update="@(form)"/> -->
+
+      <p:column selectionMode="multiple" headerText="All" exportable="false" width="6"  />
+
+      <!-- <p:column id="colBssd" sortBy="#{_irc.label}" width="50"> -->
+      <p:column id="colBssd" sortBy="#{_irc.data.ircName}" width="90" 
+        filterBy="#{_irc.data.ircName}" filterMatchMode="contains">
+        <f:facet name="header">
+          <h:outputText value="#{messages.ircName}" />
+        </f:facet>
+        <p:outputLabel id="BBB" value="#{_irc.data.ircName}" />
+        <!-- <h:outputText id="BBB" value="#{_irc.data.ircName}" /> -->
+      </p:column>
+      <!-- <p:column id="colBssd1" sortBy="#{_irc.data.ircId}" width="50">
+        <f:facet name="header">
+          <h:outputText value="#{messages.ircId}" />
+        </f:facet>
+        <h:outputText value="#{_irc.data.ircId}" />
+      </p:column>
+      <p:column id="colBssd2" sortBy="#{_irc.data.ircBucketMap.size()}" width="50">
+        <f:facet name="header">
+          <h:outputText value="#{messages.ircId}" />
+        </f:facet>
+        <h:outputText value="#{_irc.data.ircBucketMap.size()}" />
+      </p:column> -->
+      
+      <p:columns value="#{tableTermStructureInit.pivotTableHeader}" var="_column" width="40" filterBy="data.ircName" >
+        <f:facet name="header">
+          <h:outputText value="#{_column}" />
+        </f:facet>
+        
+        <!-- <h:outputText value="#{_irc.contentMap[_column].irId}" 
+                      rendered="#{_irc.contentMap[_column].intRateHisList.size()!=1}"/> -->
+        
+        <!-- <h:outputText value="#{_irc.contentMap[_column].intRateHisList.get(0).intRate}" style="float:right" 
+          rendered="#{_irc.contentMap[_column].intRateHisList.size()==1}">
+          <f:convertNumber pattern="#.####" />
+        </h:outputText> -->
+        <!-- <h:outputText id="DDD" value="#{_irc.contentMap[_column].intRate.get(basedateBean.bssd)}" style="float:right">
+          <f:convertNumber pattern="#.####" />
+        </h:outputText> -->
+
+        <p:outputLabel value="#{_irc.contentMap[_column].intRate.get(basedateBean.bssd)}" style="float:right">
+          <f:convertNumber pattern="#.####" />
+        </p:outputLabel>
+        <!-- <h:outputText value="#{_irc.contentMap[_column].intRateHisList.size()}" >
+          <f:convertNumber pattern="#.####" />
+        </h:outputText> -->
+      </p:columns>
+      
+<!--       <p:columns value="#{tableTermStructureInit.pivotTableHeader}" var="_column" sortBy="#{_irc.contentMap[_column.property]}"
+        columnIndexVar="colIndex" width="40">
+        <f:facet name="header">
+          <h:outputText value="#{_column.header}" />
+        </f:facet>
+
+        <h:outputText value="#{_irc.contentMap[_column.property]}" style="float:right">
+          <f:convertNumber pattern="#,###.####" />
+        </h:outputText>
+      </p:columns> -->
+    </p:dataTable>
+  </h:form>
+</ui:composition>

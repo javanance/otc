@@ -1,0 +1,49 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formObjectNavigation">
+    <p:accordionPanel id="acPanelObjectNavigation" value="#{messages.objectNavigation}" multiple="false" dynamic="false" >
+
+      <p:growl id="messages" showDetail="true" />
+      <p:tab id="tabObjectNavigation" title="#{messages.objectNavigation}">
+        
+        <p:tree id="treeObjectNavigation" value="#{treeObjectNavigationInit.rootNode}" var="_node" 
+          animate="true" highlight="true" orientation="horizontal" 
+          selectionMode="checkbox" selection="#{treeObjectNavigationInit.selectedNodes}" 
+          style="width:95%">
+
+<!--           <p:ajax event="select" listener="#{portfolioSelectAction.onNodeSelect}" update="@(.ui-datatable)" /> -->
+
+          <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+            <h:outputText value="#{_node.name}" />
+          </p:treeNode>
+          
+        </p:tree>
+        
+         <!-- <p:commandButton value="#{messages.submitButton}" actionListener="#{treeObjectNavigationInit.afterSelection1}" 
+          style="float:right" /> -->
+         <p:commandButton value="#{messages.submitButton}" action="#{treeObjectNavigationInit.afterSelection}" 
+          style="float:right" /> 
+        <!-- onclick="wgDlgRfSelect.hide()" update=":tabViewVcv:formVcvMatrix:tableVcvMatrix" --> 
+      </p:tab>
+
+      <p:tab id="tabUserDefined" title="#{messages.userDefined}" disabled="#{not identity.loggedIn}">
+<!-- 
+        <p:tree id="treeProtfolio2" value="#{portfolioBean.portfolioRoot}" var="node" 
+          selection="#{portfolioBean.selectedNode}"
+          selectionMode="single" style="width:95%">
+
+          <p:ajax event="select" listener="#{portfolioBean.onNodeSelect}" update="@(.ui-datatable)" />
+
+          <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+            <h:outputText value="#{node.portId}" />
+          </p:treeNode>
+
+        </p:tree> -->
+      </p:tab>
+    </p:accordionPanel>
+  </h:form>
+</ui:composition>

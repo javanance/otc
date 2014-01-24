@@ -1,0 +1,149 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+
+  <h:form id="formBondInfoAlt">
+    <p:panelGrid columns="1">
+      <p:panel header="BASIC" style="height:100%">
+        <p:panelGrid id="panelGridBondInfo" columns="8">
+          <p:outputLabel value="#{messages.productName}" styleClass="takionLabel" style="float:right"/>
+          <p:outputLabel value="#{selectBond.bondId}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.issuerId}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.issuerId}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.faceAmt}" styleClass="takionLabel" />
+          <h:outputText value="#{selectBond.faceAmt}" styleClass="takionLabelFor">
+            <f:convertNumber pattern="$##,000" />
+          </h:outputText>
+
+          <p:outputLabel value="#{messages.totalAmt}" styleClass="takionLabel" />
+          <h:outputText value="#{selectBond.totalAmt}" styleClass="takionLabelFor">
+            <f:convertNumber pattern="$##,000" />
+            <!-- <f:convertNumber type="currency"  currencySymbol="$"/> -->
+            <!-- <f:convertNumber type="currency"  currencyCode="KRW" pattern="##,000"/> -->
+          </h:outputText>
+
+          <p:outputLabel value="#{messages.issueDate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.issueDate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.maturityDate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.maturityDate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.couponRate}" styleClass="takionLabel" />
+          <h:outputText value="#{selectBond.couponRate}" style="float:right" styleClass="takionLabelFor"> 
+            <f:convertNumber type="percent" />
+          </h:outputText>
+
+          <p:outputLabel value="#{messages.intTerm}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.intTerm}" styleClass="takionLabelFor"/>
+
+
+          <p:outputLabel value="#{messages.bondCFType}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.bondCfType}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.priorityCode}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.priorityCd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.securitizationCode}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.securitizationCd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.creditRatingCode}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.creditRatingCd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.currencyCode}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.currCd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.premiumAtEnd}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.premiumAtEnd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.bondType}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.bondType}" styleClass="takionLabelFor"/>
+
+        </p:panelGrid>
+      </p:panel>
+      <p:panel header="#{messages.bondInfoCoupon}" style="height:100%">
+        <p:panelGrid id="panelGridBondInfo2" columns="8">
+          <p:outputLabel value="#{messages.compoundMethod}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.compoundMtd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.daycountMethod}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.daycountMtd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.couponPrepay}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.isCpPrepay}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.referenceIrCurve}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.refIrcId}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.spreadRate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.spreadRate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.refixingTerm}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.refixingTerm}" styleClass="takionLabelFor" />
+
+          <p:outputLabel value="#{messages.firstCouponDate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.firstCouponDate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.couponDateGeneration}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.cpDateGen}" styleClass="takionLabelFor"/>
+        </p:panelGrid>
+      </p:panel>
+      <p:panel header="#{messages.bondInfoAmortizing}" style="height:100%">
+        <p:panelGrid id="panelGridBondInfo3" columns="8">
+          <p:outputLabel value="#{messages.redemptionMethod}" styleClass="takionLabel" />
+          <p:outputLabel value="#{selectBond.redemMcd}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.amortizeStartDate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.amortStDate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.amortizeStartDate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.amortStDate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.deferredTerm}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.deferTerm}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.amortizeCount}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.amortCnt}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.amortizeFrequency}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.amortFreq}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.amortizeAmount}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.amortAmt}" styleClass="takionLabelFor"/>
+
+        </p:panelGrid>
+      </p:panel>
+      <p:panel header="#{messages.bondOption}" style="height: 300px">
+        <p:panelGrid id="panelGridBondInfo4" columns="8">
+          <p:outputLabel value="#{messages.capRate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.capRate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.floorRate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.floorRate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.stockLinkedType}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.stockLinkedType}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.referenceStock}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.refStockId}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.optionStartDate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.optionStDate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.optionEndDate}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.optionEdDate}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.strikePrice}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.strikePrice}" styleClass="takionLabelFor"/>
+
+          <p:outputLabel value="#{messages.conversionRatio}" styleClass="takionLabel" />
+          <p:outputLabel value="#{bondHome.instance.conversionRatio}" styleClass="takionLabelFor"/>
+        </p:panelGrid>
+      </p:panel>
+    </p:panelGrid>
+  </h:form>
+</ui:composition>

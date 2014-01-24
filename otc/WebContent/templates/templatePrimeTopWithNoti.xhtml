@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" contentType="text/html">
+  <h:html>
+  <h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>HimeTest</title>
+    <link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/default.css" />
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/charts.css" />
+    <link type="text/css" rel="stylesheet"
+      href="#{request.contextPath}/resources/css/syntaxhighlighter/syntaxhighlighter.css" />
+    <!-- <f:facet name="last">
+      <style type="text/css">
+          .ui-layout-pane-north .ui-layout-unit-content {
+                overflow: visible;
+          }
+      </style>
+    </f:facet> -->
+  </h:head>
+  <h:body style="background:grey">
+    <p:layout fullPage="true">
+
+      <p:layoutUnit position="center" resizable="true" gutter="2">
+        <ui:insert name="layoutCenter" />
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+
+        <p:dialog modal="false" widgetVar="statusDialog" header="#{messages.ajaxStatus}" draggable="false"
+          closable="false">
+          <p:graphicImage value="/img/ajaxloadingbar.gif" />
+        </p:dialog>
+      </p:layoutUnit>
+      <p:layoutUnit position="south" resizable="true" gutter="2" >
+        <ui:insert name="layoutBottom" />
+        <!-- <ui:include src="/templates/primeDock.xhtml" /> -->
+      </p:layoutUnit>
+    </p:layout>
+
+    <p:layoutUnit position="north" resizable="true" size="66" gutter="2" styleClass="ui-layout-pane-north-outer" >
+      <ui:include src="notificationbar.xhtml" />
+      <h:inputText value=""  onfocus="PF('notiBar').show()" onmouseover="PF('notiBar').show()" onblur="PF('notiBar').hide()" style="width:95%; border:none" />      
+      <ui:insert name="layoutTop" />
+    </p:layoutUnit>
+    <!-- <h:outputStylesheet library="css" name="primetakion.css" /> -->
+  </h:body>
+  </h:html>
+</f:view>

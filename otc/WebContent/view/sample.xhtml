@@ -1,0 +1,50 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"  xmlns:p="http://primefaces.org/ui"
+  xmlns:c="http://java.sun.com/jstl/core"
+  template="/templates/templatePrimeTLC.xhtml">
+
+  <ui:define name="layoutLeft">
+    <ui:include src="/fragment/tableLazyProducts.xhtml" />
+  </ui:define>
+
+  
+  <ui:define name="layoutCenter">
+  <!-- <ui:include src="/fragment/Element.xhtml" /> -->
+    <ui:include src="/fragment/BONDElement.xhtml" />
+    
+    
+  <!-- <p:panel rendered="#{selectedProduct == null}">
+    <ui:include src="/fragment/productDashboardChart.xhtml" />
+  </p:panel>
+  <p:panel rendered="#{selectedProduct.mvType == 'BOND'}">
+    <ui:include src="/fragment/BONDElement.xhtml" />
+  </p:panel>
+  <p:panel rendered="#{selectedProduct == 'STOCK'}">
+    <ui:include src="/fragment/Element.xhtml" />
+  </p:panel> -->
+   <!-- <c:choose>
+       <c:when test="#{selectedProduct == null}">
+          <ui:include src="/fragment/productDashboardChart.xhtml" />
+       </c:when>
+        
+       <c:when test="#{selectedProduct.mvType == 'BOND'}">
+          <ui:include src="/fragment/BONDElement.xhtml" />
+          asdfasd
+       </c:when>
+
+       <c:when test="#{selectedProduct.mvType == 'STOCK'}">
+       </c:when>
+      
+       <c:otherwise>
+
+       </c:otherwise>
+   </c:choose> -->
+     <!-- <ui:include src="/fragment/tabviewProduct.xhtml" /> -->
+  </ui:define>
+
+
+
+</ui:composition>

@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:dialog header="#{messages.dataNavigation}" modal="false" widgetVar="wgDialogDataNavigation" appendTo="@(body)" appendToBody="true"
+    closeOnEscape="true" height="500" width="1000" maximizable="true" minimizable="false">
+
+    <p:layout fullPage="false" collapseTitle="close" resizeTitle="resize"   >
+    
+      <p:layoutUnit header="Top" position="north" resizable="true" collapsible="true" gutter="2" size="100" >
+        <ui:insert name="dlgLayoutTop" />
+        
+      </p:layoutUnit>
+
+      <p:layoutUnit header="left" position="west" resizable="true" collapsible="true" gutter="2"  size="200">
+        <ui:insert name="dlgLayoutLeft" />
+        AAAA
+      </p:layoutUnit>
+      <p:layoutUnit header="right" position="east" resizable="true" collapsible="true" gutter="2"  size="200">
+        <ui:insert name="dlgLayoutRight" />
+        AAAA
+      </p:layoutUnit>
+      
+      <p:layoutUnit header="bottom" position="south" resizable="true" collapsible="true" gutter="2" size="200">
+        <ui:insert name="dlgLayoutBottom" />
+        BBBB
+      </p:layoutUnit>
+      
+
+      <p:layoutUnit header="Table" position="center" resizable="true" gutter="4"  >
+        <ui:insert name="dlgLayoutCenter" />
+        asdfasdf
+      </p:layoutUnit>
+      
+
+    </p:layout>
+
+
+    
+  </p:dialog>
+
+</ui:composition>

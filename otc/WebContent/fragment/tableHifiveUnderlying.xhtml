@@ -1,0 +1,64 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  
+  <h:form id="formHifiveUnderlying" >
+    <p:contextMenu for="tableHifiveUnderlying" widgetVar = "underlyingCmenu">
+      <p:menuitem value ="#{message.insertInfoSelection}" action="#{tableHifiveInit.addUnderlying()}"  update="tableHifiveUnderlying"/>
+    </p:contextMenu>
+    <p:dataTable id="tableHifiveUnderlying" var="_underlying" value="#{underlyingList}" 
+      widgetVar="wgTableHiFiveUnderlying"
+      emptyMessage="#{messages.noDataFound}" 
+      
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50"
+       >
+       
+      
+      <p:column id="colProdId" sortBy="#{_underlying.id.prodId}" filterBy="#{_underlying.id.prodId}" filterMatchMode="contains" 
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdId}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.id.prodId}" />
+      </p:column>
+      
+      <p:column id="colUnderlyingId" sortBy="#{_underlying.id.underlyingId}" filterBy="#{_underlying.id.underlyingId}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getUnderlyingId}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.id.underlyingId}" />
+      </p:column>
+      
+       <p:column id="colBasePrice" sortBy="#{_underlying.basePrice}" filterBy="#{_underlying.basePrice}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getBasePrice}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.basePrice}" />
+      </p:column>
+      
+    <p:column id="colDividend" sortBy="#{_underlying.dividend}" filterBy="#{_underlying.dividend}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getDividend}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.dividend}" />
+      </p:column>
+      
+      <p:column id="colIsUpHitted" sortBy="#{_underlying.isUphitted}" filterBy="#{_underlying.isUphitted}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.isUpHitted}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.isUphitted}" />
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

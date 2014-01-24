@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formLazyMarketVariables">
+
+    <p:contextMenu for="formLazyMarketVariables:tableLazyMarketVariables">
+      <p:menuitem value="#{messages.showFullMarketVariable}" action="#{mvSelectAction.onViewFullMarketVariables()}"
+        icon="ui-icon-circle-plus" update="@(form)" />
+
+      <p:menuitem value="#{messages.showOnlyRiskFactor}" action="#{mvSelectAction.onViewRiskFactor()}"
+        icon="ui-icon-document" update="@(form)" />  
+      <p:separator />
+    </p:contextMenu>
+
+    <p:dataTable id="tableLazyMarketVariables" var="_mv" value="#{lazyMarketVariables}" 
+      widgetVar="wgTableLazyMarketVariables"
+      lazy="true" selectionMode="single" 
+      selection="#{mvSelectAction.selectedMarketVariable}" 
+      rowKey="#{_mv.mvId}"
+      emptyMessage="#{messages.noDataFound}" 
+      resizableColumns="true" sortMode="single" paginator="true"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      paginatorPosition="bottom" rows="15" style="height : 100%; width :100%; border-top-left-radius: 8px ;border-top-right-radius: 8px">
+      
+      <p:ajax event="rowSelect" listener="#{productSelectAction.onRowSelect}" 
+          update="@(form)" />
+      
+      <p:column id="colMvType" headerText="#{messages.marketVariableType}" sortBy="#{_mv.mvType}"
+        filterBy="#{_mv.mvType}" filterMatchMode="contains" 
+        filterOptions="#{mvTypeOption}" >
+        <h:outputText value="#{_mv.mvType}" />
+      </p:column>
+      
+
+     <!--  <p:column id="colMvId" headerText="#{messages.marketVariableId}" sortBy="#{_mv.mvId}"
+        filterBy="#{_mv.mvId}" filterMatchMode="contains">
+        <h:outputText value="#{_mv.mvId}" />
+      </p:column> -->
+
+      <p:column id="colMvName" headerText="#{messages.marketVariableName}" sortBy="#{_mv.mvName}"
+        filterBy="#{_mv.mvName}" filterMatchMode="contains">
+        <h:outputText value="#{_mv.mvName}" />
+      </p:column>
+
+    </p:dataTable>
+
+  </h:form>
+</ui:composition>

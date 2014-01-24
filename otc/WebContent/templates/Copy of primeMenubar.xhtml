@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib">
+  <h:form id="formToolbar">
+    <p:growl id="growl" showDetail="true" />
+    <!-- <p:tooltip /> -->
+    <!-- <p:menubar style="background-color:rgb(190, 214, 248); border:none;  height:53px; opacity=0.2"> -->
+    
+    <p:menubar style="border:none;  height:53px; ">
+      <p:menuitem value="#{messages.home}"  icon="img_home_nav" url="http://localhost:8080/himemysqltest/view/home.seam" >
+        <!-- <s:link id="menubarHome" view="#{configAction.getViewUrl('Home')}" value="#{messages.Home}" 
+          propagation="none"  styleClass="ui-menuitem-link ui-corner-all" >
+             <h:graphicImage value="./../img/eclipse/home_nav.gif"/>
+        </s:link> -->
+      </p:menuitem>
+
+<!--   <p:menuitem url="http://localhost:8080/himemysqltest/view/home.seam" value="#{messages.Home}" icon="ui-icon-home" /> -->
+      
+      <p:submenu label="#{messages.MarketVariable}"  icon="img_markget_variable">
+        <p:menuitem>
+        <s:link id="menubarMaketVariable1" view="#{configAction.getViewUrl('MarketVariable')}" 
+          value="#{messages.toolbarMarketVariable}" propagation="none"  styleClass="ui-menuitem-link ui-corner-all"/>
+        </p:menuitem>
+        
+        
+      
+      </p:submenu>
+
+
+
+
+      <p:menuitem url="http://localhost:8080/himemysqltest/view/v100MarketVariableInit.seam"
+        title="#{messages.MarketVariableInit}"  icon="img_markget_variable" >
+      </p:menuitem>  
+
+
+      <p:menuitem url="http://localhost:8080/himemysqltest/view/v200RiskComponent.seam"
+        value="#{messages.RiskComponent}" icon="ui-icon-home" />
+
+      <p:menuitem url="http://localhost:8080/himemysqltest/view/v800Settings.seam" value="#{messages.Settings}"
+        icon="ui-icon-home" >
+        <s:conversationPropagation type="begin" />
+      </p:menuitem>  
+
+      <p:submenu label="#{messages.menubarMarketVarialbe}" icon="img_home_nav">
+        <p:menuitem icon="img_home_nav">
+          <s:link id="toolbarMaketVariable" view="#{configAction.getViewUrl('MarketVariable')}"
+            value="#{messages.toolbarMarketVariable}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" 
+            image="img/eclipse/home_nav_gif"/>
+        </p:menuitem>
+        <!-- <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />  
+            <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" /> -->
+      </p:submenu>
+
+      <p:submenu label="Help" icon="ui-icon-help">
+        <p:menuitem value="Contents" url="#"  icon="img_home_nav"/>
+        <p:submenu label="Search" icon="ui-icon-search">
+          <p:submenu label="Text">
+            <p:menuitem value="Workspace" url="#" />
+          </p:submenu>
+          <p:menuitem value="File" url="#" />
+        </p:submenu>
+      </p:submenu>
+
+      <p:submenu label="Actions" icon="ui-icon-gear">
+      </p:submenu>
+
+      <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+
+       <f:facet name="options">  
+        <h:outputText value="#{messages.baseDate}  :" />
+      <p:calendar id="endDate" value="#{basedateBean.date1}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" >
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleDateSelect}" update="@(form)" />
+      </p:calendar>
+<!--             <p:inputText style="margin-right:10px"/>  
+            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />   -->
+        </f:facet> 
+    </p:menubar>
+
+    <!-- <p:panelGrid columns="2" style="padding: 10px; border:none; float:right">
+      <h:outputText value="#{messages.baseDate}:" />
+      <p:calendar id="endDate" value="#{basedateBean.date1}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleDateSelect}" update="@(form) " />
+      </p:calendar>
+    </p:panelGrid> -->
+
+  </h:form>
+</ui:composition>
+

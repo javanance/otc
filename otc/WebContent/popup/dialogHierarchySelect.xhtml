@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHierarchySelect">
+    <p:dialog id="dialogHierSelect" header="Select Hierarchy To Show" widgetVar="wgDialogHierSelect" 
+      resizable="true" width="300" height="400" showEffect="fade" hideEffect="explode" 
+      closeOnEscape="true" style="border:none">
+
+      <p:selectManyMenu id="checkboxHier" value="#{portfolioTreeInit.selectedHierarchyIds}" var="_hier" 
+        showCheckbox="true"
+        style="width:100%;height:95%; border:none; box-shadow:none">
+
+        <f:selectItems value="#{portfolioTreeInit.fullPortfolioInit.fullHiers}" var="_hierarchy" itemLabel="#{_hierarchy.portId}"
+          itemValue="#{_hierarchy.portId}" />
+        <p:column headerText="Portfolio Id">  
+                #{_hier}  
+        </p:column>
+        <p:column headerText="Portfolio Name">  
+                #{_hier}  
+        </p:column>
+        </p:selectManyMenu>
+
+      <f:facet name="footer">
+        <p:commandButton id="cancelBtnPortSelect" value="Cancel" oncomplete="wgDialogHierSelect.hide()" style="float:right" />
+        <!-- <s:button id="okButtonPortSelect1" value="OK" actionListener="#{portfolioTreeInit.onChangeHierarchy}"
+        update="@(.ui-tree)" oncomplete="wgDialogHierSelect.hide()" 
+          style="float:right">
+        </s:button> -->
+        <p:commandButton id="okBtnPortSelect" value="OK" 
+          actionListener="#{portfolioTreeInit.onChangeHierarchy}"
+          update="@(.ui-tree) @(.ui-datatable)" oncomplete="wgDialogHierSelect.hide()"  ajax="true" 
+          style="float:right">
+          <!-- <f:param name="conversationId" value="#{conversation.id}"/> -->
+          <!-- <s:defaultAction /> -->
+        </p:commandButton> 
+         <!-- <p:defaultCommand target="okBtnPortSelect" /> -->
+      </f:facet>
+    </p:dialog>
+
+  </h:form>
+</ui:composition>

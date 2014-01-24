@@ -1,0 +1,49 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<!--   <p:tabView id="tabView">
+    <p:tab id="portfolioTreeTable" title="Portfolio Info"> -->
+<h:form id="portfolioTreeTableForm">
+      <p:treeTable id="portfolioTreeTable" value="#{portfolioTree.portfolioRoot}" var="node" resizableColumns="true" liveResize="true" >
+        <f:facet name="header"> Document Viewer</f:facet>
+        <p:column headerText="ID" resizable="true">
+          <h:outputText value="#{node.portId}" />
+        </p:column>
+
+        <p:column headerText="Name">
+          <h:outputText value="#{node.portName}" />
+        </p:column>
+
+        <p:column headerText="GroupId">
+          <h:outputText value="#{node.groupId}" />
+        </p:column>
+         <p:column headerText="Level1">
+          <h:outputText value="#{node.level1}" />
+        </p:column>
+        <p:column headerText="Level2">
+          <h:outputText value="#{node.level2}" />
+        </p:column>
+        <p:column headerText="Level3">
+          <h:outputText value="#{node.level3}" />
+        </p:column>
+        <p:column headerText="Level4">
+          <h:outputText value="#{node.level4}" />
+        </p:column>
+        <p:column headerText="Level5">
+          <h:outputText value="#{node.level5}" />
+        </p:column>
+
+<!--         <p:column style="width:20px">
+          <p:commandLink update="documentPanel" oncomplete="documentDialog.show()" title="View Detail"
+            styleClass="ui-icon ui-icon-search">
+            <f:setPropertyActionListener value="#{document}" target="#{documentsController.selectedDocument}" />
+          </p:commandLink>
+        </p:column> -->
+      </p:treeTable>
+</h:form>
+
+<!--     </p:tab>
+  </p:tabView> -->
+</ui:composition>

@@ -1,0 +1,141 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formLazyMarketVariables">
+    <p:dataTable id="tableLazyMarketVariables" value="#{paraLazyModels}" var="_mv"
+      widgetVar="wgTableLazyMarketVariables" lazy="true" emptyMessage="#{messages.noDataFound}" 
+      selectionMode="single"
+      rowKey="#{_mv.mvId}" selection="#{selectedMarketVariable}" 
+      resizableColumns="true" sortMode="single"
+      draggableColumns="true"
+      paginator="true"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      paginatorPosition="bottom" rows="15"
+      style="height : 100%; width :100%; border-top-left-radius: 8px ;border-top-right-radius: 8px">
+
+      <!--       <p:ajax event="rowSelect" listener="#{tableLazyMarketVariableAction.onRowSelect}" update="@(form, .ui-tabs)" disabled="#{not flagUpdateFull}"/>
+      <p:ajax event="rowSelect" listener="#{tableLazyMarketVariableAction.onRowSelect}" update="@(.ui-datatable)" disabled="#{flagUpdateFull}"/> -->
+      <p:ajax event="rowSelect" listener="#{tableMvHisDataAction.onMvSelection}" update="@(.ui-datatable)" />
+      <!-- <p:ajax event="rowSelect" listener="#{tablePositionAction.onMvSelection}" update="@(form)" disabled="#{flagDisablePosition}"/> -->
+
+      <p:column id="colMvType" sortBy="#{_mv.mvType}" filterBy="#{_mv.mvType}" filterMatchMode="contains"
+        filterOptions="#{paraSelectOneMvType}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableType}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvType}" />
+      </p:column>
+
+      <p:column id="colMvId" sortBy="#{_mv.mvId}" filterBy="#{_mv.mvId}" filterMatchMode="contains"
+        rendered="#{flagMvId}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableId}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvId}" />
+      </p:column>
+
+      <p:column id="colMvName" sortBy="#{_mv.mvName}" filterBy="#{_mv.mvName}" filterMatchMode="contains">
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableName}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvName}" />
+      </p:column>
+
+    </p:dataTable>
+
+
+    <!-- <p:selectOneRadio id="customRadio" value="#{tableLazyMarketVariableInit.flag}" layout="lineDirection" plain="false"
+      styleClass="ui-radiobutton-takion">
+      <f:selectItem itemLabel="Option 11" itemValue="1" />
+      <f:selectItem itemLabel="Option 21" itemValue="2" />
+      <f:selectItem itemLabel="Option 31" itemValue="3" />
+      <p:ajax event="valueChange" process="@this" update="@(form)"
+        listener="#{tableLazyMarketVariableInit.onViewChange()}" />
+    </p:selectOneRadio> -->
+    
+    <p:contextMenu for="tableLazyMarketVariables" rendered="#{flagContext}">
+      <p:menuitem value="#{messages.showAllMarketVariable}" icon="ui-icon-circle-plus" update="@(.ui-datatable)"
+        actionListener="#{tableLazyMarketVariableInit.resetTable()}"
+        action="#{tableLazyMarketVariableInit.onViewFullMarketVariables()}" />
+
+      <p:menuitem value="#{messages.showOnlyRiskFactor}" icon="ui-icon-document" update="@(.ui-datatable)"
+        actionListener="#{tableLazyMarketVariableInit.resetTable()}"
+        action="#{tableLazyMarketVariableInit.onViewRiskFactor()}" />
+      <p:menuitem value="#{messages.showOnlyProduct}" icon="ui-icon-document" update="@(.ui-datatable)"
+        actionListener="#{tableLazyMarketVariableInit.resetTable()}"
+        action="#{tableLazyMarketVariableInit.onViewProduct()}" />
+
+
+
+      <!-- <p:menuitem value="#{messages.showOnlyProduct}" icon="ui-icon-document" update="@(.ui-datatable)"
+        oncomplete="wgTableLazyMarketVariables.clearFilters()"
+        actionListener="#{tableLazyMarketVariableInit.resetTable()}"
+        action="#{tableLazyMarketVariableInit.onViewProduct()}" /> -->
+
+      <!-- <p:menuitem value="#{messages.showFullProduct}">
+        <p:selectOneRadio id="customRadio" value="#{tableLazyMarketVariableInit.flag}" 
+          layout="pageDirection"  plain="false" 
+          styleClass="ui-radiobutton-takion">
+          <f:selectItem itemLabel="Option 11" itemValue="1" />
+          <f:selectItem itemLabel="Option 21" itemValue="2" />
+          <f:selectItem itemLabel="Option 31" itemValue="3" />
+          <p:ajax event="valueChange" process="@this"  update="@(form)" 
+                  listener="#{tableLazyMarketVariableInit.onViewChange()}"/>
+        </p:selectOneRadio>
+      </p:menuitem> -->
+
+
+
+      <!-- <p:menuitem value="#{messages.showFullProduct}">
+        <p:selectManyCheckbox layout="pageDirection" >
+          <f:selectItem itemLabel="Option 1" itemValue="1" />
+          <f:selectItem itemLabel="Option 2" itemValue="2" />
+        </p:selectManyCheckbox>
+      </p:menuitem> -->
+
+
+      <!-- <p:menuitem value="#{messages.showFullProduct}">
+        <p:selectOneListBox id="customRadio" value="3">
+          <f:selectItem itemLabel="Option 1" itemValue="1" />
+          <f:selectItem itemLabel="Option 2" itemValue="2" />
+          <f:selectItem itemLabel="Option 3" itemValue="3" />
+        </p:selectOneListBox>
+      </p:menuitem>>  -->
+
+      <p:separator rendered="#{not empty selectedMarketVariable}" />
+      <p:menuitem value="#{messages.viewDetails}" rendered="#{not empty selectedMarketVariable}">
+
+        
+      </p:menuitem>
+
+      <p:separator />
+
+      <p:menuitem>
+        <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
+          <p:dataExporter type="xls" pageOnly="true" target="tableLazyMarketVariables"
+            fileName="#{messages.marketVariables}" />
+        </h:commandLink>
+      </p:menuitem>
+
+    </p:contextMenu>
+
+    <!-- <p:commandButton id="submitButton" value="Submit" update="display" />
+    <h:panelGrid columns="2" id="display">
+      <h:outputText value="Value1:" />
+      <h:outputText id="value1" value="#{tableLazyMarketVariableInit.flag}" />
+    </h:panelGrid> -->
+    
+    <p:contextMenu for="tableLazyMarketVariables" rendered="#{not flagContext}">
+        <p:menuitem value="#{messages.showHoldingProduct}" icon="ui-icon-document" update="@(.ui-datatable)"
+          actionListener="#{tableLazyMarketVariableInit.resetTable()}"
+          action="#{tableLazyMarketVariableInit.onViewProduct()}" />
+        
+        <p:menuitem value="#{messages.showAllProduct}" icon="ui-icon-document" update="@(.ui-datatable)"
+          actionListener="#{tableLazyMarketVariableInit.resetTable()}"
+          action="#{tableLazyMarketVariableInit.onViewProduct()}" />  
+    </p:contextMenu>
+  </h:form>
+</ui:composition>

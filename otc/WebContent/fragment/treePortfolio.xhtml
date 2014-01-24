@@ -1,0 +1,85 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPortfolioTree">
+<!--     <p:tooltip /> -->  
+    <!-- <p:toolbar styleClass="contextBar">
+      <p:toolbarGroup align="right">
+        <p:commandLink id="expandMenu" title="#{messages.expandMenu}" update="@(.ui-tree)" 
+          actionListener="#{portfolioTreeAction.expandAll}" >
+          <p:graphicImage value="/img/eclipse/expandAll.jpg" />
+        </p:commandLink>
+        <p:commandLink id="collapseMenu" title="#{messages.collapseMenu}" update="@(.ui-tree)" 
+          action="#{portfolioTreeAction.collapseAll}" >
+          <p:graphicImage value="/img/eclipse/collapseall.gif" />
+        </p:commandLink>
+        
+        <p:menuButton id="treeMenu"  styleClass="contextButton" >
+          <ui:include src="/fragment/menuPortfolioTree.xhtml" />
+        </p:menuButton>
+      </p:toolbarGroup>
+    </p:toolbar> -->
+    
+     <p:contextMenu for="accoPortTree:treePortfolio">
+      <p:menuitem value="#{messages.viewPortfolioDetail}" id="menuItemViewPortDetail" icon="ui-icon-circle-zoomin" />
+      <p:menuitem value="#{messages.viewPortfolioDetail2}" id="menuItemViewPortDetail2" icon="ui-icon-circle-zoomin" 
+          onclick="wgDialogPortDetail.show()" />    
+      <ui:include src="/fragment/menuPortfolioTree.xhtml" />
+    </p:contextMenu>
+
+<!--    <p:contextMenu for="accoPortTree:portfolioTree2">
+      <ui:include src="/fragment/menuPortfolioTree.xhtml" />
+    </p:contextMenu> -->
+    
+    <p:accordionPanel id="accoPortTree" value="#{messages.portfolio}" multiple="false" dynamic="false" >
+
+      <p:growl id="messages" showDetail="true" />
+
+      <!-- <p:ajax event="tabChange" listener="#{portfolioBean.onTabChange}" update="@(.ui-toolbar)"/> -->  
+
+      <p:tab id="tabHierarchy" title="#{messages.hierarchy}">
+        
+        <p:tree id="treePortfolio" value="#{portfolioTreeInit.portfolioRoot}" var="node" 
+          selectionMode="single" style="width:95%">
+
+          <p:ajax event="select" listener="#{portfolioSelectAction.onNodeSelect}" update="@(.ui-datatable)" />
+
+          <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+            <h:outputText value="#{node.portId}" />
+          </p:treeNode>
+
+        </p:tree>
+        
+      </p:tab>
+
+      <p:tab id="tabUserDefined" title="#{messages.userDefined}" disabled="#{not identity.loggedIn}">
+<!-- 
+        <p:tree id="treeProtfolio2" value="#{portfolioBean.portfolioRoot}" var="node" 
+          selection="#{portfolioBean.selectedNode}"
+          selectionMode="single" style="width:95%">
+
+          <p:ajax event="select" listener="#{portfolioBean.onNodeSelect}" update="@(.ui-datatable)" />
+
+          <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+            <h:outputText value="#{node.portId}" />
+          </p:treeNode>
+
+        </p:tree> -->
+      </p:tab>
+
+<!--       <p:tab title="#{messages.virtual}" disabled="#{not identity.loggedIn}">
+        <f:facet name="asdf" />
+        <p:menubar>
+          <p:menuitem value="aa" icon="ui-icon-disk">
+          </p:menuitem>
+        </p:menubar>
+        <p:commandButton value="AAAa" />
+ 
+      </p:tab>-->
+
+    </p:accordionPanel>
+  </h:form>
+</ui:composition>

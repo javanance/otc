@@ -1,0 +1,112 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="portReturnForm">
+
+    <!-- <p:contextMenu for="portReturnId">
+      <p:menuitem value="aaaa" onclick="portDialog.show();" />
+      <p:menuitem value="bbbb" id="qqq" />
+      <p:menuitem value="ccc" id="www">
+        <p:dataExporter type="csv" target="portReturnId" fileName="PortfolioReturn" />
+      </p:menuitem>
+    </p:contextMenu> -->
+    <!--    <p:overlayPanel for="qqq">
+          asdf
+        </p:overlayPanel>
+    <p:dialog header="Tbbb" widgetVar="portListDialog3">
+      <h:outputText value="bbb" />
+    </p:dialog>
+    <p:dialog header="Taaa" widgetVar="portListDialog4">
+      <h:outputText value="aaa" />
+    </p:dialog> -->
+
+    <p:dataTable id="portReturnId" var="_portfolio" value="#{portfolioBean.subPortfolios}" widgetVar="portsTable"
+      selectionMode="single" selection="#{portfolioBean.selectedSubPortfolio}" rowKey="#{_portfolio.portId}"
+      emptyMessage="No Portfolios found with given criteria" filterDelay="300" filterEvent="keyup"
+      filteredValue="#{portfolioBean.filterSubPorts}" resizableColumns="true" draggableColumns="true"
+      sortMode="multiple" paginator="true" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="5,10,15"
+      style="height : 100%">
+
+      <f:facet name="header">
+        <p:outputPanel style="float: right">
+          <h:outputText value="#{messages.datatableGlobalSearch}" style="color : rgb(137, 139, 139)" />
+          <p:inputText id="globalFilter" onkeyup="portsTable.filter()" style="width:150px"
+            value="#{portfolioBean.searchString}" />
+        </p:outputPanel>
+      </f:facet>
+
+      <!-- <p:ajax event="rowSelect" update=":#{p:component('takiondisplay')}"  oncomplete="portDialog.show()" /> -->
+      
+      <p:column id="portId" headerText="#{messages.portfoioReturnId}" sortBy="#{_portfolio.portId}"
+        filterBy="#{_portfolio.stringId}" filterMatchMode="contains" filterStyle="display:none; visibility:hidden">
+        <h:outputText value="#{_portfolio.portId}" />
+      </p:column>
+
+      <p:column id="portName" headerText="#{messages.portfoioReturnName}" sortBy="#{_portfolio.portName}"
+        filterBy="#{_portfolio.portName}" filterMatchMode="contains" filterStyle="display:none; visibility:hidden">
+        <h:outputText value="#{_portfolio.portName}" />
+      </p:column>
+
+      <p:column id="portGroup" headerText="#{messages.portfoioReturnGroup}" sortBy="#{_portfolio.groupId}"
+        filterBy="#{_portfolio.groupId}" filterMatchMode="contains" filterStyle="display:none; visibility:hidden">
+        <h:outputText value="#{_portfolio.groupId}" />
+      </p:column>
+
+      <p:column id="portPresValue" headerText="#{messages.portfoioReturnPresValue}" sortBy="#{_portfolio.presValue}"
+        filterBy="#{_portfolio.presValue}" filterMatchMode="contains" filterStyle="display:none; visibility:hidden">
+        <h:outputText value="#{_portfolio.presValue}" />
+      </p:column>
+
+      <!--  <p:column headerText="#{messages.portfoioReturnDailyReturn}" sortBy="#{_portfolio.dailyReturn}">
+        <h:outputText value="#{_portfolio.dailyReturn}" />
+      </p:column> -->
+
+
+      <p:columnGroup type="footer">
+        <p:row>
+          <p:column footerText="#{portfolioBean.selectedPortfolio.portId}" />
+          <p:column footerText="#{portfolioBean.selectedPortfolio.portName}" />
+          <p:column footerText="#{portfolioBean.selectedPortfolio.groupId}" />
+          <p:column footerText="#{portfolioBean.selectedPortfolio.presValue}" />
+        </p:row>
+      </p:columnGroup>
+      
+      <f:facet name="footer">
+
+        <h:commandLink style="float: right">
+          <p:graphicImage value="/img/primefaces/csv.png" />
+          <p:dataExporter type="csv" target="portReturnId" fileName="PortfolioReturn" />
+        </h:commandLink>
+        <h:commandLink style="float: right">
+          <p:graphicImage value="/img/primefaces/pdf.png" />
+          <p:dataExporter type="pdf" target="portReturnId" fileName="PortfolioReturn" />
+        </h:commandLink>
+        <h:commandLink style="float: right">
+          <p:graphicImage value="/img/primefaces/excel.png" />
+          <p:dataExporter type="xls" target="portReturnId" fileName="PortfolioReturn" />
+        </h:commandLink>
+        <h:outputText value="#{messages.datatableExport}" style="float: right; vertical-aling:middle" />
+      </f:facet>
+    </p:dataTable>
+
+    <!-- <ui:include src="/fragment/hierarchySelectlDialog.xhtml" />
+    <ui:include src="/fragment/portfolioDetailOverlay.xhtml" /> -->
+
+
+  </h:form>
+
+  <!--   <script type="text/javascript"
+    src="#{facesContext.externalContext.requestContextPath}/javax.faces.resource/jsf.js.xhtml?ln=javax.faces">
+  </script> -->
+  <!--   <p:ajaxStatus style="width:32px;height:32px;" id="ajaxStatusPanel">
+      <f:facet name="start">
+        <h:graphicImage value="/img/primefaces/ajaxloading.gif" />
+      </f:facet>
+      <f:facet name="complete">
+        <h:outputText value="" />
+      </f:facet>
+    </p:ajaxStatus> -->
+</ui:composition>

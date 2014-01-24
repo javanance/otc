@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib">
+  <h:form id="formToolbar">
+    <p:growl id="growl" showDetail="true" />
+     
+    <p:toolbar style="color:rgb(190, 214, 248); border:none"  >
+      <p:toolbarGroup align="left" styleClass="tak">
+        <p:separator />
+        <s:link id="toolbarHome" view="#{configAction.getViewUrl('Home')}" value="#{messages.Home}" propagation="none" />
+        <p:separator />
+        <s:link id="toolbarMaketVariable" view="#{configAction.getViewUrl('MarketVariable')}" value="#{messages.toolbarMarketVariable}" propagation="none"  />
+        <p:separator />
+        <s:link id="toolbarProduct" view="#{configAction.getViewUrl('Product')}" value="#{messages.toolbarProduct}" propagation="none"  />
+        <p:separator />
+        <s:link id="toolbarRiskFactor" view="#{configAction.getViewUrl('RiskFactor')}" value="#{messages.toolbarRiskFactor}" propagation="none"  />
+        <p:separator />
+        <s:link id="toolbarRiskComponent" view="#{configAction.getViewUrl('RiskComponent')}" value="#{messages.toolbarRiskComponent}" propagation="none"  />
+        <p:separator />
+        <s:link id="toolbarReturnRisk" view="#{configAction.getViewUrl('RiskAnalysis')}" value="#{messages.toolbarReturnRisk}" propagation="none"  />
+        <p:separator />
+        <s:link id="toolbarWhatIf" view="#{configAction.getViewUrl('WhatIf')}" value="#{messages.toolbarWhatIf}" propagation="none"  />
+        <p:separator />
+        <s:link id="toolbarStressTest" view="#{configAction.getViewUrl('StressTest')}" value="#{messages.toolbarStressTest}" propagation="none"  />
+        <p:separator />
+        
+        <s:link id="toolbarBackTest" view="#{configAction.getViewUrl('BackTest')}" value="#{messages.toolbarBackTest}" propagation="none"  />
+        <p:separator />
+        <s:link id="toolbarLimit" view="#{configAction.getViewUrl('LimitManagement')}" value="#{messages.toolbarLimit}"  propagation="none" />
+        <p:separator />
+        <s:link id="toolbarSettings" view="#{configAction.getViewUrl('Settings')}" value="#{messages.toolbarSettings}" />
+        <p:separator />
+        <s:link id="toolbarTest" view="/view/sample.xhtml" value="#{messages.toolbarSample}" propagation="none" />
+      </p:toolbarGroup>
+
+      <p:toolbarGroup align="right">
+        <h:outputText id="toolbarWelcome" value="#{messages.signedAs}: #{credentials.username}"
+          rendered="#{identity.loggedIn}" />
+        <p:separator />
+        <s:link id="toolbarLogin" view="/view/login.xhtml" value="#{messages.logIn}" rendered="#{not identity.loggedIn}"
+          propagation="none" />
+        <s:link id="toolbarLogout" view="/view/home.xhtml" action="#{identity.logout}" value="#{messages.logOut}"
+          rendered="#{identity.loggedIn}" propagation="none" />
+      </p:toolbarGroup>
+    </p:toolbar>
+    
+    <p:panelGrid columns="2" style="padding: 10px; border:none; float:right">
+<!--       <h:outputText value="#{messages.baseDate}:" rendered="false"/>
+      <p:calendar id="startDate" value="#{basedateBean.date1}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" rendered="false">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleDateSelect}" update="@(form)" />
+      </p:calendar>
+      
+      <h:outputText value="~" rendered="true" /> -->
+ 
+      <h:outputText value="#{messages.baseDate}:" />
+      <p:calendar id="endDate" value="#{basedateBean.date1}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" >
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleDateSelect}" update="@(form) " />
+      </p:calendar>
+    </p:panelGrid>
+  
+   
+  </h:form>
+</ui:composition>
+

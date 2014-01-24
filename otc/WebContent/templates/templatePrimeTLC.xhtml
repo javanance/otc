@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" contentType="text/html">
+  <h:html>
+  <h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>HimeTestPizza</title>
+    <link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/default.css" />
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/charts.css" />
+    <link type="text/css" rel="stylesheet"
+      href="#{request.contextPath}/resources/css/syntaxhighlighter/syntaxhighlighter.css" />
+
+  </h:head>
+  <h:body style="background:blue">
+
+    <p:layout fullPage="true">
+      
+
+      <p:layoutUnit position="west"  resizable="true" collapsible="true" size="350"  gutter="4">
+        <ui:insert name="layoutLeft" />
+        <ui:include src="/templates/primeDock.xhtml" />
+      </p:layoutUnit>
+
+      <p:layoutUnit position="center" resizable="true" gutter="4" >
+      <!-- <h:form prependId="false"> -->
+        <ui:insert name="layoutCenter" />
+        
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+        <p:dialog modal="false" widgetVar="statusDialog" header="#{messages.ajaxStatus}" draggable="false" closable="false">
+          <p:graphicImage value="/img/ajaxloadingbar.gif" />
+        </p:dialog>
+      <!-- </h:form> -->
+      </p:layoutUnit>
+      
+      <!-- <p:layoutUnit position="north" resizable="true" size="66" collapsible="true" gutter="3" style="background:rgb(190, 214, 248);"> -->
+      <p:layoutUnit position="north" resizable="true" size="66" collapsible="true" gutter="3" styleClass="ui-layout-pane-north-outer" >
+        <!--         <h:graphicImage value="/img/inkwell.jpg" height="20" width="100%" /> -->
+        <!-- <ui:include src="localeMenuAlt.xhtml" />
+        <ui:include src="primeToolbarOld.xhtml" /> -->
+        <!-- <ui:include src="primeToolbar.xhtml" /> -->
+        <ui:include src="primeMenubar.xhtml" />
+    
+    
+        <ui:insert name="layoutTop" />
+
+      </p:layoutUnit>
+    </p:layout>
+    <!-- <h:outputStylesheet library="css" name="primetakion.css" /> -->
+  </h:body>
+  </h:html>
+</f:view>

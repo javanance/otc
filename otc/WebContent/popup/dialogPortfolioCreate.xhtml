@@ -1,0 +1,104 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPortfolioCreate">
+
+    <p:dialog id="dialogPortCreate"  widgetVar="wgDialogPortCreate"
+      header="#{messages.addPortfolio}" 
+      resizable="false" width="700"     height="400" 
+      onHide="wgWizardPortCreate.loadStep(wgWizardPortCreatee.cfg.steps[0],true)"
+      showEffect="fade" hideEffect="explode" style="border:none" closeOnEscape="true" >
+
+      <p:wizard  id="wizPortCreate" widgetVar="wgWizardPortCreate" 
+         flowListener="#{portfolioCreateAction.onFlowProcess}" 
+         showNavBar="true" showStepStatus="false" >
+        <p:tab id="tabLoadPortfolio" title="#{messages.portfolioName}" >
+<!--           <p:growl id="growl" showDetail="true" /> -->
+          
+          <p:outputLabel value="#{messages.newPortfolioInfo}" />
+          <p:separator />
+          
+          <p:messages id="messages" /> 
+          <p:panelGrid columns="2" columnClasses="label, value" style="height : 280px">
+            <p:outputLabel for="inTxtNewPortName" value="#{messages.portfolioName}" />
+            <p:inputText id="inTxtNewPortName" value="#{portfolioCreateAction.newPortName}" required="true"/>
+            
+                        
+            <p:outputLabel value="#{messages.baseDate}" />
+            <p:outputLabel value="#{basedateBean.bssd}" />
+            
+            <h:outputLabel value="#{messages.comparedPortfolio}"  rendered="#{portfolioCreateAction.parentPortfolio != null}"/>
+            <h:outputLabel value="#{portfolioCreateAction.parentPortfolio.portName}" rendered="#{portfolioCreateAction.parentPortfolio != null}"/>
+            
+            <h:outputLabel value="#{messages.ignoreComparedPortfolio}" />
+            <p:selectBooleanCheckbox value="#{portfolioCreateAction.ignoreCompare}" />
+            
+          </p:panelGrid>
+          <p:separator />
+        </p:tab>
+
+        <p:tab  id="tabPickPortfolio" title="#{messages.addSubPortfolio} for #{portfolioCreateAction.newPortName}" >
+          <p:outputLabel value="#{messages.addSubPortfolio}" />
+          <p:separator />
+          <p:pickList id="pickListPorts" value="#{portfolioCreateAction.ports}" var="_port" effect="bounce" 
+            itemValue="#{_port}"
+            itemLabel="#{_port}" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+            showSourceFilter="true" showTargetFilter="true" filterMatchMode="startWith"
+            style="height : 300px; float : middle;">
+
+            <f:facet name="sourceCaption">Available</f:facet>
+            <f:facet name="targetCaption">Selecting</f:facet>
+            <!--          <p:column style="width:25%">
+                <p:graphicImage value="/images/barca/#{player.photo}" width="30" height="40" />
+              </p:column> -->
+
+            <p:column style="width:100%;">  
+                  #{_port}  
+              </p:column>
+
+          </p:pickList>
+
+          <p:separator />
+        </p:tab>
+
+        <!-- <p:tab title="Add Sub Positions">
+          <p:panel style="height : 300px;">
+            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">
+              <h:outputText value="Firstname: *" />
+              <p:inputText required="true" label="Firstname" value="#{portfolioBean.parentPortfolio.portName}" />
+            </h:panelGrid>
+          </p:panel>
+        </p:tab> -->
+
+        <p:tab id="tabConfirm" title="Confirmation">
+          <p:outputLabel value="#{messages.confirmWizardView}" />
+          <p:separator />
+          <p:panelGrid id="confirmation" columns="4" style="height : 300px;">
+            <h:outputText value="#{messages.newPortfolio}" />
+            <h:outputText styleClass="outputLabel" value="#{portfolioCreateAction.newPortName}" />
+
+            <h:outputText value="#{messages.target}" style="font-weight:bold" />
+            <ui:repeat value="#{portfolioCreateAction.ports.target}" var="_port">
+              <h:outputText value="#{_port}" style="margin-right:5px" />
+            </ui:repeat>
+          </p:panelGrid>
+          <p:separator />
+          <p:commandButton value="#{messages.submitButton}" actionListener="#{portfolioCreateAction.save}" update="@(.ui-dialog)" 
+              oncomplete="wgWizardPortCreate.loadStep(wgWizardPortCreate.cfg.steps[0],true)"  style="float:right" />
+        </p:tab>
+      </p:wizard>
+      <!-- <p:commandButton value="Back" onclick="wiz.back();" />
+      <p:commandButton value="Next" onclick="wiz.next();" style="float:right" /> -->
+      <!-- <p:commandButton value="Back" onclick="wiz.back();" rendered="#{wiz.step !=0}"/> -->
+      <!-- <p:commandButton value="Next" onclick="wiz.next();" style="float:right" rendered="#{!empty wiz.nextStep}"/> -->
+    </p:dialog>
+  </h:form>
+    <!-- <script type="text/javascript" >
+        function resetWizard() {
+            wiz.loadStep(wiz.cfg.steps[0], true);
+        }
+    </script> -->
+</ui:composition>

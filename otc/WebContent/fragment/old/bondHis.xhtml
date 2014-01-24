@@ -1,0 +1,58 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formBondHis">
+   <!--  <p:dataTable value="#{bondHome.instance.bondHis}" var="_bondHis">
+      <p:column id="colIdBssd" headerText="#{messages.bssd}" 
+        filterBy="#{_bondHis.id.bssd}"
+        filterMatchMode="contains">
+        <h:outputText value="#{_bondHis.id.bssd}" />
+      </p:column>
+      <p:column id="colIdBondId" headerText="#{messages.bondId}" 
+        filterBy="#{_bondHis.id.bondId}"
+        filterMatchMode="contains">
+        <h:outputText value="#{_bondHis.id.bondId}" />
+      </p:column>
+    </p:dataTable> -->
+    
+        <p:dataTable value="#{bondHome.instance.bondHis}" var="_bondHis">
+      <p:column id="colIdBssd" headerText="#{messages.bssd}" 
+        filterBy="#{_bondHis.bssd}"
+        filterMatchMode="contains">
+        <h:outputText value="#{_bondHis.bssd}" />
+      </p:column>
+      <p:column id="colIdBondId" headerText="#{messages.bondId}" 
+        filterBy="#{_bondHis.mvId}"
+        filterMatchMode="contains">
+        <h:outputText value="#{_bondHis.mvId}" />
+      </p:column>
+      
+      <p:column id="colIdBondName" headerText="#{messages.bondName}" 
+        filterBy="#{_bondHis.mvName}"
+        filterMatchMode="contains">
+        <h:outputText value="#{_bondHis.mvName}" />
+      </p:column>
+      
+      <p:column id="colClosePrice" headerText="#{messages.closePrice}" 
+        filterBy="#{_bondHis.closePrice}"
+        filterMatchMode="contains">
+        <h:outputText value="#{_bondHis.closePrice}" />
+      </p:column>
+      
+      <p:column id="colAdjDuration" headerText="#{messages.adjDuration}" 
+        filterBy="#{_bondHis.adjDuration}"
+        filterMatchMode="contains"    >
+        <h:outputText value="#{_bondHis.adjDuration}" />
+      </p:column>
+      
+      <p:column id="colMdDuration" headerText="#{messages.mdDuration}" 
+        filterBy="#{_bondHis.mdDuration}"
+        filterMatchMode="contains">
+        <h:outputText value="#{_bondHis.mdDuration}" />
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

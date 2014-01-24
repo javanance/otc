@@ -1,0 +1,118 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveStrike" >
+    <p:dataTable id="tableHifiveStrike" var="_strike" value="#{strikeList}" 
+      widgetVar="wgTableHifiveStrike"
+      emptyMessage="#{messages.noDataFound}" 
+
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50"
+       >
+       
+      <p:column id="colProdId" sortBy="#{_strike.id.prodId}" filterBy="#{_strike.id.prodId}" filterMatchMode="contains" 
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdId}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.id.prodId}" />
+      </p:column>
+      
+      <p:column id="colStrikeSerial" sortBy="#{_strike.id.strikeSerial}" filterBy="#{_strike.id.strikeSerial}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getStrikeSerial}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.id.strikeSerial}" />
+      </p:column>
+      
+      <p:column id="colStrikeDate" sortBy="#{_strike.strikeDate}" filterBy="#{_strike.strikeDate}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getStrikeDate}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.strikeDate}" />
+      </p:column>
+      
+      <p:column id="colPaymentDate" sortBy="#{_strike.paymentDate}" filterBy="#{_strike.paymentDate}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getPaymentDate}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.paymentDate}" />
+      </p:column>
+      
+      <p:column id="colStrikePrice" sortBy="#{_strike.strikePrice}" filterBy="#{_strike.strikePrice}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getStrikePrice}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.strikePrice}" />
+      </p:column>
+      
+      <p:column id="colPayoffAmt" sortBy="#{_strike.payoffAmt}"
+        filterBy="#{_strike.payoffAmt}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getPayoffAmt}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.payoffAmt}" />
+      </p:column>
+            <p:column id="colDlbJumpStrike" sortBy="#{_strike.dblJumpStrike}" filterBy="#{_strike.dblJumpStrike}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getDblJumpStrike}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.dblJumpStrike}" />
+      </p:column>
+      
+      <p:column id="colDblJumpPayoff" sortBy="#{_strike.dblJumpPayoff}"
+        filterBy="#{_strike.dblJumpPayoff}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getDblJumpPayoff}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.dblJumpPayoff}" />
+      </p:column>
+            <p:column id="colTplJumpStrike" sortBy="#{_strike.tplJumpStrike}" filterBy="#{_strike.tplJumpStrike}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getTplJumpStrike}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.tplJumpStrike}" />
+      </p:column>
+      
+      <p:column id="colTplJumpPayoff" sortBy="#{_strike.tplJumpPayoff}"
+        filterBy="#{_strike.tplJumpPayoff}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getTplJumpPayoff}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.tplJumpPayoff}" />
+      </p:column>
+      <p:column id="colCouponRate" sortBy="#{_strike.couponRate}"
+        filterBy="#{_strike.couponRate}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getCouponRate}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.couponRate}" />
+      </p:column>
+      
+      <p:column id="colUpBarrier" sortBy="#{_strike.upBarrier}"
+        filterBy="#{_strike.upBarrier}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getUpBarrier}" />  
+         </f:facet>
+        <h:outputText value="#{_strike.upBarrier}" />
+      </p:column>
+
+    </p:dataTable>
+  </h:form>
+</ui:composition>

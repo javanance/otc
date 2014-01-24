@@ -1,0 +1,24 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formStockHis">
+    <p:dataTable value="#{stockHome.instance.stockHis}" var="_stockHis">
+      <p:column id="colIdBssd" headerText="#{messages.bssd}" sortBy="#{_stockHis.id.bssd}">
+        <h:outputText value="#{_stockHis.id.bssd}" />
+      </p:column>
+      <p:column id="colIdstockId" headerText="#{messages.stockId}" >
+        <h:outputText value="#{_stockHis.id.stockId}" />
+      </p:column>
+
+      <p:column id="colClosePrice" headerText="#{messages.closePrice}" sortBy="#{_stockHis.closePrice}" >
+        <h:outputText value="#{_stockHis.closePrice}" style="float:right">
+          <f:convertNumber pattern="##0,000"/>
+        </h:outputText>
+      </p:column>
+    </p:dataTable>
+
+  </h:form>
+</ui:composition>

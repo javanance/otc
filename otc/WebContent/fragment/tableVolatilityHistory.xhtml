@@ -1,0 +1,100 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formVolHis">
+    <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.viewDates}"  />
+      <p:calendar id="popupButtonCal1" value="#{basedateBean.stDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleStartDateSelect}" update="@(.ui-datatable)" />
+      </p:calendar>
+      <h:outputText value=" ~ " />
+      <p:calendar id="popupButtonCal2" value="#{basedateBean.endDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleEndDateSelect}" update="@(form)" />
+      </p:calendar>
+      <p:commandButton value="#{messages.clearSortAndFilter}" action="#{tableVolatilityHistoryInit.resetTable()}" update="@(.ui-datatable)"/>
+    </p:panelGrid>
+
+    
+    <p:dataTable id="tableVolHis" value="#{tableVolatilityHistoryInit.volatilityHisList}" var="_volHis"
+      emptyMessage="No History Data found with given criteria. Change the Dates"
+      selection="#{tableVolatilityHistoryInit.selLazyModelVolHis}" selectionMode="single" 
+      rowKey="#{_volHis.id}"
+      sortMode="multiple"
+      resizableColumns="true" 
+      paginator="true" paginatorPosition="bottom" rows="15"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="15,25,50" 
+      style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
+
+      <p:column id="colBssd" sortBy="#{_volHis.id.bssd}" 
+        filterBy="#{_volHis.id.bssd}"  filterMatchMode="contains" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.bssd}" />
+        </f:facet>
+        <h:outputText value="#{_volHis.id.bssd}" />
+      </p:column>
+      <p:column id="colVolId" sortBy="#{_volHis.id.volId}" 
+        filterBy="#{_volHis.id.volId}"  filterMatchMode="contains" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.volId}" />
+        </f:facet>
+        <h:outputText value="#{_volHis.id.volId}" />
+      </p:column>
+      
+      <p:column id="colRiskFactor" sortBy="#{_volHis.riskFactor.mvName}" 
+        filterBy="#{_volHis.riskFactor.mvName}"  filterMatchMode="contains" width="100" >
+        <f:facet name="header">
+          <h:outputText value="#{messages.riskFactor}" />
+        </f:facet>
+        <h:outputText value="#{_volHis.riskFactor.mvName}" />
+      </p:column>
+
+      <p:column id="colRefRiskFactor" sortBy="#{_volHis.refRiskFactor.mvName}" 
+       filterBy="#{_volHis.refRiskFactor.mvName}"  filterMatchMode="contains" width ="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.refRiskFactor}" />
+        </f:facet>
+        <h:outputText value="#{_volHis.refRiskFactor.mvName}" />
+      </p:column>
+
+      <p:column id="colCovariance" sortBy="#{_volHis.covariance}" 
+        filterBy="#{_volHis.covariance}"   filterMatchMode="contains" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.covariance}" />
+        </f:facet>
+        <h:outputText value="#{_volHis.covariance}" style="float:right">
+          <f:convertNumber pattern="#,###.##" />
+          <!-- <f:convertNumber  pattern="\u00A4#,##0"/> -->
+        </h:outputText>
+      </p:column>
+
+      <p:column id="colCorrelation" sortBy="#{_volHis.correl}" 
+        filterBy="#{_volHis.correl}"  filterMatchMode="contains" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.correlation}" />
+        </f:facet>
+        <h:outputText value="#{_volHis.correl}" style="float:right">
+          <f:convertNumber pattern="#,###.##" />
+        </h:outputText>
+      </p:column>
+    </p:dataTable>
+    
+   <p:contextMenu for="formVolHis">
+      <p:menuitem value="#{messages.showChart}" id="qqqa" />
+      <p:menuitem >
+       <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
+        <!-- <p:graphicImage value="/img/primefaces/excel.png" /> -->
+        <p:dataExporter type="xls" target="tableVolHis" fileName="#{messages.volHis}" />
+      </h:commandLink>
+      </p:menuitem>
+      <p:menuitem value="#{messages.viewIrcDetail1}" action="#{tableVolatilityHistoryInit.dataTableView()}" />
+    </p:contextMenu>
+        
+      
+  </h:form>
+</ui:composition>

@@ -1,0 +1,36 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formDlgRfSelect">
+    <p:growl id="msg" showDetail="true" escape="false" />
+
+    <p:dialog id="dialogIrcDetail" widgetVar="wgDlgIrcDetail" header="#{messages.ircDetail}" resizable="false"
+      closeOnEscape="true" showEffect="fade" hideEffect="explode" maximizable="false" minimizable="true"
+      appendToBody="false" modal="false" dynamic="true" width="580" height="400" style="border:none">
+      <p:panel>
+        <p:panelGrid columns="4">
+          <p:outputLabel value="#{messages.ircName}" styleClass="takionLabel" style="float:right" />
+          <p:outputLabel value="#{selectedIrCurve.ircName}" />
+
+          <p:outputLabel value="#{messages.forwardingMethod}" styleClass="takionLabel" style="float:right" />
+          <p:outputLabel value="#{selectedIrCurve.forwardindMtd}" />
+
+          <p:outputLabel value="#{messages.generationType}" styleClass="takionLabel" style="float:right" />
+          <p:outputLabel value="#{selectedIrCurve.generationType}" />
+
+          <p:outputLabel value="#{messages.interpolationMethod}" styleClass="takionLabel" style="float:right" />
+          <p:outputLabel value="#{selectedIrCurve.interpolMtd}" />
+        </p:panelGrid>
+      </p:panel>
+
+      <p:separator />
+
+      <p:outputLabel value="[#{messages.bucketList}]" styleClass="takionLabel" style="float:none" />
+      <ui:include src="/fragment/tableIrcBucket.xhtml" />
+
+    </p:dialog>
+  </h:form>
+</ui:composition>

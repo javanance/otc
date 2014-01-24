@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+  <!-- <h:form id="formNotificationBar"> -->
+  <p:notificationBar position="top" effect="slide" widgetVar="notiBar" autoDisplay="true"
+    style="width:100%; height:66px; padding: 0px ; border:none ; opacity:1 ; background-color : #616161 ; background-image: url('./../img/path.jpg'); ">
+    <p:panel style="border:none ; margin:0px ; width:100% ; opacity: 1; background:none">
+      <p:menubar autoDisplay="false" style="border:none; opacity: 1; background:none" styleClass="takion77-menu">
+        <p:menuitem value="#{messages.menuHome}" icon="img_home_nav"
+          url="http://localhost:8080/himemysqltest/view/home.seam">
+        </p:menuitem>
+        <p:submenu label="#{messages.submenuMarketVariable}" icon="img_markget_variable">
+          <p:submenu label="#{messages.submenuViewHistoryData}">
+            <p:menuitem url="http://localhost:8080/himemysqltest/view/v101ViewHistoryData.seam"
+              value="#{messages.marketVariable}" icon="img_markget_variable" includeViewParams="true"
+              style="color:Lime; font-weight:900">
+              <f:param name="flagDataTable" value="All" />
+            </p:menuitem>
+
+            <p:menuitem url="http://localhost:8080/himemysqltest/view/v101ViewHistoryData.seam"
+              value="#{messages.menubOnlyRiskFactors}" includeViewParams="true">
+              <f:param name="flagDataTable" value="Rf" />
+            </p:menuitem>
+
+            <p:menuitem url="http://localhost:8080/himemysqltest/view/v101ViewHistoryData.seam"
+              value="#{messages.menubOnlyProducts}" includeViewParams="true">
+              <f:param name="flagDataTable" value="Prod" />
+            </p:menuitem>
+          </p:submenu>
+
+           <p:menuitem url="http://localhost:8080/himemysqltest/view/v130RfVcvMatrix.seam"
+            value="#{messages.menubarVcvMatrix}" />
+          <!--<p:menuitem url="http://localhost:8080/himemysqltest/view/v101ViewHistoryData.seam"
+            value="#{messages.menubarFxMatrix}" />
+          </p:menuitem> -->
+        </p:submenu>
+          <!-- <p:menuitem value="#{messages.hideMenubar}" url="#" onclick="PF('notiBar').hide()" /> -->
+        <f:facet name="options">
+          <p:panelGrid columns="1" style="float:right; width: 10px">
+            <p:menu styleClass="takion77-menu" style="border:none; background:none; float:right">
+              <p:menuitem value="#{messages.hideMenubar}" url="#" onclick="PF('notiBar').hide()" style="float:right"/>
+            </p:menu>
+            <!-- <s:link value="#{messages.hideMenubar}" onclick="PF('notiBar').hide()" style="float:right; color:LawnGreen "
+              styleClass="ui-menuitem-link ui-corner-all" /> -->
+          </p:panelGrid>
+        </f:facet>
+      </p:menubar>
+      <!-- <f:facet name="actions">
+           <p:tieredMenu style="width: 200px">
+
+            <p:submenu label="#{messages.submenuMarketVariable}" icon="img_markget_variable">
+              <p:submenu label="#{messages.submenuViewHistoryData}">
+                <p:menuitem>
+                  <s:link id="menuAllMarketVariables" view="#{configAction.getViewUrl('ViewHistoryData')}"
+                    value="#{messages.menuAllMarketVariables}" propagation="none"
+                    styleClass="ui-menuitem-link ui-corner-all">
+                    <f:param name="flagDataTable" value="All" />
+                  </s:link>
+                </p:menuitem>
+              </p:submenu>
+            </p:submenu>
+          </p:tieredMenu>
+          <p:tieredMenu>
+            <p:menuitem value="close" url="#" onclick="PF('bar').hide()" style="float:right" />
+          </p:tieredMenu>
+      </f:facet> -->
+    </p:panel>
+    <!-- <ui:include src="primeMenubar.xhtml" />
+    <p:tieredMenu style="float:right ; border:none ; background:none" >
+    <p:tieredMenu style="float:right ; border:none ; opacity:0.7 " >
+      <p:menuitem value="#{messages.hideMenubar}" url="#" onclick="PF('notiBar').hide()" style="float:right" />
+    </p:tieredMenu> -->
+  </p:notificationBar>
+  <!-- </h:form> -->
+</ui:composition>
+

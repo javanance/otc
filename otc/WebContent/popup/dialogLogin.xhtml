@@ -1,0 +1,41 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formLogin1">
+    <p:dialog id="dialogLogin" header="#{messages.login}" widgetVar="wgDialogLogin" resizable="false">
+
+      <h:panelGrid columns="2" cellpadding="5">
+        <h:outputLabel for="username1" value="#{messages.userName}:" />
+        <p:inputText id="username1" value="#{credentials.username}" required="true" label="username" />
+
+        <h:outputLabel for="password1" value="#{messages.password}:" />
+        <h:inputSecret id="password1" value="#{credentials.password}" required="true" label="password" />
+
+        <h:outputLabel for="rememberMe1" value="#{messages.rememberMe}" />
+        <h:selectBooleanCheckbox id="rememberMe1" value="#{rememberMe.enabled}" />
+
+        <f:facet name="footer">
+          <p:commandButton id="register1" value="#{messages.save}" />
+        </f:facet>
+      </h:panelGrid>
+      <p>
+        <i>Note - </i> You may login with the username 'admin' and a blank password.
+      </p>
+    </p:dialog>
+
+  </h:form>
+  <script type="text/javascript">  
+    function handleLoginRequest(xhr, status, args) {  
+        if(args.validationFailed || !args.loggedIn) {  
+            dlg.jq.effect("shake", { times:5 }, 100);  
+        }   
+        else {  
+            dlg.hide();  
+            $('#loginLink').fadeOut();  
+        }  
+    }  
+  </script>
+</ui:composition>

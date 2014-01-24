@@ -1,0 +1,35 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/templatePrimeTLCB.xhtml">
+
+  <ui:define name="layoutLeft">
+      <ui:include src="/fragment/treeObjectNavigation.xhtml" />
+  </ui:define>
+  
+  <ui:define name="layoutCenter">
+    <!-- <ui:include src="/fragment/tableDynamicModel.xhtml" /> -->
+   <ui:include src="/fragment/tableLazyDynamicModel.xhtml" />
+    <!-- <ui:include src="/popup/dialogDataNavigation.xhtml" /> -->
+  </ui:define>
+  
+  <ui:define name="layoutBottom">
+    <h:form id="dynForm">
+    <p:tabView id="dynTabView" value="#{tableLazyDynamicModelInit.detailTab}" var="_tabItem" dynamic="true" styleClass="dynamicTableId" orientation="top">
+      <!-- <p:tab title="#{_tabItem.columnId}_#{_tabItem.returnType}"> -->
+      <p:tab title="#{messages[_tabItem.columnId]}">
+        <ui:include src="/fragment/tableLazyDynamicModelDetail.xhtml" >
+          <ui:param name="className" value="#{_tabItem.returnType}"/> 
+          <ui:param name="detailDynamicModel" value="#{tableLazyDynamicModelInit.lazyModelDynamicDetail[_tabItem.columnId]}" />
+          <!-- <ui:param name="detailDynamicModel" value="#{tableLazyDynamicModelInit.detailTableModel[_tabItem.columnId]}" /> -->
+          <!-- <ui:param name="detailDynamicModel" value="#{tableLazyDynamicModelInit.detailTableModelList}" /> -->
+          <!-- <ui:param name="detailHeader" value="#{tableLazyDynamicModelInit.detailModelHeader}" /> -->
+          <ui:param name="detailHeader" value="#{tableLazyDynamicModelInit.detailMdoelHeaderMap[_tabItem.columnId]}" />
+        </ui:include>
+      </p:tab>
+    </p:tabView>
+    </h:form>
+  </ui:define>
+</ui:composition>

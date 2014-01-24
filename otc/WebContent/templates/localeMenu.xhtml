@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" 
+  xmlns:f="http://java.sun.com/jsf/core" 
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib">
+  <h:form id="formLocaleMenu" >
+    <!-- <p:outputPanel> -->
+      <!-- <h:panelGrid columns="6" style="float: right"> -->
+      <!-- <h:outputText value="Default Switcher:" />
+      <p:themeSwitcher style="width:200px" id="defaultSwitcher">
+        <f:selectItem itemLabel="Choose Theme" itemValue="" />
+        <f:selectItems value="#{themeSwitcher.themes}" />
+      </p:themeSwitcher> -->
+
+      <!-- <h:selectOneMenu value="#{localeSelector.localeString}">
+        <f:selectItems value="#{localeSelector.supportedLocales}" />
+      </h:selectOneMenu>
+      <h:commandButton action="#{localeSelector.select}" value="#{messages.ChangeLanguage}" /> -->
+      
+      <p:growl id="growl" showDetail="true"/> 
+<!--       <p:messages id = "msg"/> -->
+      
+      <h:outputText value="#{messages.baseDate}:" />
+      <p:calendar id="popupButtonCal" value="#{basedateBean.date1}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true"  label="Takion" >
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleDateSelect}" update="@(form)" />
+      </p:calendar>
+      <!-- </h:panelGrid> -->
+    <!-- </p:outputPanel> -->
+  </h:form>
+</ui:composition>

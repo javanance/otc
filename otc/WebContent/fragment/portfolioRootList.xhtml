@@ -1,0 +1,38 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">  
+
+  <h:form id="ListForm">
+    <p:dialog id="portListDialogId" header="#{messages.ctxtSelectPortfolio}" widgetVar="portListDialog" resizable="false">
+
+      <h:panelGrid columns="2" cellpadding="5">
+        <h:outputLabel for="username" value="Username:" />
+        <p:inputText value="#{credentials.username}" id="username" required="true" label="username" />
+
+        <h:outputLabel for="password" value="Password:" />
+        <h:inputSecret value="#{credentials.password}"   
+                    id="password" required="true"
+          label="password" />
+
+        <f:facet name="footer">
+          <p:commandButton id="portRootButton" value="Login" actionListener="#{identity.login}"
+            oncomplete="handleLoginRequest(xhr, status, args)" />
+        </f:facet>
+      </h:panelGrid>
+    </p:dialog>
+
+  </h:form>
+  <script type="text/javascript">  
+    function handleLoginRequest(xhr, status, args) {  
+        if(args.validationFailed || !args.loggedIn) {  
+            dlg.jq.effect("shake", { times:5 }, 100);  
+        }   
+        else {  
+            dlg.hide();  
+            $('#loginLink').fadeOut();  
+        }  
+    }  
+  </script>
+</ui:composition>

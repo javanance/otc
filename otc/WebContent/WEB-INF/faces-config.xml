@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<faces-config
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
-    version="2.0">
-	<application>
-		<locale-config>
-			<default-locale>en</default-locale>
-			<supported-locale>bg</supported-locale>
-			<supported-locale>de</supported-locale>
-			<supported-locale>en</supported-locale>
-			<supported-locale>fr</supported-locale>
-			<supported-locale>tr</supported-locale>
-		</locale-config>
-	</application>
-
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+  http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+  version="2.0">
+  <application>
+    <locale-config>
+      <default-locale>en</default-locale>
+      <!-- <supported-locale>ko</supported-locale> -->
+      <supported-locale>ko_KR</supported-locale>
+      <supported-locale>fr</supported-locale>
+      <supported-locale>en</supported-locale>
+    </locale-config>
+    
+    <!-- <resource-bundle>
+        <base-name>messages</base-name>
+        <var>msg</var>
+     </resource-bundle> -->
+  </application>
+ 
+<!--   <converter>
+        <converter-id>portConverter</converter-id>
+        <converter-class>com.eugenefe.converter.PortfolioConverter</converter-class>
+    </converter>
+ -->
+   <!-- <converter>
+        <converter-id>rfConverter</converter-id>
+        <converter-class>com.eugenefe.converter.MarketVariableConverter</converter-class>
+    </converter> -->
+<!--        <converter>
+        <converter-id>_rf</converter-id>
+        <converter-class>com.eugenefe.converter.RiskFactorPickListConverter</converter-class>
+    </converter> -->
+     <converter>
+        <converter-id>cntPartyConverter</converter-id>
+        <converter-class>com.eugenefe.converter.CounterpartyConverter</converter-class>
+    </converter>
+    
+    <!-- <lifecycle>
+    <phase-listener>com.eugenefe.util.LifeCycleListener</phase-listener>
+</lifecycle> -->
 </faces-config>

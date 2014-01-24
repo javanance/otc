@@ -1,0 +1,48 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formDlgRfSelectOld">
+<p:growl id="msg" showDetail="true" escape="false" />  
+     <p:dialog id="dialogRfSelect" widgetVar="wgDlgRfSelect" header="#{messages.selectRiskFactor}" resizable="false"
+      width="580" height="400" showEffect="fade" hideEffect="explode" style="border:none" closeOnEscape="true" dynamic="true">
+
+
+     <p:pickList id="pickListRiskFactors" value="#{riskFactorPickAction.pickRiskFactors}" var="_rf" effect="bounce"
+        itemValue="#{_rf}" itemLabel="#{_rf}" showSourceControls="true" showTargetControls="true"
+        showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+        filterMatchMode="startWith" style="height : 300px; ">
+
+        <f:facet name="sourceCaption">Available</f:facet>
+        <f:facet name="targetCaption">Selecting</f:facet>
+        <p:ajax event="transfer" listener="#{riskFactorPickAction.onTransfer}" update="msg" /> 
+
+       <!--  <p:column>  
+                  #{_rf.mvType}  
+        </p:column> -->
+        <p:column>  
+                  #{_rf}  
+        </p:column>
+      </p:pickList>
+
+      <p:separator />
+
+      <p:commandButton value="#{messages.submitButton}" action="#{riskFactorPickAction.afterPick(riskFactorPickAction.pickRiskFactors.target)}" 
+        onclick="wgDlgRfSelect.hide()"
+        update=":tabViewRiskFactor:formTableVcvMatrix:tableVcvMatrix" style="float:right" />
+        
+        
+    </p:dialog>
+    
+    <!-- <p:dialog modal="false" showEffect="fade" hideEffect="fade" widgetVar="playerDialog">  
+        <h:panelGrid id="displayPlayers" columns="2">  
+            <h:outputText value="Source: " style="font-weight:bold"/>  
+            <ui:repeat value="#{riskFactorPickAction.pickRiskFactors.target}" var="player">  
+                <h:outputText value="#{player}" style="margin-right:5px" />  
+            </ui:repeat>  
+        </h:panelGrid>  
+    </p:dialog> -->
+  </h:form>
+</ui:composition>

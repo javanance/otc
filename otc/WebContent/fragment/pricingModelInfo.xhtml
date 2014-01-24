@@ -1,0 +1,69 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  
+  <h:form id="formPricingModelInfo">
+      <p:panelGrid id="panelGridBondInfo" columns="6" rendered="#{selectedProduct.mvType =='BOND'}">
+        <p:outputLabel value="#{messages.prodcutName}" styleClass="takionLabel" />
+        <p:outputLabel value="#{selectBond.bondId}" />
+        
+        <p:outputLabel value="#{messages.pricerName}" styleClass="takionLabel" />
+        <p:selectOneMenu value="#{configAction.selectRiskMeasureGroup}" onchange="" >
+              <s:selectItems value="#{riskMeasureGroupMap.keySet()}" var="_group" label="#{riskMeasureGroupMap.get(_group)}"/>
+              <s:convertEnum/>
+        </p:selectOneMenu>        
+        
+        <p:outputLabel value="#{messages.discountCurve}" styleClass="takionLabel"/>
+        <p:selectOneMenu value="#{configAction.selectRiskMeasureGroup}" onchange="" >
+              <s:selectItems value="#{riskMeasureGroupMap.keySet()}" var="_group" label="#{riskMeasureGroupMap.get(_group)}"/>
+              <s:convertEnum/>
+        </p:selectOneMenu>  
+        
+        <p:outputLabel value="#{messages.discountCurveSpread}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.issuerId}"/>
+        
+        <p:outputLabel value="#{messages.referenceStock}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.issuerId}"/>
+
+        <p:outputLabel value="#{messages.volSurface}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.issuerId}"/>
+
+        <p:outputLabel value="#{messages.referenceCurve}" styleClass="takionLabel"/>
+        <h:outputText value="#{selectBond.faceAmt}">
+          <f:convertNumber pattern="$##,000" />
+        </h:outputText >
+
+
+    </p:panelGrid>
+    <!-- </p:panel> -->
+    
+    <!-- <p:autoComplete value="#{productSelectAction.secondProd}"   
+                    completeMethod="#{productSelectAction.complete}" 
+                    var="p" ">
+        <p:column> #{p.mvId}
+        </p:column>        
+        <p:column> #{p.mvName}</p:column>            
+    </p:autoComplete>
+    --> 
+   <!--  <p:autoComplete value="#{riskMeasureGroupAction.selectRMG}"   
+                    completeMethod="#{riskMeasureGroupAction.complete}" />
+    <p:autoComplete value="#{riskMeasureGroupAction.selectR}"   
+                    completeMethod="#{riskMeasureGroupAction.completeR}" var="p" forceSelection="true">
+             <p:column> #{p}
+        </p:column>        
+        <p:column> #{p.label}</p:column>            
+    
+    </p:autoComplete>      -->                                   
+    
+<!--     <p:autoComplete value="#{configAction.selectRiskMeasureGroup}"   
+                    completeMethod="#{riskMeasureGroupMap.complete}" 
+                    var="p" itemValue="#{p}">
+        <p:column> #{p.label}
+        </p:column>        
+        <p:column> #{p.label}</p:column>            
+    </p:autoComplete> -->
+  </h:form>
+</ui:composition>

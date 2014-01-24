@@ -1,0 +1,137 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  
+  <h:form id="formBondInfo">
+  <!-- <p:panel> -->
+    
+    <p:panelGrid id="panelGridBondInfo" columns="2" rendered="#{selectedMarketVariable.mvType =='BOND'}">
+        <p:outputLabel value="#{messages.productName}" styleClass="takionLabel" style="float:right"/>
+        <p:outputLabel value="#{selectBond.bondId}" />
+        
+        <p:outputLabel value="#{messages.issuerId}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.issuerId}"/>
+        
+        
+        <p:outputLabel value="#{messages.faceAmt}" styleClass="takionLabel"/>
+        <h:outputText value="#{selectBond.faceAmt}">
+          <f:convertNumber pattern="$##,000" />
+        </h:outputText >
+
+        <p:outputLabel value="#{messages.totalAmt}" styleClass="takionLabel"/>
+        <h:outputText value="#{selectBond.totalAmt}">
+        <f:convertNumber pattern="$##,000" />
+        <!-- <f:convertNumber type="currency"  currencySymbol="$"/> -->
+        <!-- <f:convertNumber type="currency"  currencyCode="KRW" pattern="##,000"/> -->
+        </h:outputText>
+        
+        <p:outputLabel value="#{messages.issueDate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.issueDate}"/>
+        
+        <p:outputLabel value="#{messages.maturityDate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.maturityDate}"/>
+        
+        <p:outputLabel value="#{messages.couponRate}" styleClass="takionLabel"/>
+        <h:outputText value="#{selectBond.couponRate}" style="float:right">
+          <f:convertNumber type="percent" />
+        </h:outputText>
+        
+        <p:outputLabel value="#{messages.intTerm}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.intTerm}"/>
+        
+        <p:outputLabel value="#{messages.compoundMethod}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.compoundMtd}"/>
+        
+        <p:outputLabel value="#{messages.daycountMethod}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.daycountMtd}"/>
+        
+        <p:outputLabel value="#{messages.bondCFType}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.bondCfType}"/>
+        
+        <p:outputLabel value="#{messages.priorityCode}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.priorityCd}"/>
+        
+        <p:outputLabel value="#{messages.securitizationCode}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.securitizationCd}"/>
+        
+        <p:outputLabel value="#{messages.creditRatingCode}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.creditRatingCd}"/>
+        
+        <p:outputLabel value="#{messages.currencyCode}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.currCd}"/>
+        
+        <p:outputLabel value="#{messages.premiumAtEnd}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.premiumAtEnd}"/>
+        
+        <p:outputLabel value="#{messages.bondType}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.bondType}"/>
+        
+        <p:outputLabel value="#{messages.redemptionMethod}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{selectBond.redemMcd}"/>
+        
+        <p:outputLabel value="#{messages.amortizeStartDate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.amortStDate}"/>
+
+        <p:outputLabel value="#{messages.amortizeStartDate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.amortStDate}"/>
+
+        <p:outputLabel value="#{messages.deferredTerm}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.deferTerm}"/>
+        
+        <p:outputLabel value="#{messages.amortizeCount}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.amortCnt}"/>
+
+        <p:outputLabel value="#{messages.amortizeFrequency}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.amortFreq}"/>
+
+        <p:outputLabel value="#{messages.amortizeAmount}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.amortAmt}"/>
+        
+        <p:outputLabel value="#{messages.couponPrepay}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.isCpPrepay}"/>
+        
+        <p:outputLabel value="#{messages.referenceIrCurve}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.refIrcId}"/>
+        
+        <p:outputLabel value="#{messages.spreadRate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.spreadRate}"/>
+        
+        <p:outputLabel value="#{messages.refixingTerm}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.refixingTerm}"/>
+        
+        <p:outputLabel value="#{messages.firstCouponDate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.firstCouponDate}"/>
+        
+        <p:outputLabel value="#{messages.couponDateGeneration}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.cpDateGen}"/>
+        
+        <p:outputLabel value="#{messages.capRate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.capRate}"/>
+        
+        <p:outputLabel value="#{messages.floorRate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.floorRate}"/>
+        
+        <p:outputLabel value="#{messages.stockLinkedType}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.stockLinkedType}"/>
+        
+        <p:outputLabel value="#{messages.referenceStock}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.refStockId}"/>
+        
+        <p:outputLabel value="#{messages.optionStartDate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.optionStDate}"/>
+        
+        <p:outputLabel value="#{messages.optionEndDate}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.optionEdDate}"/>
+        
+        <p:outputLabel value="#{messages.strikePrice}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.strikePrice}"/>
+        
+        <p:outputLabel value="#{messages.conversionRatio}" styleClass="takionLabel"/>
+        <p:outputLabel value="#{bondHome.instance.conversionRatio}"/>
+    </p:panelGrid>
+    <!-- </p:panel> -->
+  </h:form>
+</ui:composition>

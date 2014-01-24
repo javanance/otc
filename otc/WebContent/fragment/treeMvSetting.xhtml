@@ -1,0 +1,26 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   
+  <h:form id="formMvSetting">
+      <p:growl id="messages" showDetail="true" />
+      
+        <p:tree id="treeMvSetting" value="#{marketVariableSetting.superNode}" var="_node" 
+          animate="true" highlight="true" orientation="vertical" 
+          selectionMode="single"  
+          selection="#{marketVariableSetting.selectNode}"
+          draggable="false" droppable="true" 
+          style="width:95%">
+          
+          <!-- <p:ajax event="dragdrop" update="@(form)" /> --> 
+          <p:ajax event="select" listener="#{marketVariableSetting.onNodeSelect}" update="@(.ui-datatable)" />
+          <p:treeNode >
+            <h:outputText value="#{_node}"  />
+          </p:treeNode>
+        </p:tree>
+                
+
+  </h:form>
+</ui:composition>

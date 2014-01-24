@@ -1,0 +1,24 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+<!-- <h:form> -->
+  <p:pickList id="pickListString" value="#{pickList}" var="_pickItem" itemValue="#{_pickItem}" itemLabel="#{_pickItem}"
+    effect="drop" effectSpeed="fast" showCheckbox="true" filterMatchMode="contains" showSourceControls="true"
+    showSourceFilter="true" showTargetControls="true" showTargetFilter="true" style="height : 300px; ">
+
+    <f:facet name="sourceCaption">#{messages.available}</f:facet>
+    <f:facet name="targetCaption">#{messages.selected}</f:facet>
+    <!-- <p:ajax event="transfer" listener="#{riskFactorPickAction.onTransfer}" update="msg" /> -->
+
+    <!--  <p:column>#{_rf.mvType}</p:column> -->
+    <!-- <p:column>#{_rf}        </p:column> -->
+  </p:pickList>
+  
+  <!-- <p:commandButton  value="#{messages.submitButton}" action="#{riskFactorPickAction.afterPick}"
+        onclick="wgDlgRfSelect.hide()" update=":tabViewVcv:formVcvMatrix:tableVcvMatrix" style="float:right" /> -->
+        
+<!-- </h:form> -->
+</ui:composition>

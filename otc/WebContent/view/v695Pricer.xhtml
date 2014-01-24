@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/templatePrimeTLCB.xhtml">
+
+  <ui:define name="layoutLeft">
+      
+  </ui:define>
+  
+  <ui:define name="layoutCenter">
+  
+    <!-- <ui:include src="/fragment/tableHifive.xhtml" /> -->
+    <ui:include src="/fragment/tableHifive.xhtml" >
+       <!-- <ui:param name="hifiveList" value="#{tableHifiveInit.hifiveList}" /> -->
+     </ui:include>
+    
+  <!-- <img src='http://www.quandl.com/GOOG-Google-Finance/NYSE_MS-Morgan-Stanley-MS.png?dataset[trim_start]=2007-12-03&amp;dataset[trim_end]=2013-12-03&amp;dataset[width]=560&amp;dataset[height]=315&amp;dataset[visible_columns]=1,2&amp;dataset[y_axis_min]=9.2&amp;dataset[y_axis_max]=55&amp;dataset[y_axis_dual_min]=0&amp;dataset[y_axis_dual_max]=329786042&amp;dataset[graph_title]=Morgan%20Stanley%20(MS)' alt='Graph of Morgan Stanley (MS)'/> -->
+  
+  <!-- <img src='http://www.quandl.com/OPEC-Organization-of-the-Petroleum-Exporting-Countries/ORB-OPEC-Reference-Basket-Price.png?dataset[trim_start]=2010-08-26&amp;dataset[width]=800&amp;dataset[height]=400&amp;dataset[visible_columns]=0&amp;dataset[y_axis_min]=71.4&amp;dataset[y_axis_max]=124.64&amp;dataset[y_axis_dual_min]=null&amp;dataset[y_axis_dual_max]=null&amp;dataset[graph_title]=OPEC%20Reference%20Basket%20Price' 
+      alt='Graph of OPEC Reference Basket Price' /> -->
+  
+  <!-- <a target='blank' href='http://www.quandl.com/GOOG-Google-Finance/NYSE_MS-Morgan-Stanley-MS?utm_source=quandl&amp;utm_medium=graph' > -->
+  <!-- <img src='http://www.quandl.com/GOOG-Google-Finance/NYSE_MS-Morgan-Stanley-MS.png?dataset[trim_start]=2007-12-03&amp;dataset[trim_end]=2013-12-03&amp;dataset[width]=853&amp;dataset[height]=480&amp;dataset[visible_columns]=3&amp;dataset[y_axis_min]=9.2&amp;dataset[y_axis_max]=55&amp;dataset[y_axis_dual_min]=null&amp;dataset[y_axis_dual_max]=null&amp;dataset[graph_title]=Morgan%20Stanley%20(MS)' alt='Graph of Morgan Stanley (MS)'/> -->
+  <!-- </a> -->
+  
+  
+  </ui:define>
+  
+  <ui:define name="layoutBottom">
+    <p:tabView id="hifiveTabView" dynamic="true"  orientation="top">
+      <p:tab title="#{messages.hifiveUnderlying}">
+        <ui:include src="/fragment/tableHifiveUnderlying.xhtml" >
+          <ui:param name="underlyingList" value="#{tableHifiveUnderlyingInit.underlyingList}" />
+        </ui:include>
+      </p:tab>
+      <p:tab title="#{messages.hifiveStrike}">
+        <ui:include src="/fragment/tableHifiveStrike.xhtml" >
+          <ui:param name="strikeList" value="#{tableHifiveStrikeInit.strikeList}" />
+        </ui:include>
+      </p:tab>
+      <p:tab title="#{messages.hifiveSwapIr}">
+        <ui:include src="/fragment/tableHifiveSwapIr.xhtml" >
+          <ui:param name="swapIrList" value="#{tableHifiveSwapIrInit.swapIrList}" />
+        </ui:include>
+      </p:tab>
+    </p:tabView>
+      
+  </ui:define>
+</ui:composition>

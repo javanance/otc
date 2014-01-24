@@ -1,0 +1,54 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formIrcTs">
+
+    <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.viewDates}" />
+      <p:calendar id="popupButtonCal1" value="#{basedateBean.stDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleStartDateSelect}" update="@(form)" />
+      </p:calendar>
+      <h:outputText value=" ~ " />
+      <p:calendar id="popupButtonCal2" value="#{basedateBean.endDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleEndDateSelect}" update="@(form)" />
+      </p:calendar>
+    </p:panelGrid>
+
+    <p:dataTable id="tableIrcTs" var="_irc" value="#{tableIrCurveHisAction.pivotTable}" widgetVar="wgTableIrcTs"
+      emptyMessage="#{messages.noDataFound}" resizableColumns="true" liveResize="false" 
+      selection="#{tableIrCurveHisAction.selectedTableModel}"      rowKey="#{_irc.label}"
+      paginator="true" paginatorPosition="bottom" rows="15"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="15,25,50">
+      
+      <p:ajax event="rowSelectCheckbox" listener="#{chartIrcHisAction.loadChart()}" update="@(form)"/>
+      <p:ajax event="rowUnselectCheckbox" listener="#{chartIrcHisAction.loadChart()}" update="@(form)"/>
+      <p:ajax event="toggleSelect" listener="#{chartIrcHisAction.loadChart()}" update="@(form)"/>
+
+      <p:column selectionMode="multiple"  headerText="All" exportable="false" width="6" style="width:2%" />
+      
+      <p:column id="colBssd" sortBy="#{_irc.label}" width="50">
+        <f:facet name="header">
+          <h:outputText value="#{messages.bssd}" />
+        </f:facet>
+        <h:outputText value="#{_irc.label}" />
+      </p:column>
+
+      <p:columns value="#{tableIrCurveHisAction.ircTsHeader}" var="column"
+        sortBy="#{_irc.contentMap[column.property]}" columnIndexVar="colIndex" width="40">
+        <f:facet name="header">
+          <h:outputText value="#{column.header}" />
+        </f:facet>
+
+        <h:outputText value="#{_irc.contentMap[column.property]}" style="float:right">
+          <f:convertNumber pattern="#,###.####" />
+        </h:outputText>
+      </p:columns>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

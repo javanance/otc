@@ -1,0 +1,84 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/templatePrimeTLC.xhtml">
+
+
+  <ui:define name="layoutLeft">
+    <!-- <ui:include src="/fragment/tableIrCurve.xhtml" /> -->
+    <ui:include src="/fragment/tableTermStructure.xhtml" />
+
+  </ui:define>
+
+  <ui:define name="layoutCenter">
+    <!-- <p:panel>
+      <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.viewDates}" />
+      <p:calendar id="popupButtonCal1" value="#{basedateBean.stDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleStartDateSelect}" update="@(form)" />
+      </p:calendar>
+      <h:outputText value=" ~ " />
+      <p:calendar id="popupButtonCal2" value="#{basedateBean.endDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleEndDateSelect}" update="@(form)" />
+      </p:calendar>
+    </p:panelGrid>
+  </p:panel> -->
+
+    <p:tabView id="tabViewIrCurve" dynamic="true" activeIndex="0" >
+      <!-- <p:ajax event="tabChange" listener="#{chartIntRateHisAction.loadChart1}" update="@(form)" /> -->
+      <!-- <p:ajax event="tabChange" listener="#{chartIrcHisAction.loadChart1}" update="@(form)" /> -->
+      
+      <p:tab id="tabIrcTermStructure" title="#{messages.termStructure}">
+        <!-- <ui:include src="/fragment/tableIrcTermStructure.xhtml" /> -->
+        
+        <ui:include src="/fragment/datatableDynamicColumns.xhtml"/>
+      </p:tab>
+      
+      <p:tab id="tabIrcTsChart" title="#{messages.ircChart}">
+        <!-- <ui:include src="/chart/chartIrcHis.xhtml" /> -->
+      </p:tab>
+      
+      
+      <!-- <p:tab id="tabIrcBucket" title="#{messages.ircBucket}">
+        <ui:include src="/fragment/tableIrcBucket.xhtml" />        
+    </p:tab> -->
+      <!-- <p:tab id="tabIrcBucketHis" title="#{messages.ircBucketHis}">
+        <ui:include src="/fragment/tableIrcBucketHis.xhtml" />        
+        <ui:include src="/chart/chartIntRateHis.xhtml" />
+    </p:tab> -->
+      
+      <p:tab id="tabIrcBucketHis" title="#{messages.ircBucketHis}" >
+        <p:layout style="height:100%; min-height:600px; backgroud:grey;" id="layout" >
+          <!-- <p:layout style="min-width:400px;min-height:200px;" id="layout"> -->
+          
+          <p:layoutUnit position="center" gutter="4" resizable="true">
+            <ui:include src="/fragment/tableIrcBucketHis.xhtml" />
+          </p:layoutUnit>
+          
+          <p:layoutUnit  position="south" gutter="4" 
+            resizable="true" collapsible="true"
+            minSize="200"  >
+              <!-- <ui:include src="/chart/chartIntRateHis.xhtml" /> -->
+          </p:layoutUnit>
+          
+          <!-- <p:layoutUnit position="center">
+          </p:layoutUnit> -->
+          
+          
+          
+        </p:layout> 
+
+      </p:tab>
+      <p:tab id="tabIntRateHisChart" title="#{messages.intRateHisChart}">
+        <!-- <ui:include src="/chart/chartIntRateHis.xhtml" /> -->
+      </p:tab>
+    </p:tabView>
+    <!-- <ui:include src="/popup/dialogIrcDetail.xhtml" /> -->
+  </ui:define>
+
+
+</ui:composition>

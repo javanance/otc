@@ -1,0 +1,37 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+
+  <h:form id="formIrCurveInfo">
+    <p:dataTable id="dataTableIrCurve" value="#{ircBuckets}" var="_productHis" rendered="#{selectedProduct.mvType =='INT_RATE'}">
+      <p:column headerText="#{messages.ircName}" >
+        <h:outputText value="#{_productHis.id.ircId}" />
+      </p:column>
+      <p:column headerText="#{messages.ircName}" >
+        <h:outputText value="#{_productHis.maturityId.frequency}" />
+      </p:column>
+      <p:column headerText="#{messages.ircName}" >
+        <h:outputText value="#{_productHis.intRate.irId}" />
+      </p:column>
+      <!-- <p:column headerText="#{messages.ircName}" >
+        <h:outputText value="#{_productHis.id.irId}" />
+      </p:column> -->
+
+<!--       <p:column id="colIrcId" headerText="#{messages.ircId}" sortBy="#{_productHis.ircId.ircId}" width="100">
+        <h:outputText value="#{_productHis.ircId.ircId}" />
+      </p:column>
+      <p:column id="colIrcName" headerText="#{messages.ircName}" sortBy="#{_productHis.ircId.ircName}" width="100">
+        <h:outputText value="#{_productHis.ircId.ircName}" />
+      </p:column>
+ 
+      <p:column id="colGenerationType" headerText="#{messages.generationType}" sortBy="#{_productHis.ircId.generationType}" width="100">
+        <h:outputText value="#{_productHis.ircId.generationType}" />
+      </p:column> -->
+
+    </p:dataTable>
+
+  </h:form>
+</ui:composition>

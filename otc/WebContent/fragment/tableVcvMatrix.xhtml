@@ -1,0 +1,84 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formVcvMatrix">
+
+    <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.vcvMethod}" />
+
+      <p:selectOneMenu value="#{flagBean.vcvMethod}" style="width:100px">
+        <s:selectItems value="#{tableRfVcvMatrixInit.volatilityList.{t|t.volId}}" var="_vol" label="#{_vol}" />
+        <!-- <p:ajax event="change" process="@this" update="@(form)"  listener="#{tableRfVcvMatrixInit.loadVcvMatrix()}" /> -->
+        <p:ajax event="valueChange" update="@(form)"  listener="#{tableRfVcvMatrixInit.loadVcvMatrix()}"/>  
+      </p:selectOneMenu>
+      
+      <!-- <p:outputLabel value="#{messages.showRfType}" />
+      <p:selectOneMenu value="#{flagVcvRfType}" style="width:100px">
+        <s:selectItems value="#{rfType}" var="_group" label="#{_group.type}" />
+        <s:convertEnum />
+      </p:selectOneMenu> -->
+      
+      <p:outputLabel value="#{messages.vcvType}" />
+      <!-- <p:selectOneRadio id="customRadio" value="#{flagBean.flagVcvType}" layout="lineDirection"  plain="true" > -->
+      <p:selectOneRadio id="customRadio"  value="#{flagBean.vol}" layout="lineDirection"  plain="true" >
+        <f:selectItem itemLabel="#{messages.volatility}" itemValue="true" />
+        <f:selectItem itemLabel="#{messages.correlation}" itemValue="false" />
+        <p:ajax event="valueChange" process="@this" update="@(form)"/>
+      </p:selectOneRadio>
+    </p:panelGrid>
+
+    <p:contextMenu for="formVcvMatrix">
+      <p:menuitem value="#{messages.selectRiskFactors}" oncomplete="wgDlgRfSelect.show()"
+        action="#{pickListRfAction.loadPickList()}" />
+      <p:menuitem >
+       <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
+        <!-- <p:graphicImage value="/img/primefaces/excel.png" /> -->
+        <p:dataExporter type="xls" target="tableVcvMatrix" fileName="#{messages.vcvMatrix}_#{basedateBean.bssd}" />
+      </h:commandLink>
+      </p:menuitem>
+    </p:contextMenu>
+    
+    <p:dataTable id="tableVcvMatrix" var="_vcv" value="#{tableRfVcvMatrixInit.pivotTableContent}" 
+      widgetVar="wgTableVcvMatrix"
+      emptyMessage="#{messages.noDataFound}" 
+      resizableColumns="true" 
+      liveResize="false" 
+      style="height :100%;">
+
+      <!-- <p:column id="colRfType" width="100" sortBy="#{_vcv.data.mvType}"
+      filterBy="#{_vcv.data.mvType}" filterMatchMode="contains">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.colRfType}" />  
+         </f:facet>
+        <h:outputText value="#{_vcv.data.mvType}" />
+      </p:column> -->
+      <p:column id="colRfName" width="80" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.colRfName}" />  
+         </f:facet>
+        <h:outputText value="#{_vcv.data.mvName}" />
+      </p:column>
+      <p:column id="colRfId" width="80">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.colRiskFactor}" />  
+         </f:facet>
+        <h:outputText value="#{_vcv.data.mvId}" />
+      </p:column>
+
+      <p:columns value="#{tableRfVcvMatrixInit.pivotTableHeader}" var="column" columnIndexVar="colIndex" width="80" sortBy="#{_vcv.contentMap[column].covariance}">
+        <f:facet name="header">  
+                <h:outputText value="#{column.mvId}" />  
+         </f:facet>
+        <h:outputText value="#{_vcv.contentMap[column].covariance}" style="float:right" rendered="#{flagBean.vol}">
+          <f:convertNumber pattern="#,###.##" />
+        </h:outputText>
+        <h:outputText value="#{_vcv.contentMap[column].correl}" style="float:right" rendered="#{!flagBean.vol}">
+          <f:convertNumber pattern="#,###.##" />
+        </h:outputText>
+      </p:columns>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

@@ -1,0 +1,62 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formIrcBucketHis" >
+    
+    <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.viewDates}" />
+      <p:calendar id="popupButtonCal1" value="#{basedateBean.stDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleStartDateSelect}" update="@(form)" />
+      </p:calendar>
+      <h:outputText value=" ~ " />
+      <p:calendar id="popupButtonCal2" value="#{basedateBean.endDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleEndDateSelect}" update="@(form)" />
+      </p:calendar>
+    </p:panelGrid>
+      
+    <p:dataTable id="tableIrcBucketHis" var="_irc" value="#{tableIrCurveHisAction.intRateHis}" widgetVar="wgTableIrcBucketHis"
+      emptyMessage="#{messages.noDataFound}" filteredValue="#{tableIrCurveHisAction.filteredIntRateHis}"
+      
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50"
+       >
+      
+      <p:ajax event="filter" listener="#{tableIrCurveHisAction.onFilter}" />
+      <p:column id="colBssd" sortBy="#{_irc.id.bssd}" filterBy="#{_irc.id.bssd}" filterMatchMode="contains" 
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.bssd}" />  
+         </f:facet>
+        <h:outputText value="#{_irc.id.bssd}" />
+      </p:column>
+      <p:column id="colIntRateId" sortBy="#{_irc.id.irId}" filterBy="#{_irc.id.irId}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.intRateId}" />  
+         </f:facet>
+        <h:outputText value="#{_irc.id.irId}" />
+      </p:column>
+      <p:column id="colIntRate" sortBy="#{_irc.intRate}" filterBy="#{_irc.intRate}" filterMatchMode="contains"
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.intRate}" />  
+         </f:facet>
+        <h:outputText value="#{_irc.intRate}" />
+      </p:column>
+      <p:column id="colDiscountFactor" sortBy="#{_irc.intRate}" filterBy="#{_irc.intRate}" filterMatchMode="contains"
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.discountFactor}" />  
+         </f:facet>
+        <h:outputText value="#{_irc.intRate}" />
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

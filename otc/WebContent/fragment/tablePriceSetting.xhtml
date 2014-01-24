@@ -1,0 +1,106 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPriceSetting">
+
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+
+    <!-- <p:remoteCommand name ="rcResetSelection" action="#{tableHifiveInit.resetSelection}" update="@(.ui-datatable)"/> -->
+    <!-- <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+      <p:commandButton value="#{messages.yes}" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>
+      <p:commandButton value="#{messages.no}" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-no"/>
+    </p:confirmDialog> -->
+    <!-- <p:remoteCommand name ="rcCellEdit" action="#{tableHifiveInit.onCpartyChange}"/> -->
+
+    <p:panelGrid columns="2" >
+      <p:commandButton value="#{messages.save}" action="#{tablePriceSettingInit.save}" update="growl"/>
+      <p:commandButton value="#{messages.simulate}" />
+    </p:panelGrid>
+    
+    <p:contextMenu for="tablePriceSetting" widgetVar="cMenuPriceSetting">
+      <!-- <p:menuitem value="#{messages.insertHifive}" action="#{tableHifiveInit.addHifive}" update="growl, @(.ui-datatable)" /> -->
+      <p:separator/>
+      <!-- <p:menuitem value="#{messages.deleteHifive}" action="#{tableHifiveInit.removeHifive}"
+                  update="growl, @(.ui-datatable)"  oncomplete="rcResetSelection()"/> -->
+<!--       <p:menuitem >
+        <p:commandLink value="#{messages.deleteHifive}" styleClass="ui-menuitem-link" action="#{tableHifiveInit.removeHifive}" 
+            update="growl, @(.ui-datatable)"  oncomplete="rcResetSelection()" ajax="true">
+          <h:outputText styleClass="ui-menuitem-icon ui-icon ui-icon-close" />
+          <h:outputText value="#{messages.close}" styleClass="ui-menuitem-text" />
+          <p:confirm header="#{messages.confirm}" message="#{messages.confirmMessage}" icon="ui-icon-alert"/>
+        </p:commandLink>
+      </p:menuitem>   -->
+    </p:contextMenu>
+              
+    <p:dataTable id="tablePriceSetting" var="_pr" value="#{tablePriceSettingInit.priceSettingList}" 
+      widgetVar="wgTablePriceSetting"
+      emptyMessage="#{messages.noDataFound}"
+      filteredValue="#{tablePriceSettingInit.filterPrSettingList}"  filterEvent="keyup"
+      selection="#{tablePriceSettingInit.selectPrSetting}" selectionMode="single"
+      rowKey="#{_pr}" 
+      rowIndexVar="rowIndex" 
+      editable="#{isEditable}" editMode="#{editMode}" 
+      editingRow="false"  
+      sortMode="multiple"
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:ajax event="rowSelect" update="@(.ui-datatable)" />
+      <!-- <p:ajax  event="filter" listener="#{tableHifiveInit.resetSelection}"  update="tableHifive"/> -->
+      <!-- <p:ajax event="filter" oncomplete="rcResetSelection()"  /> -->
+      
+      <!-- <p:ajax event="sort" oncomplete="rcSelectDefault()"/> -->
+      <!-- <p:ajax event ="cellEdit" listener="#{tableHifiveInit.onCpartyChange}" 
+            onstart="wgTableHifive.selectRow(#{rowIndex})" update="@parent:growl, @(.ui-datatable)"/> -->
+      <!-- <p:ajax event ="cellEdit" oncomplete="rcCellEdit()" /> -->
+      <!-- <p:ajax event="rowSelect" listener="#{tableHifiveStrikeInit.loadPivotTable1}" update="@(.ui-datatable)" /> -->
+<!--       <p:column selectionMode="single" headerText="All" exportable="false" width="6"  /> -->
+
+      <p:column id="colPrObj" sortBy="#{_pr.id.pricingObjId}" 
+                filterBy="#{_pr.id.pricingObjId}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.priceObject}" /></f:facet>
+        <h:outputText value="#{_pr.id.pricingObjId}"/>
+      </p:column>
+
+      <p:column id="colProdId" sortBy="#{_pr.id.prodId}" 
+                filterBy="#{_pr.id.prodId}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getProdId}" /> </f:facet>
+        <h:outputText value="#{_pr.id.prodId}" />
+      </p:column>
+
+      <p:column id="coldllName" sortBy="#{_pr.pricingDll.dllName}" 
+                filterBy="#{_pr.pricingDll.dllName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.dllName}" /> </f:facet>
+        <h:outputText value="#{_pr.pricingDll.dllName}"/>
+      </p:column>
+      
+      <p:column id="colIrcName" sortBy="#{_pr.discountIrc.ircName}" 
+                filterBy="#{_pr.discountIrc.ircName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.ircName}" /> </f:facet>
+        <h:outputText value="#{_pr.discountIrc.ircName}"/>
+      </p:column>
+      
+      <p:column id="colMvTypeName" sortBy="#{_pr.mvType.mvTypeName}" 
+                filterBy="#{_pr.mvType.mvTypeName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.mvTypeName}" /> </f:facet>
+        <h:outputText value="#{_pr.mvType.mvTypeName}"/>
+      </p:column>
+
+      <p:column id="colSimulationNum" sortBy="#{_pr.simulationNum}" 
+                filterBy="#{_pr.mvType.mvTypeName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.simulationNumber}" /> </f:facet>
+        <h:outputText value="#{_pr.simulationNum}"/>
+      </p:column>
+            <p:column id="colLatticeNum" sortBy="#{_pr.latticeNum}" 
+                filterBy="#{_pr.latticeNum}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.latticeNumber}" /> </f:facet>
+        <h:outputText value="#{_pr.latticeNum}"/>
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

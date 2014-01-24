@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.org/schema/seam/pages" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.org/schema/seam/pages 
+  http://jboss.org/schema/seam/pages-2.3.xsd"   >
+  <!-- <action execute="#{tableRfVcvMatrixInit.initVcvMatrix()}" if="#{!conversation.longRunning}"/> -->
+  <!-- <action execute="#{tableRfVcvMatrixInit.initVcvMatrix()}" on-postback="false"/> -->
+  <!-- <action execute="#{tableRfVcvMatrixInit.initVcvMatrix()}" /> -->
+  <!-- <action execute="#{tableTermStructureInit.begin}"/> -->
+	<begin-conversation join="true" if="#{conversation.viewId == '/view/v140IrCurve.xhtml'}"/>
+</page>

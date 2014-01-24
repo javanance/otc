@@ -1,0 +1,70 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveSwapIr" >
+    
+    <p:dataTable id="tableHifiveSwapIr" var="_swapIr" value="#{swapIrList}" 
+      widgetVar="wgTableHifiveSwapIr"
+      emptyMessage="#{messages.noDataFound}" 
+      
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50"
+       >
+       
+      
+      <p:column id="colProdId" sortBy="#{_swapIr.prodId}" filterBy="#{_swapIr.prodId}" filterMatchMode="contains" 
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdId}" />  
+         </f:facet>
+        <h:outputText value="#{_swapIr.prodId}" />
+      </p:column>
+      
+      <!-- <p:column id="colRefHifive" sortBy="#{_swapIr.hifive.prodId}" filterBy="#{_swapIr.hifive.prodId}" filterMatchMode="contains" 
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getHifive}" />  
+         </f:facet>
+        <h:outputText value="#{_swapIr.hifive.prodId}" />
+      </p:column> -->
+      
+      <p:column id="colIrcId" sortBy="#{_swapIr.irCurve.ircId}" filterBy="#{_swapIr.irCurve.ircId}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getIrcId}" />  
+         </f:facet>
+        <h:outputText value="#{_swapIr.irCurve.ircId}" />
+      </p:column>
+      
+      <!-- <p:column id="colPaymentTerm" sortBy="#{_swapIr.paymentTerm}" filterBy="#{_swapIr.paymentTerm}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getPaymentTerm}" />  
+         </f:facet>
+        <h:outputText value="#{_swapIr.paymentTerm}" />
+      </p:column> -->
+      
+      <p:column id="colSpread" sortBy="#{_swapIr.spread}" filterBy="#{_swapIr.spread}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getSpread}" />  
+         </f:facet>
+        <h:outputText value="#{_swapIr.spread}" />
+      </p:column>
+      
+      <p:column id="colFixedRate" sortBy="#{_swapIr.fixedRate}" filterBy="#{_swapIr.fixedRate}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getFixedRate}" />  
+         </f:facet>
+        <h:outputText value="#{_swapIr.fixedRate}" />
+      </p:column>
+      
+    </p:dataTable>
+  </h:form>
+</ui:composition>

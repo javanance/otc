@@ -1,0 +1,35 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formProdReturn">
+
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+
+    <p:dataTable id="tableProdReturn" var="_var" value="#{tableHifiveInit.hifiveList}" 
+      widgetVar="wgTableHifivezz"
+      emptyMessage="#{messages.noDataFound}"
+      filteredValue="#{tableHifiveInit.filterHifiveList}"  filterEvent="keyup"
+      selection="#{tableHifiveInit.selectHifive}" selectionMode="single"
+      rowKey="#{_var.prodId}" 
+      rowIndexVar="rowIndex" 
+      editable="#{isEditable}" editMode="#{editMode}" 
+      editingRow="false"  
+      sortMode="multiple"
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+
+      <p:column id="colIsVirtual" sortBy="#{_var.virtual}" 
+                filterBy="#{_var.virtual}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.isVirtual}" /></f:facet>
+        <h:outputText value="#{_var.virtual}"/>
+      </p:column>
+
+    </p:dataTable>
+  </h:form>
+</ui:composition>

@@ -7,12 +7,85 @@
     xmlns:rich="http://richfaces.org/rich">
     <rich:toolbarGroup>
         <h:outputText value="#{projectName}:"/>
-        <s:link id="menuHomeId" view="/home.xhtml" value="Home" propagation="none"/>
+        <s:link id="menuHomeId" view="/error.xhtml" value="Home" propagation="none"/>
     </rich:toolbarGroup>
+    <rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+        <f:facet name="label">Browse data</f:facet>
+	<rich:menuItem>
+    	<s:link view="/BizunitList.xhtml"
+           	value="Bizunit List"
+           	id="BizunitId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/PositionList.xhtml"
+           	value="Position List"
+           	id="PositionId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/EmployeeList.xhtml"
+           	value="Employee List"
+           	id="EmployeeId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/PortfolioList.xhtml"
+           	value="Portfolio List"
+           	id="PortfolioId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/VarGenMcdList.xhtml"
+           	value="VarGenMcd List"
+           	id="VarGenMcdId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/PositionRiskList.xhtml"
+           	value="PositionRisk List"
+           	id="PositionRiskId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/BasedateList.xhtml"
+           	value="Basedate List"
+           	id="BasedateId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/PortfolioReturnList.xhtml"
+           	value="PortfolioReturn List"
+           	id="PortfolioReturnId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/PositionReturnList.xhtml"
+           	value="PositionReturn List"
+           	id="PositionReturnId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+	<rich:menuItem>
+    	<s:link view="/PortfolioDetailList.xhtml"
+           	value="PortfolioDetail List"
+           	id="PortfolioDetailId"
+			includePageParams="false"
+     		propagation="none"/>
+     </rich:menuItem>
+    </rich:dropDownMenu>
     <!-- @newMenuItem@ -->
     <rich:toolbarGroup location="right">
         <h:outputText id="menuWelcomeId" value="signed in as: #{credentials.username}" rendered="#{identity.loggedIn}"/>
         <s:link id="menuLoginId" view="/login.xhtml" value="Login" rendered="#{not identity.loggedIn}" propagation="none"/>
-        <s:link id="menuLogoutId" view="/home.xhtml" action="#{identity.logout()}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
+        <s:link id="menuLogoutId" view="/error.xhtml" action="#{identity.logout}" value="Logout" rendered="#{identity.loggedIn}" propagation="none"/>
     </rich:toolbarGroup>
 </rich:toolbar>

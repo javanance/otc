@@ -1,0 +1,37 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveStrikePivot">
+
+    <p:dataTable id="tableHifiveStrikePivot" var="_strike" value="#{tableHifiveStrikeInit.pivotTableContent}"
+      widgetVar="wgTableHifiveStrikePivot" emptyMessage="#{messages.noDataFound}" 
+      resizableColumns="true" liveResize="false"
+      filteredValue="#{tableHifiveStrikeInit.filterPivotTableContent}"
+      >
+
+      <!-- <p:column id="colBssd" sortBy="#{_strike.label}" width="50"> -->
+      <p:column id="colHifivew" sortBy="#{_strike.data}" width="90" 
+        filterBy="#{_strike.data}" filterMatchMode="contains">
+        <f:facet name="header">
+          <!-- <h:outputText value="#{messages.hifive}" /> -->
+          <h:outputText value="#{messages.strikeSerial}" />
+        </f:facet>
+        <p:outputLabel id="BBB" value="#{_strike.data}" />
+      </p:column>
+      
+      <p:columns value="#{tableHifiveStrikeInit.pivotTableHeader}" var="_column" width="40" >
+        <f:facet name="header">
+          <h:outputText value="#{_column}" />
+        </f:facet>
+        
+        <p:outputLabel value="#{_strike.contentMap[_column]}" style="float:right">
+          <!-- <f:convertNumber pattern="#.####" /> -->
+        </p:outputLabel>
+      </p:columns>
+      
+    </p:dataTable>
+  </h:form>
+</ui:composition>

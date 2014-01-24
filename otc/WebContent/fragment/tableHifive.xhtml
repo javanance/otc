@@ -1,0 +1,134 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifive" >
+    <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.viewDates}"  />
+    </p:panelGrid>
+    
+    
+    <p:contextMenu for="tableHifive" widgetVar = "hifiveCmenu">
+      <p:menuitem value ="Insert..." action="#{tableHifiveInit.addRow}"  update="tableHifive"/>
+    </p:contextMenu>
+    <p:dataTable id="tableHifive" var="_hifive" value="#{tableHifiveInit.hifiveList}" 
+      widgetVar="wgTableHifive"
+      emptyMessage="#{messages.noDataFound}" 
+      selection="#{tableHifiveInit.selectHifive}" selectionMode="single"
+      rowKey="#{_hifive.prodId}"
+      
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50"
+       >
+      <p:ajax event="rowSelect"  listener="#{tableHifiveStrikeInit.loadPivotTable1}" update="@(.ui-datatable)" />
+             
+      <!-- <p:column selectionMode="single" headerText="All" exportable="false" width="6"  /> -->
+      <p:column id="colProdId" sortBy="#{_hifive.prodId}" filterBy="#{_hifive.prodId}" filterMatchMode="contains" 
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdId}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.prodId}" />
+      </p:column>
+      
+      <p:column id="colProdName" sortBy="#{_hifive.prodName}" filterBy="#{_hifive.prodName}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdName}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.prodName}" />
+      </p:column>
+      
+      <p:column id="colHifiveType" sortBy="#{_hifive.hifiveType}" filterBy="#{_hifive.hifiveType}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getHifiveType}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.hifiveType}" />
+      </p:column>
+      
+      <p:column id="colIssueDate" sortBy="#{_hifive.issueDate}" filterBy="#{_hifive.issueDate}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getIssueDate}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.issueDate}" />
+      </p:column>
+      
+      <p:column id="colMaturityDate" sortBy="#{_hifive.maturityDate}" filterBy="#{_hifive.maturityDate}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getMaturityDate}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.maturityDate}" />
+      </p:column>
+      
+      <p:column id="colCntPartyId" sortBy="#{_hifive.counterparty.counterpartyId}"
+        filterBy="#{_hifive.counterparty.counterpartyId}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.countPartyId}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.counterparty.counterpartyId}" />
+      </p:column>
+      
+      <p:column id="colFaceAmt" sortBy="#{_hifive.faceAmt}"
+        filterBy="#{_hifive.faceAmt}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getFaceAmt}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.faceAmt}" />
+      </p:column>
+      
+      <p:column id="colNotionalAmt" sortBy="#{_hifive.notionalAmt}"
+        filterBy="#{_hifive.notionalAmt}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getNotionalAmt}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.notionalAmt}" />
+      </p:column>
+      
+      <p:column id="colDownBarrier" sortBy="#{_hifive.downBarrier}"
+        filterBy="#{_hifive.downBarrier}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getDownBarrier}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.downBarrier}" />
+      </p:column>
+      
+      <p:column id="colMaxLoss" sortBy="#{_hifive.maxLoss}"
+        filterBy="#{_hifive.maxLoss}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getMaxLoss}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.maxLoss}" />
+      </p:column>
+      
+      <p:column id="colCouponRateLast" sortBy="#{_hifive.couponRateLast}"
+        filterBy="#{_hifive.couponRateLast}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getCouponRateLast}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.couponRateLast}" />
+      </p:column>
+      
+         <p:column id="colHittingType" sortBy="#{_hifive.hittingType}"
+        filterBy="#{_hifive.hittingType}" filterMatchMode="contains"
+        width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getHittingType}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.hittingType}" />
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

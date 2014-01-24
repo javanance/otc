@@ -1,0 +1,117 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formMvHis">
+    <p:panelGrid columns="6">
+      <p:outputLabel value="#{messages.viewDates}"  />
+      <p:calendar id="popupButtonCal1" value="#{basedateBean.stDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleStartDateSelect}" update="@(.ui-datatable)" />
+      </p:calendar>
+      <h:outputText value=" ~ " />
+      <p:calendar id="popupButtonCal2" value="#{basedateBean.endDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true" styleClass="dateTimeField">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleEndDateSelect}" update="@(form)" />
+      </p:calendar>
+      
+      <p:outputLabel value="#{messages.viewDetailColumn}"  rendered="#{flagFullData}"/>
+
+      <!-- <p:selectCheckboxMenu  value="#{configAction.selectRiskMeasureGroup}" style="width:100px" onchange="" rendered="#{flagFullData}">
+        <s:selectItems value="#{riskMeasureGroupMap.keySet()}" var="_group" label="#{riskMeasureGroupMap.get(_group)}" />
+        <s:convertEnum />
+      </p:selectCheckboxMenu> -->
+      <p:selectOneMenu value="#{configAction.selectRiskMeasureGroup}" style="width:100px" onchange="" rendered="#{flagFullData}">
+        <s:selectItems value="#{riskMeasureGroupMap.keySet()}" var="_group" label="#{riskMeasureGroupMap.get(_group)}" />
+        <s:convertEnum />
+      </p:selectOneMenu>
+    </p:panelGrid>
+
+    
+    <p:dataTable id="tableMvHis" value="#{paraMvHisData}" var="_mvHis"
+      emptyMessage="No History Data found with given criteria. Select Market Varialbe or Change the Dates"
+      selectionMode="single" selection="#{selIMV}" rowKey="#{_mvHis.bssd}"
+      sortMode="multiple"
+      resizableColumns="true" 
+      stickyHeader="false"
+      paginator="true" paginatorPosition="bottom" rows="15"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="15,25,50" 
+      style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px">
+
+      <p:column id="colBssd" sortBy="#{_mvHis.bssd}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.bssd}" />
+        </f:facet>
+        <h:outputText value="#{_mvHis.bssd}" />
+      </p:column>
+
+      <p:column id="colMvName" sortBy="#{_mvHis.mvName}" width="100" rendered="#{flagMvName}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.mvName}" />
+        </f:facet>
+        <h:outputText value="#{_mvHis.mvName}" />
+      </p:column>
+
+      <p:column id="colCurrentPrice" sortBy="#{_mvHis.currentPrice}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.currentPrice}" />
+        </f:facet>
+        <h:outputText value="#{_mvHis.currentPrice}" style="float:right">
+          <!-- <f:convertNumber pattern="#,###.####" currencySymbol="$" type="currency"/> -->
+          <!-- <f:convertNumber  currencySymbol="￦" type="currency" locale="ko_KR"/> -->
+          <f:convertNumber  type="currency" locale="ko_KR"/>
+          <!-- <f:convertNumber  type="currency" locale="#{facesContext.viewRoot.locale}"/> -->
+          <!-- <f:convertNumber  pattern="\u00A4#,##0"/> -->
+        </h:outputText>
+      </p:column>
+
+      <p:column id="colVolume" sortBy="#{_mvHis.volume}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.volume}" />
+        </f:facet>
+        <h:outputText value="#{_mvHis.volume}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+          <!-- <f:convertNumber  pattern="\u00A4#,##0"/> -->
+        </h:outputText>
+      </p:column>
+
+      <p:column id="colVolumeAmt" sortBy="#{_mvHis.volumeAmt}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.volumeAmount}" />
+        </f:facet>
+        <h:outputText value="#{_mvHis.volumeAmt}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+          <!-- <f:convertNumber  pattern="\u00A4#,##0"/> -->
+        </h:outputText>
+      </p:column>
+
+
+      <!--  <p:columns value="#{configAction.productHisColumns}" var="column" columnIndexVar="colIndex"
+        sortBy="#{_mvHis[column.property]}">
+        <f:facet name="header">  
+                #{column.header}  
+         </f:facet>
+        <h:outputText value="#{_mvHis[column.property]}" style="float:right">
+          <f:convertNumber pattern="#,###.##" />
+          <f:convertNumber  pattern="\u00A4#,##0"/>
+        </h:outputText>
+      </p:columns>
+ -->
+    </p:dataTable>
+    
+   <p:contextMenu for="formMvHis:tableMvHis">
+      <p:menuitem value="#{messages.showChart}" id="qqq" />
+      <p:menuitem >
+       <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
+        <!-- <p:graphicImage value="/img/primefaces/excel.png" /> -->
+        <p:dataExporter type="xls" target="tableMvHis" fileName="#{messages.marketVaiableHis}_#{basedateBean.bssd}" />
+      </h:commandLink>
+      </p:menuitem>
+    </p:contextMenu>
+        
+      
+  </h:form>
+</ui:composition>

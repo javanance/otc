@@ -1,0 +1,47 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="portReturnHisForm">
+    <p:contextMenu >
+      <p:menuitem value="bbbb" id="qqq" />
+      <p:menuitem value="ccc" id="www">
+        <p:dataExporter type="csv" target="portReturnHisId" fileName="PortfolioReturn" />
+      </p:menuitem>
+    </p:contextMenu>
+
+    <p:dataTable id="portReturnHisId" var="_portfolio" 
+      value="#{portfolioReturnBean.portReturns}"
+      widgetVar="portsTableHis" 
+      selectionMode="single"
+      selection="#{portfolioReturnBean.selectedPort}"
+      rowKey="#{_portfolio.id}"
+      sortMode="multiple"
+      filterDelay="300" filterEvent="keyup" 
+      emptyMessage="No Ports found with given criteria">
+
+      <p:column id="bssd" headerText="#{messages.portfoioReturnBssd}" sortBy="#{_portfolio.basedate.bssd}">
+        <h:outputText value="#{_portfolio.basedate.bssd}" />
+      </p:column>
+      
+      <p:column id="portId" headerText="#{messages.portfoioReturnId}" sortBy="#{_portfolio.portfolio.portId}">
+        <h:outputText value="#{_portfolio.portfolio.portId}" />
+      </p:column>
+      <p:column id="portName" headerText="#{messages.portfoioReturnName}" sortBy="#{_portfolio.portfolio.portId}">
+        <h:outputText value="#{_portfolio.portfolio.portId}" />
+      </p:column>
+      
+      <f:facet name="footer">
+        <h:commandLink style="float: right">
+          <p:graphicImage value="/img/primefaces/csv.png" />
+          <p:dataExporter type="csv" target="portReturnHisId" fileName="PortfolioReturn" />
+        </h:commandLink>
+      </f:facet>
+    </p:dataTable>
+
+  </h:form>
+
+
+</ui:composition>

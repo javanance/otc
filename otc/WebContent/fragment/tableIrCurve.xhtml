@@ -1,0 +1,52 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formIrCurve">
+    
+    <!-- <p:dataTable id="tableIrCurve" value="#{irCurveList.resultList}" var="_irc" -->
+    <p:dataTable id="tableIrCurve" value="#{tableIrCurveInit.irCurveList}" var="_irc"
+      emptyMessage="No History Data found with given criteria."
+      selectionMode="single" selection="#{selectedIrCurve}" rowKey="#{_irc.ircId}"
+      sortMode="multiple"
+      resizableColumns="true" 
+      paginator="true" paginatorPosition="bottom" rows="15"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="15,25,50" 
+      style="border-top-left-radius: 8px; border-top-right-radius: 8px">
+      
+      <p:ajax event="rowSelect"  update="@(.ui-panel, .ui-datatable)"  listener="#{tableIrCurveHisAction.onIrcSelection()}"/>
+      
+      <!-- <p:column selectionMode="single" style="width:2px" /> -->
+      <p:column id="colIrcId" sortBy="#{_irc.ircId}" 
+        filterBy="#{_irc.ircId}"  filterMatchMode="contains" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.ircId}" />
+        </f:facet>
+        <h:outputText value="#{_irc.ircId}" />
+      </p:column>
+        
+      <p:column id="colBssd" sortBy="#{_irc.ircName}" 
+        filterBy="#{_irc.ircId}"  filterMatchMode="contains" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.ircName}" />
+        </f:facet>
+        <h:outputText value="#{_irc.ircName}" />
+      </p:column>
+      
+    </p:dataTable>
+    
+   <p:contextMenu for="formIrCurve">
+      <p:menuitem value="#{messages.viewIrcDetail}" oncomplete="wgDlgIrcDetail.show()" />
+      <p:menuitem >
+       <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
+        <p:dataExporter type="xls" target="tableIrCurve" fileName="#{messages.irCurve}" />
+      </h:commandLink>
+      </p:menuitem>
+    </p:contextMenu>
+        
+      
+  </h:form>
+</ui:composition>

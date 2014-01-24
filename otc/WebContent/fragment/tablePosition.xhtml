@@ -1,0 +1,86 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+  
+  <h:form id="formTablePosition">
+   
+    <p:dataTable id="tablePosition" var="_position" value="#{paraTablePosition}" widgetVar="wgTablePosition"
+      selectionMode="single" rowKey="#{_position.posId}" selection="#{selectedPosition}"
+      emptyMessage="No Position found with given criteria" 
+      filterDelay="300" filterEvent="keyup"      resizableColumns="true"
+      draggableColumns="true"   liveResize="true"
+      style="margin: 0.5em">
+
+        <!-- <p:ajax event="rowSelect" update=":#{p:component('takiondisplay')}"  oncomplete="portDialog.show()" /> -->
+      
+      <p:column id="colPositionId" sortBy="#{_position.posId}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.positionId}" />
+        </f:facet>
+        <h:outputText value="#{_position.posId}" />
+      </p:column>
+
+      <p:column id="colPositionName" sortBy="#{_position.posName}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.positionName}" />
+        </f:facet>
+        <h:outputText value="#{_position.posName}" />
+      </p:column>
+
+      <!-- <p:column id="colPositionPresValue" headerText="#{messages.positionPresValue}" sortBy="#{_position.presValue}"
+        filterBy="#{_position.presValue}" filterMatchMode="contains" filterStyle="display:none; visibility:hidden">
+        <h:outputText value="#{_position.presValue}" />
+      </p:column> -->
+      
+      <p:column id="colCountPartyId" sortBy="#{_position.counterparty.counterpartyId}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.countPartyId}" />
+        </f:facet>
+        <h:outputText value="#{_position.counterparty.counterpartyId}" />
+      </p:column>
+
+      <p:column id="colHoldingQy" sortBy="#{_position.holdingQty}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.holdingQty}" />
+        </f:facet>
+        <h:outputText value="#{_position.holdingQty}" style="float:right"/>
+      </p:column>
+      
+      <p:column id="colPosAmt" sortBy="#{_position.posAmt}" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.positionAmt}" />
+        </f:facet>
+        <h:outputText value="#{_position.posAmt}" style="float:right">
+          <f:convertNumber pattern="#,###"/>
+        </h:outputText>
+      </p:column>
+      
+      <!-- <f:facet name="header">
+        <h:commandLink style="float: left">
+          <p:graphicImage value="/img/primefaces/csv.png" />
+          <p:dataExporter type="csv" target="dataTablePosition" fileName="Position" />
+        </h:commandLink>
+        <h:commandLink style="float: left">
+          <p:graphicImage value="/img/primefaces/pdf.png" />
+          <p:dataExporter type="pdf" target="dataTablePosition" fileName="Position" />
+        </h:commandLink>
+        <h:commandLink style="float: left">
+          <p:graphicImage value="/img/primefaces/excel.png" />
+          <p:dataExporter type="xls" target="dataTablePosition" fileName="Position" />
+        </h:commandLink>
+        <h:outputText value="#{messages.datatableExport}" style="float: right; vertical-aling:middle" />
+      </f:facet> -->
+    </p:dataTable>
+    
+    <p:contextMenu for="tablePosition">
+      <p:menuitem>
+        <h:commandLink  value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
+          <!-- <p:graphicImage value="/img/primefaces/excel.png" /> -->
+          <p:dataExporter type="xls" target="tablePosition" fileName="#{messages.position}" />
+        </h:commandLink>  
+      </p:menuitem>
+    </p:contextMenu>
+  </h:form>
+</ui:composition>

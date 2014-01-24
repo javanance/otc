@@ -1,0 +1,49 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<h:form id="formDynamicModelDetail" styleClass="dynamicTableId">
+    <p:contextMenu id="xxxxx" for="formDynamicModelDetail"  >
+      <p:menuitem id="zzzzz" value="#{messages.viewInNewTab}" outcome="/view/v900DataNavigation" includeViewParams="true" target="_blank">
+         <f:param name="navigation" value="#{className}"/>
+      </p:menuitem>
+      <p:menuitem id="qqeqwr" value="#{messages.exportToExcel}" ajax="true">
+        <p:dataExporter id="yyyy1" type="xls" target="@form:tableDynamicModelDetail" fileName="#{messages.dataNavigation1}" />
+       </p:menuitem>
+      <!-- <p:menuitem>       
+       <s:link value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all" conversationName="">
+        <p:graphicImage value="/img/primefaces/excel.png" />
+        <p:dataExporter type="xls" target="tableDynamicModel" fileName="#{messages.dataNavigation}" />
+      </s:link>
+      </p:menuitem> -->
+    </p:contextMenu>
+
+    <p:dataTable id="tableDynamicModelDetail" value="#{detailDynamicModel}" var="_dynModel" lazy="true"
+      emptyMessage="No History Data found with given criteria. Change the Dates"
+      
+      
+      sortMode="multiple"
+      resizableColumns="true" 
+      
+      paginatorAlwaysVisible="true"
+      paginator="true" paginatorPosition="bottom" rows="15"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="15,25,50" 
+      style="margin: 0.5em; border-top-left-radius: 8px; border-top-right-radius: 8px" >
+     
+      <p:columns  value="#{detailHeader}" var="column" columnIndexVar="colIndex" width="80"
+       filterBy="#{_dynModel[column.columnId]}"   sortBy="#{column.columnId}"  filterStyle="width:100%" >
+        <f:facet name="header">  
+                <h:outputText value="#{column.columnName}" />
+         </f:facet>
+        <!-- <p:outputLabel value="#{_dynModel[column.columnId]}" style="#{column.alignFormat}" /> -->
+        
+        <h:outputText value="#{_dynModel[column.columnId]}" style="#{column.alignFormat}"  >
+          <!-- <f:convertNumber  type="currency" currencySymbol="\"/> -->
+          <!-- <h:outputText value="#{contentMap[column.colName].stringValue}" style="float:right" > -->
+        </h:outputText>
+      </p:columns>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

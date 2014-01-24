@@ -1,0 +1,29 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+  xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:c="http://java.sun.com/jstl/core" 
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+  >
+
+<!--   <ui:define name="layoutCenter"> -->
+  <p:layout collapseTitle="close" resizeTitle="resize" widgetVar="innerLayout">
+    <p:layoutUnit header="#{messages.positionInfo}" position="north" resizable="true" collapsible="true"
+      gutter="2" size="200" >
+
+      <ui:insert name="elementLayoutTop" />
+    </p:layoutUnit>
+
+    <p:layoutUnit position="east" header="#{messages.productInfo}" resizable="true" collapsible="true" size="280"
+      gutter="4">
+      <ui:insert name="elementLayoutRight" />
+    </p:layoutUnit>
+
+    <p:layoutUnit position="center" resizable="true" gutter="4">
+      <ui:insert name="elementLayoutCenter" />
+
+    </p:layoutUnit>
+  </p:layout>
+  <!-- </ui:define> -->
+</ui:composition>

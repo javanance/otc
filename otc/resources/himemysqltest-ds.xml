@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+    <!-- <datasource 
+        jndi-name="himemysqltestDatasource"
+        enabled="true" 
+        use-java-context="true" pool-name="himemysqltestDatasource_pool">
+        <connection-url>jdbc:oracle:thin:@localhost:1521:orcl</connection-url>
+        <driver>ojdbc6.jar</driver>
+        <security>
+          <user-name>takion77</user-name>
+          <password>dull6078</password>
+        </security>
+    </datasource> -->
+    <!-- <datasource 
+        jndi-name="himemysqltestDatasource"
+        enabled="true" 
+        use-java-context="true" pool-name="himemysqltestDatasource_pool">
+        <connection-url>jdbc:mysql://mysql5.hosting.bizfree.kr:3306/takion77_db</connection-url>
+        <driver>mysql-connector-java-5.1.22-bin.jar</driver>
+        <security>
+		      <user-name>takion77</user-name>
+		      <password>dull6078</password>
+        </security>
+    </datasource> -->
+</datasources>

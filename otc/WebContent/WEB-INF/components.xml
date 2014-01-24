@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<components xmlns="http://jboss.org/schema/seam/components"
-            xmlns:core="http://jboss.org/schema/seam/core"
-            xmlns:persistence="http://jboss.org/schema/seam/persistence"
-            xmlns:drools="http://jboss.org/schema/seam/drools"
-            xmlns:bpm="http://jboss.org/schema/seam/bpm"
-            xmlns:security="http://jboss.org/schema/seam/security"
-            xmlns:mail="http://jboss.org/schema/seam/mail"
-            xmlns:web="http://jboss.org/schema/seam/web"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation=
-                "http://jboss.org/schema/seam/core http://jboss.org/schema/seam/core-2.3.xsd
+<components xmlns="http://jboss.org/schema/seam/components" xmlns:core="http://jboss.org/schema/seam/core"
+  xmlns:persistence="http://jboss.org/schema/seam/persistence" xmlns:drools="http://jboss.org/schema/seam/drools"
+  xmlns:bpm="http://jboss.org/schema/seam/bpm" xmlns:security="http://jboss.org/schema/seam/security" xmlns:mail="http://jboss.org/schema/seam/mail"
+  xmlns:web="http://jboss.org/schema/seam/web" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://jboss.org/schema/seam/core http://jboss.org/schema/seam/core-2.3.xsd
                  http://jboss.org/schema/seam/persistence http://jboss.org/schema/seam/persistence-2.3.xsd
                  http://jboss.org/schema/seam/drools http://jboss.org/schema/seam/drools-2.3.xsd
                  http://jboss.org/schema/seam/bpm http://jboss.org/schema/seam/bpm-2.3.xsd
@@ -18,49 +12,84 @@
                  http://jboss.org/schema/seam/web http://jboss.org/schema/seam/web-2.3.xsd
                  http://jboss.org/schema/seam/components http://jboss.org/schema/seam/components-2.3.xsd">
 
-   <core:init debug="true" jndi-pattern="@jndiPattern@"/>
+  <core:init debug="true" jndi-pattern="@jndiPattern@" />
 
-   <core:manager concurrent-request-timeout="500"
-                 conversation-timeout="120000"
-                 conversation-id-parameter="cid"
-                 parent-conversation-id-parameter="pid"/>
+  <core:manager concurrent-request-timeout="500" conversation-timeout="120000" conversation-id-parameter="cid"
+    parent-conversation-id-parameter="pid" />
 
-   <!-- Make sure this URL pattern is the same as that used by the Faces Servlet -->
-   <web:hot-deploy-filter url-pattern="*.seam"/>
+  <!-- Make sure this URL pattern is the same as that used by the Faces Servlet -->
+  <web:hot-deploy-filter url-pattern="*.seam" />
+  <web:exception-filter url-pattern="*.seam"/>
 
-   <!-- If you are still using JBoss 4, uncomment this to have your PU started -->
-<!--   <persistence:entity-manager-factory name="entityManagerFactory"-->
-<!--                      persistence-unit-name="otc"/>-->
-   <!-- If you are still using JBoss 4, uncomment this to have the entityManagerFactory ysed -->
-<!--   <persistence:managed-persistence-context name="entityManager" auto-create="true"-->
-<!--                          entity-manager-factory="#{entityManagerFactory}"/>-->
+  <!-- If you are still using JBoss 4, uncomment this to have your PU started -->
+  <!-- <persistence:entity-manager-factory name="entityManagerFactory" -->
+  <!-- persistence-unit-name="himemysqltest"/> -->
+  <!-- If you are still using JBoss 4, uncomment this to have the entityManagerFactory ysed -->
+  <!-- <persistence:managed-persistence-context name="entityManager" auto-create="true" -->
+  <!-- entity-manager-factory="#{entityManagerFactory}"/> -->
 
-   <persistence:managed-persistence-context name="entityManager" auto-create="true"
-                           persistence-unit-jndi-name="java:/otcEntityManagerFactory"/>
+  <persistence:managed-persistence-context name="entityManager" auto-create="true"
+    persistence-unit-jndi-name="java:/otcEntityManagerFactory" >
+    <!-- <persistence:filters>
+      <value>#{filterBtwnDate}</value>
+    </persistence:filters> -->
+  </persistence:managed-persistence-context>
+  
+  
+  <!-- <persistence:hibernate-session-factory name="hibernateSessionFactory"/>
+  <persistence:managed-hibernate-session name="hibernateSession" 
+                                auto-create="true"
+                  session-factory-jndi-name="java:/hibernateSessionFactory"/> -->
+  <!-- <persistence:managed-hibernate-session name="hibernateSession" 
+                                auto-create="true"
+                  session-factory-jndi-name="java:/hibernateSessionFactory"/> -->                    
+  <factory name="session" auto-create="true" scope="stateless" value="#{entityManager.delegate}"/>
+  
+  <!-- <persistence:filter name="filterBtwnDate">
+    <persistence:name>filterBtwnDate</persistence:name>
+    <persistence:parameters>
+        <key>stBssd</key>
+        <value>#{basedateBean.stBssd}</value>
+        <key>endBssd</key>
+        <value>#{basedateBean.endBssd}</value>
+    </persistence:parameters>
+</persistence:filter> -->
+         
+  <drools:rule-base name="securityRules">
+    <drools:rule-files>
+      <value>/security.drl</value>
+    </drools:rule-files>
+  </drools:rule-base>
 
-   <drools:rule-base name="securityRules">
-      <drools:rule-files><value>/security.drl</value></drools:rule-files>
-   </drools:rule-base>
+  <security:rule-based-permission-resolver security-rules="#{securityRules}" />
 
-   <security:rule-based-permission-resolver security-rules="#{securityRules}"/>
+  <security:identity authenticate-method="#{authenticator.authenticate}" remember-me="true" />
 
-   <security:identity authenticate-method="#{authenticator.authenticate}" remember-me="true"/>
+  <event type="org.jboss.seam.security.notLoggedIn">
+    <action execute="#{redirect.captureCurrentView}" />
+  </event>
+  <event type="org.jboss.seam.security.loginSuccessful">
+    <action execute="#{redirect.returnToCapturedView}" />
+  </event>
 
-   <event type="org.jboss.seam.security.notLoggedIn">
-      <action execute="#{redirect.captureCurrentView}"/>
-   </event>
-   <event type="org.jboss.seam.security.loginSuccessful">
-      <action execute="#{redirect.returnToCapturedView}"/>
-   </event>
+  <mail:mail-session host="localhost" port="25" />
 
-   <mail:mail-session host="localhost" port="25"/>
+  <!-- For use with jBPM pageflow or process management -->
+  <!-- <bpm:jbpm> <bpm:process-definitions></bpm:process-definitions> <bpm:pageflow-definitions></bpm:pageflow-definitions> 
+    </bpm:jbpm> -->
+  <factory name="selectBond" value="#{bondHome.instance}" />
 
-   <!-- For use with jBPM pageflow or process management -->
-   <!--
-   <bpm:jbpm>
-      <bpm:process-definitions></bpm:process-definitions>
-      <bpm:pageflow-definitions></bpm:pageflow-definitions>
-   </bpm:jbpm>
-   -->
-
+  <!-- <core:resource-loader>
+    <core:bundle-names>
+      <value>messages</value>
+      <value>msg</value>
+    </core:bundle-names>
+  </core:resource-loader>
+ -->
+    
+    <!-- <factory name="radioFlag" value="1" scope="SESSION" /> -->
+    
+ <!-- <component name="flagBean">
+  <property name="vol">true</property>
+ </component> -->
 </components>
