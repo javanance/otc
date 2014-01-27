@@ -67,6 +67,15 @@ public class KisHifive {
 		loadVolCurve(selectHifive, today);
 	}
 	
+	
+	public double getPrice(){
+		return 
+		IHiFiveMc.INSTANCE.HiFive_MC(S0, t, rf, rd, nt, t_vol, vol, n_vol, corr, div, nStock, X1, X2, X3
+				, upBarrier, downBarrier, amt1, amt2, amt3, coupon, dates, pay_dates, nStrike
+				, upBarrierFlag, downBarrierFlag, bUpHitted, bDownHitted, nTrials, max_loss, p);
+				
+	}
+	
 	public Map<String, Double> getDelta(){
 		Map<String, Double> rst = new HashMap<String, Double>();
 		 
@@ -80,6 +89,20 @@ public class KisHifive {
 		return rst;
 		
 	}
+	public Map<String, Double> getGamma(){
+		Map<String, Double> rst = new HashMap<String, Double>();
+		 
+		for( int j=0 ; j<nStock; j++){
+			Double gamma = IHiFiveMc.INSTANCE.HiFive_MC_Gamma(j+1, S0, t, rf, rd, nt, t_vol, vol, n_vol, corr, div, nStock, X1, X2, X3
+					, upBarrier, downBarrier, amt1, amt2, amt3, coupon, dates, pay_dates, nStrike, upBarrierFlag
+					, downBarrierFlag, bUpHitted, bDownHitted, nTrials, max_loss);
+			
+			rst.put(underlyingName[j], gamma);
+		}
+		return rst;
+		
+	}
+	
 
 	public Map<String, Double> getVega(){
 		Map<String, Double> rst = new HashMap<String, Double>();
@@ -91,6 +114,15 @@ public class KisHifive {
 		}
 		return rst;
 	}
+
+	
+	
+	public Double getTheta(){
+		      Double rst =IHiFiveMc.INSTANCE.HiFive_MC_Theta(S0, t, rf, rd, nt, t_vol, vol, n_vol, corr, div, nStock, X1, X2, X3
+				, upBarrier, downBarrier, amt1, amt2, amt3, coupon, dates, pay_dates, nStrike, upBarrierFlag
+				, downBarrierFlag, bUpHitted, bDownHitted, nTrials, max_loss);
+		return rst;
+	}
 	
 	public Double getRho(){
 		Double rst =IHiFiveMc.INSTANCE.HiFive_MC_Rho(S0, t, rf, rd, nt, t_vol, vol, n_vol, corr, div, nStock, X1, X2, X3,
@@ -98,6 +130,10 @@ public class KisHifive {
 				downBarrierFlag, bUpHitted, bDownHitted, nTrials, max_loss);
 		return rst;
 	}
+	
+	
+	
+	
 	
 //	***************************private method****************************
 	private void loadUnderlying(Hifive selectHifive, Date today){

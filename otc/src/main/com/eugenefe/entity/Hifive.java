@@ -56,6 +56,9 @@ public class Hifive implements java.io.Serializable, Cloneable{
 //	private List<Pricing> pricings = new ArrayList<Pricing>();
 	private List<PricingMaster> priceSetting = new ArrayList<PricingMaster>();
 	private List<PricingUnderlyings> prUnderSetting = new ArrayList<PricingUnderlyings>();
+	
+	private List<ProductReturn> prodReturn = new ArrayList<ProductReturn>();
+	private List<ProductGreeks> prodGreeks = new ArrayList<ProductGreeks>();
 
 	public Hifive() {
 	}
@@ -200,9 +203,8 @@ public class Hifive implements java.io.Serializable, Cloneable{
 		this.hittingType = hittingType;
 	}
 	
-	@Transient
-//	@Column(name = "VIRTUAL_YN")
-//	@Type(type="yes_no")
+	@Column(name = "VIRTUAL_YN")
+	@Type(type="yes_no")
 	public boolean isVirtual() {
 		return virtual;
 	}
@@ -268,6 +270,29 @@ public class Hifive implements java.io.Serializable, Cloneable{
 	}
 	public void setPrUnderSetting(List<PricingUnderlyings> prUnderSetting) {
 		this.prUnderSetting = prUnderSetting;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hifive")
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	@AnnoMethodTree(order =80, init=false, type=EColumnType.List)
+	public List<ProductReturn> getProdReturn() {
+		return prodReturn;
+	}
+
+	public void setProdReturn(List<ProductReturn> prodReturn) {
+		this.prodReturn = prodReturn;
+	}
+
+	@Transient
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hifive")
+//	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+//	@AnnoMethodTree(order =81, init=false, type=EColumnType.List)
+	public List<ProductGreeks> getProdGreeks() {
+		return prodGreeks;
+	}
+
+	public void setProdGreeks(List<ProductGreeks> prodGreeks) {
+		this.prodGreeks = prodGreeks;
 	}
 
 	@Transient

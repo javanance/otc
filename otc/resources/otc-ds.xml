@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources xmlns="http://www.jboss.org/ironjacamar/schema">
-    <datasource 
+ <!--    <datasource 
         jndi-name="otcDatasource"
         enabled="true" 
         use-java-context="true" pool-name="otcDatasource_pool">
@@ -10,5 +10,5 @@
 		      <user-name>takion77</user-name>
 		      <password>dull6078</password>
         </security>
-    </datasource>
+    </datasource> -->
 </datasources>

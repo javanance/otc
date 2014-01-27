@@ -1,6 +1,7 @@
 package com.eugenefe.controller;
 
 import java.lang.reflect.ParameterizedType;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -58,9 +59,14 @@ import com.eugenefe.entity.PricingMaster;
 import com.eugenefe.entity.PricingMasterId;
 import com.eugenefe.entity.PricingUnderlyings;
 import com.eugenefe.entity.PricingUnderlyingsId;
+import com.eugenefe.entity.ProductGreeks;
+import com.eugenefe.entity.ProductGreeksId;
+import com.eugenefe.entity.ProductReturn;
+import com.eugenefe.entity.ProductReturnId;
 import com.eugenefe.entity.Stock;
 import com.eugenefe.enums.EMaturity;
 import com.eugenefe.pricer.hifive.IHiFiveMc;
+import com.eugenefe.pricevo.KisHifive;
 //import org.jboss.seam.framework.Query;
 import com.eugenefe.session.CounterpartyList;
 import com.eugenefe.session.StockList;
@@ -223,7 +229,15 @@ public class TableHifiveInit {
 		session.setFlushMode(FlushMode.MANUAL);
 		
 		String qr= "from Hifive a order by a.prodId";
-		hifiveList = session.createQuery(qr).list();
+//		hifiveList = session.createQuery(qr).list();
+		
+		
+		Criteria crit = session.createCriteria(Hifive.class);
+		hifiveList = crit.list();
+		
+//		hifiveList = new ArrayList<Hifive>();
+//		hifiveList.add((Hifive)session.get(Hifive.class, "HIFIVE_01"));
+				
 		
 		String qr2= "from MarketVariableNew a where a.underlyingYN = 'Y' order by a.mvType, a.mvId";
 		underlyingList = session.createQuery(qr2).list();
@@ -272,7 +286,7 @@ public class TableHifiveInit {
 		}
 		tempProdName = selectHifive.getProdName()+ "_" + cnt;
 		
-		
+
 		Hifive temp1 = (Hifive)selectHifive.clone();
 		temp1.setVirtual(true);
 		temp1.setProdId(tempProdId);
@@ -316,7 +330,9 @@ public class TableHifiveInit {
 		List<PricingMaster> tempPrList = new ArrayList<PricingMaster>();
 		List<PricingUnderlyings> tempPrUnderAllList = new ArrayList<PricingUnderlyings>();
 		
+		log.info("In Add Hifive11 : #0", selectHifive.getProdId());
 		for(PricingMaster aa : selectHifive.getPriceSetting()){
+			log.info("In Add Hifive111 : #0", selectHifive.getProdId());
 			PricingMaster tempPrSetting = new PricingMaster();
 
 			tempPrSetting =(PricingMaster) aa.clone();
@@ -335,12 +351,19 @@ public class TableHifiveInit {
 			tempPrSetting.setPrUnderlyingList(tempPrUnderList);
 			tempPrList.add(tempPrSetting);
 		}
-
 		temp1.setHifiveUnderlyings(tempUList);		
 		temp1.setHifiveStrikes(tempSList);
 		temp1.setPriceSetting(tempPrList);
 		temp1.setPrUnderSetting(tempPrUnderAllList);
 
+
+		temp1.setProdReturn(null);
+		temp1.setProdGreeks(null);
+		
+//		log.info("AAAA");
+//		session.get(Hifive.class, "HIFIVE_03");
+//		log.info("BBB");
+		
 		hifiveList.add(temp1);
 		
 		if(filterHifiveList!=null){
@@ -363,7 +386,7 @@ public class TableHifiveInit {
 		statusMessages.addFromResourceBundle("insertHifive.successMessages");
 
 		selectHifive= temp1;
-		log.info("Select:111 #0", selectHifive.getProdId());
+		log.info("In Add Hifive #0", selectHifive.getProdId());
 		
 	}
 	
@@ -727,6 +750,50 @@ public class TableHifiveInit {
 	}
 	
 	public void simulate(){
+		List<ProductReturn> prodReturnList = new ArrayList<ProductReturn>();
+		List<ProductGreeks> prodGreekList = new ArrayList<ProductGreeks>();
+		
+		String bssd = basedateBean.getBssd();
+		for( PricingMaster aa : selectHifive.getPriceSetting()){
+			if(aa.getPricingDll().getDllId().equals("HIFIVE_MC")){
+				KisHifive kisHifve = new KisHifive();
+				kisHifve.load(selectHifive, basedateBean.getBaseDate());
+				
+				double price = kisHifve.getPrice();
+//				double rho = kisHifve.getRho();
+//				double theta = kisHifve.getTheta();
+				
+				log.info("PricingResult : #0, #1,#2", price);
+				
+				ProductReturnId returnId = new ProductReturnId(bssd, aa.getId().getPricingObjId(),aa.getId().getProdId());
+				ProductReturn prodReturn = new ProductReturn(returnId);
+				
+				prodReturn.setPresValue(new BigDecimal(price));
+//				prodReturn.setRho(new BigDecimal(rho));
+//				prodReturn.setTheta(new BigDecimal(theta));
+				prodReturnList.add(prodReturn);
+
+//				Map<String, Double> delta = kisHifve.getDelta();
+//				Map<String, Double> gamma = kisHifve.getGamma();
+//				Map<String, Double> vega = kisHifve.getVega();
+//				for(PricingUnderlyings bb : aa.getPrUnderlyingList()){
+//					String underId = bb.getId().getUnderlyingId();
+//					ProductGreeksId greekId = new ProductGreeksId(bssd, bb.getId().getPricingObjId()
+//													, bb.getId().getProdId(), underId); 
+//					ProductGreeks prodGreeks = new ProductGreeks(greekId);
+//					prodGreeks.setDelta(new BigDecimal(delta.get(underId)));
+//					prodGreeks.setGamma(new BigDecimal(gamma.get(underId)));
+//					prodGreeks.setVega(new BigDecimal(vega.get(underId)));
+//					
+//					prodGreekList.add(prodGreeks);
+//				}
+			}
+		}
+		selectHifive.setProdReturn(prodReturnList);
+		selectHifive.setProdGreeks(prodGreekList);
+	}
+	
+	public void simulate1(){
 		int nStock = selectHifive.getHifiveUnderlyings().size();
 		int index=0;
 		log.info("Start:#0", nStock);

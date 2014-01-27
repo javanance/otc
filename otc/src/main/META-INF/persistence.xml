@@ -14,6 +14,7 @@
          <property name="hibernate.show_sql" value="true"/>
          <property name="hibernate.format_sql" value="true"/>
          <property name="hibernate.default_schema" value="takion77"/>
+         <property name="hibernate.default_batch_fetch_size" value="20"/>
          <property name="jboss.entity.manager.factory.jndi.name" value="java:/otcEntityManagerFactory"/>
       </properties>
    </persistence-unit>
