@@ -37,7 +37,21 @@ public class HifiveUnderlying implements java.io.Serializable, Cloneable {
 	private HifiveUnderlyingId id;
 	private Hifive hifive;
 //	private Stock stock;
+	
 	private MarketVariableNew underlying;
+	
+	private MarketVariableJoin underJoin;
+	
+	@ManyToOne(fetch = FetchType.LAZY )
+	@JoinColumn(name = "STOCK_ID", nullable = false, insertable = false, updatable = false)
+	@AnnoMethodTree(order=20, init=true, type=EColumnType.Entity)	
+	public MarketVariableJoin getUnderJoin() {
+		return underJoin;
+	}
+	public void setUnderJoin(MarketVariableJoin underJoin) {
+		this.underJoin = underJoin;
+	}
+
 	private BigDecimal basePrice;
 	private BigDecimal dividend;
 //	private boolean upHitted;
@@ -147,10 +161,9 @@ public class HifiveUnderlying implements java.io.Serializable, Cloneable {
 //		this.upHitted = upHitted;
 //	}
 	
-	@Transient
-//	@Column(name = "IS_UPHITTED", length=1)
-//	@Enumerated(EnumType.STRING)
-//	@AnnoMethodTree(order=50, init=true)
+	@Column(name = "IS_UPHITTED", length=1)
+	@Enumerated(EnumType.STRING)
+	@AnnoMethodTree(order=50, init=true)
 	public EBarrierHit getUpHitted() {
 		return upHitted;
 	}

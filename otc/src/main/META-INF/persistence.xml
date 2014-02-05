@@ -5,7 +5,18 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
              version="2.0">
              
-   <persistence-unit name="otc" transaction-type="JTA">
+   <!-- <persistence-unit name="himemysqltest" transaction-type="JTA">
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <jta-data-source>java:/himemysqltestDatasource</jta-data-source>
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLMyISAMDialect"/>
+         <property name="hibernate.hbm2ddl.auto" value="validate"/>
+         <property name="hibernate.show_sql" value="true"/>
+         <property name="hibernate.format_sql" value="true"/>
+         <property name="jboss.entity.manager.factory.jndi.name" value="java:/himemysqltestEntityManagerFactory"/>
+      </properties>
+   </persistence-unit> -->
+    <persistence-unit name="localOtc" transaction-type="JTA">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>java:/localOracleDS</jta-data-source>
       <properties>
@@ -13,10 +24,22 @@
          <property name="hibernate.hbm2ddl.auto" value="validate"/>
          <property name="hibernate.show_sql" value="true"/>
          <property name="hibernate.format_sql" value="true"/>
-         <property name="hibernate.default_schema" value="takion77"/>
          <property name="hibernate.default_batch_fetch_size" value="20"/>
          <property name="jboss.entity.manager.factory.jndi.name" value="java:/otcEntityManagerFactory"/>
+         <!-- <property name="jboss.entity.manager.factory.jndi.name" value="java:/pubhimemysqltestEntityManagerFactory"/> -->
       </properties>
    </persistence-unit>
-    
+   
+   <!-- <persistence-unit name="himemysqltest" transaction-type="JTA">
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <jta-data-source>java:/localOracleDS</jta-data-source>
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+         <property name="hibernate.hbm2ddl.auto" value="validate"/>
+         <property name="hibernate.show_sql" value="true"/>
+         <property name="hibernate.format_sql" value="true"/>
+         <property name="hibernate.default_batch_fetch_size" value="20"/>
+         <property name="jboss.entity.manager.factory.jndi.name" value="java:/pubhimemysqltestEntityManagerFactory"/>
+      </properties>
+   </persistence-unit> --> 
 </persistence>

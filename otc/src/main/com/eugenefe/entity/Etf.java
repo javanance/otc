@@ -3,24 +3,32 @@ package com.eugenefe.entity;
 // Generated Apr 10, 2013 4:09:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import com.eugenefe.entity.component.PriceData;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 
@@ -49,6 +57,8 @@ public class Etf extends MarketVariableJoin implements java.io.Serializable {
 //	private Set<EtfHis> etfHises = new HashSet<EtfHis>(0);
 //	private Set<EtfPdf> etfPdfs = new HashSet<EtfPdf>(0);
 
+	private Map<String, PriceData> priceMap = new HashMap<String, PriceData>();
+	
 	public Etf() {
 	}
 
@@ -187,15 +197,23 @@ public class Etf extends MarketVariableJoin implements java.io.Serializable {
 		this.versionNo = versionNo;
 	}
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "etf")
-//	public Set<EtfHis> getEtfHises() {
-//		return this.etfHises;
-//	}
-//
-//	public void setEtfHises(Set<EtfHis> etfHises) {
-//		this.etfHises = etfHises;
-//	}
-//
+	@ElementCollection
+	@CollectionTable(name="ETF_HIS", joinColumns= @JoinColumn(name="ETF_ID"))
+	@MapKeyColumn(name="BSSD")	
+	public Map<String, PriceData> getPriceMap() {
+		return priceMap;
+	}
+
+	public void setPriceMap(Map<String, PriceData> priceMap) {
+		this.priceMap = priceMap;
+	}
+
+	@Override
+	@Transient
+	public PriceData getPriceData(String bssd) {
+		return getPriceMap().get(bssd);
+	}
+	
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "etf")
 //	public Set<EtfPdf> getEtfPdfs() {
 //		return this.etfPdfs;

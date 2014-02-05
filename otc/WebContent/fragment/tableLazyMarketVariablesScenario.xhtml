@@ -1,0 +1,75 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formLazyMarketVariablesSce">
+    <p:dataTable id="tableLazyMarketVariablesSce" value="#{paraLazyModels}" var="_mv"
+      widgetVar="wgTableLazyMarketVariablesSce" lazy="true" emptyMessage="#{messages.noDataFound}" 
+      selectionMode="single"
+      rowKey="#{_mv.mvId}" 
+      editMode="row"
+      editable="true"
+      selection="#{selectedMarketVariable}" 
+      resizableColumns="true" sortMode="single"
+      draggableColumns="true"
+      paginator="true"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      paginatorPosition="bottom" rows="15"
+      style="height : 100%; width :100%; border-top-left-radius: 8px ;border-top-right-radius: 8px">
+
+
+<!--  <p:ajax event="rowSelect" listener="#{tableLazyMarketVariableAction.onRowSelect}" update="@(.ui-datatable)" disabled="#{flagUpdateFull}"/> -->
+      <p:ajax event="rowSelect" listener="#{tableMvHisDataAction.onMvSelection}" update="@(.ui-datatable)" />
+ -->
+
+      <p:column selectionMode="single" headerText="All" exportable="false" width="6"  >
+      </p:column>
+<!--       <p:column>
+        <p:rowEditor/>
+      </p:column> -->
+      <p:column id="colMvType" sortBy="#{_mv.mvType}" filterBy="#{_mv.mvType}" filterMatchMode="contains"
+        filterOptions="#{paraSelectOneMvType}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableType}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvType}" />
+      </p:column>
+
+      <p:column id="colMvId" sortBy="#{_mv.mvId}" filterBy="#{_mv.mvId}" filterMatchMode="contains"   >
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableId}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvId}" />
+      </p:column>
+
+      <p:column id="colMvName" sortBy="#{_mv.mvName}" filterBy="#{_mv.mvName}" filterMatchMode="contains">
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableName}" />
+        </f:facet>
+        <h:outputText value="#{_mv.mvName}" />
+      </p:column>
+      
+<!--       <p:column id="colShockType" >
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableName}" />
+        </f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_mv.shockType}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_mv.shockType}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+      <p:column id="colShockValue" >
+        <f:facet name="header">
+          <h:outputText value="#{messages.marketVariableName}" />
+        </f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_mv.shockValue}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_mv.shockValue}" /></f:facet>
+        </p:cellEditor>
+      </p:column> -->
+    </p:dataTable>
+  </h:form>
+</ui:composition>

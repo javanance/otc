@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -109,10 +108,9 @@ public class Counterparty implements java.io.Serializable {
 		this.creditRatingCd = creditRatingCd;
 	}
 	
-	@Transient
-//	@Column(name = "RATING_APPLY_DATE", length = 8)
-//	@Size(max = 8)
-//	@AnnoMethodTree(order=41, init=true)
+	@Column(name = "RATING_APPLY_DATE", length = 8)
+	@Size(max = 8)
+	@AnnoMethodTree(order=41, init=true)
 	public String getRateApplyDate() {
 		return RateApplyDate;
 	}

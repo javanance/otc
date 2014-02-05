@@ -7,11 +7,16 @@
 
   <ui:define name="layoutLeft">
     <p:accordionPanel>
+      <p:tab title="#{messages.scenario}">
+          <ui:include src="/fragment/treeScenario.xhtml" >
+            
+          </ui:include>      
+      </p:tab>
       <p:tab title="#{messages.productType}">
           <ui:include src="/fragment/treeMvTypeSetting.xhtml" />    
       </p:tab>
-      <p:tab title="#{messages.scenario}">
-              
+      <p:tab title="#{messages.scenarioTable}">
+          <ui:include src="/fragment/tableScenario.xhtml" />    
       </p:tab>
     </p:accordionPanel>
   </ui:define>
@@ -26,13 +31,26 @@
   </ui:define>
   
   <ui:define name="layoutBottom">
+    <!-- <h:form id="formHifiveTab"> -->
     <p:tabView id="hifiveTabView" dynamic="true"  orientation="top" widgetVar="wgHifiveTabView">
-    
+        <p:tab title="#{messages.pricingResult}" >
+        <p:outputLabel value="** #{messages.productValueAndReturn}" />
+        <ui:include src="/fragment/tableProductReturn.xhtml" >
+          <ui:param name="prodReturnList" value="#{tableHifiveInit.selectHifive.prodReturn}" />
+        </ui:include>
+      
+        <p:spacer height="30px" width="0px"/>  
+        
+        <p:outputLabel value="** #{messages.productGreeks}" />
+        <!-- <ui:include src="/fragment/tableProductReturn.xhtml" /> -->  
+      </p:tab>
+      
       <p:tab title="#{messages.hifiveDetailInfo}">
         <p:outputLabel value="** #{messages.hifiveUnderlying}" />
         <ui:include src="/fragment/tableHifiveUnderlyingEdit.xhtml" >
           <ui:param name="underlyingList" value="#{tableHifiveInit.selectHifive.hifiveUnderlyings}" />
           <ui:param name="isEditable" value="#{tableHifiveInit.selectHifive.virtual}" />
+          <ui:param name="bssd" value="#{tableHifiveInit.basedateBean.bssd}"/>
         </ui:include>
         <p:spacer height="30px" width="0px"/>
         
@@ -41,8 +59,8 @@
           <ui:param name="strikeList" value="#{tableHifiveInit.selectHifive.hifiveStrikes}" />
           <ui:param name="isEditable" value="#{tableHifiveInit.selectHifive.virtual}" />
         </ui:include>
-      </p:tab>
-
+      </p:tab>      
+   
       <p:tab title="#{messages.priceSetting}">
         <p:outputLabel value="** #{messages.priceSetting}" />      
         <ui:include src="/fragment/tablePriceSettingSelect.xhtml" >
@@ -55,24 +73,25 @@
         <ui:include src="/fragment/tablePriceSettingUnder.xhtml" >
           <ui:param name="prUnderSettingList" value="#{tableHifiveInit.selectHifive.prUnderSetting}" />
         </ui:include>
-      </p:tab>
+      </p:tab> 
       
       <p:tab title="#{messages.scenarioAdaptedValue}" >
+        <ui:include src="/fragment/tableScenarioDetail.xhtml" >
+          <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailFilter}" />
+          <!-- <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailList}" /> -->
+          <ui:param name="bssd" value="#{basedateBean.bssd}"/>
+        </ui:include>
       </p:tab>
       
       <p:tab title="#{messages.moduleInputData}" >
-      </p:tab>
+      </p:tab> 
+     
+      <p:tab title="#{messages.pricingResult1}" >
       
-      <p:tab title="#{messages.pricingResult}" >
-        <p:outputLabel value="** #{messages.productValueAndReturn}" />
-        <ui:include src="/fragment/tableProductReturn.xhtml" />
-      
-        <p:spacer height="30px" width="0px"/>  
-        
-        <p:outputLabel value="** #{messages.productGreeks}" />
-        <!-- <ui:include src="/fragment/tableProductReturn.xhtml" /> -->  
       </p:tab>
     </p:tabView>
- 
+    <!-- </h:form> -->
+    
+
   </ui:define>
 </ui:composition>

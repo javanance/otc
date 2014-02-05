@@ -13,6 +13,7 @@
     <p:contextMenu for="tableHifive" widgetVar = "hifiveCmenu">
       <p:menuitem value ="Insert..." action="#{tableHifiveInit.addRow}"  update="tableHifive"/>
     </p:contextMenu>
+
     <p:dataTable id="tableHifive" var="_hifive" value="#{tableHifiveInit.hifiveList}" 
       widgetVar="wgTableHifive"
       emptyMessage="#{messages.noDataFound}" 

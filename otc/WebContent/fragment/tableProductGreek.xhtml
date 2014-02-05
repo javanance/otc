@@ -12,23 +12,12 @@
     <p:dataTable id="tableHifive" var="_var" value="#{tableHifiveInit.hifiveList}" 
       widgetVar="wgTableHifivezz"
       emptyMessage="#{messages.noDataFound}"
-      filteredValue="#{tableHifiveInit.filterHifiveList}"  filterEvent="keyup"
-      selection="#{tableHifiveInit.selectHifive}" selectionMode="single"
-      rowKey="#{_var.prodId}" 
-      rowIndexVar="rowIndex" 
-      editable="#{isEditable}" editMode="#{editMode}" 
-      editingRow="false"  
-      sortMode="multiple"
-      resizableColumns="true" liveResize="false"
-      paginator="true" paginatorPosition="bottom" rows="10"
-      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-      rowsPerPageTemplate="10,25,50">
+      resizableColumns="true" liveResize="false">
 
 
-      <p:column id="colIsVirtual" sortBy="#{_var.virtual}" 
-                filterBy="#{_var.virtual}" filterMatchMode="contains"  width="30">
-        <f:facet name="header"><h:outputText value="#{messages.isVirtual}" /></f:facet>
-        <h:outputText value="#{_var.virtual}"/>
+      <p:column id="colBssd"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.bssd}" /></f:facet>
+        <h:outputText value="#{_var.id.bssd}"/>
       </p:column>
 
     </p:dataTable>

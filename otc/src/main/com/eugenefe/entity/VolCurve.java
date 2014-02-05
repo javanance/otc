@@ -21,7 +21,7 @@ public class VolCurve implements java.io.Serializable {
 	private String volCurveId;
 	private String volCurveName;
 	private String underlyingId;
-	private Set<PricingUnderlyings> pricingUnderlyings = new HashSet<PricingUnderlyings>();
+	private Set<PricingUnderlyings> pricingUnderlyings = new HashSet<PricingUnderlyings>(0);
 //	private Set<Pricing> pricings = new HashSet<Pricing>(0);
 
 	public VolCurve() {
@@ -32,7 +32,7 @@ public class VolCurve implements java.io.Serializable {
 	}
 
 //	public VolCurve(String volCurveId, String volCurveName, String underlyingId,
-//			Set<PricingUnderlyings> pricingUnderlyings, Set<Pricings> pricings) {
+//			Set<PricingUnderlying> pricingUnderlyings, Set<Pricing> pricings) {
 //		this.volCurveId = volCurveId;
 //		this.volCurveName = volCurveName;
 //		this.underlyingId = underlyingId;

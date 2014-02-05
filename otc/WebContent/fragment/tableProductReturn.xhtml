@@ -6,30 +6,47 @@
 
   <h:form id="formProdReturn">
 
-    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+    <p:growl id="growl" showDetail="false" sticky="false" life="5000" />
 
-    <p:dataTable id="tableProdReturn" var="_var" value="#{tableHifiveInit.hifiveList}" 
-      widgetVar="wgTableHifivezz"
-      emptyMessage="#{messages.noDataFound}"
-      filteredValue="#{tableHifiveInit.filterHifiveList}"  filterEvent="keyup"
-      selection="#{tableHifiveInit.selectHifive}" selectionMode="single"
-      rowKey="#{_var.prodId}" 
-      rowIndexVar="rowIndex" 
-      editable="#{isEditable}" editMode="#{editMode}" 
-      editingRow="false"  
-      sortMode="multiple"
-      resizableColumns="true" liveResize="false"
-      paginator="true" paginatorPosition="bottom" rows="10"
-      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-      rowsPerPageTemplate="10,25,50">
+    <p:dataTable id="tableProdReturn" var="_var" value="#{prodReturnList}" widgetVar="wgTableHifivezz"
+      emptyMessage="#{messages.noDataFound}" resizableColumns="true" liveResize="false">
 
-
-      <p:column id="colIsVirtual" sortBy="#{_var.virtual}" 
-                filterBy="#{_var.virtual}" filterMatchMode="contains"  width="30">
-        <f:facet name="header"><h:outputText value="#{messages.isVirtual}" /></f:facet>
-        <h:outputText value="#{_var.virtual}"/>
+       <p:column id="colBssd" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.bssd}" />
+        </f:facet>
+        <h:outputText value="#{_var.id.bssd}" />
       </p:column>
 
+       <p:column id="colPriceObjectId" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.prObjectId}" />
+        </f:facet>
+        <h:outputText value="#{_var.id.pricingObjId}" />
+      </p:column>
+
+      <p:column id="colProdId" width="100">
+        <f:facet name="header">
+          <h:outputText value="#{messages.prodId}" />
+        </f:facet>
+        <h:outputText value="#{_var.id.prodId}" />
+      </p:column>
+ 
+      <p:column id="colPresValue" width="100">
+        <f:facet name="header"> <h:outputText value="#{messages.presentValue}" /> </f:facet>
+        <h:outputText value="#{_var.presValue}" />
+        
+      </p:column>
+     
+<!--       <p:column id="colTheta" width="100">
+        <f:facet name="header"> <h:outputText value="#{messages.theta}" /> </f:facet>
+        <h:outputText value="#{_var.theta}" />
+      </p:column>
+      
+      <p:column id="colRho" width="100">
+        <f:facet name="header"> <h:outputText value="#{messages.rho}" /> </f:facet>
+        <h:outputText value="#{_var.rho}" />
+      </p:column>       -->
     </p:dataTable>
   </h:form>
 </ui:composition>

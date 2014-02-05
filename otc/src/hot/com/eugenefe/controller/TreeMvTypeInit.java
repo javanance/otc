@@ -123,16 +123,13 @@ public class TreeMvTypeInit implements Serializable {
 		
 	}
 
-
-
-
-	
 	public void onNodeSelect(){
 		MvType tempType = (MvType)selectNode.getData();
 		List<Hifive> hifive = new ArrayList<Hifive>();
 		
 		MvType tempSD =null;
 		for(MvType aa : mvTypeList){
+//TODO :  	
 			if(aa.getMvType().equals("STEP_DOWN")){
 				tempSD = aa;
 			}

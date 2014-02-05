@@ -29,7 +29,9 @@ import org.jboss.seam.annotations.Create;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Observer;
 import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.core.Events;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.international.StatusMessage;
 import org.jboss.seam.international.StatusMessage.Severity;
@@ -64,6 +66,9 @@ import com.eugenefe.entity.ProductGreeksId;
 import com.eugenefe.entity.ProductReturn;
 import com.eugenefe.entity.ProductReturnId;
 import com.eugenefe.entity.Stock;
+import com.eugenefe.entity.StockIndex;
+import com.eugenefe.entity.component.HisData;
+import com.eugenefe.entity.component.PriceData;
 import com.eugenefe.enums.EMaturity;
 import com.eugenefe.pricer.hifive.IHiFiveMc;
 import com.eugenefe.pricevo.KisHifive;
@@ -85,7 +90,14 @@ public class TableHifiveInit {
 	@In("#{basedateBean}")
 	private BaseDateBean basedateBean;
 	
-//	@In
+	public BaseDateBean getBasedateBean() {
+		return basedateBean;
+	}
+	public void setBasedateBean(BaseDateBean basedateBean) {
+		this.basedateBean = basedateBean;
+	}
+
+	//	@In
 //	private FacesMessages facesMessages;
 	@In
 	private StatusMessages statusMessages;
@@ -229,11 +241,11 @@ public class TableHifiveInit {
 		session.setFlushMode(FlushMode.MANUAL);
 		
 		String qr= "from Hifive a order by a.prodId";
-//		hifiveList = session.createQuery(qr).list();
+		hifiveList = session.createQuery(qr).list();
 		
 		
-		Criteria crit = session.createCriteria(Hifive.class);
-		hifiveList = crit.list();
+//		Criteria crit = session.createCriteria(Hifive.class);
+//		hifiveList = crit.list();
 		
 //		hifiveList = new ArrayList<Hifive>();
 //		hifiveList.add((Hifive)session.get(Hifive.class, "HIFIVE_01"));
@@ -246,6 +258,14 @@ public class TableHifiveInit {
 			underlyingIdList.add(aa.getMvId());
 		}
 		
+//		StockIndex rst = session.createCriteria(StockIndex.class, "SPX").uniqueResult();
+//		StockIndex rst = (StockIndex)session.get(StockIndex.class, "SPX");
+//		log.info("priceMap00000 : #0, #1",rst, rst.getPriceMap().size());
+//		for( Map.Entry<String, PriceData> entry : rst.getPriceMap().entrySet()){
+//			log.info("priceMap00 : #0, #1", entry.getKey(), entry.getValue());
+//		}
+//		IntRate rst = (IntRate)session.get(IntRate.class, "1010000_M03");
+//		log.info("IntRate : #0", rst.getAaaMap().get("20140128"));
 		
 		/*Query qr = session.createQuery("from Stock a where a.useAsUnderlying = :param");
 		qr.setParameter("param", true);
@@ -503,6 +523,12 @@ public class TableHifiveInit {
 			statusMessages.addFromResourceBundle("removeHifive.forRealProduct");
 		}
 	}
+	
+//	public void onSelect(SelectEvent event){
+//		log.info("OnSelect:#0", (Hifive)(event.getObject()));
+//		Events.instance().raiseEvent("evtHifiveSelect", (Hifive)(event.getObject()));
+//		
+//	}
 	
 	public void resetSelection(){
 //		log.info("FilterEvent:{},{}", filterEvent.toString(), filterHifiveList);

@@ -154,17 +154,41 @@ public class MarketVariableSetting implements Serializable {
 		statusMessages.addFromResourceBundle("saveChangeSetting");
 		
 	}
+	private String selectMvTypeString;
+	public String getSelectMvTypeString() {
+		return selectMvTypeString;
+	}
+	public void setSelectMvTypeString(String selectMvTypeString) {
+		this.selectMvTypeString = selectMvTypeString;
+	}
+
+	private MarketVariableType selectMvType ;
+	public MarketVariableType getSelectMvType() {
+		return selectMvType;
+	}
+	public void setSelectMvType(MarketVariableType selectMvType) {
+		this.selectMvType = selectMvType;
+	}
+	public void onComboSelect(){
+		selectMvType = MarketVariableType.valueOf(selectMvTypeString);
+		if(mvMap.get(selectMvType)==null || mvMap.get(selectMvType).size()==0){
+			Query qr = session.createQuery("from MarketVariable a where a.mvType=:param");
+			qr.setParameter("param",selectMvType);
+			mvMap.put(selectMvType, qr.list());
+		}
+		lazyModelMarketVariable = new LazyModelMarketVariable(mvMap.get(selectMvType));
+	}
 	
 	public void onNodeSelect(){
 //		marketVariables = new ArrayList<MarketVariable>();
-		MarketVariableType tempType = (MarketVariableType)selectNode.getData();
-		
-		if(mvMap.get(tempType)==null || mvMap.get(tempType).size()==0){
+//		MarketVariableType tempType = (MarketVariableType)selectNode.getData();
+		selectMvType =(MarketVariableType)selectNode.getData();
+		if(mvMap.get(selectMvType)==null || mvMap.get(selectMvType).size()==0){
 			Query qr = session.createQuery("from MarketVariable a where a.mvType=:param");
 			qr.setParameter("param",(MarketVariableType)selectNode.getData());
-			mvMap.put(tempType, qr.list());
+			mvMap.put(selectMvType, qr.list());
 		}
-		lazyModelMarketVariable = new LazyModelMarketVariable(mvMap.get(tempType));
+		lazyModelMarketVariable = new LazyModelMarketVariable(mvMap.get(selectMvType));
 	}
 	
 	public void save(){

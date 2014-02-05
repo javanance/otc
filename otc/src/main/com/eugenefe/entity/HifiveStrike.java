@@ -121,6 +121,7 @@ public class HifiveStrike implements java.io.Serializable, Cloneable{
 //	public void setPaymentDate(Date paymentDate) {
 //		this.paymentDate = paymentDate;
 //	}
+	
 	@Transient
 //	@Column(name = "PDATE")
 //	@Type(type="date")

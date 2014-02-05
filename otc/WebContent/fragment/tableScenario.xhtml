@@ -1,0 +1,58 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+<h:form id="formScenario" >
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+    
+    <p:contextMenu for="tableScenario" widgetVar = "sceCmenu">
+      <!-- <p:menuitem value ="Insert..." action="#{tableHifiveInit.addRow}"  update="tableScenario"/> -->
+    </p:contextMenu>
+
+    <p:dataTable id="tableScenario" var="_var" value="#{hifiveSimulator.scenarioList}" 
+      widgetVar="wgTableScenario"
+      emptyMessage="#{messages.noDataFound}" 
+      selection="#{hifiveSimulator.selectScenarioList}" 
+      rowKey="#{_var.scenarioId}"
+      
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom"
+      paginatorTemplate="{FirstPageLink} {LastPageLink}"
+      rows="20"
+
+       >
+<!--       <p:ajax event="rowSelect"  listener="#{}" update="@(.ui-datatable)" /> -->
+             
+      <p:column selectionMode="multiple" headerText="All" exportable="false" width="6"  />
+      
+
+
+<!--       <p:column id="colSceId" sortBy="#{_var.scenarioId}" filterBy="#{_var.scenarioId}" filterMatchMode="contains" 
+        width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.scenarioId}" />  
+         </f:facet>
+        <h:outputText value="#{_var.scenarioId}" />
+      </p:column> -->
+
+      
+      <p:column id="colSceName" sortBy="#{_var.scenarioName}" filterBy="#{_var.scenarioName}" filterMatchMode="contains" 
+        width="100" style="font-size : 90%">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.scenarioName}" />  
+         </f:facet>
+        <h:outputText value="#{_var.scenarioName}" />
+      </p:column>
+      <p:column id="colSceSet" sortBy="#{_var.scenarioSet}" filterBy="#{_var.scenarioSet}" filterMatchMode="contains" 
+        width="100" style="font-size : 90%">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.scenarioSet}" />  
+         </f:facet>
+        <h:outputText value="#{_var.scenarioSet}" />
+      </p:column>      
+
+    </p:dataTable>
+  </h:form>
+</ui:composition>

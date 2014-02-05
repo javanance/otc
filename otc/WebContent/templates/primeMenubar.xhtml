@@ -146,10 +146,11 @@
             <s:conversationPropagation type="begin" />
           </p:menuitem>
           <p:menuitem url="http://190.190.175.178:8080/otc/view/v633PricerInfo.seam"
-            value="#{messages.byVolatility}">
+            value="#{messages.byMaturity}">
             <s:conversationPropagation type="begin" />
           </p:menuitem>
-          <p:menuitem url="http://190.190.175.178:8080/otc/view/v634PricerInfo.seam" value="#{messages.byDiscount}">
+          <p:menuitem url="http://190.190.175.178:8080/otc/view/v634PricerInfo.seam" 
+            value="#{messages.byDiscountCurve}">
             <s:conversationPropagation type="begin" />
           </p:menuitem>
         </p:submenu>
@@ -162,10 +163,22 @@
         </p:submenu>
          <p:separator />
 
-        <p:menuitem url="http://190.190.175.178:8080/otc/view/v690PriceSetting.seam" value="#{messages.pricerSetting}"
-          icon="img_setting">
-          <s:conversationPropagation type="begin" />
-        </p:menuitem>
+        <p:submenu label="#{messages.userSetting}">
+          <p:menuitem url="http://190.190.175.178:8080/otc/view/v690PriceSetting.seam" value="#{messages.pricerSetting}"
+            icon="img_setting">
+          </p:menuitem>
+          
+          <p:menuitem url="http://190.190.175.178:8080/otc/view/v691ScenarioSetting.seam" value="#{messages.scenarioSetting}">
+          </p:menuitem>
+          
+          <p:menuitem>
+            <s:link id="menuAllMarketVariables1" view="/view/v691ScenarioSetting.xhtml"
+              value="#{messages.menuAllMarketVariables}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+              <f:param name="flagDataTable" value="All" />
+            </s:link>
+          </p:menuitem>
+          
+        </p:submenu>
         <p:separator />
 
         <p:menuitem url="http://190.190.175.178:8080/otc/view/v695Pricer.seam" value="#{messages.pricerWorking}">

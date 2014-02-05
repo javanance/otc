@@ -35,6 +35,8 @@ public class MarketVariableTypeOptionAction implements Serializable {
 	
 	private SelectItem[] booleanType;
 	
+	private List<MarketVariableType> mvTypeList;
+	private MarketVariableType[] mvTypeArr;
 	
 	
 	/*private List<EUnderlying> underlyingType;
@@ -45,6 +47,18 @@ public class MarketVariableTypeOptionAction implements Serializable {
 		this.underlyingType = underlyingType;
 	}*/
 	
+	public MarketVariableType[] getMvTypeArr() {
+		return mvTypeArr;
+	}
+	public void setMvTypeArr(MarketVariableType[] mvTypeArr) {
+		this.mvTypeArr = mvTypeArr;
+	}
+	public List<MarketVariableType> getMvTypeList() {
+		return mvTypeList;
+	}
+	public void setMvTypeList(List<MarketVariableType> mvTypeList) {
+		this.mvTypeList = mvTypeList;
+	}
 	public SelectItem[] getBooleanType() {
 		return booleanType;
 	}
@@ -85,7 +99,8 @@ public class MarketVariableTypeOptionAction implements Serializable {
 		int mvInx=0;
 		int totalSize =MarketVariableType.values().length;
 		int prodSize = MarketVariableType.getProductTypes().size();
-
+		mvTypeArr = MarketVariableType.values();
+		mvTypeList =  Arrays.asList(MarketVariableType.values());
 		allMvTypeOption = new SelectItem[totalSize+ 1];
 		allMvTypeOption[0] = new SelectItem("", "All");  
 

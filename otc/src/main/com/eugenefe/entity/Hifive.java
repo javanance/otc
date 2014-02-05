@@ -2,6 +2,7 @@ package com.eugenefe.entity;
 
 // Generated Nov 25, 2013 6:47:59 PM by Hibernate Tools 4.0.0
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,6 +21,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.jboss.seam.annotations.Transactional;
 
@@ -251,7 +254,8 @@ public class Hifive implements java.io.Serializable, Cloneable{
 //		this.pricings = pricings;
 //	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "hifive")
+	@OneToMany( mappedBy = "hifive" , fetch=FetchType.LAZY)
+//	@Fetch(FetchMode.JOIN)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	@AnnoMethodTree(order =75, init=false, type=EColumnType.List)
 	public List<PricingMaster> getPriceSetting() {
@@ -305,4 +309,50 @@ public class Hifive implements java.io.Serializable, Cloneable{
 		}
 		return null;
 	}
+	
+	
+	
+	@Transient
+	public Set<MarketVariableJoin> getMvList(){
+		Set<MarketVariableJoin> temp = new HashSet<MarketVariableJoin>();
+		for(HifiveUnderlying aa : this.getHifiveUnderlyings()){
+			temp.add(aa.getUnderJoin());
+		}
+		for(PricingMaster bb : this.getPriceSetting()){
+			
+			temp.addAll(bb.getDiscountIrc().getIrcBucketMap().values());
+			for(PricingUnderlyings cc : bb.getPrUnderlyingList()){
+				if(cc.getRefIrc() != null){
+					temp.addAll(cc.getRefIrc().getIrcBucketMap().values());
+				}
+//				TODO : content of vol Curve like irCuve 
+//				temp.addAll(cc.getVolCurve().getMap.values());
+			}
+		}
+		return temp;
+	}	
+		
+		
+//		Class clazz = Hifive.class;
+//				
+//				try {
+//					for (String prop : clazz.get) {
+//						Method temp = navi.getClass().getDeclaredMethod(prop);
+//						// Field temp = navi.getClass().getDeclaredField(prop);
+//						// temp.setAccessible(true);
+//						// navi = temp.get(navi);
+//						// if(temp!=null){
+//
+//						rtnType = temp.getReturnType();
+//
+//						navi = temp.invoke(navi);
+//
+//						tempContentMap.put(header.getColumnId(), String.valueOf(navi));
+//						}
+//				} catch (Exception e) {
+//					log.info("Method Call Exception :#0", header.getFullColumns());
+//				}	
+//		}
+//		
+//	}
 }

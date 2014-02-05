@@ -20,7 +20,8 @@
   <!-- Make sure this URL pattern is the same as that used by the Faces Servlet -->
   <web:hot-deploy-filter url-pattern="*.seam" />
   <web:exception-filter url-pattern="*.seam"/>
-
+  <web:multipart-filter create-temp-files="true" max-request-size="10000000" url-pattern="*.seam"/>
+  
   <!-- If you are still using JBoss 4, uncomment this to have your PU started -->
   <!-- <persistence:entity-manager-factory name="entityManagerFactory" -->
   <!-- persistence-unit-name="himemysqltest"/> -->
@@ -34,7 +35,7 @@
       <value>#{filterBtwnDate}</value>
     </persistence:filters> -->
   </persistence:managed-persistence-context>
-  
+  <factory name="session" auto-create="true" scope="stateless" value="#{entityManager.delegate}"/>  
   
   <!-- <persistence:hibernate-session-factory name="hibernateSessionFactory"/>
   <persistence:managed-hibernate-session name="hibernateSession" 
@@ -43,7 +44,11 @@
   <!-- <persistence:managed-hibernate-session name="hibernateSession" 
                                 auto-create="true"
                   session-factory-jndi-name="java:/hibernateSessionFactory"/> -->                    
-  <factory name="session" auto-create="true" scope="stateless" value="#{entityManager.delegate}"/>
+  
+  <persistence:managed-persistence-context name="pubEntityManager" auto-create="true"
+    persistence-unit-jndi-name="java:/pubOtcEntityManagerFactory" />
+  <factory name="pubSession" auto-create="true" scope="stateless" value="#{pubEntityManager.delegate}"/>
+  
   
   <!-- <persistence:filter name="filterBtwnDate">
     <persistence:name>filterBtwnDate</persistence:name>

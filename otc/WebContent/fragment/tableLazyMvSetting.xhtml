@@ -3,17 +3,18 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
-   <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+   <!-- <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
    
    <p:panelGrid columns="2" >
       <p:commandButton value="#{messages.save}" action="#{marketVariableSetting.save}" update="growl"/>
-   </p:panelGrid>
+   </p:panelGrid> -->
     
   <h:form id="formLazyMarketVariableSetting">
     <p:dataTable id="tableLazyMarketVariables" value="#{paraLazyModels}" var="_mv"
       widgetVar="wgTableLazyMarketVariables" lazy="true" emptyMessage="#{messages.noDataFound}" 
-      selectionMode="single"
-      rowKey="#{_mv.mvId}" selection="#{selectedMarketVariable}" 
+      
+      rowKey="#{_mv.mvId}" 
+      selection="#{selectedMarketVariable}" 
       editable="true" editMode="cell"
       resizableColumns="true" sortMode="single"
       draggableColumns="true"
@@ -28,6 +29,7 @@
       <!-- <p:ajax event="rowSelect" listener="#{tableMvHisDataAction.onMvSelection}" update="@(.ui-datatable)" /> -->
       <!-- <p:ajax event="rowSelect" listener="#{tablePositionAction.onMvSelection}" update="@(form)" disabled="#{flagDisablePosition}"/> -->
 
+      <p:column selectionMode="multiple" headerText="All" exportable="false" width="6"  />
       <p:column id="colMvType" sortBy="#{_mv.mvType}" filterBy="#{_mv.mvType}" filterMatchMode="contains"
         filterOptions="#{paraSelectOneMvType}" rendered="#{typeRenderer}">
         <f:facet name="header">

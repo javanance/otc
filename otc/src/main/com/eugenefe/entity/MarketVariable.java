@@ -20,6 +20,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Type;
 
 import com.eugenefe.enums.EBoolean;
+import com.eugenefe.enums.EShockType;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 import com.eugenefe.util.MarketVariableType;
@@ -368,6 +369,8 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 //		return 0;
 	}
 
+	
+	
 //	@Override
 //	@AnnoMethodTree(order=90, init=false)
 //	@Transient
@@ -376,6 +379,24 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 //		return null;
 //	}
 	
-	
+	private EShockType shockType;
+	private double shockValue;
+
+	@Transient
+	public EShockType getShockType() {
+		return shockType;
+	}
+
+	public void setShockType(EShockType shockType) {
+		this.shockType = shockType;
+	}
+	@Transient
+	public double getShockValue() {
+		return shockValue;
+	}
+
+	public void setShockValue(double shockValue) {
+		this.shockValue = shockValue;
+	}
 
 }

@@ -17,7 +17,7 @@
 
     <p:panelGrid columns="2" >
       <p:commandButton value="#{messages.save}" action="#{tableHifiveInit.save}" update="growl"/>
-      <p:commandButton value="#{messages.simulate}" action="#{tableHifiveInit.simulate}" update="growl"/> 
+      <p:commandButton value="#{messages.simulate}" action="#{tableHifiveInit.simulate}" update="growl, @(.ui-datatable)"/> 
     </p:panelGrid>
     
     <p:contextMenu for="tableHifive" widgetVar="hifiveCmenu">
@@ -56,7 +56,7 @@
       paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
       rowsPerPageTemplate="10,25,50">
 
-      <p:ajax event="rowSelect" update="@(.ui-datatable)" />
+      <p:ajax event="rowSelect" listener="#{hifiveSimulator.onHifiveSelect}" update="@(.ui-datatable)" />
       <!-- <p:ajax  event="filter" listener="#{tableHifiveInit.resetSelection}"  update="tableHifive"/> -->
       <p:ajax event="filter" oncomplete="rcResetSelection()"  />
       

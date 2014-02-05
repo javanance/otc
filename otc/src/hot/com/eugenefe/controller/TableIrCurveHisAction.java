@@ -227,12 +227,12 @@ public class TableIrCurveHisAction {
 
 		try {
 //			FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedTableModel", (CrossTableModel)event.getObject());
-//			FacesContext.getCurrentInstance().getExternalContext().redirect("/otc/view/v145IrCurveHis.seam?faces-redirect=true");
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/otc/view/v145IrCurveHis.seam");
+//			FacesContext.getCurrentInstance().getExternalContext().redirect("/himemysqltest/view/v145IrCurveHis.seam?faces-redirect=true");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/himemysqltest/view/v145IrCurveHis.seam");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-//		/otc/view/v145IrCurveHis.seam
+//		/himemysqltest/view/v145IrCurveHis.seam
 	}
 
 }

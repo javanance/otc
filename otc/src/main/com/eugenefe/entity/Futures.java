@@ -4,16 +4,22 @@ package com.eugenefe.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -24,6 +30,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import com.eugenefe.entity.component.PriceData;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 import com.eugenefe.util.EColumnType;
@@ -50,6 +57,8 @@ public class Futures extends MarketVariableJoin implements java.io.Serializable 
 	private BigDecimal versionNo;
 	private List<FuturesHis> futuresHises = new ArrayList<FuturesHis>();
 
+	private Map<String, PriceData> priceMap = new HashMap<String, PriceData>();
+	
 	public Futures() {
 	}
 
@@ -181,5 +190,21 @@ public class Futures extends MarketVariableJoin implements java.io.Serializable 
 	public void setFuturesHises(List<FuturesHis> futuresHises) {
 		this.futuresHises = futuresHises;
 	}
+	
+	@ElementCollection
+	@CollectionTable(name="FUTURES_HIS", joinColumns= @JoinColumn(name="FUTURES_ID"))
+	@MapKeyColumn(name="BSSD")	
+	public Map<String, PriceData> getPriceMap() {
+		return priceMap;
+	}
 
+	public void setPriceMap(Map<String, PriceData> priceMap) {
+		this.priceMap = priceMap;
+	}
+
+	@Override
+	@Transient
+	public PriceData getPriceData(String bssd) {
+		return getPriceMap().get(bssd);
+	}
 }

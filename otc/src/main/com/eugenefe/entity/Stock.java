@@ -4,14 +4,21 @@ package com.eugenefe.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -24,6 +31,7 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.mapping.Array;
 
+import com.eugenefe.entity.component.PriceData;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 import com.eugenefe.util.EColumnType;
@@ -35,7 +43,7 @@ import com.eugenefe.util.EColumnType;
 @Table(name = "STOCK")
 @PrimaryKeyJoinColumn(name="MV_ID")
 @AnnoNavigationFilter
-public class Stock extends MarketVariableJoin implements java.io.Serializable {
+public class Stock extends MarketVariableJoin implements java.io.Serializable{
 
 //	private String stockId;
 //	private MarketVariable marketVariable;
@@ -51,7 +59,10 @@ public class Stock extends MarketVariableJoin implements java.io.Serializable {
 	private String lastUpdated;
 	private BigDecimal versionNo;
 //	private Set<StockIndexDetail> stockIndexDetails = new HashSet<StockIndexDetail>(0);
+
 	private List<StockHis> stockHis = new ArrayList<StockHis>();
+	
+	private Map<String, PriceData> priceMap = new HashMap<String, PriceData>();
 
 	public Stock() {
 	}
@@ -89,6 +100,7 @@ public class Stock extends MarketVariableJoin implements java.io.Serializable {
 //	public void setStockId(String stockId) {
 //		this.stockId = stockId;
 //	}
+
 	@Transient
 	public String getStockId() {
 		return this.getMvId();
@@ -242,4 +254,24 @@ public class Stock extends MarketVariableJoin implements java.io.Serializable {
 		this.stockHis = stockHis;
 	}
 
+//	@Transient
+	@ElementCollection
+	@CollectionTable(name="STOCK_HIS", joinColumns= @JoinColumn(name="STOCK_ID"))
+	@MapKeyColumn(name="BSSD")	
+	public Map<String, PriceData> getPriceMap() {
+		return priceMap;
+	}
+
+	public void setPriceMap(Map<String, PriceData> priceMap) {
+		this.priceMap = priceMap;
+	}
+
+	private PriceData priceData;
+	@Override
+	@Transient
+	public PriceData getPriceData(String bssd) {
+		return getPriceMap().get(bssd);
+	}
+	
+	
 }

@@ -24,7 +24,7 @@ import com.eugenefe.util.AnnoNavigationFilter;
 @Entity
 @Table(name = "PRODUCT_RETURN")
 @AnnoNavigationFilter
-public class ProductReturn implements java.io.Serializable {
+public class ProductReturn implements java.io.Serializable, Cloneable{
 
 	private ProductReturnId id;
 	private Hifive hifive;
@@ -52,27 +52,27 @@ public class ProductReturn implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public ProductReturn(ProductReturnId id, BigDecimal bookAmt, BigDecimal presValue, BigDecimal dailyReturn,
-			BigDecimal monthlyReturn, BigDecimal quartlyReturn, BigDecimal annualReturn, BigDecimal fiscalReturn,
-			BigDecimal deltaReturn, BigDecimal gammaReturn, BigDecimal vegaReturn, BigDecimal thetaReturn,
-			BigDecimal rhoReturn, BigDecimal theta, BigDecimal rho, BigDecimal crossGamma) {
-		this.id = id;
-		this.bookAmt = bookAmt;
-		this.presValue = presValue;
-		this.dailyReturn = dailyReturn;
-		this.monthlyReturn = monthlyReturn;
-		this.quartlyReturn = quartlyReturn;
-		this.annualReturn = annualReturn;
-		this.fiscalReturn = fiscalReturn;
-		this.deltaReturn = deltaReturn;
-		this.gammaReturn = gammaReturn;
-		this.vegaReturn = vegaReturn;
-		this.thetaReturn = thetaReturn;
-		this.rhoReturn = rhoReturn;
-		this.theta = theta;
-		this.rho = rho;
-		this.crossGamma = crossGamma;
-	}
+//	public ProductReturn(ProductReturnId id, BigDecimal bookAmt, BigDecimal presValue, BigDecimal dailyReturn,
+//			BigDecimal monthlyReturn, BigDecimal quartlyReturn, BigDecimal annualReturn, BigDecimal fiscalReturn,
+//			BigDecimal deltaReturn, BigDecimal gammaReturn, BigDecimal vegaReturn, BigDecimal thetaReturn,
+//			BigDecimal rhoReturn, BigDecimal theta, BigDecimal rho, BigDecimal crossGamma) {
+//		this.id = id;
+//		this.bookAmt = bookAmt;
+//		this.presValue = presValue;
+//		this.dailyReturn = dailyReturn;
+//		this.monthlyReturn = monthlyReturn;
+//		this.quartlyReturn = quartlyReturn;
+//		this.annualReturn = annualReturn;
+//		this.fiscalReturn = fiscalReturn;
+//		this.deltaReturn = deltaReturn;
+//		this.gammaReturn = gammaReturn;
+//		this.vegaReturn = vegaReturn;
+//		this.thetaReturn = thetaReturn;
+//		this.rhoReturn = rhoReturn;
+//		this.theta = theta;
+//		this.rho = rho;
+//		this.crossGamma = crossGamma;
+//	}
 
 	@EmbeddedId
 	@AttributeOverrides({
@@ -99,12 +99,13 @@ public class ProductReturn implements java.io.Serializable {
 		this.hifive = hifive;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({
-		@JoinColumn(name = "PRICING_OBJ_ID", nullable = false, insertable = false, updatable = false),
-		@JoinColumn(name = "PROD_ID", nullable = false, insertable = false, updatable = false)
-	})
-	@AnnoMethodTree(order=12, init=true)
+	@Transient
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumns({
+//		@JoinColumn(name = "PRICING_OBJ_ID", nullable = false, insertable = false, updatable = false),
+//		@JoinColumn(name = "PROD_ID", nullable = false, insertable = false, updatable = false)
+//	})
+//	@AnnoMethodTree(order=12, init=true)
 	public PricingMaster getPriceSetting() {
 		return priceSetting;
 	}
@@ -243,6 +244,7 @@ public class ProductReturn implements java.io.Serializable {
 	public void setTheta(BigDecimal theta) {
 		this.theta = theta;
 	}
+
 	@Transient
 //	@Column(name = "RHO", scale = 4)
 //	@AnnoMethodTree(order=61, init=true)
@@ -264,5 +266,16 @@ public class ProductReturn implements java.io.Serializable {
 	public void setCrossGamma(BigDecimal crossGamma) {
 		this.crossGamma = crossGamma;
 	}
+	
+	@Transient
+	@Override
+	public Object clone(){
+		try{
+			return super.clone();
+		}catch(Exception e){
+			
+		}
+		return null;
+	}	
 
 }

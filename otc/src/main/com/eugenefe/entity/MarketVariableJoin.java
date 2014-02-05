@@ -3,7 +3,9 @@ package com.eugenefe.entity;
 // Generated Apr 10, 2013 4:09:22 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 
+import com.eugenefe.entity.component.PriceData;
 import com.eugenefe.enums.EBoolean;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
@@ -129,6 +132,23 @@ public class MarketVariableJoin implements java.io.Serializable , Comparable<Mar
 	public void setUnderlyingYN(EBoolean underlyingYN) {
 		this.underlyingYN = underlyingYN;
 	}
+	
+	private Map<String, PriceData> priceMap = new HashMap<String, PriceData>();
+	
+	@Transient
+	public Map<String, PriceData> getPriceMap(){
+		return null;
+	}
+	public void setPriceMap(Map<String, PriceData> aa){
+		this.priceMap = aa;
+	}
+	
+	@Transient
+	public PriceData getPriceData(String bssd){
+		return null;
+	}
+	
+
 	@Override
 	public int compareTo(MarketVariableJoin other) {
 		return 10* this.mvType.getRfType().compareTo(other.mvType.getRfType())

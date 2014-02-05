@@ -170,6 +170,20 @@
         </p:cellEditor>
       </p:column>
       
+       <!-- <p:column id="colCurrentPrice" sortBy="#{_underlying.underIndex.priceMap.get(bssd).closePrice}"  width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.currentPrice}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.underIndex.priceMap.get(bssd).closePrice}" />  
+      </p:column> -->
+      
+      <p:column id="colCurrentPrice1"   width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.currentPrice}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.underJoin.getPriceData(bssd).closePrice}" />  
+      </p:column>
+
     <p:column id="colDividend" sortBy="#{_underlying.dividend}" width="100" >
         <f:facet name="header">  
            <h:outputText value="#{messages.getDividend}" />  

@@ -17,8 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
@@ -175,7 +178,8 @@ public class PricingMaster implements java.io.Serializable, Cloneable{
 	}
 
 //	@Transient
-	@OneToMany(mappedBy="prMaster")
+	@OneToMany(mappedBy="prMaster" , fetch=FetchType.LAZY)
+//	@Fetch(FetchMode.SUBSELECT)
 	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
 	@AnnoMethodTree(order=60, init=false, type=EColumnType.List)
 	public List<PricingUnderlyings> getPrUnderlyingList() {
