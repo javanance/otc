@@ -13,20 +13,21 @@
     <!-- <p:panel header="#{messages.scenarioHeader}" toggleable="true"> -->
    
     <p:panelGrid id="pGridHsScenario" columns="2">
-      <p:outputLabel value="#{messages.scenarioId}" styleClass="takionLabel" />
-      <p:inputText required="true">
-      </p:inputText>
+<!--       <p:outputLabel value="#{messages.scenarioId}" styleClass="takionLabel" />
+      <p:inputText required="true">     </p:inputText>
 
       <p:outputLabel value="#{messages.scenarioName}" styleClass="takionLabel" />
-      <p:inputText required="true">
-      </p:inputText>
+      <p:inputText required="true">      </p:inputText>
 
       <p:outputLabel value="#{messages.scenarioType}" styleClass="takionLabel" />
-      <p:inputText>     </p:inputText>
+      <p:inputText>     </p:inputText> -->
 
-      <p:outputLabel value="#{messages.scenarioSet}" styleClass="takionLabel" />
-      <p:inputText>
-      </p:inputText>
+
+      <!-- <p:outputLabel value="#{messages.scenarioSet}" styleClass="takionLabel" />
+      <p:inputText>      </p:inputText> -->
+      
+      <p:outputLabel value="#{messages.scenarioPrefix}" styleClass="takionLabel" />
+      <p:inputText>     </p:inputText>
 
         <p:outputLabel value="#{messages.selectMarketVariable}" styleClass="takionLabel" />
         
@@ -40,28 +41,40 @@
 
       
         <p:outputLabel value="#{messages.startDate}" styleClass="takionLabel" />
-        <p:inputText>      </p:inputText>
+         
+        <p:calendar id="popupButtonCal1" value="#{basedateBean.stDate}" showButtonPanel="true" pattern="yyyyMMdd"
+          navigator="true" styleClass="dateTimeField">
+          <p:ajax event="dateSelect" listener="#{basedateBean.handleStartDateSelect}" update="@(.ui-datatable)" />
+        </p:calendar>    
         
         <p:outputLabel value="#{messages.endDate}" styleClass="takionLabel" />
-        <p:inputText>      </p:inputText>
+        <p:calendar id="popupButtonCal2" value="#{basedateBean.endDate}" showButtonPanel="true" pattern="yyyyMMdd"
+          navigator="true" styleClass="dateTimeField">
+          <p:ajax event="dateSelect" listener="#{basedateBean.handleEndDateSelect}" update="@(.ui-datatable)" />
+        </p:calendar>
         
         <p:outputLabel value="#{messages.scenairoNum}" styleClass="takionLabel" />
         <p:inputText>      </p:inputText>
         
         <p:outputLabel value="#{messages.timeHorizon}" styleClass="takionLabel" />
         <p:inputText>      </p:inputText>
+        <!-- <p:inputMask mask=" DAY"></p:inputMask> -->
         
         <p:outputLabel value="#{messages.returnType}" styleClass="takionLabel" />
-        <p:inputText>      </p:inputText>
+        <p:selectOneMenu  value="#{marketVariableSetting.selectMvTypeString}">
+          <f:selectItem  itemLabel="#{messages.comboSelectOne}" itemValue="" />
+          <f:selectItem  itemLabel="#{messages.LogReturn}" itemValue="Log" />
+          <f:selectItem  itemLabel="#{messages.PercentReturn}" itemValue="Perc" />
+        </p:selectOneMenu>
         
-        <p:outputLabel value="#{messages.globalShockType}" styleClass="takionLabel" />
+<!--         <p:outputLabel value="#{messages.globalShockType}" styleClass="takionLabel" />
           <p:inputText>         </p:inputText>
 
           <p:outputLabel value="#{messages.globalShockValue}" styleClass="takionLabel" />
-          <p:inputText>
+          <p:inputText> -->
             <!-- <f:convertNumber type="percent" /> -->
             <!-- <f:convertNumber pattern="###.###" /> -->
-          </p:inputText>
+          <!-- </p:inputText> -->
         
      </p:panelGrid>
 <!-- </p:panel> -->

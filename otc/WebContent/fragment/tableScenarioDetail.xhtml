@@ -15,10 +15,10 @@
       widgetVar="wgTableScenarioDetail"
       emptyMessage="#{messages.noDataFound}" 
       resizableColumns="true" liveResize="false"
-      paginator="true" paginatorPosition="bottom"
-      paginatorTemplate="{FirstPageLink} {LastPageLink}"
-      rows="20"
-       >
+      sortMode="multiple"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50"       >
 <!--       <p:ajax event="rowSelect"  listener="#{}" update="@(.ui-datatable)" /> -->
              
       <p:column id="colSceId" sortBy="#{_var.id.scenarioId}" filterBy="#{_var.id.scenarioId}" filterMatchMode="contains" 

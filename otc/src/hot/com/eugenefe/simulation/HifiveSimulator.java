@@ -71,15 +71,17 @@ public class HifiveSimulator {
 	
 	public void onNodeSelectFilter(){
 		sceDetailFilter.clear();
+//		log.info("MarketList0:#0,#1", sceDetailList.size());
 		updateSceDetailList();
-//		log.info("MarketList:#0,#1", sceDetailList.size());
+		
+		log.info("MarketList1:#0,#1", sceDetailList.size());
 		
 		for(MarketVariableJoin bb : selectHifive.getMvList()){
 			for(ScenarioDetail aa : sceDetailList){
 				if(bb.getMvId().equals(aa.getId().getMvId())){
-//					log.info("MarketList:#0,#1", bb.getMvId(), aa.getMarketVariable().getMvId());
+//					log.info("MarketList2:#0,#1", bb.getMvId(), aa.getMarketVariable().getMvId());
 					sceDetailFilter.add(aa);
-					break;
+//					break;
 				}
 			}
 			
@@ -99,6 +101,20 @@ public class HifiveSimulator {
 		onNodeSelectFilter();
 	}
 
+	public void onNodeDelete(){
+		for(TreeNode node : selectNodes){
+			String nodeId = (String)node.getData();
+			Scenario sce = (Scenario)session.get(Scenario.class, nodeId);
+			if(sce !=null){
+				session.delete(sce);
+			}
+		}
+		selectNodes = null;
+		session.flush();
+		
+		loadScenario();
+	}
+	
 	public void onNodeSelect(){
 		updateSceDetailList();
 	}
@@ -217,6 +233,7 @@ public class HifiveSimulator {
 			 tempList= Arrays.asList(selectNodes);		
 		}
 		TreeNode temp ;
+//		log.info("AAAAAAAAAAAAAAAAAAAAAAAAAA");
 		for(Scenario aa : scenarioList){
 			if(aa.getScenarioSet()!= null && !uppers.contains(aa.getScenarioSet())){
 				uppers.add(aa.getScenarioSet());
@@ -226,6 +243,7 @@ public class HifiveSimulator {
 				upNode.put(aa.getScenarioSet(),temp);
 			}
 		}
+//		log.info("AAAAAAAAAAAAbbbbbbbbbbbbbbbbb");
 		for(Scenario aa : scenarioList){
 			if(aa.getScenarioSet()== null){
 				temp = new DefaultTreeNode("scenario",aa.getScenarioId(), rootNode);
@@ -240,8 +258,10 @@ public class HifiveSimulator {
 
 	private void updateSceDetailList(){
 		sceDetailList.clear();
+//		log.info("selectnode:" );
 		if(selectNodes == null){
 		}else{
+//			log.info("selectnode:#0" , selectNodes.length);
 			for(TreeNode node : selectNodes){
 				String nodeId = (String)node.getData();
 				for(Scenario sce : scenarioList){
