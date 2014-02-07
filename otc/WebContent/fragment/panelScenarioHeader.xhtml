@@ -33,7 +33,7 @@
         
         <p:selectOneMenu  value="#{marketVariableSetting.selectMvTypeString}">
           <f:selectItem  itemLabel="#{messages.comboSelectOne}" itemValue="" />
-          <f:selectItems value="#{mvTypeOptionAction.productTypeOption}" /> 
+          <f:selectItems value="#{mvTypeOptionAction.allMvTypeOption}" /> 
           <!-- <s:selectItems value="#{mvTypeOptionAction.mvTypeList}" var="_var" label="#{_var}" itemValue="#{_var.type}"/>
           <s:convertEnum/> -->
           <p:ajax  listener="#{marketVariableSetting.onComboSelect}" update="@(.ui-datatable)" />

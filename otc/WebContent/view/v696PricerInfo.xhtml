@@ -6,42 +6,37 @@
   template="/templates/templatePrimeTLCB.xhtml">
 
   <ui:define name="layoutLeft">
-    <ui:include src="/fragment/tableHifiveforLeft.xhtml" />    
+        
   </ui:define>
   
   <ui:define name="layoutCenter">
+  <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop">
+    <p:panel>
+    <ui:include src="/temp/drdpTest.xhtml" />
+    </p:panel>
+    <p:panel>
+    <ui:include src="/temp/dropTargetTest.xhtml" />
+    </p:panel>
+  </p:panelGrid>
+
   </ui:define>
   
   <ui:define name="layoutBottom">
-    <!-- <h:form id="formHifiveTab"> -->
     <p:tabView id="hifiveTabView" dynamic="true"  orientation="top" widgetVar="wgHifiveTabView">
       
       <p:tab title="#{messages.hifive}">
-        <ui:include src="/fragment/tableHifive.xhtml" >
-          <ui:param name="hifiveList" value="#{tableHifiveInit.selectHifive}" />
-        </ui:include>
+          <ui:include src="/temp/panleHierPortfolio.xhtml" />
       </p:tab>
       <p:tab title="#{messages.hifiveUnderlying}">
-        <ui:include src="/fragment/tableHifiveUnderlying.xhtml" >
-          <ui:param name="underlyingList" value="#{tableHifiveInit.selectHifive.hifiveUnderlyings}" />
-        </ui:include>
+        
       </p:tab>
+
       <p:tab title="#{messages.hifiveStrike}">
-        <ui:include src="/fragment/tableHifiveStrike.xhtml" >
-          <ui:param name="strikeList" value="#{tableHifiveInit.selectHifive.hifiveStrikes}" />
-        </ui:include>
       </p:tab>
       <p:tab title="#{messages.hifiveStrikePivot}">
-        <ui:include src="/fragment/tableHifiveStrikePivot.xhtml" />
-        <!-- <ui:include src="/fragment/tableHifiveStrike.xhtml" >
-          <ui:param name="strikeList" value="#{tableHifiveInit.selectHifive.hifiveStrikes}" />
-        </ui:include> -->
       </p:tab>
-      <!-- <p:tab title="#{messages.hifiveSwapIr}" rendered="#{tableHifiveInit.selectHifive.hifiveType == 'SWAP'}"> -->
+
       <p:tab title="#{messages.hifiveSwapIr}" >
-        <ui:include src="/fragment/tableHifiveSwapIr.xhtml" >
-          <ui:param name="swapIrList" value="#{tableHifiveSwapIrInit.swapIrList}" />
-        </ui:include>
       </p:tab>
     </p:tabView>
     <!-- </h:form> --> 

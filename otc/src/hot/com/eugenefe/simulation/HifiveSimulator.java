@@ -256,6 +256,8 @@ public class HifiveSimulator {
 		
 	}
 
+	
+	
 	private void updateSceDetailList(){
 		sceDetailList.clear();
 //		log.info("selectnode:" );

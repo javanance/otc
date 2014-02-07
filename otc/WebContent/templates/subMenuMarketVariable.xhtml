@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <!--  MarketVariable-->
+  <p:submenu label="#{messages.subMenuMarketVariable}" icon="img_markget_variable">
+    <p:column style="width: 300px">
+      <p:submenu label="#{messages.sMenuViewHistoryData}">
+        <p:menuitem>
+          <s:link id="menuAllMarketVariables" view="#{configAction.getViewUrl('ViewHistoryData')}"
+            value="#{messages.menuAllMarketVariables}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+            <f:param name="flagDataTable" value="All" />
+          </s:link>
+        </p:menuitem>
+
+        <p:menuitem>
+          <s:link id="menuOnlyRiskFactors" view="#{configAction.getViewUrl('ViewHistoryData')}"
+            value="#{messages.menuOnlyRiskFactors}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+            <f:param name="flagDataTable" value="Rf" />
+          </s:link>
+        </p:menuitem>
+        <p:menuitem>
+          <s:link id="menuOnlyProduct" view="#{configAction.getViewUrl('ViewHistoryData')}"
+            value="#{messages.menuOnlyProduct}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+            <f:param name="flagDataTable" value="Prod" />
+          </s:link>
+        </p:menuitem>
+      </p:submenu>
+    </p:column>
+
+    <p:column>
+
+      <p:submenu label="#{messages.subMenuProduct}">
+        <!-- <p:menuitem>
+          <s:link id="menubarHoldingProduct" view="#{configAction.getViewUrl('ProductDashBoard')}"
+            value="#{conversation.viewId}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+            <f:param name="flagDataTable" value="Prod" />
+          </s:link>
+        </p:menuitem> -->
+        <p:menuitem>
+          <s:link id="menubarAllProduct" view="#{configAction.getViewUrl('ProductSelect')}"
+            value="#{messages.menuProduct}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+            <f:param name="flagDataTable" value="Prod" />
+          </s:link>
+        </p:menuitem>
+
+      </p:submenu>
+    </p:column>
+
+    <p:column>
+      <p:submenu label="#{messages.subMenuIrCurve}">
+        <p:menuitem value="#{messages.menuItemTermStructure}" url="#{messages.url}/view/v140IrCurve.seam"
+          icon="ui-icon-arrowreturnthick-1-w">
+        </p:menuitem>
+        <p:menuitem value="#{messages.menuItemTermStructureHis}" url="#{messages.url}/view/v145IrCurveHis.seam"
+          icon="ui-icon-arrowreturnthick-1-w">
+        </p:menuitem>
+        
+        <p:separator/>
+        <p:menuitem>
+          <s:link id="menubarFxMatrix" view="#{configAction.getViewUrl('ForexMatrix')}"
+            value="#{messages.menuItemFxMatrix}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" />
+        </p:menuitem>
+      </p:submenu>
+      
+    </p:column>
+
+    <p:column>
+      <p:submenu label="#{messages.subMenuVolatility}">
+
+        <p:menuitem>
+          <s:link id="menubarVcvMatrix" view="#{configAction.getViewUrl('VcvMatrix')}"
+            value="#{messages.menuItemVcvMatrix}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+          </s:link>
+        </p:menuitem>
+        
+
+        <p:menuitem value="#{messages.menuItemLocalVol}" url="http://180.180.175.146:8080/himemysqltest/view/viewTest.seam" />
+        <p:menuitem value="#{messages.menuItemHisVol}" url="http://180.180.175.146:8080/himemysqltest/view/viewTest.seam" />
+      </p:submenu>
+    </p:column>
+  </p:submenu>
+</ui:composition>
+

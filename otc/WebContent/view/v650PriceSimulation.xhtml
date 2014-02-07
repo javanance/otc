@@ -22,7 +22,7 @@
   </ui:define>
   
   <ui:define name="layoutCenter">
-    <ui:include src="/fragment/tableHifiveEdit.xhtml" >
+    <ui:include src="/tableComp/tableHifiveEdit.xhtml" >
         <!-- <ui:param name="hifiveList" value="#{tableHifiveInit.selectHifive}" /> -->
         <ui:param name="isEditable" value="true" />
         <ui:param name="editMode" value="cell" />
@@ -47,7 +47,7 @@
       
       <p:tab title="#{messages.hifiveDetailInfo}">
         <p:outputLabel value="** #{messages.hifiveUnderlying}" />
-        <ui:include src="/fragment/tableHifiveUnderlyingEdit.xhtml" >
+        <ui:include src="/tableComp/tableHifiveUnderlyingEdit.xhtml" >        
           <ui:param name="underlyingList" value="#{tableHifiveInit.selectHifive.hifiveUnderlyings}" />
           <ui:param name="isEditable" value="#{tableHifiveInit.selectHifive.virtual}" />
           <ui:param name="bssd" value="#{tableHifiveInit.basedateBean.bssd}"/>
@@ -55,7 +55,7 @@
         <p:spacer height="30px" width="0px"/>
         
         <p:outputLabel value="** #{messages.hifiveStrike}" />
-        <ui:include src="/fragment/tableHifiveStrikeEdit.xhtml" >
+        <ui:include src="/tableComp/tableHifiveStrikeEdit.xhtml" >
           <ui:param name="strikeList" value="#{tableHifiveInit.selectHifive.hifiveStrikes}" />
           <ui:param name="isEditable" value="#{tableHifiveInit.selectHifive.virtual}" />
         </ui:include>
@@ -63,20 +63,20 @@
    
       <p:tab title="#{messages.priceSetting}">
         <p:outputLabel value="** #{messages.priceSetting}" />      
-        <ui:include src="/fragment/tablePriceSettingSelect.xhtml" >
+        <ui:include src="/tableComp/tablePriceSettingSelect.xhtml" >
           <ui:param name="priceSettingList" value="#{tableHifiveInit.selectHifive.priceSetting}" />
         </ui:include>
         
         <p:spacer height="30px" width="0px"/>        
         
         <p:outputLabel value="** #{messages.priceUnderlyingSetting}" />
-        <ui:include src="/fragment/tablePriceSettingUnder.xhtml" >
+        <ui:include src="/tableComp/tablePriceSettingUnder.xhtml" >
           <ui:param name="prUnderSettingList" value="#{tableHifiveInit.selectHifive.prUnderSetting}" />
         </ui:include>
       </p:tab> 
       
       <p:tab title="#{messages.scenarioAdaptedValue}" >
-        <ui:include src="/fragment/tableScenarioDetail.xhtml" >
+        <ui:include src="/tableComp/tableScenarioDetail.xhtml" >
           <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailFilter}" />
           <!-- <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailList}" /> -->
           <ui:param name="bssd" value="#{basedateBean.bssd}"/>

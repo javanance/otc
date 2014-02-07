@@ -1,0 +1,54 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPriceSettingUnder">
+
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+              
+    <p:dataTable id="tablePriceSettingUnder" var="_var" value="#{prUnderSettingList}" 
+      widgetVar="wgTablePrSettingUnder"
+      emptyMessage="#{messages.noDataFound}"
+      selectionMode="single"
+      rowKey="#{_var}" 
+      rowIndexVar="rowIndex"
+      editable="true"  editMode="cell"
+      editingRow="false"  
+      sortMode="multiple"
+      resizableColumns="true" liveResize="false" >
+
+      <!-- <p:ajax event="rowSelect" update="@(.ui-datatable)" /> -->
+
+      <p:column id="colPrObj" sortBy="#{_var.id.pricingObjId}" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.priceObject}" /></f:facet>
+        <h:outputText value="#{_var.id.pricingObjId}"/>
+      </p:column>
+      <p:column id="colProdId" sortBy="#{_var.id.prodId}"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.prodId}" /></f:facet>
+        <h:outputText value="#{_var.id.prodId}"/>
+      </p:column>      
+      <p:column id="colUnderlyingId" sortBy="#{_var.id.underlyingId}"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.undelyingId}" /></f:facet>
+        <h:outputText value="#{_var.id.underlyingId}"/>
+      </p:column>
+      
+      <p:column id="colRefIrcId" sortBy="#{_var.refIrc.ircName}"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.refIrCurve}" /></f:facet>
+        <p:cellEditor>
+        <f:facet name="output"><h:outputText value="#{_var.refIrc.ircName}"/></f:facet>
+        <f:facet name="input"><p:inputText value="#{_var.refIrc.ircName}"></p:inputText> </f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+      <p:column id="colVolCurveId" sortBy="#{_var.volCurve.volCurveId}"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.volCurve}" /></f:facet>
+        <p:cellEditor>
+        <f:facet name="output"><h:outputText value="#{_var.volCurve.volCurveId}"/></f:facet>
+        <f:facet name="input"><p:inputText value="#{_var.volCurve.volCurveId}"></p:inputText> </f:facet>
+        </p:cellEditor>
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

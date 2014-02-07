@@ -1,0 +1,138 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+  <h:form id="formHifiveStrikeEdit" >
+  
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000"/>
+    <p:contextMenu id="strikeCtxMenu" for="tableHifiveStrike" widgetVar="hifiveStrikeCmenu" >
+    <!-- <p:contextMenu id="strikeCtxMenu" for="tableHifiveStrikeWrap" widgetVar="hifiveStrikeCmenu" > -->    
+      <p:menuitem value="#{messages.insertHifiveStrike}" action="#{tableHifiveInit.addStrike}" update="growl, tableHifiveStrike" />
+      <p:separator/>
+      <p:menuitem value="#{messages.deleteHifiveStrike}" action="#{tableHifiveInit.removeStrike(tableHifiveInit.selectStrike)}" 
+                  update="growl, tableHifiveStrike"  >
+      </p:menuitem>  
+    </p:contextMenu>
+
+
+
+<!-- <h:panelGroup layout="block" id="tableHifiveStrikeWrap"> -->
+
+    <p:dataTable id="tableHifiveStrike" var="_strike" value="#{strikeList}" 
+      widgetVar="wgTableHifiveStrike"
+      emptyMessage="#{messages.noDataFound}" 
+      editable="#{isEditable}" editMode="cell"
+      selection="#{tableHifiveInit.selectStrike}"
+      selectionMode="single"
+      rowKey="#{_strike.id}"
+      resizableColumns="true" liveResize="false"    styleClass="dynamicTableId"  >
+      
+      <p:ajax event="rowSelect" update="@form:strikeCtxMenu"/> 
+      <p:column id="colProdId" sortBy="#{_strike.id.prodId}" width="70">
+        <f:facet name="header"><h:outputText value="#{messages.getProdId}" /> </f:facet>
+        <h:outputText value="#{_strike.id.prodId}" />
+      </p:column>
+      
+      <p:column id="colStrikeSerial" sortBy="#{_strike.id.strikeSerial}" width="70" >
+        <f:facet name="header"><h:outputText value="#{messages.getStrikeSerial}" /></f:facet>
+        <h:outputText value="#{_strike.id.strikeSerial}" />
+      </p:column>
+      
+      <p:column id="colStrikeDate" sortBy="#{_strike.strikeDate}" width="70" >
+        <f:facet name="header"><h:outputText value="#{messages.getStrikeDate}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.strikeDate}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.strikeDate}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+     <!--  <p:column id="colPaymentDate" sortBy="#{_strike.paymentDate}" width="70" >
+        <f:facet name="header"><h:outputText value="#{messages.getPaymentDate}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.paymentDate}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.paymentDate}" /></f:facet>
+        </p:cellEditor>
+      </p:column> -->
+      <p:column id="colPaymentDate" sortBy="#{_strike.pDate}" width="70" >
+        <f:facet name="header"><h:outputText value="#{messages.getPaymentDate}" /></f:facet>
+        <!-- <h:outputText value="#{_strike.pDate}" /> -->
+        <p:cellEditor>
+          <f:facet name="output">
+            <h:outputText value="#{_strike.pDate}" >
+              <f:convertDateTime pattern="yyyy/MM/dd"/>
+            </h:outputText>
+          
+          </f:facet>
+          <f:facet name="input">
+<!--           <p:inputText value="#{_strike.pDate}"></p:inputText> -->
+          <p:calendar value="#{_strike.pDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+            navigator="true"/>
+          </f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+      <p:column id="colStrikePrice" sortBy="#{_strike.strikePrice}" width="70" >
+        <f:facet name="header"><h:outputText value="#{messages.getStrikePrice}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.strikePrice}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.strikePrice}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+      <p:column id="colPayoffAmt" sortBy="#{_strike.payoffAmt}" width="70"  >
+        <f:facet name="header"><h:outputText value="#{messages.getPayoffAmt}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.payoffAmt}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.payoffAmt}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+     <p:column id="colDlbJumpStrike" sortBy="#{_strike.dblJumpStrike}" width="70" >
+        <f:facet name="header"><h:outputText value="#{messages.getDblJumpStrike}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.dblJumpStrike}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.dblJumpStrike}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+      <p:column id="colDblJumpPayoff" sortBy="#{_strike.dblJumpPayoff}" width="70"  >
+        <f:facet name="header"><h:outputText value="#{messages.getDblJumpPayoff}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.dblJumpPayoff}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.dblJumpPayoff}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+      <p:column id="colTplJumpStrike" sortBy="#{_strike.tplJumpStrike}"  width="70" >
+        <f:facet name="header"><h:outputText value="#{messages.getTplJumpStrike}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.tplJumpStrike}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.tplJumpStrike}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+      <p:column id="colTplJumpPayoff" sortBy="#{_strike.tplJumpPayoff}"  width="70"  >
+        <f:facet name="header"><h:outputText value="#{messages.getTplJumpPayoff}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.tplJumpPayoff}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.tplJumpPayoff}" /></f:facet>
+        </p:cellEditor>      
+      </p:column>
+      <p:column id="colCouponRate" sortBy="#{_strike.couponRate}"  width="70"  >
+        <f:facet name="header"><h:outputText value="#{messages.getCouponRate}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.couponRate}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.couponRate}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+      
+      <p:column id="colUpBarrier" sortBy="#{_strike.upBarrier}"  width="70"  >
+        <f:facet name="header"><h:outputText value="#{messages.getUpBarrier}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_strike.upBarrier}" /></f:facet>
+          <f:facet name="input"><p:inputText value="#{_strike.upBarrier}" /></f:facet>
+        </p:cellEditor>
+      </p:column>
+    </p:dataTable>
+    <!-- </h:panelGroup> -->
+  </h:form>
+</ui:composition>

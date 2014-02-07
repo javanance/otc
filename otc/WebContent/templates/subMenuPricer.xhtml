@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <p:submenu label="#{messages.pricer}">
+    <p:column>
+      <p:submenu label="#{messages.otcDashBoard}">
+        <p:menuitem url="#{messages.urlIP}/view/v600PricerInfo.seam" value="#{messages.dashboard}" />
+      </p:submenu>
+
+      <p:submenu label="#{messages.otcPortfolio}">
+        <p:menuitem url="#{messages.urlIP}/view/v610PricerInfo.seam" value="#{messages.portfolio}" />
+        <p:menuitem url="#{messages.urlIP}/view/v620PricerInfo.seam" value="#{messages.priceValidation}" />
+      </p:submenu>
+
+      <p:submenu label="#{messages.detailView}">
+        <p:menuitem url="#{messages.urlIP}/view/v631PricerInfo.seam" value="#{messages.byUnderlying}" />
+        <p:menuitem url="#{messages.urlIP}/view/v632PricerInfo.seam" value="#{messages.byCounterParty}" />
+        <p:menuitem url="#{messages.urlIP}/view/v633PricerInfo.seam" value="#{messages.byMaturity}" />
+        <p:menuitem url="#{messages.urlIP}/view/v634PricerInfo.seam" value="#{messages.byDiscountCurve}" />
+      </p:submenu>
+    </p:column>
+
+    <p:column>
+      <p:submenu label="#{messages.simulation}">
+        <p:menuitem url="#{messages.urlIP}/view/v650PriceSimulation.seam" value="#{messages.productSimulation}" />
+        <p:menuitem url="#{messages.urlIP}/view/v660PriceSimulation.seam" value="#{messages.portfolioSimulation}" />
+      </p:submenu>
+    </p:column>
+
+
+    <p:column>
+      <p:submenu label="#{messages.userSetting}">
+        <p:menuitem url="#{messages.urlIP}/view/v690PriceSetting.seam" value="#{messages.priceSetting}" />
+        <p:menuitem url="#{messages.urlIP}/view/v691ScenarioSetting.seam" value="#{messages.scenarioSetting}" />
+
+        <p:menuitem url="#{messages.urlIP}/view/v695Pricer.seam" value="#{messages.pricerWorking}" />
+        <p:menuitem url="#{messages.urlIP}/view/v696PricerInfo.seam" value="#{messages.productPricerWorking}" />
+      </p:submenu>
+    </p:column>
+  </p:submenu>
+
+</ui:composition>
+

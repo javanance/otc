@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+  <p:submenu label="#{messages.help}" icon="img_help">
+    <p:column>
+      <p:submenu label="#{messages.general}">
+        <p:menuitem url="#{messages.urlIP}/view/v800Settings.seam" value="#{messages.settings}" />
+        <p:separator />
+        <p:menuitem value="#{messages.aboutUs}" />
+      </p:submenu>
+    </p:column>
+
+    <p:column>
+      <p:submenu label="#{messages.search}">
+        <p:menuitem url="#{messages.urlIP}/view/v810MarketVariableSetting.seam" value="#{messages.mvSetting}" />
+        <p:menuitem url="#{messages.urlIP}/view/v811MarketVariableSetting.seam" value="#{messages.mvSetting}" />
+        <p:menuitem url="#{messages.urlIP}/view/v820RiskFactorMapping.seam" value="#{messages.riskFactorMapping}" />
+      </p:submenu>
+    </p:column>
+
+
+    <p:column>
+    </p:column>
+  </p:submenu>
+
+</ui:composition>
+

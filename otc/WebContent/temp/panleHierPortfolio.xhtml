@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelHierPortfolio">
+    <p:growl id="messages" showDetail="true" />
+
+
+    <p:commandButton value="#{messages.makeHierarchy}"></p:commandButton>
+
+    
+    <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop">
+    
+    <p:panelGrid columns="3">
+      <p:outputLabel value="#{messages.portfolioPrefix}" styleClass="takionLabel" />
+      <p:inputText>      </p:inputText>
+      <p:outputLabel value="" />
+
+      <p:outputLabel value="#{messages.hierarchyLevel1}" styleClass="takionLabel" />
+      <p:selectOneMenu value="#{marketVariableSetting.selectMvTypeString}">
+        <f:selectItem itemLabel="#{messages.comboSelectOne}" itemValue="" />
+        <f:selectItems value="#{mvTypeOptionAction.allMvTypeOption}" />
+        <p:ajax listener="#{marketVariableSetting.onComboSelect}" update="@(.ui-datatable)" />
+      </p:selectOneMenu>
+      <p:inputText>      </p:inputText>
+
+      <p:outputLabel value="#{messages.hierarchyLevel2}" styleClass="takionLabel" />
+      <p:selectOneMenu value="#{marketVariableSetting.selectMvTypeString}">
+        <f:selectItem itemLabel="#{messages.comboSelectOne}" itemValue="" />
+        <f:selectItems value="#{mvTypeOptionAction.allMvTypeOption}" />
+        <p:ajax listener="#{marketVariableSetting.onComboSelect}" update="@(.ui-datatable)" />
+      </p:selectOneMenu>
+      <p:inputText value="aa" >      </p:inputText>
+    </p:panelGrid>
+  <p:panel>
+      
+    <ui:include src="/fragment/treeMvTypeSetting.xhtml" />
+  </p:panel>
+    
+    </p:panelGrid>
+  </h:form>
+</ui:composition>

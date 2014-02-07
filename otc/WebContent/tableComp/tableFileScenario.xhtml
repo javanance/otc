@@ -1,0 +1,110 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+
+  <h:form id="formFileUploadSce" enctype="multipart/form-data" >
+    <p:contextMenu for="formFileUploadSce" widgetVar = "fileSceCmenu">
+      <p:menuitem value ="#{messages.insertNew}" action="#{fileUploadController.addNew}" update="tableFileScenario" />
+    </p:contextMenu>
+    
+    <!-- <p:fileUpload  fileUploadListener="#{fileUploadController.handle}"
+      mode="advanced" sizeLimit="100000" auto="false" dragDropSupport="false"
+      update="growl" fileLimit="3"  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" /> -->
+    
+<!--     <p:fileUpload  value="#{fileUploadController.file}"   mode="simple" />
+    <p:commandButton  value="Submit" actionListener="#{fileUploadController.uploadbefore}" 
+      action="#{fileUploadController.upload}"   update="growl" ajax="false">
+    </p:commandButton>   -->
+    
+    <s:fileUpload data="#{fileUploadController.byteData}" contentType="#{fileUploadController.contType}" />
+    <p:commandButton  value="#{messages.uploadToTable}" actionListener="#{fileUploadController.uploadbefore}" 
+         update="growl, tableFileScenario" ajax="false">
+      <!-- <f:ajax execute="@all" render="@form"/> -->
+    </p:commandButton>  
+
+    
+    <p:growl id="growl" showDetail="false" sticky="false" life="5000" />
+<!--     <p:spacer height="30px"/> -->
+<!--     <p:outputLabel value="#{messages.uploadScenario}" /> -->
+    
+    <p:commandButton value="#{messages.save}" action="#{fileUploadController.save}" update="@(form)"/>
+    
+    <p:dataTable id="tableFileScenario" value="#{fileUploadController.scenarioUploadList}" var="_var"
+      widgetVar="wgTableFileScenario"
+      emptyMessage="#{messages.noDataFound}"
+      sortMode="multiple"
+      editable="true" editMode="cell"
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50" >
+
+      <p:column id="colSceId" sortBy="#{_var.scenarioId}" 
+                filterBy="#{_var.scenarioId}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.scenarioId}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.scenarioId}"/> </f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.scenarioId}"/> </f:facet>
+        </p:cellEditor>
+        
+      </p:column>
+      
+      <p:column id="colSceName" sortBy="#{_var.scenarioName}" 
+                filterBy="#{_var.scenarioName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.scenarioName}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.scenarioName}"/> </f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.scenarioName}"/> </f:facet>
+        </p:cellEditor>        
+      </p:column>
+      
+      <p:column id="colSceType" sortBy="#{_var.scenarioType}" 
+                filterBy="#{_var.scenarioType}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.scenarioType}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.scenarioType}"/> </f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.scenarioType}"/> </f:facet>
+        </p:cellEditor>        
+      </p:column>
+
+      <p:column id="colSceSet" sortBy="#{_var.scenarioSet}" 
+                filterBy="#{_var.scenarioSet}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.scenarioSet}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.scenarioSet}"/> </f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.scenarioSet}"/> </f:facet>
+        </p:cellEditor>        
+      </p:column>
+
+      <p:column id="colMvId" sortBy="#{_var.mvId}" 
+                filterBy="#{_var.mvId}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.mvId}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.mvId}"/> </f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.mvId}"/> </f:facet>
+        </p:cellEditor>        
+      </p:column>
+      
+      <p:column id="colShockType" sortBy="#{_var.shockType}" 
+                filterBy="#{_var.shockType}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.shockType}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.shockType}"/> </f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.shockType}"/> </f:facet>
+        </p:cellEditor>        
+      </p:column>
+
+      <p:column id="colShockValue" sortBy="#{_var.shockValue}" 
+                filterBy="#{_var.shockValue}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.shockValue}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.shockValue}"/> </f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.shockValue}"/> </f:facet>
+        </p:cellEditor>
+      </p:column>
+    </p:dataTable> 
+  </h:form>
+</ui:composition>

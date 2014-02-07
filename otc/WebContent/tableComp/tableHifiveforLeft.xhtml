@@ -1,0 +1,50 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveForLeft" >
+    
+    <p:dataTable id="tableHifiveLeft" var="_hifive" value="#{tableHifiveInit.hifiveList}" 
+      widgetVar="wgTableHifiveLeft"
+      emptyMessage="#{messages.noDataFound}" 
+      selection="#{tableHifiveInit.selectHifive}" selectionMode="single"
+      rowKey="#{_hifive.prodId}"
+      
+      resizableColumns="true" liveResize="true"
+      paginator="true" paginatorPosition="bottom" rows="21"
+      paginatorTemplate="{PreviousPageLink} {JumpToPageDropdown} {NextPageLink} "
+      styleClass="takion77-row" >
+      
+      <!-- <p:ajax event="rowSelect" listener="#{tableHifiveInit.onSelect}" update="@(.ui-datatable)" /> -->
+      <!-- <p:ajax event="rowSelect"  listener="#{tableHifiveStrikeInit.loadPivotTable}" update="@widgetVar(wgHifiveTabView) @(.ui-datatable)" /> -->
+      <!-- <p:ajax event="rowSelect"  update="@widgetVar(wgHifiveTabView)" /> -->
+      <p:ajax event="rowSelect"  listener="#{tableHifiveStrikeInit.loadPivotTable1}" update="@(.ui-datatable)" /> 
+
+      <p:column id="colHifiveType" sortBy="#{_hifive.hifiveType}" filterBy="#{_hifive.hifiveType}" filterMatchMode="contains"
+        width="30" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getHifiveType}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.hifiveType}" />
+      </p:column>
+     <!--  <p:column id="colProdId" sortBy="#{_hifive.prodId}" filterBy="#{_hifive.prodId}" filterMatchMode="contains" 
+        width="80">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdId}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.prodId}" />
+      </p:column> -->
+      
+      <p:column id="colProdName" sortBy="#{_hifive.prodName}" filterBy="#{_hifive.prodName}" filterMatchMode="contains"
+        width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdName}" />  
+         </f:facet>
+        <h:outputText value="#{_hifive.prodName}" />
+      </p:column>
+
+    </p:dataTable>
+  </h:form>
+</ui:composition>

@@ -18,14 +18,7 @@
   </ui:define>
 
   <ui:define name="layoutCenter">
-<!--     <ui:include src="/fragment/tableScenarioDetail.xhtml">
-      <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailList}" />
-      <ui:param name="bssd" value="#{basedateBean.bssd}" />
-      <ui:param name="isEditable" value="true" />
-      <ui:param name="editMode" value="cell" />
-    </ui:include> -->
-    
-    <ui:include src="/fragment/tableScenarioDetail.xhtml" >
+    <ui:include src="/tableComp/tableScenarioDetail.xhtml" >
       <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailList}" />
       <ui:param name="bssd" value="#{basedateBean.bssd}" />
     </ui:include>  
@@ -33,8 +26,8 @@
 
   <ui:define name="layoutBottom">
     <p:tabView id="prSettingTabView" dynamic="true" orientation="top" widgetVar="wgPrSettingTabView">
-      <p:tab title="#{messages.createNewScenarioWithFile}">
-        <ui:include src="/fragment/fileUploadScenario.xhtml" />
+      <p:tab title="#{messages.createScenarioFromFile}">
+        <ui:include src="/tableComp/tableFileScenario.xhtml" />
       </p:tab>
 
       <p:tab title="#{messages.createHistoricalScenario}">
@@ -42,7 +35,7 @@
             <p:panel>
                     <ui:include src="/fragment/panelScenarioHeader.xhtml" />
             </p:panel>
-            <ui:include src="/fragment/tableLazyMvSetting.xhtml">
+            <ui:include src="/tableComp/tableLazyMvSetting.xhtml">
               <ui:param name="paraLazyModels" value="#{marketVariableSetting.lazyModelMarketVariable}" />
             </ui:include>
           </p:panelGrid>

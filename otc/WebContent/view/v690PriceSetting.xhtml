@@ -10,10 +10,10 @@
   </ui:define>
   
   <ui:define name="layoutCenter">
-    <ui:include src="/fragment/tablePriceSetting.xhtml" >
+    <!-- <ui:include src="/tableComp/tablePriceSetting.xhtml" >
         <ui:param name="isEditable" value="true" />
         <ui:param name="editMode" value="cell" />
-     </ui:include>
+     </ui:include> -->
   </ui:define>
   
   <ui:define name="layoutBottom">
@@ -21,7 +21,7 @@
     
       <p:tab title="#{messages.underlyingPriceSetting}">
         <p:outputLabel value="** #{messages.underlyingPriceSetting}" />
-        <ui:include src="/fragment/tablePriceSettingUnder.xhtml" >
+        <ui:include src="/tableComp/tablePriceSettingUnder.xhtml" >
           <ui:param name="prSettingUnderList" value="#{tablePriceSettingInit.selectPrSetting.prUnderlyingList}" />
         </ui:include>
         <p:spacer height="30px" width="0px"/>
