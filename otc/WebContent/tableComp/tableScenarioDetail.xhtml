@@ -13,7 +13,8 @@
 
     <p:dataTable id="tableScenarioDetail" var="_var" value="#{sceDetailList}" 
       widgetVar="wgTableScenarioDetail"
-      emptyMessage="#{messages.noDataFound}" 
+      emptyMessage="#{messages.noDataFound}"
+      filteredValue="#{filterSceDetailList}"
       resizableColumns="true" liveResize="false"
       sortMode="multiple"
       paginator="true" paginatorPosition="bottom" rows="10"

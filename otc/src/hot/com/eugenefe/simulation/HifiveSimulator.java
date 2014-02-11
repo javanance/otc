@@ -46,7 +46,10 @@ public class HifiveSimulator {
 	private List<Scenario> scenarioList;
 	private List<Scenario> selectScenarioList;
 	private List<ScenarioDetail> sceDetailList = new ArrayList<ScenarioDetail>();
-	private List<ScenarioDetail> sceDetailFilter = new ArrayList<ScenarioDetail>();
+	private List<ScenarioDetail> filterSceDetailList;
+	
+//	private List<ScenarioDetail> sceDetailFilter = new ArrayList<ScenarioDetail>();
+	private List<ScenarioDetail> hifiveSceDetailList = new ArrayList<ScenarioDetail>();
 	
 	@In("#{tableHifiveInit.selectHifive}")
 	private Hifive selectHifive;
@@ -56,6 +59,14 @@ public class HifiveSimulator {
 	private TreeNode rootNode;
 	private TreeNode[] selectNodes;
 	
+	private String filterString = "";
+	public String getFilterString() {
+		return filterString;
+	}
+	public void setFilterString(String filterString) {
+		this.filterString = filterString;
+	}
+
 	public HifiveSimulator() {
 		System.out.println("Construction HifiveSimulator");
 	}
@@ -70,7 +81,8 @@ public class HifiveSimulator {
 	}
 	
 	public void onNodeSelectFilter(){
-		sceDetailFilter.clear();
+//		sceDetailFilter.clear();
+		hifiveSceDetailList.clear();
 //		log.info("MarketList0:#0,#1", sceDetailList.size());
 		updateSceDetailList();
 		
@@ -80,7 +92,8 @@ public class HifiveSimulator {
 			for(ScenarioDetail aa : sceDetailList){
 				if(bb.getMvId().equals(aa.getId().getMvId())){
 //					log.info("MarketList2:#0,#1", bb.getMvId(), aa.getMarketVariable().getMvId());
-					sceDetailFilter.add(aa);
+//					sceDetailFilter.add(aa);
+					hifiveSceDetailList.add(aa);
 //					break;
 				}
 			}
@@ -161,6 +174,11 @@ public class HifiveSimulator {
 		loadTree();
 		
 	}
+	
+	public void filterTree(){
+		log.info("FilterString :#0", filterString);
+		loadTree();
+	}
 //****************Getter and Setter************	
 
 	public List<Scenario> getScenarioList() {
@@ -186,42 +204,38 @@ public class HifiveSimulator {
 		this.sceDetailList = sceDetailList;
 	}
 	
-	public List<ScenarioDetail> getSceDetailFilter() {
-		return sceDetailFilter;
-	}
-	public void setSceDetailFilter(List<ScenarioDetail> sceDetailFilter) {
-		this.sceDetailFilter = sceDetailFilter;
-	}
+//	public List<ScenarioDetail> getSceDetailFilter() {
+//		return sceDetailFilter;
+//	}
+//	public void setSceDetailFilter(List<ScenarioDetail> sceDetailFilter) {
+//		this.sceDetailFilter = sceDetailFilter;
+//	}
 	
 	
-	public Hifive getSelectHifive() {
-		return selectHifive;
+	public List<ScenarioDetail> getFilterSceDetailList() {
+		return filterSceDetailList;
+	}
+	public void setFilterSceDetailList(List<ScenarioDetail> filterSceDetailList) {
+		this.filterSceDetailList = filterSceDetailList;
+	}
+	public List<ScenarioDetail> getHifiveSceDetailList() {
+		return hifiveSceDetailList;
+	}
+	public void setHifiveSceDetailList(List<ScenarioDetail> hifiveSceDetailList) {
+		this.hifiveSceDetailList = hifiveSceDetailList;
 	}
 
-	public void setSelectHifive(Hifive selectHifive) {
-		this.selectHifive = selectHifive;
-	}
+	public Hifive getSelectHifive() {		return selectHifive;	}
+	public void setSelectHifive(Hifive selectHifive) {		this.selectHifive = selectHifive;	}
 
-	public KisHifive getKisHifive() {
-		return kisHifive;
-	}
+	public KisHifive getKisHifive() {	return kisHifive;	}
+	public void setKisHifive(KisHifive kisHifive) {		this.kisHifive = kisHifive;	}
+	
+	public TreeNode getRootNode() {		return rootNode;	}
+	public void setRootNode(TreeNode rootNode) {		this.rootNode = rootNode;	}
 
-	public void setKisHifive(KisHifive kisHifive) {
-		this.kisHifive = kisHifive;
-	}
-	public TreeNode getRootNode() {
-		return rootNode;
-	}
-	public void setRootNode(TreeNode rootNode) {
-		this.rootNode = rootNode;
-	}
-
-	public TreeNode[] getSelectNodes() {
-		return selectNodes;
-	}
-	public void setSelectNodes(TreeNode[] selectNodes) {
-		this.selectNodes = selectNodes;
-	}
+	public TreeNode[] getSelectNodes() {		return selectNodes;	}
+	public void setSelectNodes(TreeNode[] selectNodes) {	this.selectNodes = selectNodes;	}
 
 //*****************************************************************************************	
 	private void loadTree(){
@@ -235,6 +249,10 @@ public class HifiveSimulator {
 		TreeNode temp ;
 //		log.info("AAAAAAAAAAAAAAAAAAAAAAAAAA");
 		for(Scenario aa : scenarioList){
+			if(aa.getScenarioId().toUpperCase().contains(filterString.toUpperCase())){
+//			if(aa.getScenarioId().contains(filterString) || 
+//					( aa.getScenarioName()!=null && aa.getScenarioName().contains(filterString))){
+
 			if(aa.getScenarioSet()!= null && !uppers.contains(aa.getScenarioSet())){
 				uppers.add(aa.getScenarioSet());
 				temp = new DefaultTreeNode("scenarioSet", aa.getScenarioSet(), rootNode);
@@ -242,15 +260,19 @@ public class HifiveSimulator {
 				temp.setSelected(tempList.contains(temp));
 				upNode.put(aa.getScenarioSet(),temp);
 			}
+			}
 		}
 //		log.info("AAAAAAAAAAAAbbbbbbbbbbbbbbbbb");
 		for(Scenario aa : scenarioList){
+			if(aa.getScenarioId().toUpperCase().contains(filterString.toUpperCase())){ 
+//					||	( aa.getScenarioName()!=null && aa.getScenarioName().contains(filterString))){
 			if(aa.getScenarioSet()== null){
 				temp = new DefaultTreeNode("scenario",aa.getScenarioId(), rootNode);
 				temp.setSelected(tempList.contains(temp));
 			}else{
 				temp = new DefaultTreeNode("scenario",aa.getScenarioId(), upNode.get(aa.getScenarioSet()));
 				temp.setSelected(tempList.contains(temp));
+			}
 			}
 		}
 		
@@ -260,6 +282,7 @@ public class HifiveSimulator {
 	
 	private void updateSceDetailList(){
 		sceDetailList.clear();
+		filterSceDetailList = new ArrayList<ScenarioDetail>();
 //		log.info("selectnode:" );
 		if(selectNodes == null){
 		}else{
@@ -269,6 +292,7 @@ public class HifiveSimulator {
 				for(Scenario sce : scenarioList){
 					if(sce.getScenarioId().equals(nodeId)){
 						sceDetailList.addAll(sce.getSceDetailList());
+						filterSceDetailList.addAll(sce.getSceDetailList());
 						break;
 					}
 				}

@@ -8,7 +8,8 @@
   <ui:define name="layoutLeft">
     <p:accordionPanel>
       <p:tab title="#{messages.systemScenario}">
-        <ui:include src="/fragment/treeScenario.xhtml" />
+        <!-- <ui:include src="/fragment/treeScenario.xhtml" /> -->
+        <ui:include src="/treeComp/filterTreeScenario.xhtml" />
       </p:tab>
 
       <p:tab title="#{messages.userDefinedScenario}">
@@ -20,6 +21,7 @@
   <ui:define name="layoutCenter">
     <ui:include src="/tableComp/tableScenarioDetail.xhtml" >
       <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailList}" />
+      <ui:param name="filterSceDetailList" value="#{hifiveSimulator.filterSceDetailList}" />
       <ui:param name="bssd" value="#{basedateBean.bssd}" />
     </ui:include>  
   </ui:define>

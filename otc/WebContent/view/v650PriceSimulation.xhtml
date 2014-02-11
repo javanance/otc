@@ -8,15 +8,13 @@
   <ui:define name="layoutLeft">
     <p:accordionPanel>
       <p:tab title="#{messages.scenario}">
-          <ui:include src="/fragment/treeScenario.xhtml" >
-            
-          </ui:include>      
+          <ui:include src="/treeComp/filterTreeScenario.xhtml" />
       </p:tab>
       <p:tab title="#{messages.productType}">
           <ui:include src="/fragment/treeMvTypeSetting.xhtml" />    
       </p:tab>
       <p:tab title="#{messages.scenarioTable}">
-          <ui:include src="/fragment/tableScenario.xhtml" />    
+          <ui:include src="/fragment/treeScenario.xhtml" />
       </p:tab>
     </p:accordionPanel>
   </ui:define>
@@ -74,10 +72,10 @@
           <ui:param name="prUnderSettingList" value="#{tableHifiveInit.selectHifive.prUnderSetting}" />
         </ui:include>
       </p:tab> 
-      
+
       <p:tab title="#{messages.scenarioAdaptedValue}" >
         <ui:include src="/tableComp/tableScenarioDetail.xhtml" >
-          <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailFilter}" />
+          <ui:param name="sceDetailList" value="#{hifiveSimulator.hifiveSceDetailList}" />
           <!-- <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailList}" /> -->
           <ui:param name="bssd" value="#{basedateBean.bssd}"/>
         </ui:include>
