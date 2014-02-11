@@ -1,0 +1,52 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formFilterTreeScenario">
+     <p:contextMenu for="formFilterTreeScenario">
+      <p:menuitem value="#{messages.viewDetails}" id="menuItemViewDetail" icon="ui-icon-circle-zoomin" 
+                  onclick="wgDlgSceDetail.show()" />
+      <p:menuitem id="menuItemDelete" value="#{messages.delete}" icon="ui-icon-circle-delete"  
+                action="#{hifiveSimulator.onNodeDelete}" update="@(form)"/>            
+    </p:contextMenu>
+    
+    <p:remoteCommand name ="rcFilterTree" action="#{hifiveSimulator.filterTree()}" update="@(.ui-tree)"/>
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />    
+ 
+<!--     <p:outputPanel>
+    </p:outputPanel> -->
+    <p:panelGrid columns="2">
+      <p:outputLabel value="#{messages.search}"/>
+      <p:inputText value="#{hifiveSimulator.filterString}" onkeyup="rcFilterTree()" size="15"/>
+    </p:panelGrid>
+    <p:separator/>
+    <p:tree id="treeScenario" value="#{hifiveSimulator.rootNode}" var="node" 
+          selectionMode="checkbox"
+          selection="#{hifiveSimulator.selectNodes}" 
+          style="width:95%">
+          <p:ajax event="select"  listener="#{hifiveSimulator.onNodeSelectFilter}" update="@(.ui-datatable)" />
+          <p:ajax event="unselect"  listener="#{hifiveSimulator.onNodeSelectFilter}" update="@(.ui-datatable)" />
+          <!-- <p:treeNode type="scenarioSet" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed"> -->
+          <p:treeNode type="scenarioSet" >
+            <h:outputText value="#{node}" />
+          </p:treeNode>
+          <p:treeNode  type="scenario">
+            <!-- <p:selectBooleanCheckbox value="#{node}"/> -->
+            <h:outputText value="#{node}" />
+          </p:treeNode>
+    </p:tree>
+        
+  </h:form>
+  <!-- <p:dialog id="dialogSceDetail" widgetVar="wgDlgSceDetail" header="#{messages.scenarioDetail}" 
+      resizable="false"
+      closeOnEscape="true" 
+      showEffect="fade" hideEffect="explode" 
+      maximizable="false" minimizable="true"
+      appendToBody="false" modal="false" dynamic="true" width="580" height="400" style="border:none">
+      <ui:include src="/fragment/tableScenarioDetail.xhtml" >
+        <ui:param name="sceDetailList" value="#{hifiveSimulator.selectScenarioList.get(0).sceDetailList}" />
+      </ui:include>  
+    </p:dialog> -->
+</ui:composition>

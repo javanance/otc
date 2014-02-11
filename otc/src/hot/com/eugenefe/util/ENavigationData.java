@@ -124,6 +124,7 @@ public enum ENavigationData {
 		,Counterparty(EMenuGroup.Master)
 		,Employee(EMenuGroup.Master)
 		,Bizunit(EMenuGroup.Master)
+		,HierarchyNode(EMenuGroup.Master)
 		
 		,BondHis(EMenuGroup.History)
 		,EtfHis(EMenuGroup.History)

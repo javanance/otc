@@ -18,7 +18,6 @@ public class PriceData implements Cloneable{
 	private Double volume;
 	private Double volumeAmount;
 	
-
 	public PriceData() {
 	}
 	

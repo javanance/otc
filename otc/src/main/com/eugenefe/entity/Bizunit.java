@@ -30,6 +30,11 @@ public class Bizunit implements java.io.Serializable {
 	private String orgId;
 	private Bizunit parentBizunit;
 	private String orgName;
+	private String orgRole;
+	private String orgType;
+	private String openDate;
+	private String closeDate;
+	private String useYN;
 //	private Set<Employee> employees = new HashSet<Employee>(0);
 	private List<Employee> employees = new ArrayList<Employee>();
 	private List<Bizunit> childBizunits = new ArrayList<Bizunit>();
@@ -80,6 +85,56 @@ public class Bizunit implements java.io.Serializable {
 
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
+	}
+	
+	@Column(name = "ORG_ROLE")
+	@AnnoMethodTree(order =21, init=true)
+	public String getOrgRole() {
+		return orgRole;
+	}
+
+	public void setOrgRole(String orgRole) {
+		this.orgRole = orgRole;
+	}
+	
+	@Column(name = "ORG_TYPE")
+	@AnnoMethodTree(order =22, init=true)
+	public String getOrgType() {
+		return orgType;
+	}
+
+	public void setOrgType(String orgType) {
+		this.orgType = orgType;
+	}
+
+	@Column(name = "OPEN_DATE")
+	@AnnoMethodTree(order =23, init=true)
+	public String getOpenDate() {
+		return openDate;
+	}
+
+	public void setOpenDate(String openDate) {
+		this.openDate = openDate;
+	}
+
+	@Column(name = "CLOSE_DATE")
+	@AnnoMethodTree(order =24, init=true)
+	public String getCloseDate() {
+		return closeDate;
+	}
+
+	public void setCloseDate(String closeDate) {
+		this.closeDate = closeDate;
+	}
+	
+	@Column(name = "USE_YN")
+	@AnnoMethodTree(order =25, init=true)
+	public String getUseYN() {
+		return useYN;
+	}
+
+	public void setUseYN(String useYN) {
+		this.useYN = useYN;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bizunit")
