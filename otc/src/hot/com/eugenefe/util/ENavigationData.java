@@ -112,6 +112,7 @@ public enum ENavigationData {
 		,Etf(EMenuGroup.Product		)
 		,Futures(EMenuGroup.Product	)
 		,FxCash (EMenuGroup.Product)
+		,Stock (EMenuGroup.Product)
 //		,IrcBucket("com.eugenefe.entity.IrcBucket")
 
 		,Hifive(EMenuGroup.HiFive)
@@ -134,6 +135,7 @@ public enum ENavigationData {
 		,FxRateHis(EMenuGroup.History)
 		,VolatilityHis(EMenuGroup.History)
 		
+		,Position(EMenuGroup.Position)
 		,PositionRisk(EMenuGroup.Position)
 		,PositionReturn(EMenuGroup.Position)
 		,Portfolio(EMenuGroup.Portfolio)

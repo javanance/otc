@@ -1,0 +1,39 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   
+  <h:form id="formTreePortfolioDefine">
+      <p:growl id="messages" showDetail="true" />
+      <p:outputPanel style="padding: 0.5em 1em;">
+        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioInit.saveHierDetail}"   />
+        <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePortfolioInit.makePortfolio}"   />
+      </p:outputPanel>
+      
+        <p:treeTable value="#{tablePortfolioInit.parentNode}" var="_var"  
+          selection="#{tablePortfolioInit.selectNode}" selectionMode="single"
+             
+        >
+        
+        <p:ajax event="select" listener="#{tablePortfolioInit.selectTreeNode}" update="@(.ui-datatable)" />
+
+        <p:column id="colPortId"  width="30">
+          <f:facet name="header">
+            <h:outputText value="#{messages.portfolioId}" />
+          </f:facet>
+        <h:outputText value="#{_var.portfolioId}" />
+      </p:column>
+
+      <p:column id="colHierName" width="30">
+        <f:facet name="header">
+          <h:outputText value="#{messages.portfolioName}" />
+        </f:facet>
+            <h:outputText value="#{_var.portfolioName}" />
+      </p:column>
+        
+      </p:treeTable>
+
+      
+  </h:form>
+</ui:composition>

@@ -13,7 +13,9 @@ public @interface AnnoMethodTree {
 //	public enum EColumnType { String, Number, Map, List };
 	
 	int order();
+	boolean navigatable()   default true;
 	boolean init() 			default true; 
 	EColumnType type()      default EColumnType.String;
 	String align() 			default "left";
+	boolean aggregatable()	default false;
 }

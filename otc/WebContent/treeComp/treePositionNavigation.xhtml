@@ -1,0 +1,150 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+<!--          <f:facet name="last">
+      <h:outputStylesheet library="css" name="testcss2.css"/>
+      </f:facet> -->
+  <h:form id="formPositionNavigation">
+    <p:growl id="messages" showDetail="true" />
+    <!-- <p:remoteCommand name="rcDrag" action="#{treePositionNavigationInit.update}" update="aaa" /> -->
+    <p:remoteCommand name="rcDrag" update="aaa" />
+
+    <p:outputPanel style="padding: 0.5em 1em;">
+      <p:outputLabel value="#{messages.portPrefix}"></p:outputLabel>
+      <p:inputText value="#{treePositionNavigationInit.portPrefix}">
+        <p:ajax event="keyup" update="@(.ui-datatable)" listener="#{treePositionNavigationInit.updateTable()}"></p:ajax>
+      </p:inputText>
+      <p:commandButton type="button" value="#{messages.makePortfolio}" action="#{treePositionNavigationInit.makePortfolio}" style="float:right" />
+      <p:commandButton type="button" value="#{messages.clearTarget}" action="#{treePositionNavigationInit.clearTarget}" style="float:right" />
+    </p:outputPanel>
+    <p:separator/>
+    
+    <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" styleClass="takion77-panelgrid-border"
+      style="padding:0px">
+
+<!--       <p:outputPanel style="border:solid 1px; border-radius:8px; border-color: inherit"> -->
+      
+      <p:panelGrid columns="3" columnClasses="takion77-alignTop, , takion77-alignTop, takion77-alignTop"
+        styleClass="takion77-panelgrid-border" style="margin:0px; border-radius:8px;">
+        <!-- <f:facet name="header">
+          <p:outputLabel value="#{messages.dragToMakeHierarchy}"/>      
+         </f:facet> -->
+
+
+        <p:tree id="treePositionNavigation" value="#{treePositionNavigationInit.superNode}" var="_node" animate="true"
+          highlight="true" orientation="vertical" draggable="true" droppable="true" dragdropScope="takion77"
+          dragMode="self" dropRestrict="sibling" style="width:100%; height:100%" >
+
+          <!-- <p:ajax event="dragdrop" update="@(form)" /> -->
+          <!-- <p:ajax event="select" listener="#{portfolioSelectAction.onNodeSelect}" update="@(.ui-datatable)" /> -->
+
+          <!-- <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+            <h:outputText value="#{_node.columnName}"  />
+          </p:treeNode> -->
+          <p:treeNode>
+            <h:outputText value="#{_node.columnName}" />
+          </p:treeNode>
+        </p:tree>
+
+        <h:graphicImage value="/img/famsilk/arrow_refresh.png"/>
+
+        <p:tree id="treePositionNavigationTarget" value="#{treePositionNavigationInit.targetSuperNode}" var="_node"
+          animate="true" highlight="true" orientation="vertical" draggable="true" droppable="true" 
+          dragdropScope="takion77" styleClass="takion77-tree" style="width:100%">
+          <p:ajax event="dragdrop" listener="#{treePositionNavigationInit.onDrop1}"
+            update="treePositionNavigationTarget"    oncomplete="rcDrag()" />
+<!-- <p:ajax event="dragdrop" listener="#{treePositionNavigationInit.onDrop1}"
+            update="treePositionNavigationTarget, hierarchyLevel:formPositionNavigation:aaa" />              -->
+          <!-- <p:ajax event="dragdrop" update="treePositionNavigationTarget" listener="#{treePositionNavigationInit.onDrop1}" /> -->
+          <!-- <p:ajax listener="#{treePositionNavigationInit.onDrop1()}"/> -->
+
+          <p:treeNode >
+            <h:outputText value="#{_node.columnName}" />
+          </p:treeNode>
+          <!-- <p:column>
+        <f:facet name="header"> Name</f:facet>
+        <h:outputText value="#{_node}" />
+      </p:column>> -->
+        </p:tree>
+      </p:panelGrid>
+      
+
+      <p:dataTable id="aaa" value="#{treePositionNavigationInit.pfDefineList}" var="_var" 
+        widgetVar="wgTableHifivezz"
+        emptyMessage="#{messages.noDataFound}" 
+        rowIndexVar="rowIndex" 
+        editable="true" editMode="cell" editingRow="false"
+        resizableColumns="true" liveResize="false">
+<!--         <f:facet name="header">
+          <h:outputText value="#{messages.hierarchyToPortfolio}" />
+        </f:facet> -->
+        <p:column style="width: 100px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.portPrefix}" />
+          </f:facet>
+          <h:outputText value="#{_var.portPrefix}" />
+        </p:column>
+         <p:column style="width: 50px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.portfolioLevel}" />
+          </f:facet>
+          <h:outputText value="#{_var.level}" />
+        </p:column>
+
+       <p:column style="width: 150px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.propPath}" />
+          </f:facet>
+          <h:outputText value="#{_var.propPath}" />
+        </p:column>
+        
+        <!-- <p:column style="width: 100px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.propTable}" />
+          </f:facet>
+          <h:outputText value="#{_var.propTable}" />
+        </p:column>
+                <p:column style="width: 150px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.propColumn}" />
+          </f:facet>
+          <h:outputText value="#{_var.propColumn}" />
+        </p:column> -->
+
+        <p:column style="width: 100px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.equation}" />
+          </f:facet>
+          <p:cellEditor >
+            <f:facet name="output"><h:outputText value="#{_var.equation.value}" /></f:facet>
+            <f:facet name="input"><p:inputText value="#{_var.equation.value}" /></f:facet>
+          </p:cellEditor>
+        </p:column>
+
+        <p:column style="width: 100px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.condition1}" />
+          </f:facet>
+          <p:cellEditor >
+            <f:facet name="output"><h:outputText value="#{_var.condition1}" /></f:facet>
+            <f:facet name="input"><p:inputText value="#{_var.condition1}" /></f:facet>
+          </p:cellEditor>
+        </p:column>
+
+        <p:column style="width: 100px">
+          <f:facet name="header">
+            <h:outputText value="#{messages.condition2}" />
+          </f:facet>
+          <p:cellEditor rendered="#{_var.equation.operandSize ==2}">
+            <f:facet name="output"><h:outputText value="#{_var.condition2}" /></f:facet>
+            <f:facet name="input"><p:inputText value="#{_var.condition2}" /></f:facet>
+          </p:cellEditor>
+        </p:column>
+      </p:dataTable>
+
+    </p:panelGrid>
+
+  </h:form>
+</ui:composition>

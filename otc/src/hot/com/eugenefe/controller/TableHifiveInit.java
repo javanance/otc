@@ -82,10 +82,8 @@ import com.sun.corba.se.impl.orbutil.closure.Future;
 @Name("tableHifiveInit")
 @Scope(ScopeType.CONVERSATION)
 public class TableHifiveInit {
-	@Logger
-	private Log log;
-	@In
-	private Session session;
+	@Logger 	private Log log;
+	@In			private Session session;
 	
 	@In("#{basedateBean}")
 	private BaseDateBean basedateBean;

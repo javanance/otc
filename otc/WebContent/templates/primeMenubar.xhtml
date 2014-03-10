@@ -4,19 +4,11 @@
   <h:form id="formMenubar">
 
     <p:growl id="growl" showDetail="true" />
-    <p:megaMenu autoDisplay="false">
+    <p:panelGrid columns="2" styleClass="takion77-panelgrid-border" style="width:100%; margin:4px">
+    
+    <p:megaMenu autoDisplay="false" style="border:none">
       <p:menuitem value="#{messages.menuHome}" icon="img_home_nav"
         url="#{messages.urlIP}/view/home.seam" />
-
-      <!-- <p:submenu label="#{messages.dashBoard}" icon="img_home_nav">
-        <p:column>
-          <p:submenu label="#{messages.menuHome}">
-            <p:menuitem value="#{messages.menuHome}" icon="img_home_nav"
-              url="http://190.190.175.178:8080/otc/view/home.seam" />
-          </p:submenu>
-        </p:column>
-      </p:submenu> -->
-
 
       <!--  MarketVariable-->
       <ui:include src="/templates/subMenuMarketVariable.xhtml" />
@@ -47,10 +39,18 @@
 
       <!--  WhatIf-->
       <p:submenu label="#{messages.whatIf}" icon="img_whatIf">
+          <p:column>
+            <p:submenu>
         <p:menuitem>
           <s:link id="menubarWhatIf" view="#{configAction.getViewUrl('RiskAnalysis')}"
             value="#{messages.menubarReturnRisk}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" />
         </p:menuitem>
+        
+        <p:menuitem outcome="/view/v691ScenarioSetting.xhtml" value="#{messages.scenarioSetting1}"
+          actionListener="#{layoutInit.loadLayout(v691)}"/>
+            </p:submenu>
+          </p:column>
+        
       </p:submenu>
 
       <!--  Pricer -->
@@ -73,12 +73,11 @@
         <p:commandLink id="dynaButton" value="#{messages.menuNavigationData}" 
           styleClass="ui-menuitem-link ui-corner-all ui-menu .ui-menu-parent" />
       </p:menuitem>
-
-
-      <f:facet name="options">
-        <!-- <p:panelGrid columns="2" style="padding: 10px; border:none; float:right ;"> -->
-        <p:panelGrid columns="3">
-
+    </p:megaMenu>
+    
+   
+   
+   <p:panelGrid columns="3" >
           <!-- <p:menubar model="#{navigationMenu.menuModel}" style="border: none"/> -->
           <s:link id="toolbarLogin" view="/view/login.xhtml" value="#{messages.logIn}"
             rendered="#{not identity.loggedIn}" propagation="none" />
@@ -97,13 +96,11 @@
             <p:ajax event="dateSelect" listener="#{basedateSession.handleDateSelect}" update="@(form)" />
           </p:calendar>
         </p:panelGrid>
-      </f:facet>
-    </p:megaMenu>
-
-   <p:tieredMenu id="tiered" overlay="true" trigger="dynaButton" model="#{navigationMenu.menuModel}" 
-      my="left top"     at="left bottom"  autoDisplay="true"/>
-   <p:dialog id="menubarTestDlg" widgetVar="wgtTest" header="This is a test" modal="tru" />
-    
+        
+  </p:panelGrid>
+  <p:tieredMenu id="tiered" overlay="true" trigger="dynaButton" model="#{navigationMenu.menuModel}" 
+        my="left top"   at="left bottom"  autoDisplay="true"     />
+   <p:dialog id="menubarTestDlg" widgetVar="wgtTest" header="This is a test" modal="tru" />      
   </h:form>
 </ui:composition>
 

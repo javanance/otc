@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" contentType="text/html">
+  <h:html>
+  <h:head>
+    <f:facet name="first">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>HimeTest</title>
+      <!-- <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/favicon.png" /> -->
+      <!-- <h:link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/favicon.png"/> -->
+      <!-- <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/favicon.ico" /> -->
+    </f:facet>
+
+    <f:facet name="last">
+      <h:outputStylesheet library="css" name="default_origin.css"/>
+      <h:outputStylesheet library="css" name="menubar.css"/>
+      <h:outputStylesheet library="css" name="syntaxhighlighter.css"/>
+      <h:outputStylesheet library="css" name="charts.css"/>
+      <h:outputStylesheet library="css" name="decorator.css"/>
+    </f:facet>  
+
+    <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/starcraft/reaver_48.png" />
+  </h:head>
+  <h:body style="background:tan">
+    <p:layout fullPage="true">
+
+      <p:layoutUnit position="center" resizable="true" gutter="4" style="background:Tan">
+        <ui:insert name="layoutCenter" />
+
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+        <p:dialog modal="false" widgetVar="statusDialog" header="#{messages.ajaxStatus}" draggable="false"
+          closable="false">
+          <p:graphicImage value="/img/ajaxloadingbar.gif" />
+        </p:dialog>
+      </p:layoutUnit>
+
+      <p:layoutUnit position="south" resizable="true" collapsible="true" size="300" gutter="4" 
+        >
+        <ui:insert name="layoutBottom" />
+      </p:layoutUnit>
+
+      <p:layoutUnit position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;"
+      >
+        <ui:insert name="layoutRight" />
+
+      </p:layoutUnit>
+      <p:layoutUnit position="west" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" 
+      >
+        <ui:insert name="layoutLeft" />
+      </p:layoutUnit>
+      
+      <p:layoutUnit position="north" resizable="true" size="66" collapsible="true" gutter="4"
+        styleClass="ui-layout-pane-north-outer">
+        <ui:include src="/templates/primeMenubar.xhtml" />
+        <ui:insert name="layoutTop" />
+      </p:layoutUnit>
+    </p:layout>
+  </h:body>
+  </h:html>
+</f:view>

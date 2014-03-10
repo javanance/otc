@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/templatePrimeMain.xhtml">
+
+  <ui:define name="layoutCenter">
+    <p:layout fullPage="false">
+      <p:layoutUnit position="center" resizable="true" gutter="4" style="background:Tan" >
+        <ui:insert name="layouCC" />
+      </p:layoutUnit>
+
+      <p:layoutUnit position="south" resizable="true" collapsible="true" size="300" gutter="4" 
+        rendered="#{layoutInit.viewUrl.renderBottom}">
+        <ui:insert name="layoutCB" />
+      </p:layoutUnit>
+      <p:layoutUnit position="east" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;"
+      rendered="#{layoutInit.viewUrl.renderRight}">
+        <ui:insert name="layoutCR" />
+
+      </p:layoutUnit>
+      <p:layoutUnit position="west" resizable="true" collapsible="true" size="200" gutter="4" style="oveflow:visible;" 
+      rendered="#{layoutInit.viewUrl.renderLeft}">
+        <ui:insert name="layoutCL" />
+      </p:layoutUnit>
+    </p:layout>
+  </ui:define>
+</ui:composition>

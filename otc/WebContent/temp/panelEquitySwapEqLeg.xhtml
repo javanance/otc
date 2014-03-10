@@ -1,0 +1,70 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelEquitySwapEqLeg">
+    <p:growl id="messages" showDetail="true" />
+
+    <p:panelGrid columns="8" style="background: white">
+
+      <p:outputLabel value="#{messages.returnType}" styleClass="takionLabel" />
+      <p:selectOneMenu value="" style="width:100%">
+        <f:selectItem itemLabel="Select Type" />
+        <f:selectItem itemLabel="LogReturn" itemValue="FRN" />
+        <f:selectItem itemLabel="PercentReturn" itemValue="InversFloater" />\
+         </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.evaluateMethod}" styleClass="takionLabel" />
+      <p:selectOneMenu value="" style="width:100%">
+        <f:selectItem itemLabel="Select Type" />
+        <f:selectItem itemLabel="MaxReturn" itemValue="FRN" />
+        <f:selectItem itemLabel="MinReturn" itemValue="InversFloater" />\
+        <f:selectItem itemLabel="AverageReturn" itemValue="InversFloater" />
+      </p:selectOneMenu>
+      <p:outputLabel value=" " />
+      <p:outputLabel value=" " />
+      <p:outputLabel value=" " />
+      <p:outputLabel value=" " />
+
+
+      <p:outputLabel value="#{messages.swapTerm}" styleClass="takionLabel" />
+      <p:inputText value="1M" />
+
+      <p:outputLabel value="#{messages.couponPayMethod}" styleClass="takionLabel" />
+      <p:inputText value="InArrear" />
+
+      <p:outputLabel value="#{messages.bizDayRule}" styleClass="takionLabel" />
+      <p:inputText value="Regular Following" />
+      <p:inputText value="2 Days" />
+      <p:inputText value="Act/360" />
+
+
+    </p:panelGrid>
+    <p:separator />
+
+    <p:panelGrid columns="4">
+      <p:outputLabel value="#{messages.serial}" styleClass="takionLabel" style="float:center" />
+      <p:outputLabel value="#{messages.uderlyingStock}" styleClass="takionLabel" style="float:center" />
+      <p:outputLabel value="#{messages.quantity}" styleClass="takionLabel" style="float:center" />
+      <p:outputLabel value="#{messages.weight}" styleClass="takionLabel" style="float:center" />
+
+      <p:inputText value="1" />
+      <p:inputText value="Samsung Electronics" />
+      <p:inputText value="100" />
+      <p:inputText value="1" />
+
+      <p:inputText value="2" />
+      <p:inputText value="Apple Inc." />
+      <p:inputText value="100" />
+      <p:inputText value="1" />
+
+      <p:inputText value="..." />
+      <p:inputText value=" " />
+      <p:inputText value=" " />
+      <p:inputText value=" " />
+
+    </p:panelGrid>
+  </h:form>
+</ui:composition>

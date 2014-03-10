@@ -58,11 +58,8 @@ import com.eugenefe.util.PivotTableModel;
 @Name("tableHifiveUnderlyingInit")
 @Scope(ScopeType.CONVERSATION)
 public class TableHifiveUnderlyingInit {
-	@Logger
-	private Log log;
-
-	@In
-	private Session session;
+	@Logger		private Log log;
+	@In			private Session session;
 
 	private List<HifiveUnderlying> underlyingList;
 	

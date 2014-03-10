@@ -1,0 +1,309 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <h:form id="formMenubar">
+
+    <p:growl id="growl" showDetail="true" />
+    <!-- <p:tooltip /> -->
+    <!-- <p:menubar style="background-color:rgb(190, 214, 248); border:none;  height:53px; opacity=0.2"> -->
+    <!-- <p:menubar autoDisplay="false" style="border:none; width:100%  "> -->
+
+
+
+    <!-- <p:menubar autoDisplay="false" style="border:none; opacity: 0.7; background-color: green"> -->
+    <p:menubar autoDisplay="false" style="border:none;">
+      <p:menuitem value="#{messages.menuHome}" icon="img_home_nav"
+        url="http://180.180.175.146:8080/himemysqltest/view/home.seam">
+        <!-- <s:link id="menubarHome" view="#{configAction.getViewUrl('Home')}" value="#{messages.Home}" 
+          propagation="none"  styleClass="ui-menuitem-link ui-corner-all" >
+             <h:graphicImage value="./../img/eclipse/home_nav.gif"/>
+        </s:link> -->
+      </p:menuitem>
+
+      <!--   <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/home.seam" value="#{messages.Home}" icon="ui-icon-home" /> -->
+
+      <p:submenu label="#{messages.submenuMarketVariable}" icon="img_markget_variable">
+        <p:submenu label="#{messages.submenuViewHistoryData}">
+          <p:menuitem>
+            <s:link id="menuAllMarketVariables" view="#{configAction.getViewUrl('ViewHistoryData')}"
+              value="#{messages.menuAllMarketVariables}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+              <f:param name="flagDataTable" value="All" />
+            </s:link>
+          </p:menuitem>
+
+          <p:menuitem>
+            <s:link id="menuOnlyRiskFactors" view="#{configAction.getViewUrl('ViewHistoryData')}"
+              value="#{messages.menubOnlyRiskFactors}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+              <f:param name="flagDataTable" value="Rf" />
+            </s:link>
+          </p:menuitem>
+          <p:menuitem>
+            <s:link id="menuOnlyProduct" view="#{configAction.getViewUrl('ViewHistoryData')}"
+              value="#{messages.menuOnlyProduct}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+              <f:param name="flagDataTable" value="Prod" />
+            </s:link>
+          </p:menuitem>
+        </p:submenu>
+
+        <p:submenu label="#{messages.submenuProduct}">
+          <p:menuitem>
+            <s:link id="menubarHoldingProduct" view="#{configAction.getViewUrl('ProductDashBoard')}"
+              value="#{conversation.viewId}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+              <f:param name="flagDataTable" value="Prod" />
+            </s:link>
+          </p:menuitem>
+          <p:menuitem>
+            <s:link id="menubarAllProduct" view="#{configAction.getViewUrl('ProductSelect')}"
+              value="#{messages.menubarProduct}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+              <f:param name="flagDataTable" value="Prod" />
+            </s:link>
+          </p:menuitem>
+
+        </p:submenu>
+
+        <p:separator />
+        <p:submenu label="#{messages.submenuIrCurve}">
+          <p:menuitem value="#{messages.menuitemTermStructure}" url="#{messages.url}/view/v140IrCurve.seam"
+            icon="ui-icon-arrowreturnthick-1-w">
+            <!-- <s:link id="menubarIrCurve" view="#{configAction.getViewUrl('VcvMatrix')}"
+            value="#{messages.menubarIrCurve}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" >
+          </s:link> -->
+
+          </p:menuitem>
+          <p:menuitem value="#{messages.menuitemTermStructureHis}" url="#{messages.url}/view/v145IrCurveHis.seam"
+            icon="ui-icon-arrowreturnthick-1-w">
+          </p:menuitem>
+        </p:submenu>
+
+        <p:menuitem>
+          <s:link id="menubarVcvMatrix" view="#{configAction.getViewUrl('VcvMatrix')}"
+            value="#{messages.menubarVcvMatrix}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+          </s:link>
+        </p:menuitem>
+        <p:menuitem>
+          <s:link id="menubarFxMatrix" view="#{configAction.getViewUrl('ForexMatrix')}"
+            value="#{messages.menubarFxMatrix}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" />
+        </p:menuitem>
+
+        <p:menuitem value="ViewTest" url="http://180.180.175.146:8080/himemysqltest/view/viewTest.seam" />
+        <p:menuitem>
+          <s:link view="/view/viewTest.xhtml" value="ViewTestWithLink" propagation="none"
+            styleClass="ui-menuitem-link ui-corner-all" />
+        </p:menuitem>
+
+      </p:submenu>
+
+
+      <p:submenu label="#{messages.portfolioAnalysis}" icon="img_chart_org">
+
+        <p:menuitem>
+          <s:link id="menubarReturnRisk" view="#{configAction.getViewUrl('RiskAnalysis')}"
+            value="#{messages.menubarReturnRisk}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" />
+        </p:menuitem>
+
+        <p:separator />
+        <p:menuitem value="#{messages.selectHierarchies}" onclick="wgDialogHierSelect.show()" icon="ui-icon-document"
+          disabled="#{conversation.viewId == '/view/home.xhtml'}" />
+
+        <p:menuitem value="#{messages.createPortfolio}" onclick="wgDialogPortCreate.show()" icon="ui-icon-circle-plus"
+          disabled="#{not identity.loggedIn}" />
+
+
+
+        <p:menuitem value="Show" onclick="wgtTest.show()" />
+      </p:submenu>
+
+
+
+
+      <p:submenu label="#{messages.whatIf}" icon="img_whatIf">
+        <p:menuitem>
+          <s:link id="menubarWhatIf" view="#{configAction.getViewUrl('RiskAnalysis')}"
+            value="#{messages.menubarReturnRisk}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" />
+        </p:menuitem>
+      </p:submenu>
+
+      <p:submenu label="#{messages.pricer}" >
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v600PricerInfo.seam" value="#{messages.dashboard}">
+          <s:conversationPropagation type="begin" />
+        </p:menuitem>
+        <p:separator />
+
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v610PricerInfo.seam" value="#{messages.portfolio}">
+          <s:conversationPropagation type="begin" />
+        </p:menuitem>
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v620PricerInfo.seam"
+          value="#{messages.priceValidation}">
+          <s:conversationPropagation type="begin" />
+        </p:menuitem>
+        <p:submenu label="#{messages.detailView}" >
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v631PricerInfo.seam"
+            value="#{messages.byUnderlying}">
+            <s:conversationPropagation type="begin" />
+          </p:menuitem>
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v632PricerInfo.seam"
+            value="#{messages.byCounterParty}">
+            <s:conversationPropagation type="begin" />
+          </p:menuitem>
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v633PricerInfo.seam"
+            value="#{messages.byMaturity}">
+            <s:conversationPropagation type="begin" />
+          </p:menuitem>
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v634PricerInfo.seam" 
+            value="#{messages.byDiscountCurve}">
+            <s:conversationPropagation type="begin" />
+          </p:menuitem>
+        </p:submenu>
+        <p:separator />
+        <p:submenu label="#{messages.simulation}">
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v650PriceSimulation.seam" 
+                    value="#{messages.productSimulation}"/>
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v660PriceSimulation.seam" 
+                    value="#{messages.portfolioSimulation}"/>                    
+        </p:submenu>
+         <p:separator />
+
+        <p:submenu label="#{messages.userSetting}">
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v690PriceSetting.seam" value="#{messages.pricerSetting}"
+            icon="img_setting">
+          </p:menuitem>
+          
+          <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v691ScenarioSetting.seam" value="#{messages.scenarioSetting}">
+          </p:menuitem>
+          
+          <p:menuitem>
+            <s:link id="menuAllMarketVariables1" view="/view/v691ScenarioSetting.xhtml"
+              value="#{messages.portfolioSettting}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+              <f:param name="flagDataTable" value="All" />
+            </s:link>
+          </p:menuitem>
+          
+        </p:submenu>
+        <p:separator />
+
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v695Pricer.seam" value="#{messages.pricerWorking}">
+          <s:conversationPropagation type="begin" />
+        </p:menuitem>
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v696PricerInfo.seam" value="#{messages.productPricerWorking}">
+          <s:conversationPropagation type="begin" />
+        </p:menuitem>
+        
+                <p:menuitem outcome="/view/v691ScenarioSetting.xhtml" value="#{messages.scenarioSetting1}"
+          actionListener="#{layoutInit.loadLayout('v691')}"/>
+        
+      </p:submenu>
+
+      <p:submenu label="#{messages.limitManagement}" icon="img_limit">
+        <p:menuitem>
+          <s:link id="menubarLimitManagement" view="#{configAction.getViewUrl('RiskAnalysis')}"
+            value="#{messages.menubarReturnRisk}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" />
+        </p:menuitem>
+      </p:submenu>
+
+
+      <p:submenu label="#{messages.help}" icon="img_help">
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v800Settings.seam" value="#{messages.settings}"
+          icon="img_setting">
+          <s:conversationPropagation type="begin" />
+        </p:menuitem>
+
+        <p:separator/>
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v810MarketVariableSetting.seam" value="#{messages.mvSetting}"/>
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v811MarketVariableSetting.seam" value="#{messages.mvSetting}"/>
+        <p:menuitem url="http://180.180.175.146:8080/himemysqltest/view/v820RiskFactorMapping.seam" value="#{messages.riskFactorMapping}"/>
+        
+        <p:submenu label="#{messages.search}" icon="ui-icon-search">
+          <p:submenu label="Text">
+            <p:menuitem value="Workspace" url="#" />
+          </p:submenu>
+          <p:menuitem value="File" url="#" />
+        </p:submenu>
+        <p:separator />
+        <p:menuitem value="#{messages.aboutUs}" />
+      </p:submenu>
+
+
+
+      <!--  <p:submenu label="#{messages.menuNavigationData}" icon="ui-icon-search">
+        <p:submenu label="Text">
+          <p:menuitem value="#{messages.irCurve}" outcome="/view/v900DataNavigation" includeViewParams="true">
+            <f:param name="navigation" value="IrCurve"></f:param>
+          </p:menuitem>
+          <p:menuitem value="#{messages.volatilityHis}" outcome="/view/v900DataNavigation" includeViewParams="true">
+            <f:param name="navigation" value="VolatilityHis"></f:param>
+          </p:menuitem>
+          <p:menuitem value="#{messages.fxCash}" outcome="/view/v900DataNavigation" includeViewParams="true" target="_blank">
+            <f:param name="navigation" value="FxCash"></f:param>
+          </p:menuitem>
+
+        </p:submenu>
+        <p:menuitem value="File" url="#" />
+      </p:submenu> -->
+
+
+
+      <!-- <p:submenu label="#{messages.menuNavigationData}" icon="ui-icon-search">
+          <p:submenu label="bbb">
+            <c:forEach var="_klz" items="#{navigationList.allData}">
+            <p:menuitem value="#{_klz.shortName}" outcome="/view/v900DataNavigation" includeViewParams="true">
+              <f:param name="navigation" value="#{_klz.shortName}"></f:param>
+            </p:menuitem>
+            </c:forEach>
+          </p:submenu> 
+        </p:submenu> -->
+
+      <p:menuitem>
+        <!-- <p:menuitem value="#{messages.menuNavigationData}" styleClass="ui-menu-parent"> -->
+        <p:commandLink id="dynaButton" value="#{messages.menuNavigationData}"
+          styleClass="ui-menuitem-link ui-corner-all ui-menu .ui-menu-parent" />
+        <!-- <s:link id="dynaButton" view="#{configAction.getViewUrl('DataNavigation')}" value="#{messages.menuDataNaigation}"
+          propagation="none" styleClass="ui-menuitem-link ui-corner-all" /> -->
+      </p:menuitem>
+
+
+      <f:facet name="options">
+        <!-- <p:panelGrid columns="2" style="padding: 10px; border:none; float:right ;"> -->
+        <p:panelGrid columns="3">
+
+          <!-- <p:menubar model="#{navigationMenu.menuModel}" style="border: none"/> -->
+          <s:link id="toolbarLogin" view="/view/login.xhtml" value="#{messages.logIn}"
+            rendered="#{not identity.loggedIn}" propagation="none" />
+
+          <s:link id="toolbarLogout" view="/view/home.xhtml" action="#{identity.logout}" value="#{messages.logOut}"
+            rendered="#{identity.loggedIn}" propagation="none" />
+
+          <h:outputText id="toolbarWelcome" value="#{messages.signedAs}: #{credentials.username}"
+            rendered="#{identity.loggedIn}" />
+          <h:outputText id="toolbarWelcome1" value="" rendered="#{not identity.loggedIn}" />
+
+          <h:outputText value="" />
+          <h:outputText value="#{messages.baseDate}:" />
+          <p:calendar id="baseDate" value="#{basedateSession.baseDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
+            navigator="true" mindate="#{basedateSession.stDate}" maxdate="#{basedateSession.endDate}">
+            <p:ajax event="dateSelect" listener="#{basedateSession.handleDateSelect}" update="@(form)" />
+          </p:calendar>
+        </p:panelGrid>
+      </f:facet>
+
+    </p:menubar>
+
+
+
+
+    <p:tieredMenu id="tiered" overlay="true" trigger="dynaButton" model="#{navigationMenu.menuModel}" my="left top"
+      at="left bottom" />
+    <!-- <p:menu overlay="true" trigger="dynaButton" model="#{navigationMenu.menuModel}" my="left top" at="left bottom" /> -->
+    <!-- <p:menubar model="#{navigationMenu.menuModel}"/> -->
+
+    <p:dialog id="menubarTestDlg" widgetVar="wgtTest" header="This is a test" modal="tru" />
+    <!-- <p:panelGrid columns="2" style="padding: 10px; border:none; float:right">
+      <h:outputText value="#{messages.baseDate}:" />
+      <p:calendar id="endDate" value="#{basedateBean.date1}" showButtonPanel="true" pattern="yyyy/MM/dd"
+        navigator="true">
+        <p:ajax event="dateSelect" listener="#{basedateBean.handleDateSelect}" update="@(form) " />
+      </p:calendar>
+    </p:panelGrid> -->
+
+  </h:form>
+</ui:composition>
+

@@ -1,0 +1,58 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/primeTemplates.xhtml">
+
+  <ui:define name="layoutLeft">
+    <p:accordionPanel>
+      <p:tab title="#{messages.userHierarchy}">
+        <ui:include src="/temp/tableUserHierarchy.xhtml" />
+      </p:tab>
+      <p:tab title="#{messages.systemHierarchy}">
+          <ui:include src="/temp/tableSysHierarchy.xhtml" />
+      </p:tab>    
+    </p:accordionPanel>
+  </ui:define>
+
+  <ui:define name="layoutInnerTop">
+    <ui:include src="/temp/tableHierarchyDetail.xhtml" />  
+  </ui:define>
+
+  <ui:define name="layoutInnerCenter">
+    <p:tabView id="hierarchyLevel" dynamic="true" orientation="top">
+      <p:tab title="#{messages.portfolioDefine}">
+              <!-- <p:outputPanel style="padding: 0.5em 1em;">
+          <p:outputLabel value="#{messages.portPrefix}"></p:outputLabel>
+          <p:inputText value="#{treePositionNavigationInit.portPrefix}">
+            <p:ajax event="keyup" update="@(.ui-datatable)" listener="#{treePositionNavigationInit.updateTable()}"></p:ajax>
+          </p:inputText>
+          <p:commandButton type="button" value="#{messages.makePortfolio}" style="float:right" />
+          <p:commandButton type="button" value="#{messages.clearTarget}" style="float:right" />
+          </p:outputPanel> -->
+        <!-- <p:separator/> -->
+<!--         <p:outputPanel style="padding: 0.5em 1em;">
+          <p:outputLabel value="#{messages.portPrefix}" />
+          <p:inputText value="#{tablePositionDefineInit.portPrefix}">
+            <p:ajax event="keyup" update="@(.ui-datatable)" listener="#{tablePositionDefineInit.updateTable()}" />
+          </p:inputText>
+          <p:commandButton type="button" value="#{messages.makePortfolio}"
+            action="#{tablePositionDefineInit.makePortfolio}" style="float:right" />
+        </p:outputPanel>
+ -->
+
+        <!-- <ui:include src="/tableComp/tablePositionDefine.xhtml" /> -->
+        <ui:include src="/tableComp/tablePortfolioDefineNew.xhtml" />
+      </p:tab>
+      <p:tab title="#{messages.hifiveStrike}">
+<!--         <ui:include src="/treeComp/treePositionNavigation.xhtml" /> -->
+      </p:tab>
+
+      <p:tab title="#{messages.hifiveSwapIr}">
+<!-- <ui:include src="/fragment/treeHierarchyLevel.xhtml" /> -->
+      </p:tab>
+    </p:tabView>
+
+  </ui:define>
+</ui:composition>

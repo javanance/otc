@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:s="http://jboss.org/schema/seam/taglib" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <p:submenu label="#{messages.pricer}">
+    <p:column>
+      <p:submenu label="#{messages.otcDashBoard}">
+        <p:menuitem url="#{messages.urlIP}#{layoutInit.viewUrl.url('v600')}.seam" value="#{messages.dashboard}" />
+      </p:submenu>
+
+      <p:submenu label="#{messages.otcPortfolio}">
+        <p:menuitem url="#{messages.urlIP}/view/v610PricerInfo.seam" value="#{messages.portfolio}" />
+        <p:menuitem url="#{messages.urlIP}/view/v620PricerInfo.seam" value="#{messages.priceValidation}" />
+      </p:submenu>
+
+      <p:submenu label="#{messages.detailView}">
+        <p:menuitem url="#{messages.urlIP}/view/v631PricerInfo.seam" value="#{messages.byUnderlying}" />
+        <p:menuitem url="#{messages.urlIP}/view/v632PricerInfo.seam" value="#{messages.byCounterParty}" />
+        <p:menuitem url="#{messages.urlIP}/view/v633PricerInfo.seam" value="#{messages.byMaturity}" />
+        <p:menuitem url="#{messages.urlIP}/view/v634PricerInfo.seam" value="#{messages.byDiscountCurve}" />
+      </p:submenu>
+    </p:column>
+
+    <p:column>
+      <p:submenu label="#{messages.simulation}">
+        <p:menuitem url="#{messages.urlIP}#{layoutInit.getInstance('v650').url}.seam" value="#{messages.productSimulation}">
+          <f:param name="view" value="v650"></f:param>
+        </p:menuitem>
+        <!-- <p:menuitem>
+          <s:link id="menuAllMarketVariableszz" view="#{layoutInit.viewUrl.url(view)}.xhtml"
+            value="#{messages.menuAllMarketVariables}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">
+            <f:param name="view" value="v691"></f:param>
+            
+          </s:link>
+        </p:menuitem> -->
+        <p:menuitem url="#{messages.urlIP}/view/v660PriceSimulation.seam" value="#{messages.portfolioSimulation}" />
+      </p:submenu>
+    </p:column>
+
+
+    <p:column>
+      <p:submenu label="#{messages.userSetting}">
+        <p:menuitem url="#{messages.urlIP}/view/v690PriceSetting.seam" value="#{messages.priceSetting}" />
+        
+        <!-- <p:menuitem url="#{messages.urlIP}#{eViewNew.instance('v691').url}.seam" value="#{messages.scenarioSetting}">
+          <f:param name="view" value="v691"></f:param>
+        </p:menuitem> -->        
+        
+        <p:menuitem id="v691" value="#{messages.scenarioSetting1}" 
+          actionListener="#{layoutInit.loadLayout}" 
+          action="#{layoutInit.loadLayout1}"/>
+        
+        <p:menuitem url="#{messages.urlIP}/view/v691ScenarioSetting.seam" value="#{messages.scenarioSetting}"
+        action="#{layoutInit.loadLayout('v691')}"/>
+        <p:menuitem url="#{messages.urlIP}/view/v695Pricer.seam" value="#{messages.pricerWorking}" />
+        <p:menuitem url="#{messages.urlIP}/view/v696PricerInfo.seam" value="#{messages.productPricerWorking}" />
+      </p:submenu>
+    </p:column>
+  </p:submenu>
+
+</ui:composition>
+

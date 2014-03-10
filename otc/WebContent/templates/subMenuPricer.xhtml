@@ -4,40 +4,65 @@
   <p:submenu label="#{messages.pricer}">
     <p:column>
       <p:submenu label="#{messages.otcDashBoard}">
-        <p:menuitem url="#{messages.urlIP}/view/v600PricerInfo.seam" value="#{messages.dashboard}" />
+        <p:menuitem actionListener="#{layoutInit.extractViewId}" action="#{layoutInit.setupLayout}"
+            id="v600" value="#{messages.dashboard}" />
       </p:submenu>
 
       <p:submenu label="#{messages.otcPortfolio}">
-        <p:menuitem url="#{messages.urlIP}/view/v610PricerInfo.seam" value="#{messages.portfolio}" />
-        <p:menuitem url="#{messages.urlIP}/view/v620PricerInfo.seam" value="#{messages.priceValidation}" />
+        <p:menuitem id="v610" value="#{messages.portfolio}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v620" value="#{messages.priceValidation}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
       </p:submenu>
 
       <p:submenu label="#{messages.detailView}">
-        <p:menuitem url="#{messages.urlIP}/view/v631PricerInfo.seam" value="#{messages.byUnderlying}" />
-        <p:menuitem url="#{messages.urlIP}/view/v632PricerInfo.seam" value="#{messages.byCounterParty}" />
-        <p:menuitem url="#{messages.urlIP}/view/v633PricerInfo.seam" value="#{messages.byMaturity}" />
-        <p:menuitem url="#{messages.urlIP}/view/v634PricerInfo.seam" value="#{messages.byDiscountCurve}" />
+        <p:menuitem id="v631" value="#{messages.byUnderlying}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v632" value="#{messages.byCounterParty}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v633" value="#{messages.byMaturity}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v634" value="#{messages.byDiscountCurve}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
       </p:submenu>
     </p:column>
 
     <p:column>
       <p:submenu label="#{messages.simulation}">
-        <p:menuitem url="#{messages.urlIP}/view/v650PriceSimulation.seam" value="#{messages.productSimulation}" />
-        <p:menuitem url="#{messages.urlIP}/view/v660PriceSimulation.seam" value="#{messages.portfolioSimulation}" />
+        <p:menuitem id="v650" value="#{messages.productSimulation}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v660" value="#{messages.portfolioSimulation}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
       </p:submenu>
     </p:column>
-
 
     <p:column>
       <p:submenu label="#{messages.userSetting}">
-        <p:menuitem url="#{messages.urlIP}/view/v690PriceSetting.seam" value="#{messages.priceSetting}" />
-        <p:menuitem url="#{messages.urlIP}/view/v691ScenarioSetting.seam" value="#{messages.scenarioSetting}" />
-
-        <p:menuitem url="#{messages.urlIP}/view/v695Pricer.seam" value="#{messages.pricerWorking}" />
-        <p:menuitem url="#{messages.urlIP}/view/v696PricerInfo.seam" value="#{messages.productPricerWorking}" />
+        <p:menuitem id="v690" value="#{messages.priceSetting}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v691" value="#{messages.scenarioSetting}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v694" value="#{messages.portfolioSetting}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v695" value="#{messages.hierarchySetting}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        
       </p:submenu>
     </p:column>
+    <p:column>
+      <p:submenu label="#{messages.otcProductInfo}">
+        <p:menuitem id="v696" value="#{messages.structuredNote}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v6961" value="#{messages.interestOption}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />  
+        <p:menuitem id="v697" value="#{messages.creditDerivatives}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v698" value="#{messages.equitySwap}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v699" value="#{messages.elsDls}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />      
+      </p:submenu>
+    </p:column>  
   </p:submenu>
-
 </ui:composition>
 

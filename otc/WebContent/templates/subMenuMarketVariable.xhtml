@@ -48,25 +48,22 @@
 
     <p:column>
       <p:submenu label="#{messages.subMenuIrCurve}">
-        <p:menuitem value="#{messages.menuItemTermStructure}" url="#{messages.url}/view/v140IrCurve.seam"
-          icon="ui-icon-arrowreturnthick-1-w">
-        </p:menuitem>
-        <p:menuitem value="#{messages.menuItemTermStructureHis}" url="#{messages.url}/view/v145IrCurveHis.seam"
-          icon="ui-icon-arrowreturnthick-1-w">
-        </p:menuitem>
+        <p:menuitem id="v140" value="#{messages.menuItemTermStructure}" icon="ui-icon-arrowreturnthick-1-w" 
+          actionListener="#{layoutInit.extractViewId}"   action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v145" value="#{messages.menuItemTermStructureHis}"  icon="ui-icon-arrowreturnthick-1-w"
+          actionListener="#{layoutInit.extractViewId}"   action="#{layoutInit.setupLayout}" />
         
         <p:separator/>
-        <p:menuitem>
-          <s:link id="menubarFxMatrix" view="#{configAction.getViewUrl('ForexMatrix')}"
-            value="#{messages.menuItemFxMatrix}" propagation="none" styleClass="ui-menuitem-link ui-corner-all" />
-        </p:menuitem>
+        <p:menuitem id="v146" value="#{messages.menuItemFxMatrix}"  icon="ui-icon-arrowreturnthick-1-w"
+          actionListener="#{layoutInit.extractViewId}"   action="#{layoutInit.setupLayout}" />
       </p:submenu>
-      
     </p:column>
 
     <p:column>
       <p:submenu label="#{messages.subMenuVolatility}">
-
+        <p:menuitem id="v130" value="#{messages.menuItemVcvMatrix}"  icon="ui-icon-arrowreturnthick-1-w"
+          actionListener="#{layoutInit.extractViewId}"   action="#{layoutInit.setupLayout}" />
+        
         <p:menuitem>
           <s:link id="menubarVcvMatrix" view="#{configAction.getViewUrl('VcvMatrix')}"
             value="#{messages.menuItemVcvMatrix}" propagation="none" styleClass="ui-menuitem-link ui-corner-all">

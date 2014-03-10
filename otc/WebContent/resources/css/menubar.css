@@ -1,0 +1,134 @@
+/* Menu */
+#menu {
+	position: absolute;
+	top: 25px;
+	right: 15px;
+	padding: 0;
+	height: 59px;
+	overflow: hidden;
+}
+
+#menu ul {
+	margin: 0;
+	list-style: none;
+}
+
+#menu li {
+	display: inline;
+}
+
+#menu li a {
+	display: block;
+	float: left;
+	height: 42px;
+	margin: 0;
+	padding: 18px 40px 0 40px;
+	text-decoration: none;
+	font-size: 1em;
+}
+
+#menu li a:hover {
+	text-decoration: underline;
+}
+
+#globalthemeswitcher {
+	position: absolute;
+	top: 5px;
+	right: 50px;
+}
+
+/* ********************************Menu Image**************** */
+
+.ui-menu .ui-menu-parent .ui-menu-child {
+	width : 20em
+}
+.ui-menuitem-icon.img_home_nav {
+	background: url("../img/eclipse/home_nav.gif") no-repeat;
+	height:16px;
+	width:16px;
+}
+.ui-menuitem-icon.img_markget_variable {
+	background: url("../img/famsilk/chart_curve.png") no-repeat;
+	height:16px;
+	width:16px;
+}
+.ui-menuitem-icon.img_help {
+	background: url("../img/eclipse/help.gif") no-repeat;
+	height:16px;
+	width:16px;
+}
+
+.ui-menuitem-icon.img_whatIf {
+	background: url("../img/eclipse/debugts_obj.gif") no-repeat;
+	height:16px;
+	width:16px;
+}
+
+.ui-menuitem-icon.img_chart_org {
+	background: url("../img/famsilk/chart_organisation.png") no-repeat;
+	height:16px;
+	width:16px;
+}
+
+.ui-menuitem-icon.img_limit {
+	background: url("../img/famsilk/controller.png") no-repeat;
+	height:16px;
+	width:16px;
+}
+
+.ui-menuitem-icon.img_setting {
+	background: url("../img/famsilk/cog.png") no-repeat;
+	height:16px;
+	width:16px;
+}
+
+.takion77-menu .ui-state-hover {
+	background-color: blue;
+	background-image :none;
+}
+
+/* .takion77-menu .ui-widget-content .ui-state-hover {
+	background-color: red;
+	background-image :none;
+	background-color :grey;
+	border: grey;
+} */
+
+/* .takion77-menu .ui-state-hover a, .ui-state-hover a:hover { ****** latter one is not attached to .takion77-menu*/
+.takion77-menu .ui-state-hover a {
+	color: YellowGreen;
+	text-decoration: none;
+}
+
+.takion77-menu .ui-state-hover a:hover {
+	color: Yellow;
+	text-decoration: none;
+}
+
+/* .takion77-menu .ui-menu-list{
+	background-color :Yellow;
+	background-image :none;
+} */
+
+.takion77-menu .ui-menuitem-text {
+	color :Lime;
+}
+
+.takion77-menu .ui-menuitem-active {
+	background-color :grey;
+	border: grey;
+}
+
+.takion77-menu .ui-menuitem-link {
+	/* background-color :yellow; */
+	background:none;
+	
+}
+
+.takion77-menu .ui-menuitem-parent {
+	background-color :orange;
+}
+
+.takion77-menu .ui-menuitem-child {
+	background-color :orange;
+}

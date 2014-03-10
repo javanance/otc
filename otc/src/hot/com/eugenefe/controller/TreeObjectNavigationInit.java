@@ -63,8 +63,9 @@ public class TreeObjectNavigationInit {
 		dupl = new HashSet<Class>();
 
 		try {
-			log.info("Navigation:#0", navigation);
+			log.info("Navigation:#0,#1", navigation, ENavigationData.valueOf(navigation).getQualifiedName());
 			klass = Class.forName(ENavigationData.valueOf(navigation).getQualifiedName());
+			
 			classStack.add(klass.getName());
 			
 			rootNode = new DefaultTreeNode(new TableDynamicColumn(klass.getSimpleName(), klass.getSimpleName(),
@@ -114,6 +115,8 @@ public class TreeObjectNavigationInit {
 	}
 	@Factory(value = "initPivotTableHeader", scope = ScopeType.CONVERSATION)
 	private void initHeader(List<TreeNode> childrenNodes){
+		log.info("aaaaa : #0" );
+		log.info("BBBBBB : #0", childrenNodes.size() );
 		initPivotTableHeader = new ArrayList<TableDynamicColumn>();
 		initDetailTab = new ArrayList<TableDynamicColumn>();
 		initDetailModelHeaderMap = new HashMap<String, List<TableDynamicColumn>>();
@@ -194,6 +197,7 @@ public class TreeObjectNavigationInit {
 		String tempParent;
 		
 		Method[] tempMethod = klazz.getDeclaredMethods();
+//		Method[] tempMethod = klazz.getMethods();
 		sortMethod(tempMethod);
 		
 //		Class rtnType;

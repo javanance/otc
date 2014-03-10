@@ -16,14 +16,14 @@ import com.eugenefe.util.AnnoNavigationFilter;
 public class HierarchyDetailId implements java.io.Serializable {
 
 	private String hierarchyId;
-	private String nodeId;
+	private String hierLevel;
 
 	public HierarchyDetailId() {
 	}
 
-	public HierarchyDetailId(String hierarchyId, String nodeId) {
+	public HierarchyDetailId(String hierarchyId, String hierLevel) {
 		this.hierarchyId = hierarchyId;
-		this.nodeId = nodeId;
+		this.hierLevel = hierLevel;
 	}
 
 	@Column(name = "HIERARCHY_ID", nullable = false, length = 20)
@@ -36,16 +36,17 @@ public class HierarchyDetailId implements java.io.Serializable {
 		this.hierarchyId = hierarchyId;
 	}
 
-	@Column(name = "NODE_ID", nullable = false, length = 20)
+	@Column(name = "HIER_LEVEL", nullable = false, length = 20)
 	@AnnoMethodTree(order =20, init=true)
-	public String getNodeId() {
-		return this.nodeId;
+	public String getHierLevel() {
+		return hierLevel;
 	}
 
-	public void setNodeId(String nodeId) {
-		this.nodeId = nodeId;
+	public void setHierLevel(String hierLevel) {
+		this.hierLevel = hierLevel;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -57,15 +58,17 @@ public class HierarchyDetailId implements java.io.Serializable {
 
 		return ((this.getHierarchyId() == castOther.getHierarchyId()) || (this.getHierarchyId() != null
 				&& castOther.getHierarchyId() != null && this.getHierarchyId().equals(castOther.getHierarchyId())))
-				&& ((this.getNodeId() == castOther.getNodeId()) || (this.getNodeId() != null
-						&& castOther.getNodeId() != null && this.getNodeId().equals(castOther.getNodeId())));
+				&& ((this.getHierLevel() == castOther.getHierLevel()) || (this.getHierLevel() != null
+						&& castOther.getHierLevel() != null && this.getHierLevel().equals(castOther.getHierLevel())));
 	}
 
+
+	@Override
 	public int hashCode() {
 		int result = 17;
 
 		result = 37 * result + (getHierarchyId() == null ? 0 : this.getHierarchyId().hashCode());
-		result = 37 * result + (getNodeId() == null ? 0 : this.getNodeId().hashCode());
+		result = 37 * result + (getHierLevel() == null ? 0 : this.getHierLevel().hashCode());
 		return result;
 	}
 

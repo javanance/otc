@@ -1,0 +1,36 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formTreeHierarchyLevel">
+     <!-- <p:contextMenu for="formTreeScenario">
+      <p:menuitem value="#{messages.viewDetails}" id="menuItemViewDetail" icon="ui-icon-circle-zoomin" 
+                  onclick="wgDlgSceDetail.show()" />
+      <p:menuitem id="menuItemDelete" value="#{messages.delete}" icon="ui-icon-circle-delete"  
+                action="#{hifiveSimulator.onNodeDelete}" update="@(form)"/>            
+    </p:contextMenu> -->
+
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />    
+
+    <p:tree id="treeHierarchyLevel" value="#{treeHierarchyInit.superNode}" var="node" 
+          selectionMode="checkbox"
+          selection="#{treeHierarchyInit.selectNodes}" 
+          style="width:95%">
+          <!-- <p:ajax event="select"  listener="#{hifiveSimulator.onNodeSelectFilter}" update="@(.ui-datatable)" /> -->
+          <!-- <p:ajax event="unselect"  listener="#{hifiveSimulator.onNodeSelectFilter}" update="@(.ui-datatable)" /> -->
+          <!-- <p:treeNode type="scenarioSet" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed"> -->
+<!--           <p:treeNode type="scenarioSet" >
+            <h:outputText value="#{node}" />
+          </p:treeNode>
+          <p:treeNode  type="scenario">
+            <p:selectBooleanCheckbox value="#{node}"/>
+            <h:outputText value="#{node}" />
+          </p:treeNode> -->
+          <p:treeNode >
+            <h:outputText value="#{node}" />
+          </p:treeNode>
+    </p:tree>
+  </h:form>
+</ui:composition>

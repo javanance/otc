@@ -5,7 +5,8 @@
   <p:submenu label="#{messages.help}" icon="img_help">
     <p:column>
       <p:submenu label="#{messages.general}">
-        <p:menuitem url="#{messages.urlIP}/view/v800Settings.seam" value="#{messages.settings}" />
+        <p:menuitem id="v800" value="#{messages.settings}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
         <p:separator />
         <p:menuitem value="#{messages.aboutUs}" />
       </p:submenu>
@@ -18,7 +19,6 @@
         <p:menuitem url="#{messages.urlIP}/view/v820RiskFactorMapping.seam" value="#{messages.riskFactorMapping}" />
       </p:submenu>
     </p:column>
-
 
     <p:column>
     </p:column>

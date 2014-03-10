@@ -1,0 +1,54 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelCreditRef">
+    <p:growl id="messages" showDetail="true" />
+
+<!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+
+      <p:panelGrid columns="7" style="background: white">
+        <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center;"/>
+        <p:outputLabel value="#{messages.collateralType}" styleClass="takionLabel" style="float: center;"/>
+        <p:outputLabel value="#{messages.collateralProduct}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.collateralProductName}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.collateralAmt}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.currCD}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value=" "/>
+        
+                
+         <p:outputLabel value="1" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="Bond" style="float:center;"/>
+         <p:inputText value="US1010000000" style="float:center; "/>
+         <p:inputText value="Barclay's Bond" style="float:center; "/>
+         <p:inputText value="1,000,000" style="float:center; "/>
+         <p:inputText value="USD"/>
+        <p:inputText/>
+        
+        
+        <p:outputLabel value="2" styleClass="takionLabel"  style="float: center;"/>
+         <p:inputText value="Deposit" style="float:center"/>
+         <p:inputText value="100-100-000" style="float: center;"/>
+          <p:inputText value="하나은행 예금" style="float: center;"/>
+          <p:inputText value="100,000,000" style="float: center;"/>
+        <p:inputText value="KRW"/>
+        <p:inputText/>
+
+         <p:outputLabel value="3" styleClass="takionLabel"  style="float: center;"/>
+         <p:inputText value="Deposit" style="float: center; "/>
+         <p:inputText value="101-100-000" style="float: center; "/>
+         <p:inputText value="신한은행  예금" style="float: center; "/>
+         <p:inputText value="100,000,000" style="float:right;"/>
+         <p:inputText value="KRW"/>
+        <p:inputText/>
+
+         <p:outputLabel value="..." styleClass="takionLabel"  style="float: center;"/>
+      </p:panelGrid>
+<!--      <p:panel>
+     </p:panel> -->
+
+<!--     </p:panelGrid> -->
+  </h:form>
+</ui:composition>

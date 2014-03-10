@@ -36,8 +36,4 @@ public enum EView {
 	public String getUrl() {
 		return url;
 	}
-	
-	
-	
-
 }

@@ -55,7 +55,7 @@ public class Counterparty implements java.io.Serializable {
 	@Column(name = "COUNTERPARTY_ID", unique = true, nullable = false, length = 20)
 	@NotNull
 	@Size(max = 20)
-	@AnnoMethodTree(order=10, init=true)
+	@AnnoMethodTree(order=10, init=true, aggregatable=true)
 	public String getCounterpartyId() {
 		return this.counterpartyId;
 	}
@@ -66,7 +66,7 @@ public class Counterparty implements java.io.Serializable {
 
 	@Column(name = "COUNTERPARTY_NAME", length = 50)
 	@Size(max = 50)
-	@AnnoMethodTree(order=11, init=true)
+	@AnnoMethodTree(order=11, init=true, aggregatable=true)
 	public String getCounterpartyName() {
 		return this.counterpartyName;
 	}
@@ -77,7 +77,7 @@ public class Counterparty implements java.io.Serializable {
 
 	@Column(name = "COUNTERPARTY_TYPE", length = 10)
 	@Size(max = 10)
-	@AnnoMethodTree(order=20, init=true)
+	@AnnoMethodTree(order=20, init=true, aggregatable=true)
 	public String getCounterpartyType() {
 		return this.counterpartyType;
 	}
@@ -88,7 +88,7 @@ public class Counterparty implements java.io.Serializable {
 
 	@Column(name = "CORP_NO", length = 13)
 	@Size(max = 13)
-	@AnnoMethodTree(order=30, init=true)
+	@AnnoMethodTree(order=30, init=true, aggregatable=true)
 	public String getCorpNo() {
 		return this.corpNo;
 	}
@@ -99,7 +99,7 @@ public class Counterparty implements java.io.Serializable {
 
 	@Column(name = "CREDIT_RATING_CD", length = 10)
 	@Size(max = 10)
-	@AnnoMethodTree(order=40, init=true)
+	@AnnoMethodTree(order=40, init=true, aggregatable=true)
 	public String getCreditRatingCd() {
 		return this.creditRatingCd;
 	}
@@ -110,7 +110,7 @@ public class Counterparty implements java.io.Serializable {
 	
 	@Column(name = "RATING_APPLY_DATE", length = 8)
 	@Size(max = 8)
-	@AnnoMethodTree(order=41, init=true)
+	@AnnoMethodTree(order=41, init=true, aggregatable=true)
 	public String getRateApplyDate() {
 		return RateApplyDate;
 	}

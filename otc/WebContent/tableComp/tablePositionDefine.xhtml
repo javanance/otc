@@ -1,0 +1,147 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPositionDefine">
+
+    <p:growl id="growl" showDetail="false" sticky="false" life="5000" />
+
+    <p:outputPanel style="padding: 0.5em 1em;">
+      <p:outputLabel value="#{messages.inputPortPrefix}" style="color: blue; font-weight:bold;"/>
+      <p:inputText value="#{tablePositionDefineInit.portPrefix}">
+        <p:ajax event="keyup" update="tablePortDefine" listener="#{tablePositionDefineInit.updateTable}" />
+      </p:inputText>
+      <p:commandButton id="btn1" value="#{messages.addOrUpdate}" update="pGridPortDefine, tablePortDefine"
+        action="#{tablePositionDefineInit.addPortfolioDefine()}" style="float:right" />
+    </p:outputPanel>
+    <p:separator />
+
+<!--     <p:panelGrid id="pGridPortDefine" columns="6">
+      <p:outputLabel value="#{messages.portfolioLevel}" styleClass="takionLabel"/>
+      <p:inputMask value="#{tablePositionDefineInit.level}" mask="Level_9" />
+
+      <p:outputLabel value="#{messages.propTable}" styleClass="takionLabel"  />
+      <p:selectOneMenu id="propTable" value="#{tablePositionDefineInit.propTable}" style=" width:100%;">
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <f:selectItems value="#{tablePositionDefineInit.propMap.keySet()}" />
+        <p:ajax update="propColumn" listener="#{tablePositionDefineInit.propTableChange}" />
+        <p:ajax update="propColumn"/>
+      </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.propColumn}" styleClass="takionLabel"/>
+      <p:selectOneMenu id="propColumn" value="#{tablePositionDefineInit.propColumn}" style="width:100%">
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <f:selectItems value="#{tablePositionDefineInit.propMap[tablePositionDefineInit.propTable]}" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.equation}" styleClass="takionLabel"/>
+      <p:selectOneMenu value="#{tablePositionDefineInit.equation}" height="300" >
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{tablePositionDefineInit.equationList}" var="_var" label="#{messages[_var.value]}" />
+        <p:ajax update="colCond1, colCond2" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.condition1}" styleClass="takionLabel"/>
+      <p:inputText id="colCond1" value="#{tablePositionDefineInit.condition1}"
+        disabled="#{tablePositionDefineInit.equation.operandSize == 0}" />
+
+      <p:outputLabel value="#{messages.condition2}" styleClass="takionLabel"/>
+      <p:inputText id="colCond2" value="#{tablePositionDefineInit.condition2}"
+        disabled="#{tablePositionDefineInit.equation.operandSize != 2}" />
+    </p:panelGrid> -->
+
+    <p:panelGrid id="pGridPortDefine" columns="4">
+      <p:outputLabel value="#{messages.portfolioLevel}" styleClass="takionLabel"/>
+      <p:inputMask value="#{tablePositionDefineInit.level}" mask="Level_9" />
+      <p:outputLabel value="#{messages.equation}" styleClass="takionLabel"/>
+      <p:selectOneMenu value="#{tablePositionDefineInit.equation}" height="300" >
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{tablePositionDefineInit.equationList}" var="_var" label="#{messages[_var.value]}" />
+        <p:ajax update="colCond1, colCond2" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.propTable}" styleClass="takionLabel" />
+      <p:selectOneMenu id="propTable" value="#{tablePositionDefineInit.propTable}" style=" width:100%;">
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{tablePositionDefineInit.propMap.keySet()}" var="_var" label="#{messages[_var]}" />
+        <p:ajax update="propColumn"/>
+      </p:selectOneMenu>
+      <p:outputLabel value="#{messages.condition1}" styleClass="takionLabel"/>
+      <p:inputText id="colCond1" value="#{tablePositionDefineInit.condition1}"
+        disabled="#{tablePositionDefineInit.equation.operandSize == 0}" />
+
+      <p:outputLabel value="#{messages.propColumn}" styleClass="takionLabel"/>
+      <p:selectOneMenu id="propColumn" value="#{tablePositionDefineInit.propColumn}" style="width:100%">
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{tablePositionDefineInit.propMap[tablePositionDefineInit.propTable]}" var="_var" label="#{messages[_var]}" />
+      </p:selectOneMenu>
+      <p:outputLabel value="#{messages.condition2}" styleClass="takionLabel"/>
+      <p:inputText id="colCond2" value="#{tablePositionDefineInit.condition2}"
+        disabled="#{tablePositionDefineInit.equation.operandSize != 2}" />
+    </p:panelGrid>
+
+    <p:dataTable id="tablePortDefine" var="_var" value="#{tablePositionDefineInit.pfDefineList}"
+      widgetVar="wgtablePortDefine" emptyMessage="#{messages.noDataFound}"
+      selection="#{tablePositionDefineInit.selectPortfolioDefine}" selectionMode="single" rowKey="#{_var}"
+      resizableColumns="true">
+
+      <p:ajax event="rowSelect" listener="#{tablePositionDefineInit.rowSelect}" update="@parent:pGridPortDefine" />
+      <p:column style="width: 100px">
+        <f:facet name="header">
+          <h:outputText value="#{messages.portPrefix}" />
+        </f:facet>
+        <h:outputText value="#{_var.portPrefix}" />
+      </p:column>
+      <p:column style="width: 50px">
+        <f:facet name="header">
+          <h:outputText value="#{messages.portfolioLevel}" />
+        </f:facet>
+        <h:outputText value="#{_var.level}" />
+      </p:column>
+
+      <p:column id="colPropTable" style="width: 100px">
+        <f:facet name="header">
+          <h:outputText value="#{messages.propTable}" />
+        </f:facet>
+        <h:outputText value="#{messages[_var.propTable]}" />
+      </p:column>
+
+      <p:column id="colPropColumn" style="width: 150px">
+        <f:facet name="header">
+          <h:outputText value="#{messages.propColumn}" />
+        </f:facet>
+        <h:outputText value="#{messages[_var.propColumn]}" />
+      </p:column>
+
+      <p:column style="width: 100px">
+        <f:facet name="header">
+          <h:outputText value="#{messages.equation}" />
+        </f:facet>
+        <h:outputText value="#{_var.equation.value}" />
+      </p:column>
+
+      <p:column style="width: 100px">
+        <f:facet name="header">
+          <h:outputText value="#{messages.condition1}" />
+        </f:facet>
+        <h:outputText value="#{_var.condition1}" />
+      </p:column>
+
+      <p:column style="width: 100px">
+        <f:facet name="header">
+          <h:outputText value="#{messages.condition2}" />
+        </f:facet>
+        <h:outputText value="#{_var.condition2}" />
+      </p:column>
+    </p:dataTable>
+
+    <p:outputPanel style="padding: 0.5em 1em;">
+      <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePositionDefineInit.makePortfolio}"
+        style="float:right" />
+      <p:commandButton value="#{messages.clearTable}" action="#{tablePositionDefineInit.clearTable}"
+        update="tablePortDefine, pGridPortDefine"      style="float:right" />
+    </p:outputPanel>
+  </h:form>
+</ui:composition>

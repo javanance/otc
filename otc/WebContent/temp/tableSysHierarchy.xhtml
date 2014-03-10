@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   
+  <h:form id="formSysHierarchy">
+      <p:growl id="growl" showDetail="true" />
+
+<!--     <p:contextMenu for="tableSysHierarchy" widgetVar="hierarchyCmenu">
+      <p:menuitem value="#{messages.insertHierarchy}" action="#{tableHierarchyInit.add}" update="growl, @(.ui-datatable)" />
+      <p:separator/>
+      <p:menuitem value="#{messages.deleteHierarchy}" action="#{tableHifiveInit.remove}"
+                  update="growl, @(.ui-datatable)"  />
+    </p:contextMenu>       -->
+
+      <p:dataTable id="tableSysHierarchy" var="_var" value="#{tableHierarchyInit.sysHierarchyList}" 
+      widgetVar="wgTableSysHierarchy"
+      selection="#{tableHierarchyInit.selectHierarchy}" selectionMode="single"
+      rowKey="#{_var}"
+      emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false"
+      rows="30"
+      >
+
+      <p:ajax event="rowSelect" update="@(.ui-datatable)"/>
+      <p:column id="colHierId" sortBy="#{_var.hierarchyId}" 
+                filterBy="#{_var.hierarchyId}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.hierarchyId}" /></f:facet>
+        <h:outputText value="#{_var.hierarchyId}"/>
+      </p:column>
+      <p:column id="colHierName" sortBy="#{_var.hierarchyName}" 
+                filterBy="#{_var.hierarchyName}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.hierarchyName}" /></f:facet>
+        <h:outputText value="#{_var.hierarchyName}"/>
+      </p:column>                
+      <p:column id="colIsUse" sortBy="#{_var.useYn}" 
+                filterBy="#{_var.useYn}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.useYn}" /></f:facet>
+        <h:outputText value="#{_var.useYn}"/>
+      </p:column>                                
+  </p:dataTable>
+  </h:form>
+</ui:composition>

@@ -102,7 +102,7 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 	@Column(name = "MV_ID", unique = true, nullable = false, length = 20)
 	@NotNull
 	@Size(max = 20)
-	@AnnoMethodTree(order=10, init=true)
+	@AnnoMethodTree(order=10, init=true, aggregatable=true)
 	public String getMvId() {
 		return this.mvId;
 	}
@@ -111,7 +111,7 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 	}
 	
 	@Column(name = "MV_NAME")
-	@AnnoMethodTree(order=20, init=true)
+	@AnnoMethodTree(order=20, init=true, aggregatable=true)
 	public String getMvName() {
 		return mvName;
 	}
@@ -121,7 +121,7 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 
 	@Column(name = "MV_TYPE")
 	@Enumerated(EnumType.STRING)
-	@AnnoMethodTree(order=30, init=true)
+	@AnnoMethodTree(order=30, init=true, aggregatable=true)
 	public MarketVariableType getMvType() {
 		return mvType;
 	}
@@ -140,7 +140,7 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 //	}
 
 	@Column(name = "PRODUCT_YN")
-	@AnnoMethodTree(order=40, init=true)
+	@AnnoMethodTree(order=40, init=true, aggregatable=true)
 	public String getProductYN() {
 		return productYN;
 	}
@@ -150,7 +150,7 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 	}
 	
 	@Column(name = "RF_YN")
-	@AnnoMethodTree(order=50, init=true)
+	@AnnoMethodTree(order=50, init=true, aggregatable=true)
 	public String getriskFactorYN() {
 		return riskFactorYN;
 	}
@@ -161,7 +161,7 @@ public class MarketVariable implements java.io.Serializable , Comparable<MarketV
 
 	@Column(name = "UNDERLYING_YN")
 	@Enumerated(EnumType.STRING)
-	@AnnoMethodTree(order=60, init=true)
+	@AnnoMethodTree(order=60, init=true, aggregatable=true)
 	public EBoolean getUnderlyingYN() {
 		return underlyingYN;
 	}

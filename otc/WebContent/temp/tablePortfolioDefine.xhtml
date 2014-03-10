@@ -1,0 +1,67 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   
+  <h:form id="formPortfolioDefine">
+      <p:growl id="messages" showDetail="true" />
+      <p:outputPanel style="padding: 0.5em 1em;">
+        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioInit.saveHierDetail}"   />
+        <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePortfolioInit.makePortfolio}"   />
+      </p:outputPanel>
+      
+      <p:dataTable id="tablePortDefine" var="_var" value="#{tablePortfolioInit.selectPortfolio.portDefineList}" 
+      widgetVar="wgTablePortfolioDefine"
+      selectionMode="single" selection="#{tablePortfolioInit.selectPortDefine}"
+      rowKey="#{_var}"
+      emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false"
+      rows="30"
+      >
+<!--       <p:ajax event="rowSelect" listener="#{tablePortfolioInit.hiearchyDetailSelect}" 
+        update="@parent:@parent:hierarchyLevel:formPortfolioDefine:pGridPortDefine" /> -->
+
+      <p:column id="colPortId" sortBy="#{_var.id.portId}" 
+                filterBy="#{_var.id.portId}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.portfolioId}" /></f:facet>
+        <h:outputText value="#{_var.id.portId}"/>
+      </p:column>
+      <p:column id="colPortLevel" sortBy="#{_var.id.portLevel}" 
+                filterBy="#{_var.id.portLevel}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.portfolioLevel}" /></f:facet>
+        <h:outputText value="#{_var.id.portLevel}"/>
+      </p:column>
+                 
+      <p:column id="colTableId" sortBy="#{_var.propTable}" 
+                filterBy="#{_var.propTable}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.tableId}" /></f:facet>
+        <h:outputText value="#{_var.propTable}"/>
+      </p:column>                                      
+      
+      <p:column id="colColumnId" sortBy="#{_var.propColumn}" 
+                filterBy="#{_var.propColumn}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.columnId}" /></f:facet>
+        <h:outputText value="#{_var.propColumn}"/>
+      </p:column>                                      
+      
+      <p:column id="colEquation" sortBy="#{_var.equation}" 
+                filterBy="#{_var.equation}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.equation}" /></f:facet>
+        <h:outputText value="#{_var.equation}"/>
+      </p:column>
+      
+      <p:column id="colCond1" sortBy="#{_var.condition1}" 
+                filterBy="#{_var.condition1}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.condition1}" /></f:facet>
+        <h:outputText value="#{_var.condition1}"/>
+      </p:column>
+      
+      <p:column id="colCond2" sortBy="#{_var.condition2}" 
+                filterBy="#{_var.condition2}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.condition2}" /></f:facet>
+        <h:outputText value="#{_var.condition2}"/>
+      </p:column>
+  </p:dataTable>
+  </h:form>
+</ui:composition>

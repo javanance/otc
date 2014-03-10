@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 
@@ -27,7 +28,7 @@ import com.eugenefe.util.EColumnType;
 @Entity
 @Table(name = "MV_TYPE")
 @AnnoNavigationFilter
-public class MvType implements java.io.Serializable {
+public class MvType implements java.io.Serializable, ITree {
 
 	private String mvType;
 	private String mvTypeName;
@@ -99,4 +100,24 @@ public class MvType implements java.io.Serializable {
 	public void setChildList(List<MvType> childList) {
 		this.childList = childList;
 	}
+
+	@Transient
+	@Override
+	public String getId() {
+		return getMvType();
+	}
+//
+//	@Override
+//	public int getChildrenSize() {
+//		return getChildList().size();
+//	}
+
+	@Override
+	@Transient
+	public List<? extends ITree> getChildren() {
+		return getChildList();
+	}
+
+
+	
 }

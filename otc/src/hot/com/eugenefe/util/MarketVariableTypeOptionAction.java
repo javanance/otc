@@ -73,7 +73,9 @@ public class MarketVariableTypeOptionAction implements Serializable {
 	public void setUnderlyingType(List<MarketVariableType> underlyingType) {
 		this.underlyingType = underlyingType;
 	}
-
+	
+	
+	
 	public MarketVariableTypeOptionAction() {
 	}
 

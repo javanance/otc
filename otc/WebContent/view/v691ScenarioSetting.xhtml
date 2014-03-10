@@ -3,7 +3,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
-  template="/templates/templatePrimeTLCB.xhtml">
+  template="/templates/primeTemplates.xhtml">
 
   <ui:define name="layoutLeft">
     <p:accordionPanel>
@@ -18,7 +18,8 @@
     </p:accordionPanel>
   </ui:define>
 
-  <ui:define name="layoutCenter">
+  <ui:define name="layoutInnerCenter">
+    
     <ui:include src="/tableComp/tableScenarioDetail.xhtml" >
       <ui:param name="sceDetailList" value="#{hifiveSimulator.sceDetailList}" />
       <ui:param name="filterSceDetailList" value="#{hifiveSimulator.filterSceDetailList}" />
@@ -26,7 +27,7 @@
     </ui:include>  
   </ui:define>
 
-  <ui:define name="layoutBottom">
+  <ui:define name="layoutInnerBottom">
     <p:tabView id="prSettingTabView" dynamic="true" orientation="top" widgetVar="wgPrSettingTabView">
       <p:tab title="#{messages.createScenarioFromFile}">
         <ui:include src="/tableComp/tableFileScenario.xhtml" />

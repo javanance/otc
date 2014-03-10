@@ -1,0 +1,174 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelHierPortfolio">
+    <p:growl id="messages" showDetail="true" />
+
+      <p:panelGrid columns="10" style="background: white">
+        <p:outputLabel value="#{messages.tradeDate}" styleClass="takionLabel" />
+        <p:inputText value="20140105"/>
+        
+        <p:outputLabel value="#{messages.fundCd}" styleClass="takionLabel" />
+        <p:inputText value="DS_Range"/>
+        
+        <p:outputLabel value="#{messages.isLong}" styleClass="takionLabel" />
+        <p:inputText value="매수"/>
+
+        <p:outputLabel value="#{messages.counterParty}" styleClass="takionLabel" />
+        <p:inputText value="Barclay"/>
+
+        <p:outputLabel value=" "/>        
+        <p:outputLabel value=" "/>
+        
+        <p:outputLabel value="#{messages.prodNo}" styleClass="takionLabel" />
+        <p:inputText value="Sample_01"/>
+        
+        <p:outputLabel value="#{messages.prodName}" styleClass="takionLabel" />
+        <p:inputText value="Cap Sample"/>
+        
+        <p:outputLabel value="#{messages.prodType}" styleClass="takionLabel" />
+        <!-- <p:inputText value="DualRangeAccrual"/> -->
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="Select Type"/>
+              <f:selectItem itemLabel="Cap" itemValue="FRN"/>
+              <f:selectItem itemLabel="Floor" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="Collar" itemValue="PowerSpread"/>
+              <f:selectItem itemLabel="Swaption" itemValue="Range"/>
+         </p:selectOneMenu>        
+
+        
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        
+        <p:outputLabel value="#{messages.issueDate}" styleClass="takionLabel" />
+        <p:inputText value="20140105"/>
+        
+        <p:outputLabel value="#{messages.maturityDate}" styleClass="takionLabel" />
+        <p:inputText value="20170105"/>
+        
+        <p:outputLabel value="#{messages.notionalAmt}" styleClass="takionLabel" />
+        <p:inputText value="10,000,000,000"/>
+
+        <p:outputLabel value="#{messages.currCD}" styleClass="takionLabel" />
+        <p:inputText value="KRW"/>
+
+        <p:outputLabel value="#{messages.isFunded}" styleClass="takionLabel" />
+        <p:inputText value="N"/>
+        
+        
+        <p:outputLabel value="#{messages.couponTerm}" styleClass="takionLabel" />
+        <p:inputText value="3M"/>
+        
+        <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" />
+        <p:inputText value="20140105"/>
+        
+        <p:outputLabel value="#{messages.couponPayMethod}" styleClass="takionLabel" />
+        <p:inputText value="InArrear"/>        
+
+        <p:outputLabel value="#{messages.bizDayRule}" styleClass="takionLabel" />
+        <p:inputText value="Regular Following"/>
+        <p:inputText value="2 Days"/>
+        <p:inputText value="Act/360"/>
+
+        <p:outputLabel value="#{messages.resetTerm}" styleClass="takionLabel" />
+        <p:inputText value="3M"/>        
+
+        <p:outputLabel value="#{messages.resetBizDayRule}" styleClass="takionLabel" />
+        <p:inputText value="Regular Preceding"/>
+        
+        <p:outputLabel value="#{messages.resetBizDayRuleNum}" styleClass="takionLabel" />
+        <p:inputText value="2 Days"/>
+        
+        <p:outputLabel value="#{messages.fixedRate}" styleClass="takionLabel" />
+        <p:inputText value="0.04"/>       
+
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        
+        <p:outputLabel value="#{messages.referenceRate}" styleClass="takionLabel" />
+        <p:inputText value="CD91"/>       
+
+        <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" />
+        <p:inputText value="0.01"/>
+        
+        <p:outputLabel value="#{messages.capRate}" styleClass="takionLabel" />
+        <p:inputText value="0.06"/>       
+        
+        <p:outputLabel value="#{messages.floorRate}" styleClass="takionLabel" />
+        <p:inputText value="0.01"/>       
+
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        
+        
+
+        
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>        
+        
+
+      
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+
+
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>        
+        
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+        <p:separator/>
+
+
+        <p:outputLabel value="#{messages.swaptionInfo}" styleClass="takionLabel" />
+
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+
+        
+        <p:outputLabel value="#{messages.isPayer}" styleClass="takionLabel" />
+        <p:inputText value="payer"/>
+        
+        <p:outputLabel value="#{messages.swapNotional}" styleClass="takionLabel" />
+        <p:inputText value="10,000,000"/>        
+
+        <p:outputLabel value="#{messages.swapCurrCD}" styleClass="takionLabel" />
+        <p:inputText value="USD"/>
+
+
+<!--         <p:outputLabel value="#{messages.referenceRate}" styleClass="takionLabel" />
+        <p:inputText value="0.05"/>
+
+        <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" />
+        <p:inputText value="0.05"/> -->
+        
+        <p:outputLabel value="#{messages.strikeRate}" styleClass="takionLabel" />
+        <p:inputText value="0.05"/>
+      </p:panelGrid>
+  </h:form>
+</ui:composition>

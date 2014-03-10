@@ -1,0 +1,52 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelStructureSwap">
+    <p:growl id="messages" showDetail="true" />
+
+<!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+
+      <p:panelGrid columns="7" style="background: white">
+        <p:outputLabel value="#{messages.couponSerial}" styleClass="takionLabel"  style="float: center; width:50px;"/>
+        <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" style="float: center; width:50px;"/>
+        <p:outputLabel value="#{messages.couponEnd}" styleClass="takionLabel" style="float: center; width:50px;"/>
+        <p:outputLabel value="#{messages.isPayer}" styleClass="takionLabel" style="float: center; width:50px;"/>
+        <p:outputLabel value="#{messages.isFixed}" styleClass="takionLabel" style="float: center; width:50px;"/>
+        <p:outputLabel value="#{messages.referRate1}" styleClass="takionLabel" style="float: center; width:50px;"/>
+        <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" style="float: center; width:50px;"/>
+        
+         <p:outputLabel value="1" styleClass="takionLabel"  style="float: center; width:50px;"/>
+         <p:outputLabel value="20140105" style="float:center; width:50px;"/>
+         <p:outputLabel value="20140405" style="float:center; width:50px;"/>
+         <p:outputLabel value="pay" style="float:center; width:50px;"/>
+         <p:outputLabel value="Fixed" style="float:center; width:50px;"/>
+         <p:outputLabel value=" " style="float:center; width:50px;"/>
+         <p:outputLabel value="0.03" style="float:center; width:50px;"/>
+        
+        
+        <p:outputLabel value="2" styleClass="takionLabel"  style="float: center; width:50px;"/>
+         <p:outputLabel value="20140405" style="float: center; width:50px;"/>
+         <p:outputLabel value="20140705" style="float: center; width:50px;"/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+
+        <p:outputLabel value="3" styleClass="takionLabel"  style="float: center; width:50px;"/>
+         <p:outputLabel value="20140705" style="float: center; width:50px;"/>
+         <p:outputLabel value="20141005" style="float: center; width:50px;"/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:outputLabel value="..." styleClass="takionLabel"  style="float: center; width:50px;"/>
+      </p:panelGrid>
+<!--      <p:panel>
+     </p:panel> -->
+
+<!--     </p:panelGrid> -->
+  </h:form>
+</ui:composition>
