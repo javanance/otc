@@ -1,0 +1,25 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formUserPortfolioNewTree">
+    <p:growl id="messages" showDetail="true" />
+    <p:remoteCommand name ="rcSelectNode" action="#{tablePortfolioNewInit.beforeDrag}"/>
+    
+     <p:tree id="treeUserPortfolioNew" value="#{tablePortfolioNewInit.userRootNode}" var="_node" animate="true"
+      highlight="true" orientation="vertical"  
+      selection="#{tablePortfolioNewInit.selectNode}" selectionMode="single"
+      draggable="true" droppable="true"  dragMode="self"   
+      style="width:95%; height:100%">
+
+      <p:ajax event="dragdrop" listener="#{tablePortfolioNewInit.onDrop1}"  update="treeUserPortfolioNew"  />
+      <p:ajax event="select" listener="#{tablePortfolioNewInit.selectNode}" update="@(.ui-treetable) @(.ui-datatable) @(.ui-panelgrid)" />
+      <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+        <h:outputText value="#{_node.portfolioName}" />
+                <!-- <h:outputText value="#{_node}" /> -->
+      </p:treeNode>
+    </p:tree>
+  </h:form>
+</ui:composition>

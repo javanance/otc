@@ -1,0 +1,50 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelStructureOption">
+    <p:growl id="messages" showDetail="true" />
+
+<!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+      <p:commandButton value="addRow"/>
+      <p:panelGrid columns="6" style="background: white">
+        <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center;"/>
+        <p:outputLabel value="#{messages.optionStart}" styleClass="takionLabel" style="float: center;"/>
+        <p:outputLabel value="#{messages.optionEnd}" styleClass="takionLabel" style="float: center;"/>
+        <p:outputLabel value="#{messages.optionType}" styleClass="takionLabel" style="float: center;"/>
+        <p:outputLabel value="#{messages.referenceRate}" styleClass="takionLabel" style="float: center;"/>
+        <p:outputLabel value="#{messages.optionStrike}" styleClass="takionLabel" style="float: center;"/>
+        
+         <p:outputLabel value="1" styleClass="takionLabel"  style="float: center;"/>
+         <p:inputText value="20140105" style="float:center;"/>
+         <p:inputText value="20150105" style="float:center;"/>
+         
+         <p:selectOneMenu value="Call" style="width:100%">
+              <f:selectItem itemLabel="Call" itemValue="FRN"/>
+              <f:selectItem itemLabel="Put" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="CD91"/>
+         <p:inputText value="0.05"/> 
+        
+        
+        <p:outputLabel value="2" styleClass="takionLabel"  style="float: center;"/>
+         <p:inputText value="20140105" style="float:center;"/>
+         <p:inputText value="20150105" style="float:center;"/>
+         
+         <p:selectOneMenu value="Put" style="width:100%">
+              <f:selectItem itemLabel="Call" itemValue="FRN"/>
+              <f:selectItem itemLabel="Put" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+        <p:inputText value="CD91"/>
+         <p:inputText value="0.02"/>
+        
+         <p:outputLabel value="..." styleClass="takionLabel"  style="float: center;"/>
+      </p:panelGrid>
+<!--      <p:panel>
+     </p:panel> -->
+
+<!--     </p:panelGrid> -->
+  </h:form>
+</ui:composition>
