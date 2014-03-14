@@ -6,18 +6,65 @@
 
   <h:form id="formUserPortfolioTree">
     <p:growl id="messages" showDetail="true" />
+    <p:remoteCommand name ="rcSelectNode" action="#{tablePortfolioInit.beforeDrag}"/>
+    
+
+    <p:contextMenu for="treeUserPortfolio" >
+      <!-- <p:menuitem value="#{messages.copyTo}" onclick="wgDialogPortTree.show()"/> -->
+      <p:menuitem value="#{messages.copyTo}" onclick="PF('aaaa').show()" update="@parent:@parent:ddd:treeUserPortfolio1"/>
+      <!-- <p:menuitem value="#{messages.copyTo}" action="#{tablePortfolioInit.openDialog}" 
+        onclick="PF('aaaa').show()" update="@parent:@parent:ddd:dlgOutLabel"/> -->
+        
+      <p:menuitem value="#{messages.delete}" action="#{tablePortfolioInit.delete}"
+        update = "@parent:@parent:treeUserPortfolio"/>
+    </p:contextMenu>    
 
      <p:tree id="treeUserPortfolio" value="#{tablePortfolioInit.userRootNode}" var="_node" animate="true"
       highlight="true" orientation="vertical"  
       selection="#{tablePortfolioInit.selectNode}" selectionMode="single"
-      draggable="true" droppable="true"  dragMode="self" style="width:95%; height:100%">
 
-      <p:ajax event="dragdrop" listener="#{tablePortfolioInit.onDrop}"      update="treeUserPortfolio"    />
+      draggable="true" droppable="true"  dragMode="self"   
+      style="width:95%; height:100%">
+
+      <p:ajax event="dragdrop" listener="#{tablePortfolioInit.onDrop}"  update="treeUserPortfolio @(.ui-datatable)"  />
       <p:ajax event="select" listener="#{tablePortfolioInit.selectNode}" update="@(.ui-treetable) @(.ui-datatable) @(.ui-panelgrid)" />
+
       <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
-        <h:outputText value="#{_node.portfolioName}" />
-                <!-- <h:outputText value="#{_node}" /> -->
+        <h:outputText value="#{_node.portName}" />
       </p:treeNode>
     </p:tree>
+    
+    <p:dialog id="ddd" header="#{messages.selectPortfolioToCopy}" widgetVar="aaaa" closeOnEscape="true"
+      dynamic="true" closable="true" resizable="true">
+
+      <p:hotkey bind="esc" handler="PF('aaaa').hide()"/>      
+      <p:panelGrid id="panelGrid" columns="2">
+      <p:outputLabel value="#{messages.copyFromPortfolio}"/>
+      <p:outputLabel id="dlgOutLabel" value="#{tablePortfolioInit.selectPortfolio.portName}"/>
+
+      <p:outputLabel value="#{messages.copyToPortfolio}"/>
+      <p:outputLabel id="dlgOutLabel1" value="#{tablePortfolioInit.copyToPortfolio.portName}"/>
+      </p:panelGrid>
+      
+      <p:separator/>
+
+      <p:tree id="treeUserPortfolio1" value="#{tablePortfolioInit.userRootNode}" var="_node" animate="true"
+      highlight="true" orientation="vertical"  
+       
+      selection="#{tablePortfolioInit.dlgSelNode}" selectionMode="single"
+      style="width:100%; height:95%">
+        <p:ajax event="select"  listener="#{tablePortfolioInit.selectDlgNode}" update="@parent:panelGrid:dlgOutLabel1"/>
+        <p:treeNode >
+          <h:outputText value="#{_node.portName}" />
+        </p:treeNode>
+      </p:tree>
+  
+        <p:separator/>
+      
+        <p:commandButton value="#{messages.submit}" action="#{tablePortfolioInit.copyPortfolio}" 
+            update="@parent:@parent:treeUserPortfolio" oncomplete="PF('aaaa').hide()"/>
+        <p:commandButton value="#{messages.cancel}" onclick="PF('aaaa').hide()"/>
+    </p:dialog>
+    
   </h:form>
 </ui:composition>

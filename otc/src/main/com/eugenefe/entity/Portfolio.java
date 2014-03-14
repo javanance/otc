@@ -3,19 +3,27 @@ package com.eugenefe.entity;
 // Generated Apr 16, 2013 7:33:55 PM by Hibernate Tools 4.0.0
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.log.Log;
 
@@ -39,6 +47,7 @@ public class Portfolio implements IPortfolio, Serializable {
 
 	private String portId;
 	private Portfolio parentPortfolio;
+	private Portfolio replicatePortfolio;
 	private String portName;
 	private String groupId;
 	private String level1;
@@ -46,37 +55,32 @@ public class Portfolio implements IPortfolio, Serializable {
 	private String level3;
 	private String level4;
 	private String level5;
+	private BigDecimal weight;
 	// private Set<Portfolio> childPortfolios = new HashSet<Portfolio>(0);
 	// private Set<IPortfolio> childPortfolios = new HashSet<IPortfolio>(0);
-	private List<Portfolio> childPortfolios = new ArrayList<Portfolio>(0);
+	private List<Portfolio> childPortfolios = new ArrayList<Portfolio>();
+	private List<Portfolio> copiedPortfolioList = new ArrayList<Portfolio>();
+	
+	private Map<Portfolio, Double> subPortfolioMap = new HashMap<Portfolio, Double>();
+	private List<PortfolioCompo> portfolioCompoList = new ArrayList<PortfolioCompo>();
+	private List<PortfolioDefineNew> portDefineList = new ArrayList<PortfolioDefineNew>();
 
+	
 	private List<PortfolioReturn> portfolioReturns = new ArrayList<PortfolioReturn>();
 
 	// private List<PositionReturn> positions = new ArrayList<PositionReturn>();
 
 	public Portfolio() {
 	}
+	
+	public Portfolio(String portId) {
+		this.portId = portId;
+	}
 
 	public Portfolio(String portId, String portName) {
 		this.portId = portId;
 		this.portName = portName;
 	}
-
-	// public Portfolio(String portId, Portfolio parentPortfolio, String
-	// portName, String groupId, String level1,
-	// String level2, String level3, String levle4, String level5,
-	// Set<Portfolio> childPortfolios) {
-	// this.portId = portId;
-	// this.parentPortfolio = parentPortfolio;
-	// this.portName = portName;
-	// this.groupId = groupId;
-	// this.level1 = level1;
-	// this.level2 = level2;
-	// this.level3 = level3;
-	// this.levle4 = levle4;
-	// this.level5 = level5;
-	// this.childPortfolios = childPortfolios;
-	// }
 
 	@Id
 	@Column(name = "PORT_ID", nullable = false, length = 50)
@@ -88,7 +92,16 @@ public class Portfolio implements IPortfolio, Serializable {
 	public void setPortId(String portId) {
 		this.portId = portId;
 	}
+	@Column(name = "PORT_NAME", length = 50)
+	@AnnoMethodTree(order=20, init=true)
+	public String getPortName() {
+		return this.portName;
+	}
 
+	public void setPortName(String portName) {
+		this.portName = portName;
+	}
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PARENT_PORT_ID")
 	@AnnoMethodTree(order=30, init=false)
@@ -100,14 +113,16 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.parentPortfolio = parentPortfolio;
 	}
 
-	@Column(name = "PORT_NAME", length = 50)
-	@AnnoMethodTree(order=20, init=true)
-	public String getPortName() {
-		return this.portName;
+//	@Transient
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "REPLICATE_PORT")
+	@AnnoMethodTree(order=31, init=false)
+	public Portfolio getReplicatePortfolio() {
+		return replicatePortfolio;
 	}
 
-	public void setPortName(String portName) {
-		this.portName = portName;
+	public void setReplicatePortfolio(Portfolio replicatePortfolio) {
+		this.replicatePortfolio = replicatePortfolio;
 	}
 
 	@Column(name = "GROUP_ID", length = 20)
@@ -170,10 +185,22 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.level5 = level5;
 	}
 
+	
+	@Column(name = "WEIGHT")
+	@AnnoMethodTree(order=55, init=true)
+	public BigDecimal getWeight() {
+		return weight;
+	}
+
+	public void setWeight(BigDecimal weight) {
+		this.weight = weight;
+	}
+
 	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentPortfolio",
 	// targetEntity=Portfolio.class)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentPortfolio")
 //	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parentPortfolio")
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
 	@AnnoMethodTree(order=60, init=false, type=EColumnType.List)
 	public List<Portfolio> getChildPortfolios() {
 //		System.out.println("Call DB");
@@ -193,6 +220,58 @@ public class Portfolio implements IPortfolio, Serializable {
 	// public void setChildPortfolios(Set<IPortfolio> childPortfolios) {
 	// this.childPortfolios = childPortfolios;
 	// }
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "replicatePortfolio")
+	@Cascade(CascadeType.DELETE)
+	public List<Portfolio> getCopiedPortfolioList() {
+		return copiedPortfolioList;
+	}
+
+	public void setCopiedPortfolioList(List<Portfolio> copiedPortfolioList) {
+		this.copiedPortfolioList = copiedPortfolioList;
+	}
+
+	@Transient
+//	@ElementCollection
+//	@MapKeyJoinColumn(name="CHILD_PORTFOLIO_ID")
+//	@JoinTable(name="PORTFOLIO_COMPO"
+//				, joinColumns=@JoinColumn(name="PORTFOLIO_ID")
+//	)
+//	@Column(name="PORT_WEIGHT")
+	public Map<Portfolio, Double> getSubPortfolioMap() {
+		return subPortfolioMap;
+	}
+
+	public void setSubPortfolioMap(Map<Portfolio, Double> subPortfolioMap) {
+		this.subPortfolioMap = subPortfolioMap;
+	}
+	
+//	@Transient
+//	public List<Map.Entry<Portfolio, Double>> getSubPortfolioList(){
+//		return new ArrayList<Map.Entry<Portfolio, Double>>(subPortfolioMap.entrySet());
+//	}
+
+	
+	@OneToMany(mappedBy="portfolio")
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
+	public List<PortfolioCompo> getPortfolioCompoList() {
+		return portfolioCompoList;
+	}
+
+	public void setPortfolioCompoList(List<PortfolioCompo> portfolioCompoList) {
+		this.portfolioCompoList = portfolioCompoList;
+	}
+
+	@OneToMany(mappedBy="portfolio")	
+	public List<PortfolioDefineNew> getPortDefineList() {
+		return portDefineList;
+	}
+
+
+
+	public void setPortDefineList(List<PortfolioDefineNew> portDefineList) {
+		this.portDefineList = portDefineList;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "portfolio")
 	@AnnoMethodTree(order=70, init=false, type= EColumnType.List)

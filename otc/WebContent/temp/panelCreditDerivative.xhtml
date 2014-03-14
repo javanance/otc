@@ -19,11 +19,11 @@
         <p:outputLabel value="#{messages.prodType}" styleClass="takionLabel" />
         <!-- <p:inputText value="DualRangeAccrual"/> -->
          <p:selectOneMenu value="" style="width:100%">
-              <f:selectItem itemLabel="Select Type"/>
               <f:selectItem itemLabel="CDS" itemValue="FRN"/>
               <f:selectItem itemLabel="CLN" itemValue="InversFloater"/>
-              <f:selectItem itemLabel="TRS" itemValue="PowerSpread"/>
-              <f:selectItem itemLabel="CDO" itemValue="DualSpreadRangeAccrual"/>
+              <f:selectItem itemLabel="CLN+CDRA" itemValue="InversFloater"/>
+<!--               <f:selectItem itemLabel="TRS" itemValue="PowerSpread"/>
+              <f:selectItem itemLabel="CDO" itemValue="DualSpreadRangeAccrual"/> -->
          </p:selectOneMenu>        
         <p:outputLabel value=" "/>        
         <p:outputLabel value=" "/>
@@ -34,13 +34,27 @@
         <p:inputText value="20140105"/>
               
         <p:outputLabel value="#{messages.fundCd}" styleClass="takionLabel" />
-        <p:inputText value="DS_CLN"/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="DS_CLN" itemValue="FRN"/>
+              <f:selectItem itemLabel="DS_CDS" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="PowerSpread"/>
+         </p:selectOneMenu>        
+
+        
         
         <p:outputLabel value="#{messages.isLong}" styleClass="takionLabel" />
-        <p:inputText value="매도"/>
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="매수" itemValue="FRN"/>
+              <f:selectItem itemLabel="매도" itemValue="InversFloater"/>
+         </p:selectOneMenu>        
 
         <p:outputLabel value="#{messages.counterParty}" styleClass="takionLabel" />
-        <p:inputText value="Barclay"/>
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="Barclay" itemValue="FRN"/>
+              <f:selectItem itemLabel="KB" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="BOA" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>        
 
         <p:outputLabel value="#{messages.issuer}" styleClass="takionLabel" />
         <p:inputText value="Hankook Securities"/>
@@ -56,8 +70,13 @@
         <p:inputText value="10,000,000,000"/>
 
         <p:outputLabel value="#{messages.currCD}" styleClass="takionLabel" />
-        <p:inputText value="KRW"/>
-
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="KRW" itemValue="FRN"/>
+              <f:selectItem itemLabel="USD" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="HKD" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>        
+        
         <p:outputLabel value="#{messages.isFunded}" styleClass="takionLabel" />
         <p:inputText value="Y"/>
         
@@ -70,18 +89,38 @@
         <p:inputText value="20140105"/>
         
         <p:outputLabel value="#{messages.couponPayMethod}" styleClass="takionLabel" />
-        <p:inputText value="InArrear"/>        
-
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="InArrear" itemValue="FRN"/>
+              <f:selectItem itemLabel="InAdvance" itemValue="InversFloater"/>
+         </p:selectOneMenu>        
+       
         <p:outputLabel value="#{messages.bizDayRule}" styleClass="takionLabel" />
-        <p:inputText value="Regular Following"/>
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="Regular Following" itemValue="FRN"/>
+              <f:selectItem itemLabel="Regular Preceding" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="Modified Following" itemValue="FRN"/>
+              <f:selectItem itemLabel="Modified Preceding" itemValue="InversFloater"/>
+         </p:selectOneMenu>        
         <p:inputText value="2 Days"/>
-        <p:inputText value="Act/360"/>
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="Act/Act" itemValue="FRN"/>
+              <f:selectItem itemLabel="Act/365" itemValue="FRN"/>
+              <f:selectItem itemLabel="Act/360" itemValue="FRN"/>
+              <f:selectItem itemLabel="30/360" itemValue="FRN"/>
+              <f:selectItem itemLabel="..." itemValue="FRN"/>
+         </p:selectOneMenu>        
 
         <p:outputLabel value="#{messages.resetTerm}" styleClass="takionLabel" />
         <p:inputText value="3M"/>        
 
         <p:outputLabel value="#{messages.resetBizDayRule}" styleClass="takionLabel" />
-        <p:inputText value="Regular Preceding"/>
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="Regular Following" itemValue="FRN"/>
+              <f:selectItem itemLabel="Regular Preceding" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="Modified Following" itemValue="FRN"/>
+              <f:selectItem itemLabel="Modified Preceding" itemValue="InversFloater"/>
+         </p:selectOneMenu>        
+        
         
         <p:outputLabel value="#{messages.resetBizDayRuleNum}" styleClass="takionLabel" />
         <p:inputText value="2 Days"/>
@@ -89,20 +128,27 @@
         <p:outputLabel value="#{messages.fixedRate}" styleClass="takionLabel" />
         <p:inputText value="0.04"/>       
 
-        <p:outputLabel value=" "/>
-        <p:outputLabel value=" "/>
+        <p:outputLabel value="#{messages.accruedInterest}" styleClass="takionLabel" />
+        <p:inputText value="100"/>
+        
 
         <p:outputLabel value="#{messages.referenceRate}" styleClass="takionLabel" />
-        <p:inputText value="CD91"/>       
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB_3M" itemValue="FRN"/>
+              <f:selectItem itemLabel="IRS_1Y" itemValue="FRN"/>
+              <f:selectItem itemLabel="LIBOR_3M" itemValue="FRN"/>
+              <f:selectItem itemLabel="..." itemValue="FRN"/>
+         </p:selectOneMenu>        
 
         <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" />
         <p:inputText value="0.01"/>
 
-        <p:outputLabel value=" "/>
-        <p:outputLabel value=" "/>
+        <p:outputLabel value="#{messages.recoveryRate}" styleClass="takionLabel" />
+        <p:inputText value="0.45"/>
 
         <p:outputLabel value=" "/>
-        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>        
 
         <p:outputLabel value=" "/>
         <p:outputLabel value=" "/>
@@ -117,8 +163,25 @@
         <p:inputText value="Bullet"/>
         
         <p:outputLabel value="#{messages.feePayMethod}" styleClass="takionLabel" />
-        <p:inputText value="InAdvance"/>        
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="InArrear" itemValue="FRN"/>
+              <f:selectItem itemLabel="InAdvance" itemValue="InversFloater"/>
+         </p:selectOneMenu>                
 
+        <p:outputLabel value="#{messages.lossRate}" styleClass="takionLabel" />
+        <p:inputText value="0.2"/>
+
+        <p:outputLabel value="#{messages.isUpFrontPay}" styleClass="takionLabel" />
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="지급" itemValue="FRN"/>
+              <f:selectItem itemLabel="수취" itemValue="InversFloater"/>
+         </p:selectOneMenu>                        
+        
+        <p:outputLabel value="#{messages.upFrontFeeRate}" styleClass="takionLabel" />
+        <p:inputText value="0.015"/>
+        
+        <p:outputLabel value="#{messages.upFrontFeeAmt}" styleClass="takionLabel" />
+        <p:inputText value="10,000 USD"/>
         </p:panelGrid>
         
 

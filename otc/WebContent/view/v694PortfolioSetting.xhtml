@@ -8,14 +8,11 @@
   <ui:define name="layoutLeft">
     <p:accordionPanel>
       <p:tab title="#{messages.userPortfolio}" >
-        <!-- <ui:include src="/temp/tableUserPortfolio.xhtml" /> -->
-        <ui:include src="/temp/treeUserPortfolio.xhtml" />        
+        <ui:include src="/temp/treeUserPortfolio.xhtml" />
       </p:tab>
+
       <p:tab title="#{messages.systemPortfolio}">
-        <ui:include src="/temp/treeSysPortfolio.xhtml" />          
       </p:tab>
-      <p:tab title="#{messages.systemPortfolio1}">
-      </p:tab>    
     </p:accordionPanel>
   </ui:define>
 
@@ -25,10 +22,8 @@
         <ui:include src="/temp/tablePortfolioMaster.xhtml" />
       </p:tab>
       <p:tab title="#{messages.portfolioDefine}">
-        <ui:include src="/temp/tablePortfolioDefine.xhtml" />
       </p:tab>
       <p:tab title="#{messages.portfolioStructure}">
-        <ui:include src="/temp/treeTablePortfolioDefine.xhtml" />
       </p:tab>
      </p:tabView>     
             
@@ -46,6 +41,9 @@
       <p:tab title="#{messages.hifiveSwapIr}">
       </p:tab>
     </p:tabView>
-
   </ui:define>
+
+  <!-- <p:dialog header="#{messages.selectPortfolioToCopy}" widgetVar="wgDialogPortTree">
+    <ui:include src="/temp/treeUserPortfolio1.xhtml" />
+  </p:dialog> -->
 </ui:composition>

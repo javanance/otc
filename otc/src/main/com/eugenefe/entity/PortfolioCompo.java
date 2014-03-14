@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 
@@ -29,16 +31,29 @@ public class PortfolioCompo implements java.io.Serializable {
 //	private String portfolioId;
 //	private String childPortId;
 	private PortfolioCompoId id;
-	private PortfolioNew portfolio;
-	private PortfolioNew childPortfolio;
+	private Portfolio portfolio;
+	private Portfolio childPortfolio;
+//	private double portWeight;
 	private BigDecimal portWeight;
-
+	
 	public PortfolioCompo() {
 	}
 	
 
 	public PortfolioCompo(PortfolioCompoId id) {
 		this.id = id;
+	}
+
+//	public PortfolioCompo(PortfolioCompoId id, BigDecimal portWeight) {
+//		this.id = id;
+//		this.portWeight = portWeight;
+//	}
+	
+	public PortfolioCompo(Portfolio portfolio, Portfolio childPortfolio, double weight ) {
+		this.id = new PortfolioCompoId(portfolio.getPortId(), childPortfolio.getPortId());
+		this.portfolio = portfolio;
+		this.childPortfolio = childPortfolio;
+		this.portWeight = new BigDecimal(weight);
 	}
 
 
@@ -58,32 +73,63 @@ public class PortfolioCompo implements java.io.Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "PORTFOLIO_ID", nullable=true, insertable=false, updatable=false)
 	@AnnoMethodTree(order =15, init=true)
-	public PortfolioNew getPortfolio() {
+	public Portfolio getPortfolio() {
 		return portfolio;
 	}
 
-	public void setPortfolio(PortfolioNew portfolio) {
-		this.portfolio = portfolio;
-	}
 
+	public void setPortfolio(Portfolio portfolio) {
+		this.portfolio = portfolio;
+	}	
+	
+	
+//	public PortfolioNew getPortfolio() {
+//		return portfolio;
+//	}
+//
+//	public void setPortfolio(PortfolioNew portfolio) {
+//		this.portfolio = portfolio;
+//	}
+
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CHILD_PORTFOLIO_ID", nullable=true, insertable=false, updatable=false)
 	@AnnoMethodTree(order =20, init=true)
-	public PortfolioNew getChildPortfolio() {
+	public Portfolio getChildPortfolio() {
 		return childPortfolio;
 	}
-	public void setChildPortfolio(PortfolioNew childPortfolio) {
+	public void setChildPortfolio(Portfolio childPortfolio) {
 		this.childPortfolio = childPortfolio;
 	}
+
+
 	
-	@Column(name = "PORT_WEIGHT", precision = 10, scale = 4)
+
+//	public PortfolioNew getChildPortfolio() {
+//		return childPortfolio;
+//	}
+//	public void setChildPortfolio(PortfolioNew childPortfolio) {
+//		this.childPortfolio = childPortfolio;
+//	}
+
+	
+	@Column(name = "PORT_WEIGHT", precision = 4, scale = 2)
+//	@Type(type="double")
 	@AnnoMethodTree(order =30, init=true)
 	public BigDecimal getPortWeight() {
-		return this.portWeight;
+		return portWeight;
 	}
 
 	public void setPortWeight(BigDecimal portWeight) {
 		this.portWeight = portWeight;
 	}
+	
+	
+//	public BigDecimal getPortWeight() {
+//		return this.portWeight;
+//	}
+//	public void setPortWeight(BigDecimal portWeight) {
+//		this.portWeight = portWeight;
+//	}
 
 }

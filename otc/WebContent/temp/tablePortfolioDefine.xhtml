@@ -7,19 +7,19 @@
   <h:form id="formPortfolioDefine">
       <p:growl id="messages" showDetail="true" />
       <p:outputPanel style="padding: 0.5em 1em;">
-        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioInit.saveHierDetail}"   />
-        <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePortfolioInit.makePortfolio}"   />
+        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioNewInit.saveHierDetail}"   />
+        <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePortfolioNewInit.makePortfolio}"   />
       </p:outputPanel>
       
-      <p:dataTable id="tablePortDefine" var="_var" value="#{tablePortfolioInit.selectPortfolio.portDefineList}" 
+      <p:dataTable id="tablePortDefine" var="_var" value="#{tablePortfolioNewInit.selectPortfolio.portDefineList}" 
       widgetVar="wgTablePortfolioDefine"
-      selectionMode="single" selection="#{tablePortfolioInit.selectPortDefine}"
+      selectionMode="single" selection="#{tablePortfolioNewInit.selectPortDefine}"
       rowKey="#{_var}"
       emptyMessage="#{messages.noDataFound}"
       resizableColumns="true" liveResize="false"
       rows="30"
       >
-<!--       <p:ajax event="rowSelect" listener="#{tablePortfolioInit.hiearchyDetailSelect}" 
+<!--       <p:ajax event="rowSelect" listener="#{tablePortfolioNewInit.hiearchyDetailSelect}" 
         update="@parent:@parent:hierarchyLevel:formPortfolioDefine:pGridPortDefine" /> -->
 
       <p:column id="colPortId" sortBy="#{_var.id.portId}" 

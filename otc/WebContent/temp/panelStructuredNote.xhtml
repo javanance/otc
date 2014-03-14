@@ -44,6 +44,8 @@
               <f:selectItem itemLabel="DualSpreadRange" itemValue="DualSpreadRange"/>
               <f:selectItem itemLabel="DualRangeAccrual" itemValue="DualRangeAccrual"/>
               <f:selectItem itemLabel="DualSpreadRangeAccrual" itemValue="DualSpreadRangeAccrual"/>
+              <f:selectItem itemLabel="AverageRangeAccrual" itemValue="DualSpreadRangeAccrual"/>
+              <f:selectItem itemLabel="AverageSpreadRangeAccrual" itemValue="DualSpreadRangeAccrual"/>
          </p:selectOneMenu>        
 
         <p:outputLabel value="#{messages.issuer}" styleClass="takionLabel" />
@@ -99,7 +101,19 @@
         <p:outputLabel value=" "/>
         <p:outputLabel value=" "/>
 
-        </p:panelGrid>
+        <p:outputLabel value="#{messages.isUpFrontPay}" styleClass="takionLabel" />
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="지급" itemValue="FRN"/>
+              <f:selectItem itemLabel="수취" itemValue="InversFloater"/>
+         </p:selectOneMenu>                        
+        
+        <p:outputLabel value="#{messages.upFrontFeeRate}" styleClass="takionLabel" />
+        <p:inputText value="0.015"/>
+        
+        <p:outputLabel value="#{messages.upFrontFeeAmt}" styleClass="takionLabel" />
+        <p:inputText value="10,000 USD"/>
+      
+      </p:panelGrid>
         <p:separator/>
         
         <p:panelGrid columns="10" >        

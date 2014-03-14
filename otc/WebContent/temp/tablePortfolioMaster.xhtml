@@ -6,35 +6,41 @@
    
   <h:form id="formPortfolioPosition">
       <p:growl id="messages" showDetail="true" />
+      
       <p:outputPanel style="padding: 0.5em 1em;">
-        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioInit.savePortfolio}"   update="@(form)" />
-        <p:commandButton  value="#{messages.clear}" action="#{tablePortfolioInit.unselectPortfolio}"   />
-        <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePortfolioInit.makePortfolio}"   />
+        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioInit.savePortfolio}"   update="@(form)" >
+<!--           <p:confirm header="#{messages.confirm}" message="#{messages.confirmInsert}"/> -->
+            <p:confirm header=" "  message="confirmInsert" icon="ui-icon-alert" />
+        </p:commandButton>
+        <p:commandButton  value="#{messages.clear}" action="#{tablePortfolioInit.clearPortfolio}" 
+            update="@parent:@parent:aaa:bbb,  @parent:@parent:aaa:tablePortPosition"  />
       </p:outputPanel>
+      <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+        <p:commandButton value="#{messages.yes}" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+        <p:commandButton value="#{messages.no}" type="button"  styleClass="ui-confirmdialog-no" icon="ui-icon-check"/>
+      </p:confirmDialog>
 
-    
-    
-    
-    <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop">
-    <p:panelGrid columns="2">
+    <p:panelGrid id="aaa" columns="2" columnClasses="takion77-alignTop, takion77-alignTop">
+    <p:panelGrid id="bbb" columns="2">
         <p:outputLabel value="#{messages.portfolioId}" styleClass="takionLabel" style="float: right;"/>
-        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portfolioId}"/>
+        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portId}"/>
 
         <p:outputLabel value="#{messages.portfolioName}" styleClass="takionLabel" style="float: right;"/>
-        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portfolioName}"/>
+        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portName}"/>
         
-        <p:outputLabel value="#{messages.portfolioType}" styleClass="takionLabel" style="float: right;"/>
-        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portfolioType}"/>
+  <!--       <p:outputLabel value="#{messages.portfolioType}" styleClass="takionLabel" style="float: right;"/>
+        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portType}"/> -->
         
   <!--       <p:outputLabel value="#{messages.referenceHierarchy}" styleClass="takionLabel" style="float: right; "/>
         <p:inputText  value="#{tablePortfolioInit.selectPortfolio.hierarchy.hierarchyName}"/> -->
     </p:panelGrid>
   
           
-     <p:dataTable id="tablePortPosition" var="_var" value="#{tablePortfolioInit.selectPortfolio.subPortfolioList}" 
+     <p:dataTable id="tablePortPosition" var="_var" value="#{tablePortfolioInit.addPortfolio.childPortfolios}" 
       widgetVar="wgTablePortPosition"
-      selectionMode="single" selection="#{tablePortfolioInit.selectPortDefine}"
+
       rowKey="#{_var}"
+      editable="true" editMode="cell"
       emptyMessage="#{messages.noDataFound}"
       resizableColumns="true" liveResize="false"
       rows="30"
@@ -42,23 +48,26 @@
 <!--       <p:ajax event="rowSelect" listener="#{tablePortfolioInit.hiearchyDetailSelect}" 
         update="@parent:@parent:hierarchyLevel:formPortfolioDefine:pGridPortDefine" /> -->
 
-      <p:column id="colPortId" sortBy="#{_var.id.portfolioId}" 
-                filterBy="#{_var.id.portfolioId}" filterMatchMode="contains"  width="100">
+      <!-- <p:column id="colPortId" sortBy="#{_var.portId}" 
+                filterBy="#{_var.portId}" filterMatchMode="contains"  width="100">
         <f:facet name="header"><h:outputText value="#{messages.portfolioId}" /></f:facet>
-        <h:outputText value="#{_var.id.portfolioId}"/>
-      </p:column>
-       <p:column id="colPortLevel" sortBy="#{_var.childPortfolio.portfolioName}" 
-                filterBy="#{_var.childPortfolio.portfolioName}" filterMatchMode="contains"  width="100">
-        <f:facet name="header"><h:outputText value="#{messages.portfolioName}" /></f:facet>
-        <h:outputText value="#{_var.childPortfolio.portfolioName}"/>
+        <h:outputText value="#{_var.portId}"/>
+      </p:column> -->
+      
+       <p:column id="colPortLevel" sortBy="#{_var.portName}" 
+                filterBy="#{_var.portName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.subPortfolioName}" /></f:facet>
+        <h:outputText value="#{_var.portName}"/>
       </p:column>
                  
-
-      
-     <p:column id="colWeight" sortBy="#{_var.portWeight}" 
-                filterBy="#{_var.portWeight}" filterMatchMode="contains"  width="100">
+     <p:column id="colWeight" sortBy="#{_var.weight}" 
+                filterBy="#{_var.weight}" filterMatchMode="contains"  width="100">
         <f:facet name="header"><h:outputText value="#{messages.portfolioWeight}" /></f:facet>
-        <h:outputText value="#{_var.portWeight}"/>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.weight}"/></f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.weight}"/> </f:facet>
+        </p:cellEditor>
+        <!-- <h:outputText value="#{_var.weight}"/> -->
       </p:column>
   </p:dataTable>
   

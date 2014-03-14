@@ -28,7 +28,7 @@ public class PortfolioDefineNew implements Serializable{
 	
 	private PortfolioNew portfolio;
 //	private String propPath;
-	
+	private Portfolio portfolioOld;
 	private String propTable;
 	private String propColumn;
 	private EEquation equation;
@@ -63,17 +63,18 @@ public class PortfolioDefineNew implements Serializable{
 		this.portfolio = portfolio;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY )
+	@JoinColumn(name = "PORT_ID", nullable = false, insertable = false, updatable = false)
+	@AnnoMethodTree(order=16, init=false, type=EColumnType.Entity, aggregatable=false)
+	public Portfolio getPortfolioOld() {
+		return portfolioOld;
+	}
 
-//	public String getPropPath() {
-//		return propPath;
-//	}
-//
-//	public void setPropPath(String propPath) {
-//		this.propPath = propPath;
-//	}
+	public void setPortfolioOld(Portfolio portfolioOld) {
+		this.portfolioOld = portfolioOld;
+	}
 
-
-
+	
 	@Column(name = "TABLE_ID", nullable = true, length = 20)
 	@AnnoMethodTree(order =20, init=true)
 	public String getPropTable() {

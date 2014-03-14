@@ -7,16 +7,16 @@
   <h:form id="formTreePortfolioDefine">
       <p:growl id="messages" showDetail="true" />
       <p:outputPanel style="padding: 0.5em 1em;">
-        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioInit.saveHierDetail}"   />
-        <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePortfolioInit.makePortfolio}"   />
+        <p:commandButton  value="#{messages.save}" action="#{tablePortfolioNewInit.saveHierDetail}"   />
+        <p:commandButton  value="#{messages.makePortfolio}" action="#{tablePortfolioNewInit.makePortfolio}"   />
       </p:outputPanel>
       
-        <p:treeTable value="#{tablePortfolioInit.parentNode}" var="_var"  
-          selection="#{tablePortfolioInit.selectNode}" selectionMode="single"
+        <p:treeTable value="#{tablePortfolioNewInit.parentNode}" var="_var"  
+          selection="#{tablePortfolioNewInit.selectNode}" selectionMode="single"
              
         >
         
-        <p:ajax event="select" listener="#{tablePortfolioInit.selectTreeNode}" update="@(.ui-datatable)" />
+        <p:ajax event="select" listener="#{tablePortfolioNewInit.selectTreeNode}" update="@(.ui-datatable)" />
 
         <p:column id="colPortId"  width="30">
           <f:facet name="header">

@@ -34,6 +34,7 @@ public enum EViewNew {
 	,v650("v650PriceSimulation",					true, 	false, 	false, 	true, 	false, 	false)
 	,v691("v691ScenarioSetting", 					true, 	false, 	false, 	false, 	false,	true)
 	,v694("v694PortfolioSetting",					true,	false, 	false, 	true, 	false, 	false)
+	,v6941("v6941PortfolioNewSetting",				true,	false, 	false, 	true, 	false, 	false)
 	,v695("v695HierarchySetting",					true,	false, 	false, 	true, 	false, 	false)
 	,v696("v696StructuredNote", 					false,	false, 	false, 	false, 	false, 	true)
 	,v6961("v6961InterestOption", 					false,	false, 	false, 	false, 	false, 	false)

@@ -8,9 +8,9 @@
     <p:growl id="messages" showDetail="true" />
 
 <!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
-
+<p:commandButton value="addRow"/>
       <p:panelGrid columns="7" style="background: white">
-        <p:outputLabel value="#{messages.couponSerial}" styleClass="takionLabel"  style="float: center; width:50px;"/>
+        <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center; width:50px;"/>
         <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" style="float: center; width:50px;"/>
         <p:outputLabel value="#{messages.couponEnd}" styleClass="takionLabel" style="float: center; width:50px;"/>
         <p:outputLabel value="#{messages.isPayer}" styleClass="takionLabel" style="float: center; width:50px;"/>
@@ -19,25 +19,25 @@
         <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" style="float: center; width:50px;"/>
         
          <p:outputLabel value="1" styleClass="takionLabel"  style="float: center; width:50px;"/>
-         <p:outputLabel value="20140105" style="float:center; width:50px;"/>
-         <p:outputLabel value="20140405" style="float:center; width:50px;"/>
-         <p:outputLabel value="pay" style="float:center; width:50px;"/>
-         <p:outputLabel value="Fixed" style="float:center; width:50px;"/>
-         <p:outputLabel value=" " style="float:center; width:50px;"/>
-         <p:outputLabel value="0.03" style="float:center; width:50px;"/>
+         <p:inputText value="20140105" style="float:center; "/>
+         <p:inputText value="20140405" style="float:center; "/>
+         <p:inputText value="pay" style="float:center; "/>
+         <p:inputText value="Fixed" style="float:center; "/>
+         <p:inputText value=" " style="float:center; "/>
+         <p:inputText value="0.03" style="float:center; "/>
         
         
         <p:outputLabel value="2" styleClass="takionLabel"  style="float: center; width:50px;"/>
-         <p:outputLabel value="20140405" style="float: center; width:50px;"/>
-         <p:outputLabel value="20140705" style="float: center; width:50px;"/>
+         <p:inputText value="20140405" style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
         <p:inputText/>
         <p:inputText/>
         <p:inputText/>
         <p:inputText/>
 
         <p:outputLabel value="3" styleClass="takionLabel"  style="float: center; width:50px;"/>
-         <p:outputLabel value="20140705" style="float: center; width:50px;"/>
-         <p:outputLabel value="20141005" style="float: center; width:50px;"/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:inputText value="20141005" style="float: center; "/>
         <p:inputText/>
         <p:inputText/>
         <p:inputText/>
