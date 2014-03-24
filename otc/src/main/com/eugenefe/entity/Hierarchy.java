@@ -5,12 +5,23 @@ package com.eugenefe.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.IndexColumn;
+
+import com.eugenefe.entity.component.PropertyEquation;
+import com.eugenefe.enums.EBoolean;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 import com.eugenefe.util.EColumnType;
@@ -25,9 +36,11 @@ public class Hierarchy implements java.io.Serializable {
 
 	private String hierarchyId;
 	private String hierarchyName;
-	private String useYn;
-	private String changeable;
-	private List<HierarchyDetail> hierarchyDetailList = new ArrayList<HierarchyDetail>();
+	private EBoolean useable;
+	private EBoolean changeable;
+//	private List<HierarchyDetail> hierarchyDetailList = new ArrayList<HierarchyDetail>();
+	private List<PropertyEquation> hierDefineIndexList = new ArrayList<PropertyEquation>();
+	private List<Portfolio> portfolioList = new ArrayList<Portfolio>();
 
 	public Hierarchy() {
 	}
@@ -36,10 +49,10 @@ public class Hierarchy implements java.io.Serializable {
 		this.hierarchyId = hierarchyId;
 	}
 
-	public Hierarchy(String hierarchyId, String hierarchyName, String useYn) {
+	public Hierarchy(String hierarchyId, String hierarchyName, EBoolean useYn) {
 		this.hierarchyId = hierarchyId;
 		this.hierarchyName = hierarchyName;
-		this.useYn = useYn;
+		this.useable = useYn;
 	}
 
 	@Id
@@ -65,31 +78,60 @@ public class Hierarchy implements java.io.Serializable {
 
 	@Column(name = "USE_YN", length = 1)
 	@AnnoMethodTree(order =30, init=true)
-	public String getUseYn() {
-		return this.useYn;
+	@Enumerated(EnumType.STRING)
+	public EBoolean getUseable() {
+		return this.useable;
 	}
 
-	public void setUseYn(String useYn) {
-		this.useYn = useYn;
+	public void setUseable(EBoolean useable) {
+		this.useable = useable;
 	}
 
 	@Column(name = "CHANGEABLE", length = 1)
-	@AnnoMethodTree(order =31, init=true)	
-	public String getChangeable() {
+	@AnnoMethodTree(order =31, init=true)
+	@Enumerated(EnumType.STRING)
+	public EBoolean getChangeable() {
 		return changeable;
 	}
 
-	public void setChangeable(String changeable) {
+	public void setChangeable(EBoolean changeable) {
 		this.changeable = changeable;
 	}
+	
+	
+//	@OneToMany(mappedBy="hierarchy")
+//	@IndexColumn(name ="LVL" ,base=1)
+//	@AnnoMethodTree(order =35, init=false, type=EColumnType.List)
+//	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+//	public List<HierarchyDetail> getHierarchyDetailList() {
+//		return hierarchyDetailList;
+//	}
+
+
+
+//	public void setHierarchyDetailList(List<HierarchyDetail> hierarchyDetailList) {
+//		this.hierarchyDetailList = hierarchyDetailList;
+//	}
 
 	@OneToMany(mappedBy="hierarchy")
-	@AnnoMethodTree(order =35, init=false, type=EColumnType.List)
-	public List<HierarchyDetail> getHierarchyDetailList() {
-		return hierarchyDetailList;
+	@AnnoMethodTree(order =40, init=false, type=EColumnType.List)
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	public List<Portfolio> getPortfolioList() {
+		return portfolioList;
 	}
 
-	public void setHierarchyDetailList(List<HierarchyDetail> hierarchyDetailList) {
-		this.hierarchyDetailList = hierarchyDetailList;
+	public void setPortfolioList(List<Portfolio> portfolioList) {
+		this.portfolioList = portfolioList;
+	}
+
+	@ElementCollection
+	@CollectionTable(name="HIERARCHY_DETAIL_NEW", joinColumns=@JoinColumn(name ="HIERARCHY_ID"))
+	@IndexColumn(name="LVL", base=1	)
+	public List<PropertyEquation> getHierDefineIndexList() {
+		return hierDefineIndexList;
+	}
+
+	public void setHierDefineIndexList(List<PropertyEquation> hierDefineIndexList) {
+		this.hierDefineIndexList = hierDefineIndexList;
 	}
 }

@@ -1,0 +1,85 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelDlsRetrunSwapCp">
+      <p:panel header="적용 금리">
+      <p:commandButton value="적용금리 추가"/>
+      <p:commandButton value="적용금리 수정"/>
+      <p:commandButton value="적용금리 삭제"/>    
+
+      <p:panelGrid columns="9" style="background: white">
+        <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.couponEnd}" styleClass="takionLabel" style="float: center; "/>
+
+        <p:outputLabel value="전략 적용 방법" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="수익률 평가방법" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.returnType}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="참여율" styleClass="takionLabel" style="float: center; "/>
+        
+        <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" style="float: center; "/>
+        
+        <p:outputLabel value="#{messages.capRate}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.floorRate}" styleClass="takionLabel" style="float: center; "/>
+
+
+
+        <p:inputText value="20140105" style="float: center;"/>
+        <p:inputText value="20150105" style="float: center;"/>
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="전략 평균 수익률" itemValue="FRN"/>
+              <f:selectItem itemLabel="전략 최고 수익률" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="전략 최저 수익률" itemValue="InversFloater"/>
+         </p:selectOneMenu>                
+        
+        <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="누적  평균 수익률" itemValue="FRN"/>
+              <f:selectItem itemLabel="구간  수익률" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+      
+        <p:selectOneMenu value="2" style="width:100%">
+        <f:selectItem itemLabel="Select Type" />
+        <f:selectItem itemLabel="LogReturn" itemValue="1" />
+        <f:selectItem itemLabel="PercentReturn" itemValue="2" />\
+         </p:selectOneMenu>         
+         
+        <p:inputText value="0.85" style="float: center;"/>
+        <p:inputText value="0.1" style="float: center;"/>
+        
+        <p:inputText value="1.2" style="float: center;"/>
+        <p:inputText value="0.8" style="float: center;"/>
+
+
+        <p:inputText value="20150105" style="float: center;"/>
+        <p:inputText value="20160105" style="float: center;"/>
+        <p:selectOneMenu value="2" style="width:100%">
+              <f:selectItem itemLabel="전략 평균 수익률" itemValue="1"/>
+              <f:selectItem itemLabel="전략 최고 수익률" itemValue="2"/>
+              <f:selectItem itemLabel="전략 최저 수익률" itemValue="3"/>
+         </p:selectOneMenu>                
+        
+        <p:selectOneMenu value="1" style="width:100%">
+              <f:selectItem itemLabel="누적  평균 수익률" itemValue="1"/>
+              <f:selectItem itemLabel="구간  수익률" itemValue="2"/>
+         </p:selectOneMenu>
+         
+        <p:selectOneMenu value="2" style="width:100%">
+        <f:selectItem itemLabel="Select Type" />
+        <f:selectItem itemLabel="LogReturn" itemValue="1" />
+        <f:selectItem itemLabel="PercentReturn" itemValue="2" />\
+         </p:selectOneMenu>
+                  
+        <p:inputText value="0.85" style="float: center;"/>
+        <p:inputText value="0.1" style="float: center;"/>
+        
+        <p:inputText value="1.2" style="float: center;"/>
+        <p:inputText value="0.8" style="float: center;"/>
+
+          <p:outputLabel value="..." styleClass="takionLabel"  style="float: center; "/>
+       </p:panelGrid>
+      </p:panel>  
+
+  </h:form>
+</ui:composition>

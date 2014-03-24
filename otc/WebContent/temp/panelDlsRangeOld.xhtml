@@ -1,0 +1,184 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelDlsRange">
+    <p:growl id="messages" showDetail="true" />
+
+<!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+      <p:commandButton value="addRow"/>
+      
+      <p:panelGrid columns="11" style="background: white">
+        <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center; "/>
+        <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.couponEnd}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.lowerRange}" styleClass="takionLabel"  style="float: center; "/>
+
+        <p:outputLabel value="#{messages.multiplier1}" styleClass="takionLabel" style="float: center; width:60px;"/>
+        <p:outputLabel value="#{messages.referRate1}" styleClass="takionLabel" style="float: center; width:60px;"/>
+        <p:outputLabel value="#{messages.multiplier2}" styleClass="takionLabel" style="float: center; width:60px;"/>
+        <p:outputLabel value="#{messages.referRate2}" styleClass="takionLabel" style="float: center; width:60px;"/>
+        
+        <p:outputLabel value="#{messages.upperRange}" styleClass="takionLabel" style="float: center; "/>
+
+        <p:outputLabel value="#{messages.rateForRange}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.rateForOutOfRange}" styleClass="takionLabel" style="float: center; "/>
+                 
+         <p:outputLabel value="1" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140105" style="float:center;"/>
+         <p:inputText value="20140405" style="float:center;"/>
+         <p:inputText value="0.03" style="float:center; "/>
+         <p:inputText value="1" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="-1" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="0.035" style="float:center; "/>
+
+         <p:inputText value="0.05" style="float: center; "/>
+         <p:inputText value="0.01" style="float:center; "/>
+        
+        <p:outputLabel value=" " />
+        <p:outputLabel value=" " />
+        <p:outputLabel value=" " />
+
+         <p:inputText value="0.03" style="float:center; "/>
+         <p:inputText value="1" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="0.035" style="float:center; "/>
+
+         <p:inputText value="0.05" style="float: center; "/>
+         <p:inputText value="0.01" style="float:center; "/>
+         
+        
+        <p:outputLabel value="2" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140405" style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         
+        <p:inputText value="" style="float:center; "/>
+        <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel=" " itemValue="FRN"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+        <p:inputText/>
+
+        <p:inputText/>
+        <p:inputText/>
+        
+        <p:outputLabel value=" " />
+        <p:outputLabel value=" " />
+        <p:outputLabel value=" " />
+        
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+
+         <p:inputText value="" style="float: center; "/>
+         <p:inputText value="" style="float:center; "/>
+         
+         <p:outputLabel value="3" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:inputText value="20141005" style="float: center; "/>
+        <p:inputText/>
+        
+        <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+        <p:inputText/>
+        <p:inputText value="" style="float:center; "/>
+        <p:inputText/>
+        
+        <p:outputLabel value=" " />
+        <p:outputLabel value=" " />
+        <p:outputLabel value=" " />
+
+        <p:inputText value="" style="float:center; "/>
+         <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="KTB3M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="CD91" itemValue="FRN"/>
+              <f:selectItem itemLabel="LIBOR6M" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="..." itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+
+         <p:inputText value="" style="float: center; "/>
+         <p:inputText value="" style="float:center; "/>
+         
+        <p:outputLabel value="..." styleClass="takionLabel"  style="float: center; "/>
+      </p:panelGrid>
+  </h:form>
+</ui:composition>

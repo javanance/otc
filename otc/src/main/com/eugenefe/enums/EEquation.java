@@ -22,6 +22,11 @@ public enum EEquation {
 	}
 	,START_WITH ("startWith", 1){
 		public boolean check(Object aa, String cond1, String cond2){
+			System.out.println("StratWith:"+ String.valueOf(aa).startsWith(cond1) +":" + String.valueOf(aa));
+			if(String.valueOf(aa)==null){
+				System.out.println("StratWith1:"+ String.valueOf(aa));
+				return false;
+			}
 			return String.valueOf(aa).startsWith(cond1);
 		}
 	}

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -16,7 +17,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,9 +27,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.IndexColumn;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.log.Log;
 
+import com.eugenefe.entity.component.PropertyEquation;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 import com.eugenefe.util.EColumnType;
@@ -49,6 +54,8 @@ public class Portfolio implements IPortfolio, Serializable {
 	private Portfolio parentPortfolio;
 	private Portfolio replicatePortfolio;
 	private String portName;
+//	private String portPrefix;
+	private String portType;
 	private String groupId;
 	private String level1;
 	private String level2;
@@ -56,19 +63,18 @@ public class Portfolio implements IPortfolio, Serializable {
 	private String level4;
 	private String level5;
 	private BigDecimal weight;
-	// private Set<Portfolio> childPortfolios = new HashSet<Portfolio>(0);
-	// private Set<IPortfolio> childPortfolios = new HashSet<IPortfolio>(0);
+	private Hierarchy hierarchy;
+
 	private List<Portfolio> childPortfolios = new ArrayList<Portfolio>();
 	private List<Portfolio> copiedPortfolioList = new ArrayList<Portfolio>();
+		
+	private List<PropertyEquation> portDefineIndexList = new ArrayList<PropertyEquation>();
 	
-	private Map<Portfolio, Double> subPortfolioMap = new HashMap<Portfolio, Double>();
-	private List<PortfolioCompo> portfolioCompoList = new ArrayList<PortfolioCompo>();
-	private List<PortfolioDefineNew> portDefineList = new ArrayList<PortfolioDefineNew>();
-
+	private Map<Position, BigDecimal> portPositionMap = new HashMap<Position, BigDecimal>();
+	
+	private List<Position> portDetailList= new ArrayList<Position>();
 	
 	private List<PortfolioReturn> portfolioReturns = new ArrayList<PortfolioReturn>();
-
-	// private List<PositionReturn> positions = new ArrayList<PositionReturn>();
 
 	public Portfolio() {
 	}
@@ -93,15 +99,34 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.portId = portId;
 	}
 	@Column(name = "PORT_NAME", length = 50)
-	@AnnoMethodTree(order=20, init=true)
+	@AnnoMethodTree(order=11, init=true)
 	public String getPortName() {
 		return this.portName;
 	}
-
 	public void setPortName(String portName) {
 		this.portName = portName;
 	}
 	
+	@Column(name = "PORT_TYPE", length = 20)
+	@AnnoMethodTree(order=12, init=true)	
+	public String getPortType() {
+		return portType;
+	}
+
+	public void setPortType(String portType) {
+		this.portType = portType;
+	}
+
+//	@Column(name = "PORT_PREFIX", length = 20)
+//	@AnnoMethodTree(order=13, init=true)	
+//	public String getPortPrefix() {
+//		return portPrefix;
+//	}
+//
+//	public void setPortPrefix(String portPrefix) {
+//		this.portPrefix = portPrefix;
+//	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PARENT_PORT_ID")
 	@AnnoMethodTree(order=30, init=false)
@@ -135,7 +160,7 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.groupId = groupId;
 	}
 
-	@Column(name = "LEVEL1", length = 20)
+	@Column(name = "LEVEL1", length = 50)
 	@AnnoMethodTree(order=50, init=true)
 	public String getLevel1() {
 		return this.level1;
@@ -145,7 +170,7 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.level1 = level1;
 	}
 
-	@Column(name = "LEVEL2", length = 20)
+	@Column(name = "LEVEL2", length = 50)
 	@AnnoMethodTree(order=51, init=true)
 	public String getLevel2() {
 		return this.level2;
@@ -155,7 +180,7 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.level2 = level2;
 	}
 
-	@Column(name = "LEVEL3", length = 20)
+	@Column(name = "LEVEL3", length = 50)
 	@AnnoMethodTree(order=52, init=true)
 	public String getLevel3() {
 		return this.level3;
@@ -165,7 +190,7 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.level3 = level3;
 	}
 
-	@Column(name = "LEVEL4", length = 20)
+	@Column(name = "LEVEL4", length = 50)
 	@AnnoMethodTree(order=53, init=true)
 	public String getLevel4() {
 		return this.level4;
@@ -175,7 +200,7 @@ public class Portfolio implements IPortfolio, Serializable {
 		this.level4 = level4;
 	}
 
-	@Column(name = "LEVEL5", length = 20)
+	@Column(name = "LEVEL5", length = 50)
 	@AnnoMethodTree(order=54, init=true)
 	public String getLevel5() {
 		return this.level5;
@@ -230,21 +255,52 @@ public class Portfolio implements IPortfolio, Serializable {
 	public void setCopiedPortfolioList(List<Portfolio> copiedPortfolioList) {
 		this.copiedPortfolioList = copiedPortfolioList;
 	}
+	
 
-	@Transient
+	@ElementCollection
+	@JoinTable(name="PORTFOLIO_POSITION"
+		, joinColumns=@JoinColumn(name="PORT_ID")
+	)
+	@MapKeyJoinColumn(name="POS_ID")
+	@Column(name="POS_WEIGHT")
+	public Map<Position,BigDecimal> getPortPositionMap() {
+		return portPositionMap;
+	}
+
+	public void setPortPositionMap(Map<Position,BigDecimal> portPositionMap) {
+		this.portPositionMap = portPositionMap;
+	}
+
+	@ManyToMany
+	@JoinTable(name="PORTFOLIO_POSITION"
+		, joinColumns=@JoinColumn(name="PORT_ID")
+		,inverseJoinColumns=@JoinColumn(name="POS_ID")
+	)
+	public List<Position> getPortDetailList() {
+		return portDetailList;
+	}
+
+	public void setPortDetailList(List<Position> portDetailList) {
+		this.portDetailList = portDetailList;
+	}
+
+//	@Transient
 //	@ElementCollection
 //	@MapKeyJoinColumn(name="CHILD_PORTFOLIO_ID")
 //	@JoinTable(name="PORTFOLIO_COMPO"
 //				, joinColumns=@JoinColumn(name="PORTFOLIO_ID")
 //	)
 //	@Column(name="PORT_WEIGHT")
-	public Map<Portfolio, Double> getSubPortfolioMap() {
-		return subPortfolioMap;
-	}
-
-	public void setSubPortfolioMap(Map<Portfolio, Double> subPortfolioMap) {
-		this.subPortfolioMap = subPortfolioMap;
-	}
+//	public Map<Portfolio, Double> getSubPortfolioMap() {
+//		return subPortfolioMap;
+//	}
+//
+//	public void setSubPortfolioMap(Map<Portfolio, Double> subPortfolioMap) {
+//		this.subPortfolioMap = subPortfolioMap;
+//	}
+	
+	
+	
 	
 //	@Transient
 //	public List<Map.Entry<Portfolio, Double>> getSubPortfolioList(){
@@ -252,26 +308,15 @@ public class Portfolio implements IPortfolio, Serializable {
 //	}
 
 	
-	@OneToMany(mappedBy="portfolio")
-	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.DELETE_ORPHAN})
-	public List<PortfolioCompo> getPortfolioCompoList() {
-		return portfolioCompoList;
-	}
-
-	public void setPortfolioCompoList(List<PortfolioCompo> portfolioCompoList) {
-		this.portfolioCompoList = portfolioCompoList;
-	}
-
-	@OneToMany(mappedBy="portfolio")	
-	public List<PortfolioDefineNew> getPortDefineList() {
-		return portDefineList;
-	}
-
-
-
-	public void setPortDefineList(List<PortfolioDefineNew> portDefineList) {
-		this.portDefineList = portDefineList;
-	}
+	
+//	@OneToMany(mappedBy="portfolioOld")	
+//	public List<PortfolioDefineNew> getPortDefineList() {
+//		return portDefineList;
+//	}
+//
+//	public void setPortDefineList(List<PortfolioDefineNew> portDefineList) {
+//		this.portDefineList = portDefineList;
+//	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "portfolio")
 	@AnnoMethodTree(order=70, init=false, type= EColumnType.List)
@@ -282,7 +327,32 @@ public class Portfolio implements IPortfolio, Serializable {
 	public void setPortfolioReturns(List<PortfolioReturn> portfolioReturns) {
 		this.portfolioReturns = portfolioReturns;
 	}
+	
+	@ManyToOne
+	@JoinColumn(name="HIER_ID")
+	@AnnoMethodTree(order=80, init=false)
+	public Hierarchy getHierarchy() {
+		return hierarchy;
+	}
 
+	public void setHierarchy(Hierarchy hierarchy) {
+		this.hierarchy = hierarchy;
+	}
+
+	
+	@ElementCollection
+	@CollectionTable(name="PORTFOLIO_DEFINE", joinColumns= @JoinColumn(name="PORT_ID"))
+	@IndexColumn(name="LVL" , base=1)
+//	@JoinTable(name="PORTFOLIO_DEFINE")
+//	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	public List<PropertyEquation> getPortDefineIndexList() {
+		return portDefineIndexList;
+	}
+
+	public void setPortDefineIndexList(List<PropertyEquation> portDefineIndexList) {
+		this.portDefineIndexList = portDefineIndexList;
+	}
+	
 	// @ManyToMany(fetch = FetchType.LAZY)
 	// @FilterJoinTable(name= "filterCurrentDatePortfolioDetail", condition
 	// ="BSSD = :currentDate")
@@ -299,6 +369,8 @@ public class Portfolio implements IPortfolio, Serializable {
 	// public void setPositions(Set<PositionReturn> positions) {
 	// this.positions = positions;
 	// }
+
+
 
 	@Override
 	@Transient

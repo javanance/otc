@@ -106,7 +106,7 @@ public class PortfolioDefineNew implements Serializable{
 		this.equation = equation;
 	}
 
-	@Column(name = "CONDITION_1", nullable = true, length = 20)
+	@Column(name = "CONDITION_1", nullable = true)
 	@AnnoMethodTree(order =31, init=true)
 	public String getCondition1() {
 		return condition1;
@@ -116,7 +116,7 @@ public class PortfolioDefineNew implements Serializable{
 		this.condition1 = condition1;
 	}
 
-	@Column(name = "CONDITION_2", nullable = true, length = 20)
+	@Column(name = "CONDITION_2", nullable = true)
 	@AnnoMethodTree(order =32, init=true)
 	public String getCondition2() {
 		return condition2;

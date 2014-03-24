@@ -1,0 +1,56 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelDlsCdsM">
+
+  <p:panel header="현금흐름">
+      <p:panelGrid columns="3">    
+        
+        <p:outputLabel value="부도발생 인식기준"/>
+        <!-- <p:selectOneMenu value="" style="width:100%">
+            <f:selectItem itemLabel="최초부도" itemValue="FRN"/>
+            <f:selectItem itemLabel="두번째 부도" itemValue="InversFloater"/>
+            <f:selectItem itemLabel="모두 부도" itemValue="InversFloater"/>
+        </p:selectOneMenu> -->                
+        <p:inputText value="1"/>
+        <p:outputLabel value="번째  부도"/>
+        
+      </p:panelGrid>
+      <p:panelGrid columns="10" style="background: white" columnClasses="takion77-alignTop, takion77-alignTop">
+        <p:panelGrid columns="2">
+          <f:facet name="header">
+            <p:outputLabel value="부도 미발생시  현금흐름"/>
+          </f:facet>
+        <p:outputLabel value="#{messages.cdsFee}" styleClass="takionLabel" />
+        <p:inputText value="0.015"/>
+
+        <p:outputLabel value="#{messages.feeTerm}" styleClass="takionLabel" />
+        <p:inputText value="Bullet"/>
+        
+        <p:outputLabel value="#{messages.feePayMethod}" styleClass="takionLabel" />
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="InArrear" itemValue="FRN"/>
+              <f:selectItem itemLabel="InAdvance" itemValue="InversFloater"/>
+         </p:selectOneMenu>                
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+        <p:outputLabel value=" "/>
+    </p:panelGrid>
+        <p:panelGrid columns="2">
+          <f:facet name="header">
+            <p:outputLabel value="부도 발생시  현금흐름"/>
+          </f:facet>
+           <p:selectOneMenu>
+              <f:selectItem itemLabel="잔존가액 현금청산" itemValue="FRN"/>
+              <f:selectItem itemLabel="부도자산 인수" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="전액 손실" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+        </p:panelGrid>
+     </p:panelGrid>   
+</p:panel>        
+
+  </h:form>
+</ui:composition>

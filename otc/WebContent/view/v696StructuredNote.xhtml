@@ -12,6 +12,11 @@
   
   <ui:define name="layoutInnerBottom">
     <p:tabView id="hifiveTabView" dynamic="true"  orientation="top" widgetVar="wgHifiveTabView">
+      
+      <p:tab title="#{messages.couponSchedule}">
+          <ui:include src="/temp/panelStructuredNoteCouponSchedule.xhtml" />
+      </p:tab>
+      
       <p:tab title="#{messages.referenceRate}">
           <ui:include src="/temp/panelStructuredNoteReference.xhtml" />
       </p:tab>
@@ -23,10 +28,21 @@
       <p:tab title="#{messages.swapRate}">
           <ui:include src="/temp/panelStructuredNoteSwapRate.xhtml" />
       </p:tab>
+  
+      <p:tab title="#{messages.creditInfo}">
+          <ui:include src="/temp/panelCreditDerivativeReference.xhtml" />
+      </p:tab>
+      
+      <p:tab title="#{messages.irOption}">
+          <ui:include src="/temp/panelIrOption.xhtml" />
+      </p:tab>
       
       <p:tab title="#{messages.additionalOption}">
           <ui:include src="/temp/panelStructuredNoteOption.xhtml" />
       </p:tab>
+      
+
+ 
     </p:tabView>
   </ui:define>
 </ui:composition>

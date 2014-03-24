@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,6 +28,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Formula;
 
+import com.eugenefe.enums.EBoolean;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 
@@ -41,7 +44,7 @@ public class PortfolioNew implements java.io.Serializable {
 	private String portfolioName;
 	private String portfolioType;
 	private Hierarchy hierarchy;
-	private String changeable;
+	private EBoolean changeable;
 
 	
 	private Map<PortfolioNew, BigDecimal> subPortfolioMap = new HashMap<PortfolioNew, BigDecimal>();
@@ -145,11 +148,12 @@ public class PortfolioNew implements java.io.Serializable {
 
 	@Column(name = "CHANGEABLE", length = 1)
 	@AnnoMethodTree(order =40, init=true)	
-	public String getChangeable() {
+	@Enumerated(EnumType.STRING)
+	public EBoolean getChangeable() {
 		return changeable;
 	}
 
-	public void setChangeable(String changeable) {
+	public void setChangeable(EBoolean changeable) {
 		this.changeable = changeable;
 	}
 	

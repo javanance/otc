@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelDlsRetrunSwapSt">
+    <p:growl id="messages" showDetail="true" />
+
+<!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+
+     <p:panel header="투자전략">
+      <p:commandButton value="전략추가"/>
+      <p:commandButton value="전략수정"/>
+      <p:commandButton value="전략삭제"/>
+      <p:panelGrid columns="5" style="background: white">
+        <p:outputLabel value="전략이름" styleClass="takionLabel"  style="float: center;"/>
+        
+        <p:outputLabel value="#{messages.KOSPI200}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.HSCEI}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.SP500}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="..." styleClass="takionLabel"  style="float: center;"/>
+                
+        <p:outputLabel value="공격적 전략" styleClass="takionLabel" style="float: center;"/>
+        <p:inputText value="0.5" style="float: center;"/>
+        <p:inputText value="0.3" style="float: center;"/>
+        <p:inputText value="0.2" style="float: center;"/>
+        <p:inputText value="..." style="float: center;"/>
+        
+        <p:outputLabel value="중립적 전략" styleClass="takionLabel" style="float: center;"/>
+        <p:inputText value="0.34" style="float: center;"/>
+        <p:inputText value="0.33" style="float: center;"/>
+        <p:inputText value="0.33" style="float: center;"/>
+        <p:inputText value="..." style="float: center;"/>
+        
+        <p:outputLabel value="방어적 전략" styleClass="takionLabel" style="float: center;"/>                
+        <p:inputText value="0.2" style="float: center;"/>
+        <p:inputText value="0.3" style="float: center;"/>
+        <p:inputText value="0.5" style="float: center;"/>
+        <p:inputText value="..." style="float: center;"/>
+                        
+
+         <p:outputLabel value="..." styleClass="takionLabel"  style="float: center;"/>
+      </p:panelGrid>
+
+     </p:panel>
+     
+<!-- </p:panelGrid> -->
+
+  </h:form>
+</ui:composition>

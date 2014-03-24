@@ -6,7 +6,7 @@
   template="/templates/primeTemplates.xhtml">
 
   <ui:define name="layoutLeft">
-    <p:accordionPanel>
+    <p:accordionPanel id="accoPort">
       <p:tab title="#{messages.userPortfolio}" >
         <ui:include src="/temp/treeUserPortfolio.xhtml" />
       </p:tab>
@@ -16,20 +16,33 @@
     </p:accordionPanel>
   </ui:define>
 
-  <ui:define name="layoutInnerTop">
+  <ui:define name="layoutInnerCenter">
      <p:tabView id="tabPortfolio1" dynamic="true" orientation="top">
       <p:tab title="#{messages.portfolioMaster}">
         <ui:include src="/temp/tablePortfolioMaster.xhtml" />
+        
+
+        <ui:include src="/temp/tablePortfolioDefine.xhtml" />
+        
+        <!-- <p> *Sub Portfolios        </p>
+        <ui:include src="/temp/dataGridPortfolioSub.xhtml" /> -->
+                
+        <ui:include src="/temp/tablePortfolioSub.xhtml" />
       </p:tab>
-      <p:tab title="#{messages.portfolioDefine}">
+
+      <p:tab title="#{messages.subPortfolio}">
+        <!-- <ui:include src="/temp/tablePortfolioSub.xhtml" /> -->
+        <!-- <ui:include src="/temp/dataGridPortfolioSub.xhtml" /> -->
       </p:tab>
-      <p:tab title="#{messages.portfolioStructure}">
+
+      <p:tab title="#{messages.portfolioPosition}">
+        <ui:include src="/temp/tablePortfolioPosition.xhtml" />      
       </p:tab>
      </p:tabView>     
             
   </ui:define>
 
-  <ui:define name="layoutInnerCenter">
+<!--   <ui:define name="layoutInnerCenter">
     <p:tabView id="tabPortfolio" dynamic="true" orientation="top">
       <p:tab title="#{messages.portfolioDefine}">
         
@@ -41,7 +54,7 @@
       <p:tab title="#{messages.hifiveSwapIr}">
       </p:tab>
     </p:tabView>
-  </ui:define>
+  </ui:define> -->
 
   <!-- <p:dialog header="#{messages.selectPortfolioToCopy}" widgetVar="wgDialogPortTree">
     <ui:include src="/temp/treeUserPortfolio1.xhtml" />

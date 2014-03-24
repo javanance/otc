@@ -17,20 +17,29 @@ public class HierarchyDetailId implements java.io.Serializable {
 
 	private String hierarchyId;
 	private String hierLevel;
-
+//	private int lvl;
+	
 	public HierarchyDetailId() {
 	}
 
+//	public HierarchyDetailId(String hierarchyId, int lvl) {
+//		super();
+//		this.lvl = lvl;
+//	}
+	
 	public HierarchyDetailId(String hierarchyId, String hierLevel) {
 		this.hierarchyId = hierarchyId;
 		this.hierLevel = hierLevel;
 	}
 
+	
 	@Column(name = "HIERARCHY_ID", nullable = false, length = 20)
 	@AnnoMethodTree(order =10, init=true)
 	public String getHierarchyId() {
 		return this.hierarchyId;
 	}
+
+	
 
 	public void setHierarchyId(String hierarchyId) {
 		this.hierarchyId = hierarchyId;
@@ -46,6 +55,8 @@ public class HierarchyDetailId implements java.io.Serializable {
 		this.hierLevel = hierLevel;
 	}
 
+	
+	
 	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
@@ -62,7 +73,6 @@ public class HierarchyDetailId implements java.io.Serializable {
 						&& castOther.getHierLevel() != null && this.getHierLevel().equals(castOther.getHierLevel())));
 	}
 
-
 	@Override
 	public int hashCode() {
 		int result = 17;
@@ -72,4 +82,41 @@ public class HierarchyDetailId implements java.io.Serializable {
 		return result;
 	}
 
+
+/*	@Column(name = "LVL", nullable = false)
+	@AnnoMethodTree(order =20, init=true)
+	public int getLvl() {
+		return lvl;
+	}
+
+	public void setLvl(int lvl) {
+		this.lvl = lvl;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if ((this == other))
+			return true;
+		if ((other == null))
+			return false;
+		if (!(other instanceof HierarchyDetailId))
+			return false;
+		HierarchyDetailId castOther = (HierarchyDetailId) other;
+
+		return ((this.getHierarchyId() == castOther.getHierarchyId()) || (this.getHierarchyId() != null
+				&& castOther.getHierarchyId() != null && this.getHierarchyId().equals(castOther.getHierarchyId())))
+					&& ((this.getLvl() == castOther.getLvl()));
+	}
+
+
+	@Override
+	public int hashCode() {
+		int result = 17;
+
+		result = 37 * result + (getHierarchyId() == null ? 0 : this.getHierarchyId().hashCode());
+		result = 37 * result + (this.getLvl());
+		return result;
+	}	
+	*/
+	
 }

@@ -34,10 +34,10 @@
         <f:facet name="header"><h:outputText value="#{messages.hierarchyName}" /></f:facet>
         <h:outputText value="#{_var.hierarchyName}"/>
       </p:column>                
-      <p:column id="colIsUse" sortBy="#{_var.useYn}" 
-                filterBy="#{_var.useYn}" filterMatchMode="contains"  width="30">
+      <p:column id="colIsUse" sortBy="#{_var.useable}" 
+                filterBy="#{_var.useable}" filterMatchMode="contains"  width="30">
         <f:facet name="header"><h:outputText value="#{messages.useYn}" /></f:facet>
-        <h:outputText value="#{_var.useYn}"/>
+        <h:outputText value="#{_var.useable}"/>
       </p:column>                                
   </p:dataTable>
   </h:form>

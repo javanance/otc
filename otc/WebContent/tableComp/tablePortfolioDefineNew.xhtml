@@ -10,7 +10,7 @@
 
     <p:outputPanel style="padding: 0.5em 1em;">
       <p:commandButton id="btn1" value="#{messages.addOrUpdate}" update="pGridPortDefine, @(.ui-datatable)"
-        action="#{tableHierarchyInit.addHierarchyDetail}" />
+        action="#{tableHierarchyInit.addHierarchyDefine}" />
     </p:outputPanel>
     <p:separator />
 
@@ -19,7 +19,7 @@
       <p:outputLabel value="#{tableHierarchyInit.hierId}" />
       
       <p:outputLabel value="#{messages.hierarchyLevel}" styleClass="takionLabel"/>
-      <p:inputMask value="#{tableHierarchyInit.level}" mask="Level_9" />
+      <p:inputMask value="#{tableHierarchyInit.lvl}" mask="9" />
 
       <p:outputLabel value="#{messages.propTable}" styleClass="takionLabel" />
       <p:selectOneMenu id="propTable" value="#{tableHierarchyInit.propTable}" style=" width:100%;">

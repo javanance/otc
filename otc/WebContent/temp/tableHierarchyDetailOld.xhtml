@@ -1,0 +1,70 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   
+  <h:form id="formHierarchyDetail">
+      <p:growl id="messages" showDetail="true" />
+      <p:outputPanel style="padding: 0.5em 1em;">
+        <p:commandButton  value="#{messages.save}" action="#{tableHierarchyInit.saveHierDetail}"   />
+        <p:commandButton  value="#{messages.makePortfolio}" action="#{tableHierarchyInit.makePortfolio}"   />
+        <p:commandButton  value="#{messages.makePortfolio2}" action="#{tableHierarchyInit.makePortfolio2}"   />
+        <p:commandButton  value="#{messages.makePortfolio3}" action="#{tableHierarchyInit.makePortfolio3}"   />
+        <p:commandButton  value="#{messages.makePortfolio4}" action="#{tableHierarchyInit.makePortfolio4}"   />
+      </p:outputPanel>
+      
+      <p:dataTable id="tableHierDetail" var="_var" value="#{tableHierarchyInit.selectHierarchy.hierarchyDetailList}" 
+      widgetVar="wgTableHierarchyDetail"
+      selectionMode="single" selection="#{tableHierarchyInit.selectHierDetail}"
+      rowKey="#{_var}"
+      emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false"
+      rows="30"
+      >
+      <p:ajax event="rowSelect" listener="#{tableHierarchyInit.hiearchyDetailSelect}" 
+        update="@parent:@parent:hierarchyLevel:formPortfolioDefine:pGridPortDefine" />
+
+      <p:column id="colHierId" sortBy="#{_var.id.hierarchyId}" 
+                filterBy="#{_var.id.hierarchyId}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.hierarchyId}" /></f:facet>
+        <h:outputText value="#{_var.id.hierarchyId}"/>
+      </p:column>
+      <p:column id="colHierLevel" sortBy="#{_var.id.hierLevel}" 
+                filterBy="#{_var.id.hierLevel}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.hierarchyLevel}" /></f:facet>
+        <h:outputText value="#{_var.id.hierLevel}"/>
+      </p:column>
+                 
+      <p:column id="colTableId" sortBy="#{_var.tableId}" 
+                filterBy="#{_var.tableId}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.tableId}" /></f:facet>
+        <h:outputText value="#{_var.tableId}"/>
+      </p:column>                                      
+      
+      <p:column id="colColumnId" sortBy="#{_var.columnId}" 
+                filterBy="#{_var.columnId}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.columnId}" /></f:facet>
+        <h:outputText value="#{_var.columnId}"/>
+      </p:column>                                      
+      
+      <p:column id="colEquation" sortBy="#{_var.equation}" 
+                filterBy="#{_var.equation}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.equation}" /></f:facet>
+        <h:outputText value="#{_var.equation}"/>
+      </p:column>
+      
+      <p:column id="colCond1" sortBy="#{_var.condition1}" 
+                filterBy="#{_var.condition1}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.condition1}" /></f:facet>
+        <h:outputText value="#{_var.condition1}"/>
+      </p:column>
+      
+      <p:column id="colCond2" sortBy="#{_var.condition2}" 
+                filterBy="#{_var.condition2}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.condition2}" /></f:facet>
+        <h:outputText value="#{_var.condition2}"/>
+      </p:column>
+  </p:dataTable>
+  </h:form>
+</ui:composition>

@@ -39,6 +39,7 @@ import com.eugenefe.entity.PortfolioDefineNew;
 import com.eugenefe.entity.PortfolioNew;
 import com.eugenefe.entity.Position;
 import com.eugenefe.entity.Scenario;
+import com.eugenefe.enums.EBoolean;
 import com.eugenefe.util.MarketVariableType;
 import com.eugenefe.util.NamedQuery;
 
@@ -155,7 +156,7 @@ public class TablePortfolioNewInit {
 		portList = session.createCriteria(PortfolioNew.class).list();
 		
 		for(PortfolioNew aa : portList){
-			if(aa.getChangeable().equals("Y")){
+			if(aa.getChangeable().getValue()){
 				userPortfolioList.add(aa);
 			}else{
 				sysPortfolioList.add(aa);
@@ -204,7 +205,7 @@ public class TablePortfolioNewInit {
 		selectPortfolio= (PortfolioNew)selectNode.getData();
 		
 		addPortfolio = new PortfolioNew();
-		addPortfolio.setChangeable("Y");	
+		addPortfolio.setChangeable(EBoolean.Y);	
 		if(selectPortfolio!=null){
 			addPortfolio.setPortfolioId(selectPortfolio.getPortfolioId());
 			addPortfolio.setPortfolioName(selectPortfolio.getPortfolioName());
@@ -223,7 +224,7 @@ public class TablePortfolioNewInit {
 	}
 	
 	public void savePortfolio(){
-		addPortfolio.setChangeable("Y");
+		addPortfolio.setChangeable(EBoolean.Y);
 
 		for(PortfolioNew aa : portList){
 			if(aa.getPortfolioId().equals(addPortfolio.getPortfolioId())){

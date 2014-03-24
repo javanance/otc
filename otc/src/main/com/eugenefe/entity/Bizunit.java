@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.eugenefe.enums.EBoolean;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 import com.eugenefe.util.EColumnType;
@@ -36,7 +39,7 @@ public class Bizunit implements java.io.Serializable, ITree {
 	private String orgType;
 	private String openDate;
 	private String closeDate;
-	private String useYN;
+	private EBoolean usable;
 //	private Set<Employee> employees = new HashSet<Employee>(0);
 	private List<Employee> employees = new ArrayList<Employee>();
 	private List<Bizunit> childBizunits = new ArrayList<Bizunit>();
@@ -152,12 +155,13 @@ public class Bizunit implements java.io.Serializable, ITree {
 //	@Transient
 	@Column(name = "USE_YN")
 	@AnnoMethodTree(order =25, init=true, aggregatable=true)
-	public String getUseYN() {
-		return useYN;
+	@Enumerated(EnumType.STRING)
+	public EBoolean getUsable() {
+		return usable;
 	}
 
-	public void setUseYN(String useYN) {
-		this.useYN = useYN;
+	public void setUsable(EBoolean usable) {
+		this.usable = usable;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bizunit")

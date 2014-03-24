@@ -4,15 +4,40 @@
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
-  <h:form id="formPanelCreditCollateral">
+  
+  <h:form id="formPanelCreditRef">
     <p:growl id="messages" showDetail="true" />
 
 <!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+      <p:panelGrid columns="12">
+              <p:outputLabel value="#{messages.nthToDefault}" styleClass="takionLabel" />
+        <p:inputText value="2"/>
+
+        <p:outputLabel value="#{messages.cdsFee}" styleClass="takionLabel" />
+        <p:inputText value="0.015"/>
+
+        <p:outputLabel value="#{messages.feeTerm}" styleClass="takionLabel" />
+        <p:inputText value="Bullet"/>
+        
+        <p:outputLabel value="#{messages.feePayMethod}" styleClass="takionLabel" />
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="InArrear" itemValue="FRN"/>
+              <f:selectItem itemLabel="InAdvance" itemValue="InversFloater"/>
+         </p:selectOneMenu>                
+
+        <!-- <p:outputLabel value="#{messages.lossRate}" styleClass="takionLabel" />
+        <p:inputText value="0.2"/> -->
+        
+        <p:outputLabel value="#{messages.recoveryRate}" styleClass="takionLabel" />
+        <p:inputText value="0.45"/>
+      </p:panelGrid>
+      
+      <p:separator/>
 
       <p:panelGrid columns="5" style="background: white">
         <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center;"/>
-        <p:outputLabel value="#{messages.referenceObligor}" styleClass="takionLabel" style="float: center;"/>
-        <p:outputLabel value="#{messages.referenceAsset}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.referenceObligor}" styleClass="takionLabel" style="float: center;" title="준거자산의  차주를  입력"/>
+        <p:outputLabel value="#{messages.referenceAsset}" styleClass="takionLabel" style="float: center; " title="준거자산의 상품 코드를 입력함"/>
         <p:outputLabel value="#{messages.referenceAssetName}" styleClass="takionLabel" style="float: center; "/>
         <p:outputLabel value="#{messages.currCD}" styleClass="takionLabel" style="float: center; "/>
         
@@ -38,8 +63,7 @@
 
          <p:outputLabel value="..." styleClass="takionLabel"  style="float: center;"/>
       </p:panelGrid>
-<!--      <p:panel>
-     </p:panel> -->
+
 
 <!--     </p:panelGrid> -->
   </h:form>

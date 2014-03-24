@@ -4,6 +4,7 @@
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
+  <p:tooltip/>
   <h:form id="formPanelHierPortfolio">
     <p:growl id="messages" showDetail="true" />
 
@@ -46,6 +47,15 @@
               <f:selectItem itemLabel="DualSpreadRangeAccrual" itemValue="DualSpreadRangeAccrual"/>
               <f:selectItem itemLabel="AverageRangeAccrual" itemValue="DualSpreadRangeAccrual"/>
               <f:selectItem itemLabel="AverageSpreadRangeAccrual" itemValue="DualSpreadRangeAccrual"/>
+              
+              <f:selectItem itemLabel="CDS" itemValue="DualSpreadRangeAccrual"/>
+              <f:selectItem itemLabel="PlainCLN" itemValue="DualSpreadRangeAccrual"/> 
+              <f:selectItem itemLabel="RangeCLN" itemValue="DualSpreadRangeAccrual"/>
+              
+              <f:selectItem itemLabel="Cap" itemValue="DualSpreadRangeAccrual"/>
+              <f:selectItem itemLabel="Floor" itemValue="DualSpreadRangeAccrual"/>
+              <f:selectItem itemLabel="Collar" itemValue="DualSpreadRangeAccrual"/>
+              <f:selectItem itemLabel="Swaption" itemValue="DualSpreadRangeAccrual"/>
          </p:selectOneMenu>        
 
         <p:outputLabel value="#{messages.issuer}" styleClass="takionLabel" />
@@ -114,16 +124,34 @@
         <p:inputText value="10,000 USD"/>
       
       </p:panelGrid>
+
+        <p:separator/>
+        <h4> ** 결제정보  ** </h4>
+        <p:panelGrid columns="8">
+          <p:outputLabel value="#{messages.settleCurrency}" styleClass="takionLabel" />
+          <p:inputText value="USD"/>
+
+          <p:outputLabel value="#{messages.settleDate}" styleClass="takionLabel"  title="결제지역의 영업일 규칙이 적용된  실제 결제일을 입력함" />
+          <p:inputText id="settleDate" value="20170107"  />                    
+          <!-- <p:tooltip for="settleDate" value="결제지역의 영업일 규칙이 적용된  실제 결제일을 입력함"/> -->
+          
+          <p:outputLabel value="#{messages.settleDayRule}" styleClass="takionLabel"  />
+            <p:inputText value="Regular Following"/>
+            <p:inputText value="2 Days"/>
+            <p:inputText value="Act/360"/>
+        
+        </p:panelGrid>
         <p:separator/>
         
+        <h4> ** 스왑 마스터 정보 **  </h4>
         <p:panelGrid columns="10" >        
-        <p:outputLabel value="#{messages.isSwap}" styleClass="takionLabel" />
+        <p:outputLabel value="#{messages.isSwap}" styleClass="takionLabel" title="구조화금융 에 스왑조건이 부가된 경우 Y 로 입력함"/>
         <p:inputText value="Y"/>
         <p:outputLabel value="#{messages.isPayer}" styleClass="takionLabel" />
         <p:inputText value="payer"/>
         
-        <p:outputLabel value="#{messages.isFunded}" styleClass="takionLabel" />
-        <p:inputText value="N"/>
+        <!-- <p:outputLabel value="#{messages.isFunded}" styleClass="takionLabel" />
+        <p:inputText value="N"/> -->
         
         <p:outputLabel value="#{messages.swapNotional}" styleClass="takionLabel" />
         <p:inputText value="10,000,000"/>        

@@ -1,0 +1,201 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPanelStructureRef">
+    <p:growl id="messages" showDetail="true" />
+
+<!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+<p:commandButton value="addRow"/>
+      <p:panelGrid columns="16" style="background: white">
+        <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center; "/>
+        <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.couponEnd}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.paymentDate}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.couponInclude}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.couponFunction}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.funcParameter}" styleClass="takionLabel" style="float: center; "/>
+        
+        <p:outputLabel value="#{messages.multiplier1}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.referRate1}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.multiplier2}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.referRate2}" styleClass="takionLabel" style="float: center; "/>
+        
+        <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.maxReference}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.maxSpread}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.minReference}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.minSpread}" styleClass="takionLabel" style="float: center; "/>
+        
+         <p:outputLabel value="1" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140105" style="float:center; "/>
+         <p:inputText value="20140405" style="float:center; "/>
+         <p:inputText value="20140405" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
+              <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="DailyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="AsIs" itemValue="FRN"/>
+              <f:selectItem itemLabel="MthlyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="WeeklyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="HistoricalDifference" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="5 Day" style="float:center; "/>
+
+         <p:inputText value="1" style="float:center;"/>
+         <p:inputText value="CD91" style="float:center;"/>
+         <p:inputText value="-1" style="float:center; "/>
+         <p:inputText value="KTB_3M" style="float: center;"/>
+         <p:inputText value="0.01" style="float:center; "/>
+         <p:inputText value=" " style="float: center; "/>
+         <p:inputText value="0.06" style="float:center;"/>
+         <p:inputText value=" " style="float: center; "/>
+         <p:inputText value="0.02" style="float:center; "/>
+        
+<!--          <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="DailyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="AsIs" itemValue="FRN"/>
+              <f:selectItem itemLabel="MthlyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="WeeklyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="HistoricalDifference" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="5 Day" style="float:center; "/>
+         
+         <p:inputText value="1" style="float:center;"/>
+         <p:inputText value="USD CMS 3Y" style="float:center;"/>
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value="" style="float: center;"/>
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value=" " style="float: center; "/>
+         <p:inputText value="0.06" style="float:center;"/>
+         <p:inputText value=" " style="float: center; "/>
+         <p:inputText value="0.02" style="float:center; "/>
+ -->        
+        
+        <p:outputLabel value="2" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140405" style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
+              <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="AsIs" itemValue="FRN"/>
+              <f:selectItem itemLabel="DailyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="MthlyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="WeeklyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="HistoricalDifference" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        
+    <!--      <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="AsIs" itemValue="FRN"/>
+              <f:selectItem itemLabel="DailyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="MthlyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="WeeklyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="HistoricalDifference" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         
+         <p:inputText value="" style="float:center;"/>
+         <p:inputText value="" style="float:center;"/>
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value="" style="float: center;"/>
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value=" " style="float: center; "/>
+         <p:inputText value="" style="float:center;"/>
+         <p:inputText value=" " style="float: center; "/>
+         <p:inputText value="" style="float:center; "/>
+         
+     -->     
+         <p:outputLabel value="3" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:inputText value="20141005" style="float: center; "/>
+         <p:inputText value="20141005" style="float: center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
+              <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="AsIs" itemValue="FRN"/>
+              <f:selectItem itemLabel="DailyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="MthlyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="WeeklyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="HistoricalDifference" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+        
+<!--          <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>
+         <p:outputLabel value=" "/>         
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="" itemValue="FRN"/>
+              <f:selectItem itemLabel="AsIs" itemValue="FRN"/>
+              <f:selectItem itemLabel="DailyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="MthlyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="WeeklyAverage" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="HistoricalDifference" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value="" style="float:center;"/>
+         <p:inputText value="" style="float:center;"/>
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value="" style="float: center;"/>
+         <p:inputText value="" style="float:center; "/>
+         <p:inputText value="" style="float: center; "/>
+         <p:inputText value="" style="float:center;"/>
+         <p:inputText value="" style="float: center; "/>
+         <p:inputText value="" style="float:center; "/>
+ -->         
+         <p:outputLabel value="..." styleClass="takionLabel"  style="float: center; "/>
+      </p:panelGrid>
+  </h:form>
+</ui:composition>

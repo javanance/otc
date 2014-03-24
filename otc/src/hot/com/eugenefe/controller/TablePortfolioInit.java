@@ -53,8 +53,8 @@ public class TablePortfolioInit {
 //******************************************************************
 	@Create
 	public void create(){
-		sysRootNode = new DefaultTreeNode(new Portfolio("SYS_ROOT"), null);
-		userRootNode = new DefaultTreeNode(new Portfolio("USER_ROOT"), null);
+		sysRootNode = new DefaultTreeNode("HIER",new Portfolio("SYS_ROOT"), null);
+		userRootNode = new DefaultTreeNode("UD", new Portfolio("USER_ROOT"), null);
 //		parentNode = sysRootNode;
 //		dlgNode = new DefaultTreeNode(new Portfolio("USER_ROOT"), null);
 		
@@ -86,6 +86,10 @@ public class TablePortfolioInit {
 		if(selectPortfolio!=null){
 			addPortfolio.setPortId(selectPortfolio.getPortId());
 			addPortfolio.setPortName(selectPortfolio.getPortName());
+			addPortfolio.setPortType(selectPortfolio.getPortType());
+			
+//			addPortfolio.setPortPrefix(selectPortfolio.getPortPrefix());
+			
 			addPortfolio.setReplicatePortfolio(selectPortfolio.getReplicatePortfolio());
 			addPortfolio.setChildPortfolios(selectPortfolio.getChildPortfolios());
 //			addPortfolio.setPortfolioType(selectPortfolio.getPortfolioType());
@@ -99,7 +103,7 @@ public class TablePortfolioInit {
 				log.info("Update:#0,#1", addPortfolio.getPortId(), aa.getPortName());
 				aa.setPortId(addPortfolio.getPortId());
 				aa.setPortName(addPortfolio.getPortName());
-//				aa.setPortfolioType(addPortfolio.getPortfolioType());
+				aa.setPortType(addPortfolio.getPortType());
 				
 				session.update(aa);
 				session.flush();
@@ -108,7 +112,7 @@ public class TablePortfolioInit {
 		}
 //		portList.add(addPortfolio);
 		userPortfolioList.add(addPortfolio);
-		TreeNode tempNode = new DefaultTreeNode(addPortfolio, userRootNode);
+		TreeNode tempNode = new DefaultTreeNode(addPortfolio.getPortType(), addPortfolio, userRootNode);
 				
 		session.save(addPortfolio);
 		session.flush();
@@ -157,6 +161,8 @@ public class TablePortfolioInit {
 		Portfolio temp  = new Portfolio();
 		temp.setPortId(copyToPortfolio.getPortId()+"_"+selectPortfolio.getPortId());
 		temp.setPortName("*"+selectPortfolio.getPortName());
+		temp.setPortType("COPY");
+
 		temp.setWeight(new BigDecimal(1));
 		temp.setReplicatePortfolio(selectPortfolio);
 
@@ -164,7 +170,7 @@ public class TablePortfolioInit {
 		copyToPortfolio.getChildPortfolios().add(temp);
 		
 		userPortfolioList.add(temp);
-		TreeNode aaNode = new DefaultTreeNode(temp, dlgSelNode);
+		TreeNode aaNode = new DefaultTreeNode(temp.getPortType(), temp, dlgSelNode);
 		
 		session.save(temp);
 		session.flush();
@@ -178,6 +184,7 @@ public class TablePortfolioInit {
 	}
 	public void clearPortfolio(){
 		addPortfolio =new Portfolio();
+		selectPortfolio=null;
 	}
 	
 	
@@ -260,8 +267,8 @@ public class TablePortfolioInit {
 //		if(data.getReplicatePortfolio()!=null){
 //			data = data.getReplicatePortfolio();
 //		}
-		TreeNode tempNode = new DefaultTreeNode(data, node);
-		tempNode.setExpanded(true);
+		TreeNode tempNode = new DefaultTreeNode(data.getPortType(), data, node);
+//		tempNode.setExpanded(true);
 		for(Portfolio aa : data.getChildPortfolios()){
 //			log.info("Rec:#0,#1", aa.getId().getPortId());
 			log.info("Rec1:#0,#1", aa.getPortId());

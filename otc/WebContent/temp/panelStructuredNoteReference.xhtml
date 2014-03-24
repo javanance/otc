@@ -8,37 +8,38 @@
     <p:growl id="messages" showDetail="true" />
 
 <!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
-<p:commandButton value="addRow"/>
-      <p:panelGrid columns="16" style="background: white">
+<p:commandButton value="#{messages.addRow}"/>
+      <p:panelGrid columns="14" style="background: white">
         <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center; "/>
-        <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.couponEnd}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.paymentDate}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.adaptStart}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.adaptEnd}" styleClass="takionLabel" style="float: center; "/>
+<!--         <p:outputLabel value="#{messages.paymentDate}" styleClass="takionLabel" style="float: center; "/>
         <p:outputLabel value="#{messages.couponInclude}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.couponFunction}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.funcParameter}" styleClass="takionLabel" style="float: center; "/>
+ -->
+        <p:outputLabel value="#{messages.couponFunction}" styleClass="takionLabel" style="float: center; " title="참조금리가 과거 데이터 평균, 최대값, 최소값 등을 이용하는 경우 선택함"/>
+        <p:outputLabel value="#{messages.funcParameter}" styleClass="takionLabel" style="float: center; " title="참조금리 결정시 과거 5일 평균 등 함수에 필요한 매개변수을 입력함" />
         
-        <p:outputLabel value="#{messages.multiplier1}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.multiplier1}" styleClass="takionLabel" style="float: center; " title="참조금리가 CD91-KTB3M + 20bp 인 경우 승수1:1, 참조금리 1 : CD91, 승수2:-1, 참조금리 2: KTB3M, 스프레드:0.002 입력함"/>
         <p:outputLabel value="#{messages.referRate1}" styleClass="takionLabel" style="float: center; "/>
         <p:outputLabel value="#{messages.multiplier2}" styleClass="takionLabel" style="float: center; "/>
         <p:outputLabel value="#{messages.referRate2}" styleClass="takionLabel" style="float: center; "/>
         
         <p:outputLabel value="#{messages.spread}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.maxReference}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.maxSpread}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.minReference}" styleClass="takionLabel" style="float: center; "/>
-        <p:outputLabel value="#{messages.minSpread}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.maxReference}" styleClass="takionLabel" style="float: center; " title="참조금리가 min(CD91, KTB3M) 인경우, 참조금리1 : CD91, 상한참조금리 : KTB3M 입력"/>
+        <p:outputLabel value="#{messages.maxSpread}" styleClass="takionLabel" style="float: center; "  title="참조금리가 min(CD91, 5%) 인경우, 참조금리1 : CD91, 상한금리 : 0.05 입력"/>
+        <p:outputLabel value="#{messages.minReference}" styleClass="takionLabel" style="float: center; " title="참조금리가 max(CD91, KTB3M) 인경우, 참조금리1 : CD91, 하한참조금리 : KTB3M 입력"/>
+        <p:outputLabel value="#{messages.minSpread}" styleClass="takionLabel" style="float: center; " title="참조금리가 max(CD91, 2%) 인경우, 참조금리1 : CD91, 하한금리 : 0.03 입력"/>
         
          <p:outputLabel value="1" styleClass="takionLabel"  style="float: center; "/>
          <p:inputText value="20140105" style="float:center; "/>
          <p:inputText value="20140405" style="float:center; "/>
-         <p:inputText value="20140405" style="float:center; "/>
+<!--          <p:inputText value="20140405" style="float:center; "/>
          <p:selectOneMenu value="" style="width:100%">
               <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
               <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
               <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
               <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
-         </p:selectOneMenu>
+         </p:selectOneMenu> -->
          
          <p:selectOneMenu value="" style="width:100%">
               <f:selectItem itemLabel="DailyAverage" itemValue="InversFloater"/>
@@ -87,13 +88,13 @@
         <p:outputLabel value="2" styleClass="takionLabel"  style="float: center; "/>
          <p:inputText value="20140405" style="float: center; "/>
          <p:inputText value="20140705" style="float: center; "/>
-         <p:inputText value="20140705" style="float: center; "/>
+<!--          <p:inputText value="20140705" style="float: center; "/>
          <p:selectOneMenu value="" style="width:100%">
               <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
               <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
               <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
               <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
-         </p:selectOneMenu>
+         </p:selectOneMenu> -->
          
          <p:selectOneMenu value="" style="width:100%">
               <f:selectItem itemLabel="" itemValue="FRN"/>
@@ -144,13 +145,13 @@
          <p:outputLabel value="3" styleClass="takionLabel"  style="float: center; "/>
          <p:inputText value="20140705" style="float: center; "/>
          <p:inputText value="20141005" style="float: center; "/>
-         <p:inputText value="20141005" style="float: center; "/>
+<!--          <p:inputText value="20141005" style="float: center; "/>
          <p:selectOneMenu value="" style="width:100%">
               <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
               <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
               <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
               <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
-         </p:selectOneMenu>
+         </p:selectOneMenu> -->
 
          <p:selectOneMenu value="" style="width:100%">
               <f:selectItem itemLabel="" itemValue="FRN"/>

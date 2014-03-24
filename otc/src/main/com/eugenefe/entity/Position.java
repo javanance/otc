@@ -5,16 +5,25 @@ package com.eugenefe.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -44,7 +53,10 @@ public class Position implements IPortfolio, Serializable {
 	private BigDecimal initTxAmt;
 	private BigDecimal holdingQty;
 	private BigDecimal posAmt;
-
+	
+//	private Map<String, List<PositionProperty>> propertyMap = new HashMap<String, List<PositionProperty>>();
+	private List<PositionProperty> propertyList = new ArrayList<PositionProperty>();
+	private Map<HierarchyProperty, String> propMap = new HashMap<HierarchyProperty, String>();
 	public Position() {
 	}
 
@@ -227,6 +239,37 @@ public class Position implements IPortfolio, Serializable {
 
 	public void setPosAmt(BigDecimal posAmt) {
 		this.posAmt = posAmt;
+	}
+
+
+	@OneToMany(mappedBy="position")
+	public List<PositionProperty> getPropertyList() {
+		return propertyList;
+	}
+
+	public void setPropertyList(List<PositionProperty> propertyList) {
+		this.propertyList = propertyList;
+	}
+
+	
+//	@ElementCollection
+//	@CollectionTable(name="ETF_HIS", joinColumns= @JoinColumn(name="ETF_ID"))
+//	@MapKeyColumn(name="BSSD")
+	
+
+	@ElementCollection
+	@MapKeyJoinColumn(name="PROP_ID")
+	@JoinTable(name="POSITION_PROP"
+				, joinColumns=@JoinColumn(name="POS_ID")
+//				, inverseJoinColumns=@JoinColumn(name="PORT_WEIGHT")
+	)
+	@Column(name="PROP_VALUE")
+	public Map<HierarchyProperty, String> getPropMap() {
+		return propMap;
+	}
+
+	public void setPropMap(Map<HierarchyProperty, String> propMap) {
+		this.propMap = propMap;
 	}
 
 	//**************************************	

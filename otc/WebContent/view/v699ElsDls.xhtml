@@ -16,6 +16,27 @@
   <ui:define name="layoutInnerBottom">
     <p:tabView id="hifiveTabView" dynamic="true"  orientation="top" widgetVar="wgHifiveTabView">
       
+
+      <p:tab title="#{messages.rangeAccrualInfo}">
+          <ui:include src="/temp/panelDlsRange.xhtml" />
+      </p:tab>      
+
+      <p:tab title="#{messages.cdsInfo}">
+              <!-- <ui:include src="/temp/panelDlsCds.xhtml" /> -->
+        <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop">
+        <ui:include src="/temp/panelDlsCds.xhtml" />
+        <ui:include src="/temp/panelDlsCdsMaster.xhtml" />
+        </p:panelGrid>
+      </p:tab>
+
+      <p:tab title="#{messages.returnSwapInfo}">
+        <!-- <ui:include src="/temp/panelDlsReturnSwap.xhtml" /> -->
+        <ui:include src="/temp/panelDlsReturnSwapSt.xhtml" />
+        <ui:include src="/temp/panelDlsReturnSwapCp.xhtml" />
+      </p:tab>
+      
+
+
       <p:tab title="#{messages.earlyRedemptionInfo}">
            <p:outputLabel value="기존 3802 화면  이벤트 탭 활용"/>
       </p:tab>
@@ -30,19 +51,7 @@
       
       <p:tab title="#{messages.DigitalInfo}">
             <p:outputLabel value="기존 3802 화면   이벤트 탭  활용"/>
-      </p:tab>
-      
-      <p:tab title="#{messages.rangeAccrualInfo}">
-
-      </p:tab>
-
-      <p:tab title="#{messages.cdsInfo}">
-
-      </p:tab>
-
-      <p:tab title="#{messages.returnSwapInfo}">
-
-      </p:tab>      
+      </p:tab>            
     </p:tabView>
   </ui:define>
 </ui:composition>

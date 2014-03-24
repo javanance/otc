@@ -1,0 +1,71 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+  
+  <h:form id="formPanelStructureSched">
+    <p:growl id="messages" showDetail="true" />
+
+<!--     <p:panelGrid columns="2" columnClasses="takion77-alignTop, takion77-alignTop" style="background: white"> -->
+  <p:commandButton value="#{messages.addRow}"/>
+      <p:panelGrid columns="8" style="background: white">
+        <p:outputLabel value="#{messages.serial}" styleClass="takionLabel"  style="float: center; "/>
+        <p:outputLabel value="#{messages.couponStart}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.couponEnd}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.paymentDate}" styleClass="takionLabel" style="float: center; " title="영업일 규칙이 적용된 실제 이자 지급일 입력"/>
+        <p:outputLabel value="#{messages.couponInclude}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.couponAmt}" styleClass="takionLabel" style="float: center;" title="고정금리인 경우 또는 변동금리의 이자금액이 결정된 경우 입력함"/>
+        <p:outputLabel value="#{messages.currency}" styleClass="takionLabel" style="float: center; "/>
+        <p:outputLabel value="#{messages.paymentYN}" styleClass="takionLabel" style="float: center; " title="이자금액이 실제 지급된경우 Y , 지급되지 않았거나 아직 기일이 도래되지 않은 경우 N"/>
+        
+         <p:outputLabel value="1" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140105" style="float:center; "/>
+         <p:inputText value="20140405" style="float:center; "/>
+         <p:inputText value="20140405" style="float:center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
+              <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         <p:inputText value="" />
+         <p:inputText value="" />
+         <p:inputText value="" />
+        
+
+        
+        <p:outputLabel value="2" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140405" style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
+              <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+         
+         
+        <p:inputText/>
+        <p:inputText/>
+        <p:inputText/>
+
+         <p:outputLabel value="3" styleClass="takionLabel"  style="float: center; "/>
+         <p:inputText value="20140705" style="float: center; "/>
+         <p:inputText value="20141005" style="float: center; "/>
+         <p:inputText value="20141005" style="float: center; "/>
+         <p:selectOneMenu value="" style="width:100%">
+              <f:selectItem itemLabel="01.초일산입말일산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="02.초일산입말일불산입" itemValue="InversFloater"/>
+              <f:selectItem itemLabel="03.초일불산입말일산입" itemValue="FRN"/>
+              <f:selectItem itemLabel="04.초일불산입말일불산입" itemValue="InversFloater"/>
+         </p:selectOneMenu>
+
+         <p:inputText value="" style="float:center; "/>
+        <p:inputText/>
+        <p:inputText/>
+         <p:outputLabel value="..." styleClass="takionLabel"  style="float: center; "/>
+      </p:panelGrid>
+  </h:form>
+</ui:composition>

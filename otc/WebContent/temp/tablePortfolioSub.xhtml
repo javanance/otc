@@ -1,0 +1,77 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+   
+  <h:form id="formPortfolioSub">
+     <p:growl id="messages" showDetail="true" />
+     <p:panelGrid columns="1">
+        <p:outputLabel value="#{messages.subPortfolio}" styleClass="takionLabel"/>
+     </p:panelGrid>
+     
+     <p:dataTable id="tablePortSub" var="_var" value="#{tablePortfolioInit.addPortfolio.childPortfolios}" 
+      widgetVar="wgTablePortPosition"
+
+      rowKey="#{_var}"
+      editable="true" editMode="cell"
+      emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false"
+      rows="30"
+      >
+<!--       <p:ajax event="rowSelect" listener="#{tablePortfolioInit.hiearchyDetailSelect}" 
+        update="@parent:@parent:hierarchyLevel:formPortfolioDefine:pGridPortDefine" /> -->
+
+      <!-- <p:column id="colPortId" sortBy="#{_var.portId}" 
+                filterBy="#{_var.portId}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.portfolioId}" /></f:facet>
+        <h:outputText value="#{_var.portId}"/>
+      </p:column> -->
+      
+       <p:column id="colPortName" sortBy="#{_var.portName}" 
+                filterBy="#{_var.portName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.subPortfolioName}" /></f:facet>
+        <h:outputText value="#{_var.portName}"/>
+      </p:column>
+      <p:column id="colPortType" sortBy="#{_var.portType}" 
+                filterBy="#{_var.portType}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.subPortfolioType}" /></f:facet>
+        <h:outputText value="#{_var.portType}"/>
+      </p:column>                 
+      <p:column id="colLevel1" sortBy="#{_var.level1}" 
+                filterBy="#{_var.level1}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.level1}" /></f:facet>
+        <h:outputText value="#{_var.level1}"/>
+      </p:column>
+      <p:column id="colLevel2" sortBy="#{_var.level2}" 
+                filterBy="#{_var.level1}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.level2}" /></f:facet>
+        <h:outputText value="#{_var.level2}"/>
+      </p:column>
+      <p:column id="colLevel3" sortBy="#{_var.level3}" 
+                filterBy="#{_var.level3}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.level3}" /></f:facet>
+        <h:outputText value="#{_var.level3}"/>
+      </p:column>
+      <p:column id="colLevel4" sortBy="#{_var.level4}" 
+                filterBy="#{_var.level4}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.level4}" /></f:facet>
+        <h:outputText value="#{_var.level4}"/>
+      </p:column>
+      <p:column id="colLevel5" sortBy="#{_var.level5}" 
+                filterBy="#{_var.level5}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.level5}" /></f:facet>
+        <h:outputText value="#{_var.level5}"/>
+      </p:column>                 
+     <p:column id="colWeight" sortBy="#{_var.weight}" 
+                filterBy="#{_var.weight}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.portfolioWeight}" /></f:facet>
+        <p:cellEditor>
+          <f:facet name="output"><h:outputText value="#{_var.weight}"/></f:facet>
+          <f:facet name="input"> <p:inputText value="#{_var.weight}"/> </f:facet>
+        </p:cellEditor>
+        <!-- <h:outputText value="#{_var.weight}"/> -->
+      </p:column>
+  </p:dataTable>
+  </h:form>
+</ui:composition>

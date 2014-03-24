@@ -4,7 +4,7 @@
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
    
-  <h:form id="formPortfolioPosition">
+  <h:form id="formPortfolioMaster">
       <p:growl id="messages" showDetail="true" />
       
       <p:outputPanel style="padding: 0.5em 1em;">
@@ -12,65 +12,45 @@
 <!--           <p:confirm header="#{messages.confirm}" message="#{messages.confirmInsert}"/> -->
             <p:confirm header=" "  message="confirmInsert" icon="ui-icon-alert" />
         </p:commandButton>
-        <p:commandButton  value="#{messages.clear}" action="#{tablePortfolioInit.clearPortfolio}" 
-            update="@parent:@parent:aaa:bbb,  @parent:@parent:aaa:tablePortPosition"  />
+        
+        <p:commandButton  value="#{messages.clearToNewPort}" action="#{tablePortfolioInit.clearPortfolio}" 
+            update="@parent:@parent:aaa:bbb,  @parent:@parent:@parent:@parent:formPortfolioSub:tablePortSub
+            @parent:@parent:@parent:@parent:formPortfolioDefine:panelPortDefine:tablePortDefine"
+            
+              />
       </p:outputPanel>
       <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
         <p:commandButton value="#{messages.yes}" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
         <p:commandButton value="#{messages.no}" type="button"  styleClass="ui-confirmdialog-no" icon="ui-icon-check"/>
       </p:confirmDialog>
 
-    <p:panelGrid id="aaa" columns="2" columnClasses="takion77-alignTop, takion77-alignTop">
-    <p:panelGrid id="bbb" columns="2">
-        <p:outputLabel value="#{messages.portfolioId}" styleClass="takionLabel" style="float: right;"/>
-        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portId}"/>
+    <p:panelGrid id="aaa" columns="1" >
+    <!-- <p:panelGrid id="aaa" columns="2" columnClasses="takion77-alignTop, takion77-alignTop"> -->
+      <p:panelGrid id="bbb" columns="8">
+        <p:outputLabel value="#{messages.portfolioType}" styleClass="takionLabel" style="float: right;"/>
+        <!-- <p:outputLabel value="#{tablePortfolioInit.addPortfolio == null ?   'AAA': null}" styleClass="takionLabel" style="float: right;" -->   
+        <p:outputLabel value="#{tablePortfolioInit.addPortfolio.portType}" styleClass="takionLabel" style="float: right;"
+           rendered="#{not empty tablePortfolioInit.selectPortfolio}"/>
+        <p:selectOneMenu value="#{tablePortfolioInit.addPortfolio.portType}" 
+            rendered="#{empty tablePortfolioInit.selectPortfolio}">
+              <f:selectItem itemLabel="UserDefined" itemValue="UD"/>
+              <f:selectItem itemLabel="Hierarchy" itemValue="HIER"/>
+              <p:ajax  update="aaa, @(form)" />
+         </p:selectOneMenu>
+        <p:outputLabel value="#{messages.portfolioPrefix}" styleClass="takionLabel" style="float: right;"
+              rendered="#{tablePortfolioInit.addPortfolio.portType == 'HIER'}"/>
+        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portPrefix}" 
+              rendered="#{tablePortfolioInit.addPortfolio.portType == 'HIER'}"/>     
+              
+                                       
+        <p:outputLabel value="#{messages.portfolioId}" styleClass="takionLabel" style="float: right;" />
+        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portId}" 
+              disabled="#{tablePortfolioInit.addPortfolio.portType == 'HIER'}"/>
 
         <p:outputLabel value="#{messages.portfolioName}" styleClass="takionLabel" style="float: right;"/>
-        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portName}"/>
-        
-  <!--       <p:outputLabel value="#{messages.portfolioType}" styleClass="takionLabel" style="float: right;"/>
-        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portType}"/> -->
-        
-  <!--       <p:outputLabel value="#{messages.referenceHierarchy}" styleClass="takionLabel" style="float: right; "/>
-        <p:inputText  value="#{tablePortfolioInit.selectPortfolio.hierarchy.hierarchyName}"/> -->
-    </p:panelGrid>
-  
-          
-     <p:dataTable id="tablePortPosition" var="_var" value="#{tablePortfolioInit.addPortfolio.childPortfolios}" 
-      widgetVar="wgTablePortPosition"
-
-      rowKey="#{_var}"
-      editable="true" editMode="cell"
-      emptyMessage="#{messages.noDataFound}"
-      resizableColumns="true" liveResize="false"
-      rows="30"
-      >
-<!--       <p:ajax event="rowSelect" listener="#{tablePortfolioInit.hiearchyDetailSelect}" 
-        update="@parent:@parent:hierarchyLevel:formPortfolioDefine:pGridPortDefine" /> -->
-
-      <!-- <p:column id="colPortId" sortBy="#{_var.portId}" 
-                filterBy="#{_var.portId}" filterMatchMode="contains"  width="100">
-        <f:facet name="header"><h:outputText value="#{messages.portfolioId}" /></f:facet>
-        <h:outputText value="#{_var.portId}"/>
-      </p:column> -->
-      
-       <p:column id="colPortLevel" sortBy="#{_var.portName}" 
-                filterBy="#{_var.portName}" filterMatchMode="contains"  width="100">
-        <f:facet name="header"><h:outputText value="#{messages.subPortfolioName}" /></f:facet>
-        <h:outputText value="#{_var.portName}"/>
-      </p:column>
-                 
-     <p:column id="colWeight" sortBy="#{_var.weight}" 
-                filterBy="#{_var.weight}" filterMatchMode="contains"  width="100">
-        <f:facet name="header"><h:outputText value="#{messages.portfolioWeight}" /></f:facet>
-        <p:cellEditor>
-          <f:facet name="output"><h:outputText value="#{_var.weight}"/></f:facet>
-          <f:facet name="input"> <p:inputText value="#{_var.weight}"/> </f:facet>
-        </p:cellEditor>
-        <!-- <h:outputText value="#{_var.weight}"/> -->
-      </p:column>
-  </p:dataTable>
-  
+        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portName}" 
+              disabled="#{tablePortfolioInit.addPortfolio.portType == 'HIER'}"/>
+      </p:panelGrid>        
   </p:panelGrid>
   </h:form>
 </ui:composition>
