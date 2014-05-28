@@ -15,12 +15,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.IndexColumn;
 
 import com.eugenefe.entity.component.PropertyEquation;
+import com.eugenefe.entity.component.PropertyEquationNew;
 import com.eugenefe.enums.EBoolean;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
@@ -39,7 +43,7 @@ public class Hierarchy implements java.io.Serializable {
 	private EBoolean useable;
 	private EBoolean changeable;
 //	private List<HierarchyDetail> hierarchyDetailList = new ArrayList<HierarchyDetail>();
-	private List<PropertyEquation> hierDefineIndexList = new ArrayList<PropertyEquation>();
+	private List<PropertyEquationNew> hierDefineIndexList = new ArrayList<PropertyEquationNew>();
 	private List<Portfolio> portfolioList = new ArrayList<Portfolio>();
 
 	public Hierarchy() {
@@ -113,9 +117,9 @@ public class Hierarchy implements java.io.Serializable {
 //		this.hierarchyDetailList = hierarchyDetailList;
 //	}
 
-	@OneToMany(mappedBy="hierarchy")
+	@OneToMany(mappedBy="hierarchy", cascade={javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.REMOVE})
 	@AnnoMethodTree(order =40, init=false, type=EColumnType.List)
-	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+//	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.ALL})
 	public List<Portfolio> getPortfolioList() {
 		return portfolioList;
 	}
@@ -124,14 +128,18 @@ public class Hierarchy implements java.io.Serializable {
 		this.portfolioList = portfolioList;
 	}
 
+	
+	
+//	@Transient
 	@ElementCollection
 	@CollectionTable(name="HIERARCHY_DETAIL_NEW", joinColumns=@JoinColumn(name ="HIERARCHY_ID"))
-	@IndexColumn(name="LVL", base=1	)
-	public List<PropertyEquation> getHierDefineIndexList() {
+//	@IndexColumn(name="LVL", base=1	)
+	@IndexColumn(name="HIER_LEVEL", base=1	)
+	public List<PropertyEquationNew> getHierDefineIndexList() {
 		return hierDefineIndexList;
 	}
 
-	public void setHierDefineIndexList(List<PropertyEquation> hierDefineIndexList) {
+	public void setHierDefineIndexList(List<PropertyEquationNew> hierDefineIndexList) {
 		this.hierDefineIndexList = hierDefineIndexList;
 	}
 }

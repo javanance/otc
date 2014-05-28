@@ -1,0 +1,98 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+    <p:panelGrid columns="8">
+      <p:outputLabel value="옵션유형" styleClass="takionLabel" />
+      <p:selectOneMenu value="StepDown">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="StepDown" itemValue="FRN" />
+        <f:selectItem itemLabel="Digital" itemValue="InversFloater" />
+      </p:selectOneMenu>
+      
+      <p:commandButton value="조회" />  
+      <p:commandButton value="신규" />
+      <p:commandButton value="저장"  />
+      <p:commandButton value="삭제"  />
+      <p:commandButton value="상품설정" />
+    </p:panelGrid>
+    
+    
+    <p:panel id="panelPricerMapping" styleClass="takion77-treeMvType">
+       <p:panelGrid  columns="6"  >
+      <p:outputLabel value="#{messages.pricingObject}" styleClass="takionLabel"/>
+      <p:selectOneMenu id="propTable" value="#{tablePricerSettingNewInit.pricingObject}" disabled="#{tablePricerSettingNewInit.editPrMapping}">
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{comboListInit.prObjList}" var="_var" itemValue="#{_var}" label="#{_var.name}_#{_var}" /> 
+      </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.dllName}" styleClass="takionLabel"/>
+      <p:selectOneMenu id="dll" value="#{tablePricerSettingNewInit.selectPricingMapping.dllId}" >
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{comboListInit.dllList}" var="r" label="#{r.dllName}" itemValue="#{r.dllId}"/>
+      </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.ircType}" styleClass="takionLabel"/>
+      <p:selectOneMenu id="discount" value="#{tablePricerSettingNewInit.selectPricingMapping.irCurveType}" >
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{comboListInit.irTypeList}" var="r" label="#{r.name}" itemValue="#{r}"/>
+      </p:selectOneMenu>
+      
+      <p:outputLabel value="#{messages.volType}" styleClass="takionLabel"/>
+      <p:selectOneMenu id="volType" value="#{tablePricerSettingNewInit.selectPricingMapping.volType}" >
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{comboListInit.volTypeList}" var="r" label="#{r.name}" itemValue="#{r}"/>
+      </p:selectOneMenu>
+      
+      <p:outputLabel value="#{messages.simulationNum}" styleClass="takionLabel"/>
+      <p:inputText id="colSimNum" value="#{tablePricerSettingNewInit.selectPricingMapping.simulationNum}"         />
+
+
+      <p:outputLabel value="#{messages.latticeNum}" styleClass="takionLabel"/>
+      <p:inputText id="colLatticeNum" value="#{tablePricerSettingNewInit.selectPricingMapping.latticeNum}"         />
+      
+      </p:panelGrid>
+  </p:panel>
+
+  <p:spacer height="10"/>
+
+    <p:dataTable var="_var" value="#{viewTempInit.pricingList}" emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true"  
+      liveResize="true" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+        <p:row>
+          <p:column headerText="옵션유형" width="100" />
+          <p:column headerText="평가목적" width="100" />
+          <p:column headerText="DLL 명" width="100" />
+
+          <p:column headerText="금리곡선 유형" width="100" />
+          <p:column headerText="변동성유형" width="100" />
+          <p:column headerText="시뮬레이션 회수" width="100" />
+          <p:column headerText="Lattice 개수" width="100" />
+        </p:row>
+      </p:columnGroup>
+
+
+      <p:column>
+        <h:outputText value="StepDown" />
+      </p:column>
+      <p:column>
+        <h:outputText value="#{_var}" />
+      </p:column>
+
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+    </p:dataTable>
+    
+  </h:form>
+</ui:composition>

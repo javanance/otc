@@ -22,11 +22,9 @@ import com.eugenefe.entity.PositionReturn;
 //@Scope(ScopeType.CONVERSATION)
 public class LazyModelPosition  extends LazyDataModel<Position>{
 	
-//	@Logger
-//	private Log log;
+	@Logger	private Log log;
 	
 	private List<Position> datasource;  
-    
     
 	public LazyModelPosition(List<Position> datasource) {  
         this.datasource = datasource;  
@@ -43,12 +41,13 @@ public class LazyModelPosition  extends LazyDataModel<Position>{
     }  
   
     @Override  
-    public Object getRowKey(Position posReturn) {  
-        return posReturn.getPosId();  
+    public Object getRowKey(Position pos) {  
+        return pos.getPosId();  
     }  
   
     @Override  
-    public List<Position> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {  
+    public List<Position> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {    
+    /*public List<Position> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {*/  
         List<Position> data = new ArrayList<Position>();  
                 
         //filter  
@@ -58,7 +57,7 @@ public class LazyModelPosition  extends LazyDataModel<Position>{
             for(String it: filters.keySet()){	
             	try {  
                     String filterProperty = it;
-                    String filterValue = filters.get(filterProperty);  
+                    String filterValue = (String)filters.get(filterProperty);  
                     String fieldValue = String.valueOf(aa.getClass().getField(filterProperty).get(aa));  
   
                     if(filterValue == null || fieldValue.startsWith(filterValue)) {  
@@ -103,5 +102,4 @@ public class LazyModelPosition  extends LazyDataModel<Position>{
             return data;  
         }  
     }
-
 }

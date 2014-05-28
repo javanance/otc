@@ -1,6 +1,7 @@
 package com.eugenefe.enums;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.eugenefe.entity.component.PriceData;
@@ -48,5 +49,9 @@ public enum EShockType {
 	
 	public PriceData getScenarioPriceData( PriceData base, double shockValue){
 		return null;
+	}
+	
+	public static List<EShockType> getList(){
+		return  Arrays.asList(EShockType.values());
 	}
 }

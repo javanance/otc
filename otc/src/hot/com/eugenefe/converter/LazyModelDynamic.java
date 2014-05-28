@@ -26,7 +26,9 @@ import com.eugenefe.util.MapUtil;
 import com.eugenefe.util.PivotTableModel;
 import com.eugenefe.util.PivotTableModelNew;
 
+//TODO: primefaces5.0
 public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
+//public class LazyModelDynamic extends LazyDataModel<Map<String, Object>> {
 	private static final long serialVersionUID = 1L;
 
 	private List<Map<String, String>> datasource;
@@ -71,7 +73,7 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 	
 
 
-	@Override
+/*	@Override
 	public List<Map<String, String>> load(int first, int pageSize, String sortField, SortOrder sortOrder,
 			Map<String, String> filters) {
 		// throw new
@@ -89,7 +91,7 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 			boolean match = true;
 			for (Map.Entry<String, String> it : filters.entrySet()) {
 //				System.out.println(it.getKey() + "_" + it.getValue() + "______");
-				if (!aa.get(it.getKey()).toLowerCase().contains(it.getValue().toLowerCase())) {
+				if (!aa.get(it.getKey()).toLowerCase().contains(((String)it.getValue()).toLowerCase())) {
 					match = false;
 					break;
 				}
@@ -144,7 +146,8 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 			for (Map.Entry<String, String> it : filters.entrySet()) {
 //				System.out.println(it.getKey() + "_" + it.getValue() + "______");
 				// if (!aa.get(it.getKey()).contains(it.getValue())) {
-				if (!aa.get(it.getKey()).toLowerCase().contains(it.getValue().toLowerCase())) {
+//				if (!aa.get(it.getKey()).toLowerCase().contains(it.getValue().toLowerCase())) {
+				if (!aa.get(it.getKey()).toLowerCase().contains(((String)it.getValue()).toLowerCase())) {					
 					match = false;
 					break;
 				}
@@ -181,7 +184,7 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 		} else {
 			return data;
 		}
-	}
+	}*/
 
 	@Override
 	public void setRowIndex(int rowIndex) {
@@ -231,4 +234,116 @@ public class LazyModelDynamic extends LazyDataModel<Map<String, String>> {
 //		}
 //	}
 
+	
+	public List<Map<String, String>> load(int first, int pageSize, String sortField, SortOrder sortOrder,
+			Map<String, Object> filters) {
+		// throw new
+		// UnsupportedOperationException("Lazy loading is not implemented.");
+
+		System.out.println("filter1 key :");
+		List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+		Object navi;
+		String rst = new String();
+
+		for (Map<String, String> aa : datasource) {
+//			for (Map.Entry<String, String> bb : aa.entrySet()) {
+//				System.out.println(bb.getKey() + "_" + bb.getValue());
+//			}
+			boolean match = true;
+			for (Map.Entry<String, Object> it : filters.entrySet()) {
+//				System.out.println(it.getKey() + "_" + it.getValue() + "______");
+				if (!aa.get(it.getKey()).toLowerCase().contains(((String)it.getValue()).toLowerCase())) {
+					match = false;
+					break;
+				}
+			}
+			if (match) {
+				data.add(aa);
+			}
+		}
+
+		if (sortField != null) {
+			Collections.sort(data, new LazySorterDynamicModel(sortField, sortOrder));
+			// System.out.println("in the sort1 :"+ data.size()+sortField +":" +
+			// sortOrder.toString());
+			// Collections.sort(data);
+			// System.out.println("in the sort2");
+		}
+
+		int dataSize = data.size();
+		this.setRowCount(dataSize);
+
+		// paginate
+		if (dataSize > pageSize) {
+			// System.out.println("in the pagination" + dataSize);
+			try {
+				return data.subList(first, first + pageSize);
+			} catch (IndexOutOfBoundsException e) {
+				return data.subList(first, first + (dataSize % pageSize));
+			}
+		} else {
+			return data;
+		}
+	}
+
+
+	@Override
+	public List<Map<String, String>> load(int first, int pageSize, List<SortMeta> multiSortMeta,
+			Map<String, Object> filters) {
+		// throw new
+		// UnsupportedOperationException("Lazy loading is not implemented.");
+
+		System.out.println("filter1 key 1:" + String.valueOf(getRowIndex()) +"_"+ pageSize+":"+first);
+		List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+		Object navi;
+		String rst = new String();
+
+		for (Map<String, String> aa : datasource) {
+//			for (Map.Entry<String, String> bb : aa.entrySet()) {
+//				System.out.println(bb.getKey() + "_" + bb.getValue());
+//			}
+			
+			boolean match = true;
+			for (Map.Entry<String, Object> it : filters.entrySet()) {
+//				System.out.println(it.getKey() + "_" + it.getValue() + "______");
+				// if (!aa.get(it.getKey()).contains(it.getValue())) {
+//				if (!aa.get(it.getKey()).toLowerCase().contains(it.getValue().toLowerCase())) {
+				if (!aa.get(it.getKey()).toLowerCase().contains(((String)it.getValue()).toLowerCase())) {					
+					match = false;
+					break;
+				}
+			}
+			if (match) {
+				data.add(aa);
+			}
+		}
+
+		if (multiSortMeta != null && !multiSortMeta.isEmpty()) {
+			for (int i = multiSortMeta.size() - 1; i >= 0; i--) {
+				Collections.sort(data, new LazySorterDynamicModel(multiSortMeta.get(i).getSortField(), multiSortMeta
+						.get(i).getSortOrder()));
+				// LazySorterVolatilityHis(multiSortMeta.get(i).getSortField(),
+				// multiSortMeta.get(i).getSortOrder()));
+			}
+			// for(SortMeta aa: multiSortMeta){
+			// Collections.sort(data, new
+			// LazySorterVolatilityHis(aa.getSortField(), aa.getSortOrder()));
+			// }
+		}
+
+		int dataSize = data.size();
+		this.setRowCount(dataSize);
+
+		// paginate
+		if (dataSize > pageSize) {
+			// System.out.println("in the pagination" + dataSize);
+			try {
+				return data.subList(first, first + pageSize);
+			} catch (IndexOutOfBoundsException e) {
+				return data.subList(first, first + (dataSize % pageSize));
+			}
+		} else {
+			return data;
+		}
+	}
 }

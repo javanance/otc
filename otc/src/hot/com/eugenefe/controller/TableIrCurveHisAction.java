@@ -24,7 +24,8 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.annotations.datamodel.DataModel;
 import org.jboss.seam.core.Events;
 import org.jboss.seam.log.Log;
-import org.primefaces.component.behavior.ajax.AjaxBehavior;
+//TODO : comment to primefaces 5.0
+//import org.primefaces.component.behavior.ajax.AjaxBehavior;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
@@ -216,8 +217,9 @@ public class TableIrCurveHisAction {
 		// List<Screenshot> obj = table.getFilteredData();
 
 		// Do your stuff here
-
-		Map<String, String> filters = table.getFilters();
+//		TODO : comment due to primefaces 5.0
+//		Map<String, String> filters = table.getFilters();
+		Map<String, String> filters = new HashMap<String, String>();
 		return filters;
 	}
 	

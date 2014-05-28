@@ -1,0 +1,86 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  
+  <h:form id="formHifiveUnderlyingEdit" >
+
+<!--     <p:contextMenu id="underlyingCtxMenu" for="tableHifiveUnderlying" widgetVar = "underlyingCmenu">
+      <p:menuitem value ="#{messages.insertInfoSelection}" action="#{tableHifiveInit.addUnderlying}"  
+                  update="tableHifiveUnderlying"/>
+      <p:menuitem value ="#{messages.deleteInfoSelection}" action="#{tableHifiveInit.removeUnderlying(tableHifiveInit.selectUnder)}"  
+                  update="growl, tableHifiveUnderlying"/>                  
+    </p:contextMenu> -->
+<!-- <h:panelGroup layout="block" id="tableHifiveUnderlyingWrap"> -->    
+    
+    <p:dataTable id="tableHifiveUnderlying" var="_underlying" value="#{underlyingList}" 
+      widgetVar="wgTableHiFiveUnderlying1"
+      emptyMessage="#{messages.noDataFound}" 
+      selection="#{tableHifiveNewInit.selectUnder}"
+      selectionMode="single"
+      rowKey="#{_underlying.id}"
+      resizableColumns="true" liveResize="false"
+      styleClass="dynamicTableId, takion77-tableSelector"      >
+       
+      <p:ajax event="rowSelect" update="@(form)"/>
+      <!-- <p:column id="colProdId" sortBy="#{_underlying.prodId}" width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdId}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.prodId}" />
+      </p:column> -->
+      <p:column id="colProdId" sortBy="#{_underlying.id.prodId}" width="100">
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getProdId}" />  
+         </f:facet>
+        <h:outputText value="#{_underlying.id.prodId}" />
+      </p:column>
+      
+      <p:column id="colUnderlyingIdCombo2" sortBy="#{_underlying.underlyingId}" width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getUnderlyingId}" />  
+         </f:facet>
+          <h:outputText value="#{_underlying.underlyingId}" />
+      </p:column>
+      
+      <p:column sortBy="#{_underlying.underlying.mvName}" width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getUnderlyingName}" />  
+         </f:facet>
+          <h:outputText value="#{_underlying.underlying.mvName}" />
+      </p:column>      
+      
+      <p:column id="colUnderlyingType" sortBy="#{_underlying.underlying.mvType}"  width="100"  >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.underlyingType}" />  
+         </f:facet>
+          <h:outputText value="#{_underlying.underlying.mvType}" />
+      </p:column>
+      
+       <p:column id="colBasePrice" sortBy="#{_underlying.basePrice}"  width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getBasePrice}" />  
+         </f:facet>
+         <h:outputText value="#{_underlying.basePrice}" />
+      </p:column>
+      
+      
+
+    <p:column id="colDividend" sortBy="#{_underlying.dividend}" width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.getDividend}" />  
+         </f:facet>
+         <h:outputText value="#{_underlying.dividend}" />
+      </p:column>
+      
+      <p:column id="colIsUpHitted" sortBy="#{_underlying.isUphitted}" width="100" >
+        <f:facet name="header">  
+           <h:outputText value="#{messages.isUpHitted}" />  
+         </f:facet>
+         <h:outputText value="#{_underlying.upHitted}" />
+     </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

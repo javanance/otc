@@ -1,0 +1,35 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/primeTemplates.xhtml">
+
+    <ui:define name="layoutLeft">
+      <!-- <ui:include src="/viewTemp/OTC_S02_Left.xhtml" /> -->
+      <ui:include src="/temp/treeUserPortfolio.xhtml" />
+  </ui:define>
+  
+  <ui:define name="layoutInnerCenter">
+  <!--   <ui:include src="/viewTemp/OTC_S02_Center.xhtml" />
+    <ui:include src="/viewTemp/OTC_S01_Body.xhtml" /> -->
+    
+    <ui:include src="/viewTemp/OTC_R06_H.xhtml" />
+    <ui:include src="/viewTemp/OTC_R06_Top.xhtml" />
+    
+  </ui:define>
+    <ui:define name="layoutInnerBottom">
+    <p:tabView>
+      <p:tab title="기초자산별 헤지현황">
+      <p:commandButton value="지표선택" onclick="PF('measure').show()"/>
+      <ui:include src="/viewTemp/OTC_R06_Body.xhtml" />
+       </p:tab>
+      <p:tab title="만기별 헤지현황">
+      <p:commandButton value="지표선택"/>
+      <ui:include src="/viewTemp/OTC_R06_Body_Tab2.xhtml" />
+       </p:tab> 
+       
+    </p:tabView>
+    <ui:include src="/viewTemp/OTC_Measure.xhtml" />
+  </ui:define>
+</ui:composition>

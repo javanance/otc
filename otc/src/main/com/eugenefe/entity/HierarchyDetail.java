@@ -51,9 +51,9 @@ public class HierarchyDetail implements java.io.Serializable {
 
 
 	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "hierarchyId", column = @Column(name = "HIERARCHY_ID", nullable = false, length = 20)),
-			@AttributeOverride(name = "nodeId", column = @Column(name = "NODE_ID", nullable = false, length = 20)) })
+//	@AttributeOverrides({
+//			@AttributeOverride(name = "hierarchyId", column = @Column(name = "HIERARCHY_ID", nullable = false, length = 20)),
+//			@AttributeOverride(name = "nodeId", column = @Column(name = "NODE_ID", nullable = false, length = 20)) })
 	@AnnoMethodTree(order =10, init=true)
 	public HierarchyDetailId getId() {
 		return this.id;
@@ -63,7 +63,7 @@ public class HierarchyDetail implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "LVL")
+	@Column(name = "HIER_LEVEL")
 	@AnnoMethodTree(order =11, init=true)
 	public int getLvl() {
 		return lvl;

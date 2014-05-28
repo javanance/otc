@@ -301,6 +301,19 @@ img.right {
 	 border: none;
 	padding: 0px;
 } */
+
+.ui-panelgrid .ui-panelgrid-cell {
+	border: none;
+	padding-right: 2px;
+	background: none;
+}
+
+.ui-panelgrid tbody {
+	border: none;
+	padding-right: 2px;
+	background: none;
+}
+
 .ui-panelgrid tr {
 	border: none;
 	padding-right: 2px;
@@ -702,3 +715,15 @@ overflow: auto;
 	vertical-align: top;
 }
 
+.takion77-treeMvType{
+}
+
+.takion77-tableSelector{
+	
+}
+.takion77-tableSelector2{
+	
+}
+.takion77-tableSelector3{
+	
+}

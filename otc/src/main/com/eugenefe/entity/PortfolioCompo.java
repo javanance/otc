@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
@@ -91,10 +92,10 @@ public class PortfolioCompo implements java.io.Serializable {
 //		this.portfolio = portfolio;
 //	}
 
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "CHILD_PORTFOLIO_ID", nullable=true, insertable=false, updatable=false)
-	@AnnoMethodTree(order =20, init=true)
+	@Transient
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name = "CHILD_PORTFOLIO_ID", nullable=true, insertable=false, updatable=false)
+//	@AnnoMethodTree(order =20, init=true)
 	public Portfolio getChildPortfolio() {
 		return childPortfolio;
 	}

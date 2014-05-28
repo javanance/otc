@@ -25,6 +25,7 @@ import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
 
@@ -125,8 +126,9 @@ public class PortfolioNew implements java.io.Serializable {
 	public void setPortDefineList(List<PortfolioDefineNew> portDefineList) {
 		this.portDefineList = portDefineList;
 	}
-
-	@OneToMany(mappedBy="portfolio")
+//TODO: CHANGE IN DB CREATION 
+	@Transient
+//	@OneToMany(mappedBy="portfolio")
 	public List<PortfolioCompo> getSubPortfolioList() {
 		return subPortfolioList;
 	}
@@ -137,7 +139,9 @@ public class PortfolioNew implements java.io.Serializable {
 
 	private List<PortfolioCompo> parentPort = new ArrayList<PortfolioCompo>();
 
-	@OneToMany(mappedBy="childPortfolio")
+//	TODO : CHANGE IN DB CHANGE
+	@Transient
+//	@OneToMany(mappedBy="childPortfolio")
 	public List<PortfolioCompo> getParentPort() {
 		return parentPort;
 	}

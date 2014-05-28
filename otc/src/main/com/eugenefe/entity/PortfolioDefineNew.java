@@ -42,7 +42,7 @@ public class PortfolioDefineNew implements Serializable{
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "portId", column = @Column(name = "PORT_ID", nullable = false, length = 20)),
-			@AttributeOverride(name = "portLevel", column = @Column(name = "PORT_LEVEL", nullable = false, length = 20)) })
+			@AttributeOverride(name = "portLevel", column = @Column(name = "PORT_LEVEL", nullable = false)) })
 	@AnnoMethodTree(order =10, init=true)
 	public PortfolioDefineId getId() {
 		return id;

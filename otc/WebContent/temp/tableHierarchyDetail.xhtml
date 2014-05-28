@@ -8,12 +8,11 @@
       <p:growl id="messages" showDetail="true" />
       <p:outputPanel style="padding: 0.5em 1em;">
         <p:commandButton  value="#{messages.save}" action="#{tableHierarchyInit.saveHierDetail}"   />
-        <p:commandButton  value="#{messages.makePortfolio}" action="#{tableHierarchyInit.makePortfolio}"   />
         <p:commandButton  value="#{messages.makePortfolio2}" action="#{tableHierarchyInit.makePortfolio2}"   />
-        <p:commandButton  value="#{messages.makePortfolio3}" action="#{tableHierarchyInit.makePortfolio3}"   />
         <p:commandButton  value="#{messages.makePortfolio4}" action="#{tableHierarchyInit.makePortfolio4}"   />
       </p:outputPanel>
       
+
       <p:dataTable id="tableHierDetail" var="_var" value="#{tableHierarchyInit.selectHierarchy.hierDefineIndexList}" 
       widgetVar="wgTableHierarchyDetail"
       selectionMode="single" selection="#{tableHierarchyInit.selectHierDefine}"
@@ -21,7 +20,7 @@
       rowIndexVar="rIndex"
       emptyMessage="#{messages.noDataFound}"
       resizableColumns="true" liveResize="false"
-      rows="30"
+      rows="30" styleClass="takion77-tableSelector"
       >
       <p:ajax event="rowSelect" listener="#{tableHierarchyInit.hierarcyDefineSelect}" 
         update="@parent:@parent:hierarchyLevel:formPortfolioDefine:pGridPortDefine" />

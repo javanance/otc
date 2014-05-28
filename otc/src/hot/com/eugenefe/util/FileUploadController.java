@@ -54,12 +54,9 @@ import com.eugenefe.util.RiskMeasureGroup;
 @Scope(ScopeType.CONVERSATION)
 public class FileUploadController {
 	
-	@Logger
-	private Log log;
-	@In
-	private StatusMessages statusMessages;
-	@In
-	private Session session;
+	@Logger	private Log log;
+	@In		private StatusMessages statusMessages;
+	@In		private Session session;
 	
 	private byte[] byteData;
 	public byte[] getByteData() {

@@ -1,0 +1,48 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable var="_var" value="#{viewTempInit.underlyingList}" emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+        
+        <p:row>
+          <p:column rowspan="2" headerText="기초자산" />
+          <p:column colspan="4" headerText="발행" />
+          <p:column colspan="4" headerText="헤지" />
+        </p:row>
+        <p:row>
+
+          <p:column headerText="%델타" width="30" />
+          <p:column headerText="금액델타" width="30" />                    
+          <p:column headerText="%감마" width="30" />
+          <p:column headerText="금액감마" width="30" />
+          
+          <p:column headerText="%델타" width="30" />
+          <p:column headerText="금액델타" width="30" />                    
+          <p:column headerText="%감마" width="30" />
+          <p:column headerText="금액감마" width="30" />
+        </p:row>
+      </p:columnGroup>
+
+
+      <p:column >       <h:outputText value="#{_var}" />     </p:column>
+      
+      
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+    </p:dataTable>
+  
+</ui:composition>

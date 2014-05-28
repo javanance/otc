@@ -1,0 +1,61 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formSyntheticDetail">
+    <p:dataTable value="#{synDetailList}" var="_var" emptyMessage="#{messages.noDataFound}"
+      selection=""
+      selectionMode="single"
+      rowKey="#{_var}"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.els}" />
+        </f:facet>
+        <h:outputText value="#{_var.id.synProdId}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.elsName}" />
+        </f:facet>
+        <h:outputText value="#{_var.synProd.synProdName}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.synType}" />
+        </f:facet>
+        <h:outputText value="#{_var.synProd.sourceTable}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.subProd}" />
+        </f:facet>
+        <h:outputText value="#{_var.id.subProdId}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.weight}" />
+        </f:facet>
+        <h:outputText value="#{_var.weight}" />
+      </p:column>
+            <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.type}" />
+        </f:facet>
+        <h:outputText value="#{_var.sourceTable}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.unitPrice}" />
+        </f:facet>
+        <h:outputText value="#{_var.firstUnitPrice}" />
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

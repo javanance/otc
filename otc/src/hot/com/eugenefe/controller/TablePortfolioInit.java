@@ -17,11 +17,15 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TreeDragDropEvent;
 import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.TreeNode;
 
+import com.eugenefe.converter.LazyModelMarketVariable;
+import com.eugenefe.converter.LazyModelPosition;
 import com.eugenefe.entity.Portfolio;
 import com.eugenefe.entity.PortfolioCompo;
 import com.eugenefe.entity.PortfolioCompoId;
+import com.eugenefe.entity.Position;
 
 @Name("tablePortfolioInit")
 @Scope(ScopeType.CONVERSATION)
@@ -33,7 +37,7 @@ public class TablePortfolioInit {
 	
 	private List<Portfolio> portList = new ArrayList<Portfolio>();
 	private List<Portfolio> userPortfolioList = new ArrayList<Portfolio>();
-
+	
 	private Portfolio selectPortfolio;
 	private Portfolio addPortfolio;
 
@@ -45,6 +49,14 @@ public class TablePortfolioInit {
 	private TreeNode dlgSelNode;
 	private Portfolio copyToPortfolio;
 	private TreeNode[] selectNodeList;
+	
+	private LazyDataModel<Position> lazyModelPosition;
+	public LazyDataModel<Position> getLazyModelPosition() {
+		return lazyModelPosition;
+	}
+	public void setLazyModelPosition(LazyDataModel<Position> lazyModelPosition) {
+		this.lazyModelPosition = lazyModelPosition;
+	}
 		
 //	private TreeNode parentNode;
 
@@ -54,7 +66,8 @@ public class TablePortfolioInit {
 	@Create
 	public void create(){
 		sysRootNode = new DefaultTreeNode("HIER",new Portfolio("SYS_ROOT"), null);
-		userRootNode = new DefaultTreeNode("UD", new Portfolio("USER_ROOT"), null);
+//		userRootNode = new DefaultTreeNode("UD", new Portfolio("USER_ROOT"), null);
+		userRootNode = new DefaultTreeNode( new Portfolio("USER_ROOT"), null);
 //		parentNode = sysRootNode;
 //		dlgNode = new DefaultTreeNode(new Portfolio("USER_ROOT"), null);
 		
@@ -71,14 +84,21 @@ public class TablePortfolioInit {
 		}
 	}
 
-	public void selectNode(NodeSelectEvent event){
-//		parentNode=null;
-//		parentNode = new DefaultTreeNode(new Portfolio("root"),null);
-
+	public void onTest(NodeSelectEvent event){
+		log.info("onNodeSelect:#0", selectNode.getData());
+	}	
+	public void onNodeSelect(NodeSelectEvent event){
+		log.info("onNodeSelect");
+		/*selectPortfolio= (Portfolio)selectNode.getData();
+		log.info("onNodeSelect:#0", selectPortfolio.getPortName());
 		if(selectPortfolio!=null){
 			log.info("Select Node : #0,#1", selectPortfolio.getPortId(), selectNode.toString());	
-		}
-		selectPortfolio= (Portfolio)selectNode.getData();
+		}*/
+		
+		/*		
+		lazyModelPosition =  new LazyModelPosition(selectPortfolio.getPortDetailList().subList(0, Math.min(10, selectPortfolio.getPortDetailList().size())));
+		
+		
 		log.info("Select Node2 : #0,#1", selectPortfolio.getPortId(), selectNode);
 		
 		addPortfolio = new Portfolio();
@@ -88,14 +108,15 @@ public class TablePortfolioInit {
 			addPortfolio.setPortName(selectPortfolio.getPortName());
 			addPortfolio.setPortType(selectPortfolio.getPortType());
 			
-//			addPortfolio.setPortPrefix(selectPortfolio.getPortPrefix());
-			
 			addPortfolio.setReplicatePortfolio(selectPortfolio.getReplicatePortfolio());
 			addPortfolio.setChildPortfolios(selectPortfolio.getChildPortfolios());
-//			addPortfolio.setPortfolioType(selectPortfolio.getPortfolioType());
+
+//			addPortfolio.setHierarchy(selectPortfolio.getHierarchy());
 		}
 //		recursiveTreeSet(selectPortfolio, parentNode);
+*/	
 	}
+
 
 	public void savePortfolio(){
 		for(Portfolio aa : userPortfolioList){
@@ -267,11 +288,14 @@ public class TablePortfolioInit {
 //		if(data.getReplicatePortfolio()!=null){
 //			data = data.getReplicatePortfolio();
 //		}
-		TreeNode tempNode = new DefaultTreeNode(data.getPortType(), data, node);
+		
+//		TreeNode tempNode = new DefaultTreeNode(data.getPortType(), data, node);
+		TreeNode tempNode = new DefaultTreeNode(data, node);
+		
 //		tempNode.setExpanded(true);
 		for(Portfolio aa : data.getChildPortfolios()){
 //			log.info("Rec:#0,#1", aa.getId().getPortId());
-			log.info("Rec1:#0,#1", aa.getPortId());
+//			log.info("Rec1:#0,#1", aa.getPortId());
 			recursiveTreeSet(aa, tempNode);
 		}
 	}

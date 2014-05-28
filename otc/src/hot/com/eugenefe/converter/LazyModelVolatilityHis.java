@@ -58,7 +58,7 @@ public class LazyModelVolatilityHis extends LazyDataModel<VolatilityHis> {
 		return volHis.getId();
 	}
 
-	@Override
+/*	@Override
 	public List<VolatilityHis> load(int first, int pageSize, String sortField, SortOrder sortOrder,
 			Map<String, String> filters) {
 		List<VolatilityHis> data = new ArrayList<VolatilityHis>();
@@ -72,7 +72,7 @@ public class LazyModelVolatilityHis extends LazyDataModel<VolatilityHis> {
 				navi =aa;
 				System.out.println("filter key :"+ it);
 				try {
-					String filterValue = filters.get(it).toUpperCase();
+					String filterValue = ((String)filters.get(it)).toUpperCase();
 					 
 					for (String filiterProperty : it.split("\\.")) {
 						System.out.println("filter Prop:"+ filiterProperty);
@@ -140,7 +140,7 @@ public class LazyModelVolatilityHis extends LazyDataModel<VolatilityHis> {
 				navi =aa;
 				System.out.println("filter key :"+ it);
 				try {
-					String filterValue = filters.get(it).toUpperCase();
+					String filterValue = ((String)filters.get(it)).toUpperCase();
 					 
 					for (String filiterProperty : it.split("\\.")) {
 						System.out.println("filter Prop:"+ filiterProperty);
@@ -196,7 +196,7 @@ public class LazyModelVolatilityHis extends LazyDataModel<VolatilityHis> {
 		} else {
 			return data;
 		}
-    }
+    }*/
 	
 	/*
 	 * @Override public void setRowIndex(int rowIndex) { if (getPageSize() == 0)
@@ -263,4 +263,144 @@ public class LazyModelVolatilityHis extends LazyDataModel<VolatilityHis> {
 	// for (String st : tempRst) {
 	// log.info("Field2222:#0,#1", st);
 	// }
+	
+	@Override
+	public List<VolatilityHis> load(int first, int pageSize, String sortField, SortOrder sortOrder,
+			Map<String, Object> filters) {
+		List<VolatilityHis> data = new ArrayList<VolatilityHis>();
+		Class<VolatilityHis> klass = VolatilityHis.class;
+		Object  navi;
+		String rst = new String();
+
+		for (VolatilityHis aa : datasource) {
+			boolean match = true;
+			for (String it : filters.keySet()) {
+				navi =aa;
+				System.out.println("filter key :"+ it);
+				try {
+					String filterValue = ((String)filters.get(it)).toUpperCase();
+					 
+					for (String filiterProperty : it.split("\\.")) {
+						System.out.println("filter Prop:"+ filiterProperty);
+						navi = navi.getClass().getDeclaredField(filiterProperty).get(navi); 
+						rst = String.valueOf(navi);
+						System.out.println("rst Value :"+ rst);
+//						recu(aa, filiterProperty, rst);
+					}
+					String fieldValue = rst.toUpperCase();
+					
+					// String filterProperty = it;
+					// String filterValue = filters.get(filterProperty);
+					// String fieldValue =
+					// String.valueOf(aa.getClass().getField(filterProperty).get(aa));
+
+					// if(filterValue == null || fieldValue.startsWith(filterValue)) {
+					if (filterValue == null || fieldValue.contains(filterValue)) {
+						match = true;
+					} else {
+						match = false;
+						break;
+					}
+				} catch (Exception e) {
+					match = false;
+				}
+			}
+
+			if (match) {
+				data.add(aa);
+			}
+		}
+
+		if (sortField != null) {
+			Collections.sort(data, new LazySorterVolatilityHis(sortField, sortOrder));
+		}
+
+
+		int dataSize = data.size();
+		this.setRowCount(dataSize);
+
+		// paginate
+		if (dataSize > pageSize) {
+			// System.out.println("in the pagination" + dataSize);
+			try {
+				return data.subList(first, first + pageSize);
+			} catch (IndexOutOfBoundsException e) {
+				return data.subList(first, first + (dataSize % pageSize));
+			}
+		} else {
+			return data;
+		}
+	}
+	@Override
+	public List<VolatilityHis> load(int first, int pageSize, List<SortMeta> multiSortMeta, Map<String,Object> filters) {
+//		throw new UnsupportedOperationException("Lazy loading is not implemented.");
+		
+		List<VolatilityHis> data = new ArrayList<VolatilityHis>();
+		Class<VolatilityHis> klass = VolatilityHis.class;
+		Object  navi;
+		String rst = new String();
+
+		for (VolatilityHis aa : datasource) {
+			boolean match = true;
+			for (String it : filters.keySet()) {
+				navi =aa;
+				System.out.println("filter key :"+ it);
+				try {
+					String filterValue = ((String)filters.get(it)).toUpperCase();
+					 
+					for (String filiterProperty : it.split("\\.")) {
+						System.out.println("filter Prop:"+ filiterProperty);
+						navi = navi.getClass().getDeclaredField(filiterProperty).get(navi); 
+						rst = String.valueOf(navi);
+						System.out.println("rst Value :"+ rst);
+//						recu(aa, filiterProperty, rst);
+					}
+					String fieldValue = rst.toUpperCase();
+					
+					// String filterProperty = it;
+					// String filterValue = filters.get(filterProperty);
+					// String fieldValue =
+					// String.valueOf(aa.getClass().getField(filterProperty).get(aa));
+
+					// if(filterValue == null || fieldValue.startsWith(filterValue)) {
+					if (filterValue == null || fieldValue.contains(filterValue)) {
+						match = true;
+					} else {
+						match = false;
+						break;
+					}
+				} catch (Exception e) {
+					match = false;
+				}
+			}
+
+			if (match) {
+				data.add(aa);
+			}
+		}
+		
+        if(multiSortMeta!=null && !multiSortMeta.isEmpty()){
+        	for(int i = multiSortMeta.size()-1;  i>=0 ; i--){
+        		Collections.sort(data, new LazySorterVolatilityHis(multiSortMeta.get(i).getSortField(), multiSortMeta.get(i).getSortOrder()));
+        	}
+//        	for(SortMeta aa: multiSortMeta){
+//        		Collections.sort(data, new LazySorterVolatilityHis(aa.getSortField(), aa.getSortOrder()));
+//        	}
+        }
+        
+		int dataSize = data.size();
+		this.setRowCount(dataSize);
+
+		// paginate
+		if (dataSize > pageSize) {
+			// System.out.println("in the pagination" + dataSize);
+			try {
+				return data.subList(first, first + pageSize);
+			} catch (IndexOutOfBoundsException e) {
+				return data.subList(first, first + (dataSize % pageSize));
+			}
+		} else {
+			return data;
+		}
+    }
 }

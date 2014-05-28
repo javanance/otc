@@ -1,0 +1,64 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+    <p:panelGrid columns="14">
+      <p:outputLabel value="조회 시작일자" styleClass="takionLabel" />
+      <p:selectOneMenu value="20140126">
+        <f:selectItem itemLabel="20140129" itemValue="20140129" />
+        <f:selectItem itemLabel="20140128" itemValue="20140128" />
+        <f:selectItem itemLabel="20140126" itemValue="20140126" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="조회 종료일자" styleClass="takionLabel" />
+      <p:selectOneMenu value="20140129">
+        <f:selectItem itemLabel="20140129" itemValue="FRN" />
+        <f:selectItem itemLabel="20140130" itemValue="InversFloater" />
+      </p:selectOneMenu>
+    </p:panelGrid>
+  
+    <p:dataTable var="_var" value="#{viewTempInit.dateList}" emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true"  
+      liveResize="true" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+        <p:row>
+          <p:column headerText="기준일자" width="100" />
+          <p:column headerText="포지션명" width="100" />
+
+          <p:column headerText="장부가" width="100" />
+          <p:column headerText="평가금액" width="100" />
+          <p:column headerText="전일비" width="100" />
+
+          <p:column headerText="주간손익" width="100" />
+          <p:column headerText="월간손익" width="100" />
+          <p:column headerText="분기손익" width="100" />
+          <p:column headerText="기손익" width="100" />
+        </p:row>
+      </p:columnGroup>
+
+
+      <p:column>
+        <h:outputText value="#{_var}" />
+      </p:column>
+      <p:column>
+        <h:outputText value="한국증권(DLS)367" />
+      </p:column>
+
+      <p:column />
+      <p:column />
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+
+    </p:dataTable>
+  </h:form>
+</ui:composition>

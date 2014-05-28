@@ -1,0 +1,36 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:tooltip/>
+  <h:form id="formPanelStepDownUnderlying" >
+      <p:panelGrid columns="2" style="background: white" >
+        <p:outputLabel value="종목 ID" styleClass="takionLabel" />
+        <p:inplace>
+          <p:inputText value="#{tableHifiveNewInit.selectHifive.prodId}" />
+        </p:inplace> 
+        <!-- <p:outputLabel value="#{selectHifive.prodId}" /> -->
+        
+      
+        <p:outputLabel value="기초자산 ID" styleClass="takionLabel" />
+        <p:inplace>
+          <p:inputText value="#{selectUnderlying.underlyingId}" />
+        </p:inplace> 
+
+        <p:outputLabel value="기초자산 명" styleClass="takionLabel" />
+        <p:outputLabel value="#{selectUnderlying.underlying.mvName}"  />
+        
+        <p:outputLabel value="기초자산 유형" styleClass="takionLabel" />
+        <p:outputLabel value="#{selectUnderlying.underlying.mvType}" />
+          
+        <p:outputLabel value="기준가"  styleClass="takionLabel" />
+        <p:inplace style="float:right">
+          <p:inputText value="#{tableHifiveNewInit.selectUnder.basePrice}" style="float:right" >
+               <f:convertNumber pattern="#,###" />
+          </p:inputText>
+         </p:inplace>
+        </p:panelGrid>          
+  </h:form>
+</ui:composition>

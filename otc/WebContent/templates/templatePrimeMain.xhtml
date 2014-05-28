@@ -7,7 +7,7 @@
   <h:head>
     <f:facet name="first">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>HimeTest</title>
+      <title>#{messages[layoutInit.viewId]}</title>
       <!-- <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/favicon.png" /> -->
       <!-- <h:link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/favicon.png"/> -->
       <!-- <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/favicon.ico" /> -->
@@ -23,17 +23,17 @@
 
     <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/starcraft/carrier_16.png" />
   </h:head>
+  
   <h:body style="background:tan">
     <p:layout fullPage="true">
 
       <p:layoutUnit position="center" resizable="true" gutter="4" style="background:grey">
         <ui:insert name="layoutCenter" />
-
-        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
-        <p:dialog modal="false" widgetVar="statusDialog" header="#{messages.ajaxStatus}" draggable="false"
-          closable="false">
-          <p:graphicImage value="/img/ajaxloadingbar.gif" />
-        </p:dialog>
+         <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+         <p:dialog modal="false" widgetVar="statusDialog" header="#{messages.ajaxStatus}" draggable="false"
+            closable="false">
+            <p:graphicImage value="/img/ajaxloadingbar.gif" />
+          </p:dialog>
       </p:layoutUnit>
 
       <p:layoutUnit position="south" resizable="true" collapsible="true" size="300" gutter="4" 

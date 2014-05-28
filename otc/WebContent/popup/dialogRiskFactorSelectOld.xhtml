@@ -30,7 +30,7 @@
       <p:separator />
 
       <p:commandButton value="#{messages.submitButton}" action="#{riskFactorPickAction.afterPick(riskFactorPickAction.pickRiskFactors.target)}" 
-        onclick="wgDlgRfSelect.hide()"
+        onclick="PF('wgDlgRfSelect').hide()"
         update=":tabViewRiskFactor:formTableVcvMatrix:tableVcvMatrix" style="float:right" />
         
         

@@ -47,6 +47,13 @@ public class FnCalendar extends GregorianCalendar {
 		return new FnCalendar(cal.get(YEAR),cal.get(MONTH),cal.get(DATE));
 	}
 	
+	public static FnCalendar getInstance(String bssd){
+		int year = Integer.parseInt(bssd.substring(0, 4));
+		int month = Integer.parseInt(bssd.substring(4,6));
+		int day = Integer.parseInt(bssd.substring(6,8));
+
+		return new FnCalendar(year, month-1, day);
+	}
 	
 	/**
 	 * get the Month of this Calendar in Real World  
@@ -137,13 +144,14 @@ public class FnCalendar extends GregorianCalendar {
 			while (this.addTerm(maturity, cnt,true).before(date)){
 				cnt =cnt+1;
 			}
+			return -1* cnt ;
 		}
 		else {
 			while(date.addTerm(maturity, cnt,true).before(this)){
 				cnt = cnt+1;
 			}
+			return  cnt;
 		}
-		return cnt;
 	}
 	public FnCalendar getMax(FnCalendar cal){
 		if(this.before(cal)){

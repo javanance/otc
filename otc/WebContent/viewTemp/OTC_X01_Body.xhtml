@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+
+    <p:dataTable var="_var" value="#{viewTempInit.pricingList}" emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true"  
+      liveResize="true" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+        <p:row>
+          <p:column headerText="옵션유형" width="100" />
+          <p:column headerText="평가목적" width="100" />
+          <p:column headerText="DLL 명" width="100" />
+
+          <p:column headerText="금리곡선 유형" width="100" />
+          <p:column headerText="변동성유형" width="100" />
+          <p:column headerText="시뮬레이션 회수" width="100" />
+          <p:column headerText="Lattice 개수" width="100" />
+        </p:row>
+      </p:columnGroup>
+
+
+      <p:column>
+        <h:outputText value="StepDown" />
+      </p:column>
+      <p:column>
+        <h:outputText value="#{_var}" />
+      </p:column>
+
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+    </p:dataTable>
+  </h:form>
+</ui:composition>

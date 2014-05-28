@@ -7,10 +7,8 @@
   <h:form id="formPortfolioMaster">
       <p:growl id="messages" showDetail="true" />
       
-      <p:outputPanel style="padding: 0.5em 1em;">
+<!--       <p:outputPanel style="padding: 0.5em 1em;">
         <p:commandButton  value="#{messages.save}" action="#{tablePortfolioInit.savePortfolio}"   update="@(form)" >
-<!--           <p:confirm header="#{messages.confirm}" message="#{messages.confirmInsert}"/> -->
-            <p:confirm header=" "  message="confirmInsert" icon="ui-icon-alert" />
         </p:commandButton>
         
         <p:commandButton  value="#{messages.clearToNewPort}" action="#{tablePortfolioInit.clearPortfolio}" 
@@ -18,11 +16,11 @@
             @parent:@parent:@parent:@parent:formPortfolioDefine:panelPortDefine:tablePortDefine"
             
               />
-      </p:outputPanel>
-      <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+      </p:outputPanel> -->
+<!--       <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
         <p:commandButton value="#{messages.yes}" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
         <p:commandButton value="#{messages.no}" type="button"  styleClass="ui-confirmdialog-no" icon="ui-icon-check"/>
-      </p:confirmDialog>
+      </p:confirmDialog> -->
 
     <p:panelGrid id="aaa" columns="1" >
     <!-- <p:panelGrid id="aaa" columns="2" columnClasses="takion77-alignTop, takion77-alignTop"> -->
@@ -37,10 +35,11 @@
               <f:selectItem itemLabel="Hierarchy" itemValue="HIER"/>
               <p:ajax  update="aaa, @(form)" />
          </p:selectOneMenu>
-        <p:outputLabel value="#{messages.portfolioPrefix}" styleClass="takionLabel" style="float: right;"
+         
+        <!-- <p:outputLabel value="#{messages.hierarchyName}" styleClass="takionLabel" style="float: right;"
               rendered="#{tablePortfolioInit.addPortfolio.portType == 'HIER'}"/>
-        <p:inputText  value="#{tablePortfolioInit.addPortfolio.portPrefix}" 
-              rendered="#{tablePortfolioInit.addPortfolio.portType == 'HIER'}"/>     
+        <p:inputText  value="#{tablePortfolioInit.addPortfolio.hierarchy.hierarchyName}" 
+              rendered="#{tablePortfolioInit.addPortfolio.portType == 'HIER'}"/> -->     
               
                                        
         <p:outputLabel value="#{messages.portfolioId}" styleClass="takionLabel" style="float: right;" />

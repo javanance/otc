@@ -4,11 +4,16 @@
   <h:form id="formMenubar">
 
     <p:growl id="growl" showDetail="true" />
-    <p:panelGrid columns="2" styleClass="takion77-panelgrid-border" style="width:100%; margin:4px">
+    <!-- <p:panelGrid columns="2" styleClass="takion77-panelgrid-border" style="width:100%; margin:4px"> -->
+    <p:panelGrid columns="2" style="width:100%; margin:4px">
     
     <p:megaMenu autoDisplay="false" style="border:none">
-      <p:menuitem value="#{messages.menuHome}" icon="img_home_nav"
-        url="#{messages.urlIP}/view/home.seam" />
+      <p:menuitem actionListener="#{layoutInit.extractViewId}" action="#{layoutInit.setupLayout}"
+            id="Home" value="#{messages.home}" icon="img_home_nav"/>
+      <p:menuitem value="#{messages.menuHome}" icon="img_home_nav" 
+        url ="/view/home.xhtml"/>
+        <!-- url ="http\://180.180.175.146\:8080/himemysqltest/view/home.seam"/> -->
+        <!-- url="#{messages.urlIP}/view/home.seam" /> -->
 
       <!--  MarketVariable-->
       <ui:include src="/templates/subMenuMarketVariable.xhtml" />
@@ -24,15 +29,15 @@
           </p:menuitem>
 
           <p:separator />
-          <p:menuitem value="#{messages.selectHierarchies}" onclick="wgDialogHierSelect.show()" icon="ui-icon-document"
+          <p:menuitem value="#{messages.selectHierarchies}" onclick="PF('wgDialogHierSelect').show()" icon="ui-icon-document"
             disabled="#{conversation.viewId == '/view/home.xhtml'}" />
 
-          <p:menuitem value="#{messages.createPortfolio}" onclick="wgDialogPortCreate.show()" icon="ui-icon-circle-plus"
+          <p:menuitem value="#{messages.createPortfolio}" onclick="PF('wgDialogPortCreate').show()" icon="ui-icon-circle-plus"
             disabled="#{not identity.loggedIn}" />
 
 
 
-          <p:menuitem value="Show" onclick="wgtTest.show()" />
+          <p:menuitem value="Show" onclick="PF('wgtTest').show()" />
           <!--           </p:submenu> -->
         </p:column>
       </p:submenu>
@@ -77,19 +82,17 @@
     
    
    
-   <p:panelGrid columns="3" >
-          <!-- <p:menubar model="#{navigationMenu.menuModel}" style="border: none"/> -->
+   <p:panelGrid columns="2" >
           <s:link id="toolbarLogin" view="/view/login.xhtml" value="#{messages.logIn}"
             rendered="#{not identity.loggedIn}" propagation="none" />
-
           <s:link id="toolbarLogout" view="/view/home.xhtml" action="#{identity.logout}" value="#{messages.logOut}"
             rendered="#{identity.loggedIn}" propagation="none" />
 
           <h:outputText id="toolbarWelcome" value="#{messages.signedAs}: #{credentials.username}"
             rendered="#{identity.loggedIn}" />
           <h:outputText id="toolbarWelcome1" value="" rendered="#{not identity.loggedIn}" />
+          <!-- <h:outputText value="" /> -->
 
-          <h:outputText value="" />
           <h:outputText value="#{messages.baseDate}:" />
           <p:calendar id="baseDate" value="#{basedateSession.baseDate}" showButtonPanel="true" pattern="yyyy/MM/dd"
             navigator="true" mindate="#{basedateSession.stDate}" maxdate="#{basedateSession.endDate}">

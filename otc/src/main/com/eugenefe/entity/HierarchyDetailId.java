@@ -16,21 +16,25 @@ import com.eugenefe.util.AnnoNavigationFilter;
 public class HierarchyDetailId implements java.io.Serializable {
 
 	private String hierarchyId;
-	private String hierLevel;
+//	private String hierLevel;
+	private String nodeId;
 //	private int lvl;
 	
 	public HierarchyDetailId() {
 	}
-
+	public HierarchyDetailId(String hierarchyId, String nodeId) {
+		this.hierarchyId = hierarchyId;
+		this.nodeId = nodeId;
+	}
 //	public HierarchyDetailId(String hierarchyId, int lvl) {
 //		super();
 //		this.lvl = lvl;
 //	}
 	
-	public HierarchyDetailId(String hierarchyId, String hierLevel) {
-		this.hierarchyId = hierarchyId;
-		this.hierLevel = hierLevel;
-	}
+//	public HierarchyDetailId(String hierarchyId, String hierLevel) {
+//		this.hierarchyId = hierarchyId;
+//		this.hierLevel = hierLevel;
+//	}
 
 	
 	@Column(name = "HIERARCHY_ID", nullable = false, length = 20)
@@ -38,26 +42,56 @@ public class HierarchyDetailId implements java.io.Serializable {
 	public String getHierarchyId() {
 		return this.hierarchyId;
 	}
-
-	
-
 	public void setHierarchyId(String hierarchyId) {
 		this.hierarchyId = hierarchyId;
 	}
 
-	@Column(name = "HIER_LEVEL", nullable = false, length = 20)
+//	@Column(name = "HIER_LEVEL", nullable = false, length = 20)
+//	@AnnoMethodTree(order =20, init=true)
+//	public String getHierLevel() {
+//		return hierLevel;
+//	}
+//
+//	public void setHierLevel(String hierLevel) {
+//		this.hierLevel = hierLevel;
+//	}
+
+	
+	@Column(name = "NODE_ID", nullable = false, length = 20)
 	@AnnoMethodTree(order =20, init=true)
-	public String getHierLevel() {
-		return hierLevel;
+	public String getNodeId() {
+		return nodeId;
 	}
-
-	public void setHierLevel(String hierLevel) {
-		this.hierLevel = hierLevel;
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
 	}
-
-	
-	
 	@Override
+	public boolean equals(Object other) {
+		if ((this == other))
+			return true;
+		if ((other == null))
+			return false;
+		if (!(other instanceof HierarchyDetailId))
+			return false;
+		HierarchyDetailId castOther = (HierarchyDetailId) other;
+
+		return ((this.getHierarchyId() == castOther.getHierarchyId()) || (this.getHierarchyId() != null
+				&& castOther.getHierarchyId() != null && this.getHierarchyId().equals(castOther.getHierarchyId())))
+				&& ((this.getNodeId() == castOther.getNodeId()) || (this.getNodeId() != null
+						&& castOther.getNodeId() != null && this.getNodeId().equals(castOther.getNodeId())));
+	}
+
+	@Override
+	public int hashCode() {
+		int result = 17;
+
+		result = 37 * result + (getHierarchyId() == null ? 0 : this.getHierarchyId().hashCode());
+		result = 37 * result + (getNodeId() == null ? 0 : this.getNodeId().hashCode());
+		return result;
+	}
+	
+	
+/*	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -80,8 +114,7 @@ public class HierarchyDetailId implements java.io.Serializable {
 		result = 37 * result + (getHierarchyId() == null ? 0 : this.getHierarchyId().hashCode());
 		result = 37 * result + (getHierLevel() == null ? 0 : this.getHierLevel().hashCode());
 		return result;
-	}
-
+	}*/
 
 /*	@Column(name = "LVL", nullable = false)
 	@AnnoMethodTree(order =20, init=true)

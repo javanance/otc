@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:tooltip/>
+  <h:form id="formPanelStepDownMonthCoupon" >
+      <p:panelGrid columns="2" style="background: white" >
+        <p:outputLabel value="종목 ID" styleClass="takionLabel" />
+        <p:inplace>
+          <p:inputText value="#{tableHifiveNewInit.selectHifive.prodId}" />
+        </p:inplace> 
+        <!-- <p:outputLabel value="#{selectHifive.prodId}" /> -->
+        
+      
+        <p:outputLabel value="이자지급일" styleClass="takionLabel" />
+        <p:inplace>
+          <p:inputText value="#{tableHifiveNewInit.selectCouponEntry.key.id.couponPayDate}" />
+        </p:inplace> 
+
+         <p:outputLabel value="이자평가일" styleClass="takionLabel" />
+           <p:inplace>
+          <p:inputText value="#{tableHifiveNewInit.selectCouponEntry.key.couponEvalDate}" />
+        </p:inplace> 
+        
+        <p:outputLabel value="베리어 율"  styleClass="takionLabel" />
+        <p:inplace style="float:right">
+          <p:inputText value="#{tableHifiveNewInit.selectCouponEntry.key.barrierRate}" style="float:right" >
+        
+          </p:inputText>
+         </p:inplace>
+
+        <p:outputLabel value="관찰 유형" styleClass="takionLabel" />
+        <p:inplace>
+          <p:inputText value="#{tableHifiveNewInit.selectCouponEntry.key.observeType}" >
+            
+          </p:inputText>
+        </p:inplace>
+         
+         <p:outputLabel value="동시여부" styleClass="takionLabel" />
+        <p:inplace>
+          <p:inputText value="#{tableHifiveNewInit.selectCouponEntry.key.smtmType}" >
+            
+          </p:inputText>
+        </p:inplace>
+
+         
+        <p:outputLabel value="이자율"  styleClass="takionLabel" />
+        <p:inplace style="float:right">
+          <p:inputText value="#{tableHifiveNewInit.selectCouponEntry.key.couponRate}" style="float:right" >
+               <f:convertNumber pattern="#,###.####" />
+          </p:inputText>
+         </p:inplace> 
+       </p:panelGrid>  
+  </h:form>
+</ui:composition>

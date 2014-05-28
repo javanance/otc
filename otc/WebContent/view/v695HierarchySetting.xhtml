@@ -8,16 +8,19 @@
   <ui:define name="layoutLeft">
     <p:accordionPanel>
       <p:tab title="#{messages.userHierarchy}">
-        <ui:include src="/temp/tableUserHierarchy.xhtml" />
+        <!-- <ui:include src="/temp/tableUserHierarchy.xhtml" /> -->
+        <ui:include src="/temp/tableUserHierarchyNew.xhtml" />
       </p:tab>
       <p:tab title="#{messages.systemHierarchy}">
-          <ui:include src="/temp/tableSysHierarchy.xhtml" />
+          <!-- <ui:include src="/temp/tableSysHierarchy.xhtml" /> -->
+          <ui:include src="/temp/tableSysHierarchyNew.xhtml" />
       </p:tab>    
     </p:accordionPanel>
   </ui:define>
 
   <ui:define name="layoutInnerTop">
-    <ui:include src="/temp/tableHierarchyDetail.xhtml" />  
+    <!-- <ui:include src="/temp/tableHierarchyDetail.xhtml" /> -->  
+    <ui:include src="/temp/tableHierarchyDetailNew.xhtml" />
   </ui:define>
 
   <ui:define name="layoutInnerCenter">
@@ -43,7 +46,7 @@
  -->
 
         <!-- <ui:include src="/tableComp/tablePositionDefine.xhtml" /> -->
-        <ui:include src="/tableComp/tablePortfolioDefineNew.xhtml" />
+        <ui:include src="/tableComp/tablePortfolioDefineNewNew.xhtml" />
       </p:tab>
       <p:tab title="#{messages.hifiveStrike}">
 <!--         <ui:include src="/treeComp/treePositionNavigation.xhtml" /> -->

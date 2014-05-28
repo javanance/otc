@@ -31,7 +31,7 @@
     </p:panelGrid>
 
     <p:contextMenu for="formVcvMatrix">
-      <p:menuitem value="#{messages.selectRiskFactors}" oncomplete="wgDlgRfSelect.show()"
+      <p:menuitem value="#{messages.selectRiskFactors}" oncomplete="PF('wgDlgRfSelect').show()"
         action="#{pickListRfAction.loadPickList()}" />
       <p:menuitem >
        <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">

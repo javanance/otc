@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:panelGrid columns="10">
+      <p:outputLabel value="포지션 검색  :" styleClass="takionLabel" />
+      <p:inputText/>
+      <p:commandButton value="검색" title="포지션명으로 검색"/>
+      <p:commandButton value="수정" onclick="PF('prObjEdit').show()" title="수정버튼을 누르면 포지션에 설정된 정보를 수정할 수 있는 Popup"/>
+      <p:commandButton value="저장" title="수정된 정보 저장"/>
+  </p:panelGrid>
+  
+  
+  <p:spacer height="10"/>
+ <p:dataTable var="_var" value="#{viewTempInit.posList}" emptyMessage="#{messages.noDataFound}"
+      rowKey="#{_var}"
+         
+      resizableColumns="true"  
+      liveResize="true" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+        <p:row>
+          <p:column headerText="선택" style="width: 3%"/>
+          <p:column headerText="포지션명" width="100"  filterBy=""  />
+          <p:column headerText="DLL 명" width="100" />
+
+          <p:column headerText="금리곡선  명" width="100" />
+          <p:column headerText="변동성  명" width="100" />
+          <p:column headerText="시뮬레이션 회수" width="100" />
+          <p:column headerText="Lattice 개수" width="100" />
+          <p:column headerText="사용자수정여부" width="100" />
+        </p:row>
+      </p:columnGroup>
+
+      <p:column selectionMode="single" style="width: 3%"/>
+      <p:column >
+        <h:outputText value="#{_var}" title="검색창에 포지션명으로 조회"/>
+      </p:column>
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+    </p:dataTable>
+</ui:composition>

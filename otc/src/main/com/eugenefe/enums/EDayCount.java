@@ -1,6 +1,8 @@
 package com.eugenefe.enums;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 import com.eugenefe.util.FnCalendar;
 
@@ -281,6 +283,10 @@ public enum EDayCount {
 		}
 		return fromDate.differDays(toDate)/(double)365;
 //		else return 0.0;
+	}
+	
+	public static List<EDayCount> getList(){
+		return  Arrays.asList(EDayCount.values());
 	}
 	
 }

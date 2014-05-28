@@ -45,7 +45,7 @@
     </p:dataTable>
     
    <p:contextMenu for="formDynamicModel">
-      <p:menuitem value="#{messages.showChart}" id="qqqa" onclick="wgDialogDataNavigation.show()"/>
+      <p:menuitem value="#{messages.showChart}" id="qqqa" onclick="PF('wgDialogDataNavigation').show()"/>
       <p:menuitem value="#{messages.fxCash}" includeViewParams="true" >
        <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
         <p:dataExporter type="xls" target="tableDynamicModel" fileName="#{messages.dataNavigation}" />

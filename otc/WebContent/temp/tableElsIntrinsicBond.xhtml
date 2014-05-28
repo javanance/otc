@@ -1,0 +1,118 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formElsIntrinsicBond">
+    <p:dataTable value="#{elsOptionInit.optionCrudList}" var="_var" emptyMessage="#{messages.noDataFound}"
+      sortMode="multiple"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.els}" />
+        </f:facet>
+        <h:outputText value="#{_var.optionId}" />
+      </p:column>
+      
+      <p:column width="300" headerText="optionName">
+        <!-- <f:facet name="header" >
+          <h:outputText value="#{messages.optionName}"/>
+        </f:facet> -->
+        <h:outputText value="#{_var.optionName}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.underlying}" />
+        </f:facet>
+        <h:outputText value="#{_var.underlyingId}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.optionType}" />
+        </f:facet>
+        <h:outputText value="#{_var.optionType}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.exoticType}" />
+        </f:facet>
+        <h:outputText value="#{_var.exoticType}" />
+      </p:column>
+
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.barrierType}" />
+        </f:facet>
+        <h:outputText value="#{_var.barrierType}" />
+      </p:column>
+
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.digitalType}" />
+        </f:facet>
+        <h:outputText value="#{_var.digitalType}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.digitalPayoff}" />
+        </f:facet>
+        <h:outputText value="#{_var.digitalPayoff}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.observationType}" />
+        </f:facet>
+        <h:outputText value="#{_var.observationType}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.eventEvalType}" />
+        </f:facet>
+        <h:outputText value="#{_var.eventEvalType}" />
+      </p:column>
+
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.returnEvalType}" />
+        </f:facet>
+        <h:outputText value="#{_var.returnEvalType}" />
+      </p:column>      
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.basketYN}" />
+        </f:facet>
+        <h:outputText value="#{_var.basketYn}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.issuerId}" />
+        </f:facet>
+        <h:outputText value="#{_var.issuerId}" />
+      </p:column>
+      <p:column sortBy="#{_var.issueDate}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.issueDate}" />
+        </f:facet>
+        <h:outputText value="#{_var.issueDate}" />
+      </p:column>
+      <p:column sortBy="#{_var.maturityDate}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.maturityDate}" />
+        </f:facet>
+        <h:outputText value="#{_var.maturityDate}" />
+      </p:column>
+      
+    </p:dataTable>
+  </h:form>
+</ui:composition>

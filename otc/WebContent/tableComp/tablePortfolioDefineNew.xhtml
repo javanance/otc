@@ -5,10 +5,9 @@
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
   <h:form id="formPortfolioDefine">
-
     <p:growl id="growl" showDetail="false" sticky="false" life="5000" />
 
-    <p:outputPanel style="padding: 0.5em 1em;">
+    <p:outputPanel style="padding: 0.5em 1em;" styleClass="takion77-tableSelector">
       <p:commandButton id="btn1" value="#{messages.addOrUpdate}" update="pGridPortDefine, @(.ui-datatable)"
         action="#{tableHierarchyInit.addHierarchyDefine}" />
     </p:outputPanel>

@@ -50,7 +50,8 @@ public class LazyModelVcvHis  extends LazyDataModel<VcvMatrixHis>{
     
     
     @Override  
-    public List<VcvMatrixHis> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {  
+    public List<VcvMatrixHis> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters) {
+//    public List<VcvMatrixHis> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {  
         List<VcvMatrixHis> data = new ArrayList<VcvMatrixHis>();  
                 
         //filter  
@@ -61,7 +62,7 @@ public class LazyModelVcvHis  extends LazyDataModel<VcvMatrixHis>{
             for(String it: filters.keySet()){	
             	try {  
                     String filterProperty = it;
-                    String filterValue = filters.get(filterProperty);  
+                    String filterValue = (String)filters.get(filterProperty);  
                     String fieldValue = String.valueOf(aa.getClass().getField(filterProperty).get(aa));  
   
 //                    if(filterValue == null || fieldValue.startsWith(filterValue)) {

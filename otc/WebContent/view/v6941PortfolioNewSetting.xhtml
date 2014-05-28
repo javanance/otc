@@ -6,48 +6,190 @@
   template="/templates/primeTemplates.xhtml">
 
   <ui:define name="layoutLeft">
-    <p:accordionPanel>
-      <p:tab title="#{messages.userPortfolio}" >
-        <!-- <ui:include src="/temp/tableUserPortfolio.xhtml" /> -->
-        <!-- <ui:include src="/temp/treeUserPortfolio.xhtml" /> -->
-        <ui:include src="/temp/treeUserPortfolioNew.xhtml" />        
-      </p:tab>
-      <p:tab title="#{messages.systemPortfolio}">
-        <!-- <ui:include src="/temp/treeSysPortfolio.xhtml" /> -->          
-      </p:tab>
-    </p:accordionPanel>
+    <p:commandButton value="당사/타사발행 옵션" action="#{dataTransNewInit.mapSingleOptionOnly()}" update="@(.ui-datatable)"/>
+    <p:commandButton value="채권+옵션" action="#{dataTransNewInit.mapSingleOptionBond()}" update="@(.ui-datatable)"/>
+    <p:commandButton value="Swap" action="#{dataTransNewInit.mapSingleOptionSwap()}" update="@(.ui-datatable)"/>
+    
+    <p:commandButton value="position" action="#{dataTransNewInit.setPositionHis()}" update="@(.ui-datatable)"/>
+    
+    <!-- <p:commandButton value="Plain Vanilla" action="#{dataTransInit.convertPlainVanilla}"/>
+    <p:commandButton value="Call Spread" action="#{dataTransInit.convertCallSpread}"/>
+    <p:commandButton value="Digital" action="#{dataTransInit.convertDigital}"/>
+    <p:commandButton value="Knock Out" action="#{dataTransInit.convertKnockOut}"/>
+    <p:commandButton value="KnockOut Call And Put"  action="#{dataTransInit.convertKnockOutCallPut}"/>
+    <p:commandButton value="Step Down" action="#{dataTransInit.convertCallSpread}"/>
+    
+    <p:commandButton value="Position" action="#{dataTransInit.setPosition}"/> -->
+    
   </ui:define>
 
   <ui:define name="layoutInnerTop">
-     <p:tabView id="tabPortfolio1" dynamic="true" orientation="top">
-      <p:tab title="#{messages.portfolioMaster}">
-        <ui:include src="/temp/tablePortfolioMaster.xhtml" />
-      </p:tab>
-      <p:tab title="#{messages.portfolioDefine}">
-        <ui:include src="/temp/tablePortfolioDefine.xhtml" />
-      </p:tab>
-      <p:tab title="#{messages.portfolioStructure}">
-        <ui:include src="/temp/treeTablePortfolioDefine.xhtml" />
-      </p:tab>
-     </p:tabView>     
-            
+    <!--     <p:dataTable value="#{dataTransInit.elsMasterList}" var="_var"   emptyMessage="#{messages.noDataFound}">
+      <p:column>
+            <f:facet name="header"><h:outputText value="#{messages.els}" /></f:facet>
+            <h:outputText value="#{_var.pdno}"/>
+      </p:column>
+      <p:column>
+            <f:facet name="header"><h:outputText value="#{messages.els}" /></f:facet>
+            <h:outputText value="#{_var.issuDt}"/>
+      </p:column>
+    </p:dataTable> -->
+    <!--     <p:dataTable value="#{dataTransInit.hifiveList}" var="_var"   emptyMessage="#{messages.noDataFound}">
+      <p:column>
+            <f:facet name="header"><h:outputText value="#{messages.els}" /></f:facet>
+            <h:outputText value="#{_var.prodId}"/>
+      </p:column>
+      <p:column>
+            <f:facet name="header"><h:outputText value="#{messages.els}" /></f:facet>
+            <h:outputText value="#{_var.prodName}"/>
+      </p:column>
+    </p:dataTable> -->
+    <p:dataTable value="#{dataTransNewInit.optionCrudList}" var="_var" emptyMessage="#{messages.noDataFound}"
+      sortMode="multiple"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.els}" />
+        </f:facet>
+        <h:outputText value="#{_var.optionId}" />
+      </p:column>
+      
+      <p:column width="200" headerText="optionNameaaaaaaaaaaaaaaaaaaaaaaa">
+      <!--   <f:facet name="header" >
+          <h:outputText value="#{messages.optionName}"/>
+        </f:facet> -->
+        <h:outputText value="#{_var.optionName}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.underlying}" />
+        </f:facet>
+        <h:outputText value="#{_var.underlyingId}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.optionType}" />
+        </f:facet>
+        <h:outputText value="#{_var.optionType}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.exoticType}" />
+        </f:facet>
+        <h:outputText value="#{_var.exoticType}" />
+      </p:column>
+
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.barrierType}" />
+        </f:facet>
+        <h:outputText value="#{_var.barrierType}" />
+      </p:column>
+
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.digitalType}" />
+        </f:facet>
+        <h:outputText value="#{_var.digitalType}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.digitalPayoff}" />
+        </f:facet>
+        <h:outputText value="#{_var.digitalPayoff}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.observationType}" />
+        </f:facet>
+        <h:outputText value="#{_var.observationType}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.eventEvalType}" />
+        </f:facet>
+        <h:outputText value="#{_var.eventEvalType}" />
+      </p:column>
+
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.returnEvalType}" />
+        </f:facet>
+        <h:outputText value="#{_var.returnEvalType}" />
+      </p:column>      
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.basketYN}" />
+        </f:facet>
+        <h:outputText value="#{_var.basketYn}" />
+      </p:column>
+      
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.issuerId}" />
+        </f:facet>
+        <h:outputText value="#{_var.issuerId}" />
+      </p:column>
+<!--       <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.exchangeId}" />
+        </f:facet>
+        <h:outputText value="#{_var.exchangeId}" />
+      </p:column> -->
+      <p:column sortBy="#{_var.issueDate}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.issueDate}" />
+        </f:facet>
+        <h:outputText value="#{_var.issueDate}" />
+      </p:column>
+      <p:column sortBy="#{_var.maturityDate}">
+        <f:facet name="header">
+          <h:outputText value="#{messages.maturityDate}" />
+        </f:facet>
+        <h:outputText value="#{_var.maturityDate}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.strikePrice}" />
+        </f:facet>
+        <h:outputText value="#{_var.strikePrice}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.upBarrier}" />
+        </f:facet>
+        <h:outputText value="#{_var.upBarrier}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.downBarrier}" />
+        </f:facet>
+        <h:outputText value="#{_var.downBarrier}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.multiplier}" />
+        </f:facet>
+        <h:outputText value="#{_var.multiplier}" />
+      </p:column>
+      <p:column>
+        <f:facet name="header">
+          <h:outputText value="#{messages.conversionRatio}" />
+        </f:facet>
+        <h:outputText value="#{_var.conversionRatio}" />
+      </p:column>
+    </p:dataTable>
   </ui:define>
 
   <ui:define name="layoutInnerCenter">
-    <p:tabView id="tabPortfolio" dynamic="true" orientation="top">
-      <p:tab title="#{messages.portfolioDefine}">
-        
-      </p:tab>
-
-      <p:tab title="#{messages.hifiveStrike}">
-      </p:tab>
-
-      <p:tab title="#{messages.hifiveSwapIr}">
-      </p:tab>
-    </p:tabView>
-
   </ui:define>
-  <!-- <p:dialog header="#{messages.selectPortfolioToCopy}" widgetVar="wgDialogPortTree">
-    <ui:include src="/temp/treeUserPortfolio.xhtml" />
-  </p:dialog> -->
 </ui:composition>

@@ -20,22 +20,19 @@ import com.eugenefe.util.AnnoNavigationFilter;
 @Table(name = "PRICING_DLL")
 @AnnoNavigationFilter
 public class PricingDll implements java.io.Serializable {
-
 	private String dllId;
 	private String dllName;
 	private String dllType;
 	private String dllVendor;
-//	private String coveredMvType;
 	private MvType coveredMvType;
 	private String description;
 
 	public PricingDll() {
 	}
 
-//	public PricingDll(String dllId, String coveredMvType) {
-//		this.dllId = dllId;
-//		this.coveredMvType = coveredMvType;
-//	}
+	public PricingDll(String dllId) {
+		this.dllId = dllId;
+	}
 //
 //	public PricingDll(String dllId, String dllName, String dllType, String dllVendor, String coveredMvType,
 //			String description) {
@@ -98,7 +95,7 @@ public class PricingDll implements java.io.Serializable {
 //	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "COVERED_MV_TYPE", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "COVERED_MV_TYPE", nullable = true)
 	@AnnoMethodTree(order=40, init=true)
 	public MvType getCoveredMvType() {
 		return coveredMvType;

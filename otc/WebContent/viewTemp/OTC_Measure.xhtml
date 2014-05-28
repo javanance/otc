@@ -1,0 +1,32 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="measure" widgetVar="measure" header="지표 선택">
+      <p:commandButton value="확인" />
+
+<!--       <p:dataTable var="_var1" value="#{viewTempInit.measureList1}" rowKey="#{_var1}"
+        selection="#{viewTempInit.portList}">
+        <p:column selectionMode="multiple" headerText="All" exportable="false" width="6" />
+
+        <p:column headerText="지표 유형" width="30">
+        </p:column>
+        <p:column headerText="지표명 " width="30">
+          <h:outputText value="#{_var1}" />
+        </p:column>
+      </p:dataTable> -->
+       <p:dataTable var="_var1" value="#{viewTempInit.daoList}" rowKey="#{_var1}"
+        selection="#{viewTempInit.portList}">
+        <p:column selectionMode="multiple" headerText="All" exportable="false" width="6" />
+
+        <p:column headerText="지표 유형" width="30">
+           <h:outputText value="#{_var1.measureGroup}" />
+        </p:column>
+        <p:column headerText="지표명 " width="30">
+          <h:outputText value="#{_var1.measure}" />
+        </p:column>
+      </p:dataTable>
+    </p:dialog>
+</ui:composition>

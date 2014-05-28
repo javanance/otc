@@ -69,7 +69,11 @@
         <h:outputText value="#{_var.counterparty.counterpartyName}"/>
       </p:column> -->
 
-
+     <p:column id="colCpartyId" sortBy="#{_var.counterparty.counterpartyId}" 
+                filterBy="#{_var.counterparty.counterpartyId}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.cpartyId}" /></f:facet>
+        <h:outputText value="#{_var.counterparty.counterpartyId}"/>
+      </p:column>
       <p:column id="colTxType" sortBy="#{_var.txType}" filterBy="#{_var.txType}" filterMatchMode="contains" width="30">
         <f:facet name="header">
           <h:outputText value="#{messages.transactionType}" />

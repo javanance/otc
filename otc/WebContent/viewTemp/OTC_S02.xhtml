@@ -1,0 +1,105 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+
+    <p:panelGrid columns="14">
+      <p:outputLabel value="기준일자" styleClass="takionLabel" />
+      <p:selectOneMenu value="20140129">
+        <f:selectItem itemLabel="20140129" itemValue="FRN" />
+        <f:selectItem itemLabel="20140130" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="펀드" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="Equity_DS_ELS" itemValue="FRN" />
+        <f:selectItem itemLabel="투자공학부_ELS" itemValue="InversFloater" />
+      </p:selectOneMenu>
+      
+      
+      <p:outputLabel value="부서 " styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="DS부" itemValue="FRN" />
+        <f:selectItem itemLabel="투자공학부" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="거래유형" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="채권+당사발행" itemValue="FRN" />
+        <f:selectItem itemLabel="채권+타사발행" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="옵션유형" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="StepDown" itemValue="FRN" />
+        <f:selectItem itemLabel="Digital" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="시나리오 그룹" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="주가지수" itemValue="FRN" />
+        <f:selectItem itemLabel="환율" itemValue="InversFloater" />
+        <f:selectItem itemLabel="금리" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+
+      <p:commandButton value="지표선택" onclick="PF('bbb').show()" />
+      <p:commandButton value="조회" />
+    </p:panelGrid>
+
+    <p:dataTable var="_var" value="#{viewTempInit.posList}" emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true"  
+      liveResize="true" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+
+        <p:row>
+          <p:column colspan="2" headerText="포지션 정보" />
+          <p:column colspan="3" headerText="평가결과" />
+          <p:column colspan="4" headerText="시나리오 민감도결과" />
+
+        </p:row>
+        <p:row>
+          <p:column headerText="포지션명" width="100" />
+          <p:column headerText="시나리오명" width="100" />
+          
+          
+          <p:column headerText="평가금액" width="100" />
+          <p:column headerText="시나리오 평가금액" width="100" />
+          <p:column headerText="변화율" width="100" />
+
+
+          <p:column headerText="%델타" width="100" />
+          <p:column headerText="금액델타" width="100" />
+          <p:column headerText="%감마" width="100" />
+          <p:column headerText="금액감마" width="100" />
+        </p:row>
+      </p:columnGroup>
+
+
+      <p:column>
+        <h:outputText value="#{_var}" />
+      </p:column>
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+    </p:dataTable>
+  </h:form>
+</ui:composition>

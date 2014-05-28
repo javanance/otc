@@ -1,0 +1,75 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPortfolioLazyPosition">
+    <p:growl id="messages" showDetail="true" />
+
+    <p:dataTable id="tablePortLazyPosition" var="_var" value="#{tablePortfolioInit.lazyModelPosition}"
+      widgetVar="wgTablePortLazyPosition" 
+      rowKey="#{_var}" 
+      emptyMessage="#{messages.noDataFound}" 
+      resizableColumns="true"
+      rows="15"
+      paginatorAlwaysVisible="true"
+      paginator="true" paginatorPosition="bottom"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,15,25,50" 
+      >
+
+      <p:column id="colPosId" sortBy="#{_var.posId}" filterBy="#{_var.posId}" filterMatchMode="contains" width="30">
+        <f:facet name="header">
+          <h:outputText value="#{messages.positionId}" />
+        </f:facet>
+        <h:outputText value="#{_var.posId}" />
+      </p:column>
+<!--       <p:column id="colPosName" sortBy="#{_var.posName}" filterBy="#{_var.posName}" filterMatchMode="contains"
+        width="30">
+        <f:facet name="header">
+          <h:outputText value="#{messages.positionName}" />
+        </f:facet>
+        <h:outputText value="#{_var.posName}" />
+      </p:column>
+
+      <p:column id="colPosSide" sortBy="#{_var.posSide}" filterBy="#{_var.posSide}" filterMatchMode="contains"
+        width="30">
+        <f:facet name="header">
+          <h:outputText value="#{messages.positionSide}" />
+        </f:facet>
+        <h:outputText value="#{_var.posSide}" />
+      </p:column>
+
+      <p:column id="colProduct" sortBy="#{_var.product.mvId}" 
+        filterBy="#{_var.product.mvId}" filterMatchMode="contains"   width="30">
+        <f:facet name="header">
+          <h:outputText value="#{messages.product}" />
+        </f:facet>
+        <h:outputText value="#{_var.product.mvId}" />
+      </p:column> -->
+    
+
+<!--      <p:column id="colCpartyId" sortBy="#{_var.counterparty.counterpartyId}" 
+                filterBy="#{_var.counterparty.counterpartyId}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.cpartyId}" /></f:facet>
+        <h:outputText value="#{_var.counterparty.counterpartyId}"/>
+      </p:column>
+      <p:column id="colTxType" sortBy="#{_var.txType}" filterBy="#{_var.txType}" filterMatchMode="contains" width="30">
+        <f:facet name="header">
+          <h:outputText value="#{messages.transactionType}" />
+        </f:facet>
+        <h:outputText value="#{_var.txType==null ? 'NULL' : _var.txType}" />
+      </p:column>
+
+      <p:column id="colCurrency" sortBy="#{_var.currency}" filterBy="#{_var.currency}" filterMatchMode="contains"
+        width="30">
+        <f:facet name="header">
+          <h:outputText value="#{messages.currency}" />
+        </f:facet>
+        <h:outputText value="#{_var.currency}" />
+      </p:column> -->
+
+    </p:dataTable>
+  </h:form>
+</ui:composition>

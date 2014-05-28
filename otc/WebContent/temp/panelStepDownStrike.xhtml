@@ -1,0 +1,74 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:tooltip />
+  <h:form id="formPanelStepDownStrike">
+    <p:panelGrid columns="2" style="background: white">
+      <p:outputLabel value="종목 ID" styleClass="takionLabel" />
+      <p:inplace>
+        <p:inputText value="#{tableHifiveNewInit.selectHifive.prodId}" />
+      </p:inplace>
+      <!-- <p:outputLabel value="#{selectHifive.prodId}" /> -->
+
+
+      <p:outputLabel value="회차" styleClass="takionLabel" />
+      <p:inplace>
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.id.strikeSerial}" />
+      </p:inplace>
+
+      <p:outputLabel value="평가일" styleClass="takionLabel" />
+      <p:inplace>
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.strikeDate}" />
+      </p:inplace>
+      <p:outputLabel value="지급일" styleClass="takionLabel" />
+      <p:inplace>
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.paymentDate}" />
+      </p:inplace>
+
+      <p:outputLabel value="행사가" styleClass="takionLabel" />
+      <p:inplace style="float:right">
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.strikePrice}">
+          <f:convertNumber pattern="#,###.####" />
+        </p:inputText>
+      </p:inplace>
+
+      <p:outputLabel value="지급율" styleClass="takionLabel" />
+      <p:inplace style="float:right">
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.payoffAmt}" style="float:right">
+          <f:convertNumber pattern="#,###.####" />
+        </p:inputText>
+      </p:inplace>
+
+      <p:outputLabel value="더블점프행사가" styleClass="takionLabel" />
+      <p:inplace style="float:right">
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.dblJumpStrike}" >
+          <f:convertNumber pattern="#,###.####" />
+        </p:inputText>
+      </p:inplace>
+
+      <p:outputLabel value="더블점프지급율" styleClass="takionLabel" />
+      <p:inplace style="float:right">
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.dblJumpPayoff}" style="float:right">
+          <f:convertNumber pattern="#,###.####" />
+        </p:inputText>
+      </p:inplace>
+
+      <p:outputLabel value="트리플점프행사가" styleClass="takionLabel" />
+      <p:inplace style="float:right">
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.tplJumpStrike}">
+          <f:convertNumber pattern="#,###.####" />
+        </p:inputText>
+      </p:inplace>
+
+      <p:outputLabel value="트리플점프지급율" styleClass="takionLabel" />
+      <p:inplace style="float:right">
+        <p:inputText value="#{tableHifiveNewInit.selectStrikeEntry.key.tplJumpPayoff}" style="float:right">
+          <f:convertNumber pattern="#,###.####" />
+        </p:inputText>
+      </p:inplace>
+    </p:panelGrid>
+  </h:form>
+</ui:composition>

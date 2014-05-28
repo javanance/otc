@@ -24,7 +24,7 @@ public class PositionPropertyId implements java.io.Serializable {
 		this.propId = propId;
 	}
 
-	@Column(name = "PROP_iD", nullable = false)
+	@Column(name = "PROP_ID", nullable = false)
 	@NotNull
 	public String getPropId() {
 		return propId;

@@ -156,7 +156,7 @@ public class TablePortfolioNewInit {
 		portList = session.createCriteria(PortfolioNew.class).list();
 		
 		for(PortfolioNew aa : portList){
-			if(aa.getChangeable().getValue()){
+			if(aa.getChangeable()== null || aa.getChangeable().getValue()){
 				userPortfolioList.add(aa);
 			}else{
 				sysPortfolioList.add(aa);

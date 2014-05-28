@@ -1,6 +1,7 @@
 package com.eugenefe.enums;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.eugenefe.util.CashFlow;
@@ -24,5 +25,8 @@ public enum EAmortMtd {
 		cashFlows.add(cf);
 		
 		return cashFlows;
+	}
+	public static List<EAmortMtd> getList(){
+		return  Arrays.asList(EAmortMtd.values());
 	}
 }

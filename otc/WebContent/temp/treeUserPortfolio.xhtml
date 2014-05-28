@@ -6,12 +6,11 @@
 
   <h:form id="formUserPortfolioTree">
     <p:growl id="messages" showDetail="true" />
-    <p:remoteCommand name ="rcSelectNode" action="#{tablePortfolioInit.beforeDrag}"/>
-    
 
     <p:contextMenu for="treeUserPortfolio" >
-      <!-- <p:menuitem value="#{messages.copyTo}" onclick="wgDialogPortTree.show()"/> -->
       <p:menuitem value="#{messages.copyTo}" onclick="PF('aaaa').show()" update="@parent:@parent:ddd:treeUserPortfolio1"/>
+      <!-- <p:menuitem value="#{messages.copyTo}" onclick="PF('aaaa').show()" update="@(.takion77-tableSelector)"/> -->
+
       <!-- <p:menuitem value="#{messages.copyTo}" action="#{tablePortfolioInit.openDialog}" 
         onclick="PF('aaaa').show()" update="@parent:@parent:ddd:dlgOutLabel"/> -->
         
@@ -20,33 +19,37 @@
     </p:contextMenu>    
 
      <p:tree id="treeUserPortfolio" value="#{tablePortfolioInit.userRootNode}" var="_node" animate="true"
-      highlight="true" orientation="vertical"  
+      highlight="true" orientation="vertical"   
       selection="#{tablePortfolioInit.selectNode}" selectionMode="single"
-
-      draggable="true" droppable="true"  dragMode="self"   
+      dynamic="false"
+      draggable="false" droppable="false"  dragMode="self"         
       style="width:95%; height:100%">
 
-      <p:ajax event="dragdrop" listener="#{tablePortfolioInit.onDrop}"  update="treeUserPortfolio @(.ui-datatable)"  />
-      <p:ajax event="select" listener="#{tablePortfolioInit.selectNode}" 
+<!--       <p:ajax event="dragdrop" listener="#{tablePortfolioInit.onDrop}"  update="treeUserPortfolio @(.ui-datatable)"  /> -->
+      <p:ajax event="select" listener="#{tablePortfolioInit.onTest}" 
           update="@(.ui-treetable) @(.ui-datatable) @(.ui-panel) @(.ui-panelgrid) @(.ui-datagrid)" />
 <!--             @parent:@parent:@parent:@parent:tabPortfolio1:formPortfolioDefine:panelPortDefine" /> -->
 
-      <p:treeNode  type="UD"  expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+      <p:treeNode  expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
         <!-- <h:outputText value="#{_node.portName}(#{_node.weight})"  /> -->
+        <h:outputText value="#{_node.portName}"  />
+      </p:treeNode>
+      
+<!--       <p:treeNode  type="UD"  expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
         <h:outputText value="#{_node.portName}"  />
       </p:treeNode>
       
       <p:treeNode type="HIER" >
-        <!-- <h:outputText value="#{_node.portName}(#{_node.weight})"  /> -->
         <h:outputText value="#{_node.portName}"  />
       </p:treeNode>
       
       <p:treeNode type="COPY" >
-        <!-- <h:outputText value="#{_node.portName}(#{_node.weight})"  /> -->
         <h:outputText value="#{_node.portName}"  />
-      </p:treeNode>
+      </p:treeNode> -->
     </p:tree>
     
+
+
     <p:dialog id="ddd" header="#{messages.selectPortfolioToCopy}" widgetVar="aaaa" closeOnEscape="true"
       dynamic="true" closable="true" resizable="true">
 
@@ -65,7 +68,7 @@
       highlight="true" orientation="vertical"  
        
       selection="#{tablePortfolioInit.dlgSelNode}" selectionMode="single"
-      style="width:100%; height:95%">
+      style="width:100%; height:95%" styleClass="takion77-tableSelector">
         <p:ajax event="select"  listener="#{tablePortfolioInit.selectDlgNode}" update="@parent:panelGrid:dlgOutLabel1"/>
         <p:treeNode type="UD">
           <h:outputText value="#{_node.portName}" />

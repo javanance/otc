@@ -1,0 +1,161 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/primeTemplates.xhtml">
+
+  <ui:define name="layoutInnerCenter">
+    <p:tabView id="vv100View" dynamic="true" orientation="top" widgetVar="wgHifiveTabView">
+      <p:tab title="포트폴리오 현황">
+        <ui:include src="/viewTemp/OTC_R01.xhtml" />
+      </p:tab>
+      <p:tab title="포트폴리오 위험지표 현황">
+        <ui:include src="/viewTemp/OTC_R02.xhtml" />
+      </p:tab>
+      <p:tab title="차주별 OTC 현황">
+        <ui:include src="/viewTemp/OTC_R03.xhtml" />
+      </p:tab>
+      <p:tab title="기초자산별 OTC 현황">
+        <ui:include src="/viewTemp/OTC_R04.xhtml" />
+      </p:tab>
+      <p:tab title="Pricing 방법별 OTC 현황">
+        <ui:include src="/viewTemp/OTC_R05.xhtml" />
+      </p:tab>
+<!--       <p:tab title="발행 헤지 현황">
+        <ui:include src="/viewTemp/OTC_R06_H.xhtml" />
+        <ui:include src="/viewTemp/OTC_R06_Top.xhtml" />
+        <p:spacer height="10" />
+        <ui:include src="/viewTemp/OTC_R06_Body.xhtml" />
+      </p:tab> -->
+      <p:tab title="포지션 현황">
+        <ui:include src="/viewTemp/OTC_P01.xhtml" />
+      </p:tab>
+      <p:tab title="포지션 위험 현황">
+        <ui:include src="/viewTemp/OTC_P02.xhtml" />
+      </p:tab>
+      <p:tab title="포지션  민감도 현황">
+        <ui:include src="/viewTemp/OTC_P03.xhtml" />
+      </p:tab>
+
+      <p:tab title="발행현황">
+        <ui:include src="/viewTemp/OTC_P04_H.xhtml" />
+        <ui:include src="/viewTemp/OTC_P04.xhtml" />
+        <p:spacer height="10" />
+        <ui:include src="/viewTemp/OTC_P04_02.xhtml" />
+      </p:tab>
+
+      <p:tab title="OTC 공정가액 검증">
+        <ui:include src="/viewTemp/OTC_V01.xhtml" />
+      </p:tab>
+
+      <p:tab title="시나리오 현황">
+        <ui:include src="/viewTemp/OTC_S01.xhtml" />
+      </p:tab>
+<!--       <p:tab title="시뮬레이션 조회">
+        <ui:include src="/viewTemp/OTC_S02.xhtml" />
+      </p:tab>
+      <p:tab title="포트폴리오 시뮬레이션 조회">
+        <ui:include src="/viewTemp/OTC_S04.xhtml" />
+      </p:tab> -->
+      
+<!--       <p:tab title="VaR 중간결과 조회">
+        <ui:include src="/viewTemp/OTC_S05.xhtml" />
+      </p:tab> -->
+            
+      <p:tab title="평가방법론 설정 및 조회">
+        <ui:include src="/viewTemp/OTC_X01.xhtml" />
+        <p:spacer height="10"/>
+        <p:separator/>
+        <ui:include src="/viewTemp/OTC_X01_Bottom.xhtml" />
+      </p:tab>
+      <p:tab title="시나리오 설정 및 조회">
+        <ui:include src="/viewTemp/OTC_X02.xhtml" />
+      </p:tab>      
+    </p:tabView>
+
+    <p:dialog widgetVar="R01His" header="과거 이력 조회">
+      <ui:include src="/viewTemp/OTC_R01_HIS.xhtml" />
+    </p:dialog>
+
+    <p:dialog widgetVar="R02His" header="과거 이력 조회">
+      <ui:include src="/viewTemp/OTC_R02_HIS.xhtml" />
+    </p:dialog>
+
+    <p:dialog id="posHis" widgetVar="posHis" header="과거 이력 조회">
+      <ui:include src="/viewTemp/OTC_P01_HIS.xhtml" />
+    </p:dialog>
+    <p:dialog id="sceHis" widgetVar="sceHis" header="과거 이력 조회">
+      <ui:include src="/viewTemp/OTC_S01_HIS.xhtml" />
+    </p:dialog>
+    <p:dialog id="valHis" widgetVar="valHis" header="과거 이력 조회">
+      <ui:include src="/viewTemp/OTC_V01_HIS.xhtml" />
+    </p:dialog>
+    <p:dialog id="hisData" widgetVar="hisData" header="과거 이력 조회">
+      <p:panelGrid columns="4">
+
+        <p:outputLabel value="조회시작일자" styleClass="takionLabel" />
+        <p:selectOneMenu value="20140129">
+          <f:selectItem itemLabel="20140129" itemValue="FRN" />
+          <f:selectItem itemLabel="20140130" itemValue="InversFloater" />
+        </p:selectOneMenu>
+
+        <p:outputLabel value="조회종료일자" styleClass="takionLabel" />
+        <p:selectOneMenu value="20140129">
+          <f:selectItem itemLabel="20140129" itemValue="FRN" />
+          <f:selectItem itemLabel="20140130" itemValue="InversFloater" />
+        </p:selectOneMenu>
+      </p:panelGrid>
+
+      <p:dataTable var="_var1" value="#{viewTempInit.measureList}" rowKey="#{_var1}">
+        <p:column headerText="조회일자" width="30" />
+        <p:column headerText="포트폴리오" width="30" />
+        <p:column headerText="장부가" width="30" />
+        <p:column headerText="평가금액" width="30" />
+        <p:column headerText="전일비" width="30" />
+        <p:column headerText="RM VaR" width="30" />
+        <p:column headerText="HS VaR" width="30" />
+        <p:column headerText="MC VaR" width="30" />
+      </p:dataTable>
+    </p:dialog>
+
+
+
+
+
+
+    <p:dialog id="aaa" widgetVar="aaa" header="지표 선택">
+      <p:commandButton value="확인" />
+
+      <p:dataTable var="_var1" value="#{viewTempInit.measureList}" rowKey="#{_var1}"
+        selection="#{viewTempInit.portList}">
+        <p:column selectionMode="multiple" headerText="All" exportable="false" width="6" />
+
+        <p:column headerText="지표 유형" width="30">
+        </p:column>
+        <p:column headerText="지표명 " width="30">
+          <h:outputText value="#{_var1}" />
+        </p:column>
+      </p:dataTable>
+    </p:dialog>
+
+    <p:dialog id="bbb" widgetVar="bbb" header="지표 선택">
+      <p:commandButton value="확인" />
+
+      <p:dataTable var="_var1" value="#{viewTempInit.cPartyMeasureList}" rowKey="#{_var1}"
+        selection="#{viewTempInit.portList}">
+        <p:column selectionMode="multiple" headerText="All" exportable="false" width="6" />
+
+        <p:column headerText="지표 유형" width="30">
+        </p:column>
+        <p:column headerText="지표명 " width="30">
+          <h:outputText value="#{_var1}" />
+        </p:column>
+      </p:dataTable>
+    </p:dialog>
+    
+    <p:dialog id="prObjEdit" widgetVar="prObjEdit" header="평가정보 수정">
+      <ui:include src="/viewTemp/OTC_X01_Bottom_Edit.xhtml" />
+    </p:dialog>
+  </ui:define>
+</ui:composition>

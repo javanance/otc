@@ -9,7 +9,7 @@
     <h:form id="formSettings">
 
       <!-- <p:contextMenu for="tabviewSettings:acordionId:xxx">
-        <p:menuitem value="View" onclick="portListDialog3.show();" icon="ui-icon-search" />
+        <p:menuitem value="View" onclick="PF('portListDialog3').show();" icon="ui-icon-search" />
       </p:contextMenu> -->
 
       <p:tabView id="tabviewSettings" orientation="top">
@@ -81,7 +81,7 @@
               <p:column colspan="3">
                 <p:themeSwitcher id="defaultSwitcher" value="#{themeSwitcher.theme}" style="width:200px">
                   <f:selectItem itemLabel="#{messages.selectTheme}" itemValue="" />
-                  <f:selectItems value="#{themeSwitcher.themes}" var="_theme" itemLabel="#{_theme.name}"
+                  <f:selectItems value="#{themeSwitcher.themes}" var="_theme" itemLabel="#{_theme}"
                     itemValue="#{_theme}" />
                   <p:ajax listener="#{themeSwitcher.saveTheme}" />
                 </p:themeSwitcher>
@@ -158,17 +158,17 @@
         </p:tab>
         <!-- ********************************************************************** -->
         <p:tab title="#{messages.aaa}">
-          <p:commandButton id="basiczzz" value="Basic" onclick="portListDialog3.show();" type="button" />
+          <p:commandButton id="basiczzz" value="Basic" onclick="PF('portListDialog3').show();" type="button" />
         </p:tab>
         <p:tab id="tabzzzz" title="Test Accordion">
           <p:accordionPanel id="acordionId" multiple="true">
             <p:tab title="#{messages.userDefined}" disabled="#{not identity.loggedIn}">
               <p:outputLabel id="xyz" value="AAAA" />
-              <s:link value="BBB" onclick="portListDialog3.show();" />
-              <h:outputLink value="javascript:void(0)" onclick="portListDialog3.show();">CCC </h:outputLink>
+              <s:link value="BBB" onclick="PF('portListDialog3').show();" />
+              <h:outputLink value="javascript:void(0)" onclick="PF('portListDialog3').show();">CCC </h:outputLink>
             </p:tab>
             <p:tab id="xxx" title="#{messages.userDefined}" disabled="#{not identity.loggedIn}">
-              <p:commandButton type="button" value="AAA222" onclick="portListDialog3.show();" />
+              <p:commandButton type="button" value="AAA222" onclick="PF('portListDialog3').show();" />
             </p:tab>
           </p:accordionPanel>
         </p:tab>

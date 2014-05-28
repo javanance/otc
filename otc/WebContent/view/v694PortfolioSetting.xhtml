@@ -9,37 +9,44 @@
     <p:accordionPanel id="accoPort">
       <p:tab title="#{messages.userPortfolio}" >
         <ui:include src="/temp/treeUserPortfolio.xhtml" />
+        <!-- <ui:include src="/temp/treeUserPortfolioNew.xhtml" /> -->
       </p:tab>
 
       <p:tab title="#{messages.systemPortfolio}">
       </p:tab>
     </p:accordionPanel>
   </ui:define>
-
-  <ui:define name="layoutInnerCenter">
-     <p:tabView id="tabPortfolio1" dynamic="true" orientation="top">
-      <p:tab title="#{messages.portfolioMaster}">
-        <ui:include src="/temp/tablePortfolioMaster.xhtml" />
         
+  <ui:define name="layoutInnerCenter">
+    <!-- <ui:include src="/temp/tablePortfolioLazyPosition.xhtml" /> -->
+    
+     <p:tabView id="tabPortfolio1" dynamic="true" orientation="top">
+<!--       <p:tab title="#{messages.portfolioPosition}">
+        <ui:include src="/temp/tablePortfolioPosition.xhtml" />
+        <ui:include src="/temp/tablePortfolioLazyPosition.xhtml" />      
+      </p:tab>
+ -->
+      <p:tab title="#{messages.portfolioMaster}">
+        <!-- <ui:include src="/temp/tablePortfolioMaster.xhtml" /> -->
 
         <ui:include src="/temp/tablePortfolioDefine.xhtml" />
         
-        <!-- <p> *Sub Portfolios        </p>
-        <ui:include src="/temp/dataGridPortfolioSub.xhtml" /> -->
+        <p> *Sub Portfolios        </p>
+        <ui:include src="/temp/dataGridPortfolioSub.xhtml" />
                 
-        <ui:include src="/temp/tablePortfolioSub.xhtml" />
-      </p:tab>
-
-      <p:tab title="#{messages.subPortfolio}">
         <!-- <ui:include src="/temp/tablePortfolioSub.xhtml" /> -->
-        <!-- <ui:include src="/temp/dataGridPortfolioSub.xhtml" /> -->
-      </p:tab>
+      </p:tab> 
 
-      <p:tab title="#{messages.portfolioPosition}">
-        <ui:include src="/temp/tablePortfolioPosition.xhtml" />      
-      </p:tab>
+<!--       <p:tab title="#{messages.subPortfolio}">
+        <ui:include src="/temp/tablePortfolioSub.xhtml" />
+        <ui:include src="/temp/dataGridPortfolioSub.xhtml" />
+      </p:tab> -->
+
+<!--       <p:tab title="#{messages.portfolioPosition}">
+        <ui:include src="/temp/tablePortfolioPosition.xhtml" />
+        <ui:include src="/temp/tablePortfolioLazyPosition.xhtml" />      
+      </p:tab> -->
      </p:tabView>     
-            
   </ui:define>
 
 <!--   <ui:define name="layoutInnerCenter">

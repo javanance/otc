@@ -1,0 +1,26 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/primeTemplates.xhtml">
+
+  <ui:define name="layoutRight">
+    <p:accordionPanel >
+      <p:tab title="발행내역">
+        <ui:include src="/temp/panelDebtPosition.xhtml" />
+      </p:tab>
+    </p:accordionPanel>
+  </ui:define>
+  <ui:define name="layoutInnerCenter">
+    <ui:include src="/temp/ZOTC_D_P01.xhtml" >
+      <ui:param name="positionList" value="#{elsPositionInit.assetPosList}" />
+    </ui:include>
+  </ui:define>
+  
+  <!-- <ui:define name="layoutInnerBottom">
+    <ui:include src="/temp/ZOTC_D_P01.xhtml" >
+      <ui:param name="positionList" value="#{elsPositionInit.debtPosList}" />
+    </ui:include>
+  </ui:define> -->
+</ui:composition>

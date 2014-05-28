@@ -1,0 +1,41 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+
+    <p:panelGrid columns="14">
+      <p:outputLabel value="기준일자" styleClass="takionLabel" />
+      <p:selectOneMenu value="20140129">
+        <f:selectItem itemLabel="20140129" itemValue="FRN" />
+        <f:selectItem itemLabel="20140130" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="시나리오 그룹" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="HS VaR" itemValue="FRN" />
+        <f:selectItem itemLabel="MC VaR" itemValue="InversFloater" />
+        <f:selectItem itemLabel="민감도" itemValue="InversFloater" />
+      </p:selectOneMenu>
+      
+      
+      <p:outputLabel value="시장변수 유형" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="주가지수" itemValue="FRN" />
+        <f:selectItem itemLabel="환율" itemValue="InversFloater" />
+        <f:selectItem itemLabel="금리" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+
+      <p:outputLabel value=" " />
+            <p:outputLabel value=" " />
+      <!-- <p:commandButton value="지표선택" onclick="bbb.show()" /> -->
+      <p:commandButton value="조회" />
+      <p:commandButton value="과거 데이터 조회" onclick="PF('sceHis').show()" />
+    </p:panelGrid>
+  </h:form>
+</ui:composition>

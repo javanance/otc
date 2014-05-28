@@ -53,12 +53,8 @@ import com.eugenefe.util.ENavigationData;
 @Name("tableLazyDynamicModelInit")
 @Scope(ScopeType.CONVERSATION)
 public class TableLazyDynamicModelInit<T> {
-	@Logger
-	private Log log;
-
-	@In
-	private Session session;
-
+	@Logger	private Log log;
+	@In		private Session session;
 	@In(value = "#{basedateBean}")
 	private BaseDateBean basedateBean;
 
@@ -99,7 +95,6 @@ public class TableLazyDynamicModelInit<T> {
 
 	private LazyModelDynamic lazyModelDynamic;
 	private Map<String,LazyModelDynamic> lazyModelDynamicDetail;
-	
 
 
 	public TableLazyDynamicModelInit() {

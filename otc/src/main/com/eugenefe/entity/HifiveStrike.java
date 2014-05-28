@@ -3,8 +3,10 @@ package com.eugenefe.entity;
 // Generated Nov 25, 2013 6:47:59 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,6 +23,8 @@ import org.hibernate.annotations.Type;
 
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
+import com.eugenefe.util.ColumnModel;
+import com.eugenefe.util.DynamicColumnModel;
 import com.eugenefe.util.FnCalendar;
 
 /**
@@ -29,7 +33,7 @@ import com.eugenefe.util.FnCalendar;
 @Entity
 @Table(name = "HIFIVE_STRIKE")
 @AnnoNavigationFilter
-public class HifiveStrike implements java.io.Serializable, Cloneable{
+public class HifiveStrike implements java.io.Serializable, Cloneable, Comparable<HifiveStrike>{
 
 	private HifiveStrikeId id;
 	private Hifive hifive;
@@ -46,6 +50,8 @@ public class HifiveStrike implements java.io.Serializable, Cloneable{
 	private BigDecimal tplJumpPayoff;
 	private BigDecimal couponRate;
 	private BigDecimal upBarrier;
+	
+	private static List<DynamicColumnModel> columnModelList = new ArrayList<DynamicColumnModel>();
 
 	public HifiveStrike() {
 	}
@@ -239,4 +245,73 @@ public class HifiveStrike implements java.io.Serializable, Cloneable{
 		
 		return new FnCalendar(year, month, day);
 	}
+
+	@Transient
+	public  static List<String> getColumnList(){
+		List<String> columnList = new ArrayList<String>();
+		columnList.add("getStrikeDate");
+		columnList.add("getPaymentDate");
+		columnList.add("getStrikePrice");
+		columnList.add("getPayoffAmt");
+		columnList.add("getDblJumpStrike");
+		columnList.add("getDblJumpPayoff");
+		columnList.add("getTplJumpStrike");
+		columnList.add("getTplJumpPayoff");
+		columnList.add("getUpBarrier");
+		columnList.add("getCouponRate");
+		return columnList;
+	}
+
+	@Transient
+	public  static List<String> getStringColumnList(){
+		List<String> columnList = new ArrayList<String>();
+		columnList.add("getStrikeDate");
+		columnList.add("getPaymentDate");
+		return columnList;
+	}
+	@Transient
+	public  static List<String> getNumberColumnList(){
+		List<String> columnList = new ArrayList<String>();
+		columnList.add("getStrikePrice");
+		columnList.add("getPayoffAmt");
+		columnList.add("getDblJumpStrike");
+		columnList.add("getDblJumpPayoff");
+		columnList.add("getTplJumpStrike");
+		columnList.add("getTplJumpPayoff");
+		columnList.add("getUpBarrier");
+		columnList.add("getCouponRate");
+		return columnList;
+	}
+	@Transient
+	public  static List<DynamicColumnModel> getColumnModelList(){
+		if(columnModelList.isEmpty()){
+			createColumnModelList();
+		}
+		return columnModelList;
+	}	
+	@Transient
+	private static void createColumnModelList(){
+		columnModelList.add(new DynamicColumnModel("getStrikeDate","date","STRING", true, 0));
+		columnModelList.add(new DynamicColumnModel("getPaymentDate","date","STRING", true,1));
+		columnModelList.add(new DynamicColumnModel("getStrikePrice","strike","NUMBER", true,2));
+		columnModelList.add(new DynamicColumnModel("getPayoffAmt","strike","NUMBER", true,3));
+		columnModelList.add(new DynamicColumnModel("getDblJumpStrike","strike","NUMBER", false,4));
+		columnModelList.add(new DynamicColumnModel("getDblJumpPayoff","strike","NUMBER",false,5));
+		columnModelList.add(new DynamicColumnModel("getTplJumpStrike","strike","NUMBER",false,6));
+		columnModelList.add(new DynamicColumnModel("getTplJumpPayoff","strike","NUMBER",false,7));
+		columnModelList.add(new DynamicColumnModel("getUpBarrier","strike","NUMBER", true,8));
+		columnModelList.add(new DynamicColumnModel("getCouponRate","strike","NUMBER", true,9));
+	}
+
+	@Override
+	@Transient
+	public int compareTo(HifiveStrike o) {
+		if(this.getId().getStrikeSerial()>= o.getId().getStrikeSerial()){
+			return 1;
+		}else{
+			return -1;
+		}
+	}
+	
+	
 }

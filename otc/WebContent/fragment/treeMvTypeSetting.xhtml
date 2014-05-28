@@ -15,18 +15,18 @@
           style="width:100%;height:100%" styleClass="takion77-treeContainer">
           
           <!-- <p:ajax event="dragdrop" update="@(form)" /> --> 
-          <p:ajax event="select" listener="#{treeMvTypeInit.onNodeSelect}" update="@(.ui-datatable)" />
+          <p:ajax event="select" listener="#{treeMvTypeInit.onNodeSelect}" update="@(.takion77-treeMvType)" />
 
 <!--           <p:treeNode >
             <h:outputText value="#{_node}"  />
           </p:treeNode>
  -->          
           <p:treeNode type="root" icon="ui-icon-document">
-            <h:outputText value="#{_node.mvType}"  />
+            <h:outputText value="#{_node.mvTypeName}"  />
           </p:treeNode>
           
           <p:treeNode type="sub" icon="ui-icon-video">
-            <h:outputText value="#{_node.mvType}"  />
+            <h:outputText value="#{_node.mvTypeName}"  />
           </p:treeNode>
         </p:tree>
   </h:form>

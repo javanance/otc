@@ -35,11 +35,8 @@ import com.eugenefe.util.NamedQuery;
 @Name("tableLazyMarketVariableInit")
 @Scope(ScopeType.CONVERSATION)
 public class TableLazyMarketVariableInit {
-	@Logger
-	private Log log;
-	
-	@In
-	private EntityManager entityManager;
+	@Logger	private Log log;
+	@In		private EntityManager entityManager;
 	
 	@RequestParameter  
 	private String flagDataTable; 

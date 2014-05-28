@@ -39,7 +39,7 @@
     </p:dataTable>
     
    <p:contextMenu for="formIrCurve">
-      <p:menuitem value="#{messages.viewIrcDetail}" oncomplete="wgDlgIrcDetail.show()" />
+      <p:menuitem value="#{messages.viewIrcDetail}" oncomplete="PF('wgDlgIrcDetail').show()" />
       <p:menuitem >
        <h:commandLink value="#{messages.exportToExcel}" styleClass="ui-menuitem-link ui-corner-all">
         <p:dataExporter type="xls" target="tableIrCurve" fileName="#{messages.irCurve}" />

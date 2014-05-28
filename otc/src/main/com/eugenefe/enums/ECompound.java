@@ -1,5 +1,8 @@
 package com.eugenefe.enums;
 
+import java.util.Arrays;
+import java.util.List;
+
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
@@ -62,4 +65,7 @@ public enum ECompound {
 		}
 		return frequency * ( Math.pow(intFactor, 1/(frequency*timeFactor))-1);
 	}
+	public static List<ECompound> getList(){
+		return  Arrays.asList(ECompound.values());
+	}	
 }

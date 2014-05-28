@@ -1,0 +1,82 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+
+    <p:panelGrid columns="12" >
+      <p:outputLabel value="기준일자" styleClass="takionLabel" />
+      <p:selectOneMenu value="20140129" >
+              <f:selectItem itemLabel="20140129" itemValue="FRN"/>
+              <f:selectItem itemLabel="20140130" itemValue="InversFloater"/>
+     </p:selectOneMenu>                
+     <p:outputLabel value="포트폴리오 계층" styleClass="takionLabel" />
+      <p:selectOneMenu value="부서별" >
+              <f:selectItem itemLabel="부서별" itemValue="FRN"/>
+              <f:selectItem itemLabel="부서/상품" itemValue="InversFloater"/>
+     </p:selectOneMenu>        
+             
+      <p:outputLabel value=" " />
+      <p:outputLabel value=" " />
+      
+      <p:outputLabel value=" " />
+      <p:outputLabel value=" " />
+      <p:commandButton value="조회"  />
+      <p:commandButton value="과거데이터조회" onclick="PF('R01His').show()"/>
+      <p:commandButton value="그래프"  />
+      <p:commandButton value="엑셀 내보내기"  />
+    </p:panelGrid>
+
+    <p:dataTable  var="_var" value="#{viewTempInit.portList}" 
+      emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50"
+      >
+    <p:columnGroup type="header">
+        <p:row>
+            <p:column rowspan="2" headerText="포트폴리오"  filterBy="" sortBy=""/>
+            <p:column colspan="3" headerText="잔고정보"  />
+            <p:column colspan="4" headerText="VaR"  />
+            <p:column colspan="4" headerText="VaR 비율"  />
+        </p:row>
+        <p:row>
+          <p:column headerText="장부가" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="평가금액" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="전일비" width="100" filterBy="" sortBy=""/>
+
+          <p:column headerText="RM_VaR" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="HS_VaR" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="MC_VaR" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="ES" width="100" filterBy="" sortBy=""/>
+
+          <p:column headerText="RM_VaR_Ratio" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="HS_VaR_Ratio" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="MC_VaR_Ratio" width="100" filterBy="" sortBy=""/>
+          <p:column headerText="ES_Ratio" width="100" filterBy="" sortBy=""/>
+        </p:row>    
+    </p:columnGroup>     
+
+      <p:column>
+        <h:outputText value="#{_var}" />
+      </p:column>
+            
+      <p:column/>
+      <p:column/>
+      <p:column/>
+
+      <p:column/>
+      <p:column/>
+      <p:column/>
+      <p:column/>
+      
+      <p:column/>
+      <p:column/>
+      <p:column/>
+      <p:column/>      
+    </p:dataTable>
+  </h:form>
+</ui:composition>

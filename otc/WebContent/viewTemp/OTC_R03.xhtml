@@ -1,0 +1,83 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+
+    <p:panelGrid columns="12">
+      <p:outputLabel value="기준일자" styleClass="takionLabel" />
+      <p:selectOneMenu value="20140129">
+        <f:selectItem itemLabel="20140129" itemValue="FRN" />
+          <f:selectItem itemLabel="20140130" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value="신용등급" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="AAA" itemValue="FRN" />
+        <f:selectItem itemLabel="AA" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+      <p:outputLabel value=" " />
+      <p:outputLabel value=" " />
+      <p:outputLabel value=" " />
+      <p:commandButton value="지표선택" onclick="PF('bbb').show()"/>
+      <p:commandButton value="조회" />
+      <p:commandButton value="과거 데이터 조회" onclick="PF('hisData').show()"/>
+      <p:commandButton value="그래프"  />
+      <p:commandButton value="엑셀 내보내기"  />
+    </p:panelGrid>
+
+    <p:dataTable var="_var" value="#{viewTempInit.cPartyList}" emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+        <p:row>
+          <p:column colspan="2" headerText="차주정보" />
+          <p:column colspan="3" headerText="잔고정보" />
+          <p:column colspan="4" headerText="평가손익정보" />
+          <p:column colspan="4" headerText="위험정보" />
+        </p:row>
+        <p:row>
+          <p:column headerText="차주명" width="30" />
+          <p:column headerText="신용등급" width="30" />
+          <p:column headerText="장부가" width="30" />
+          <p:column headerText="평가금액" width="30" />
+          <p:column headerText="전일비" width="30" />
+
+          <p:column headerText="주간손익" width="30" />
+          <p:column headerText="월간손익" width="30" />
+          <p:column headerText="분기손익" width="30" />
+          <p:column headerText="기손익" width="30" />
+
+          <p:column headerText="델타위험액" width="30" />
+          <p:column headerText="대체비용" width="30" />
+          <p:column headerText="신용환산율" width="30" />                    
+          <p:column headerText="Potential Exposure" width="30" />
+        </p:row>
+      </p:columnGroup>
+
+
+      <p:column >       <h:outputText value="#{_var}" />     </p:column>
+      <p:column />
+      
+      <p:column />
+      <p:column />
+      <p:column />
+      
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+    </p:dataTable>
+  </h:form>
+</ui:composition>

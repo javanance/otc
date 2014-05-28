@@ -19,9 +19,11 @@ import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.international.StatusMessage.Severity;
 import org.jboss.seam.international.StatusMessages;
 import org.jboss.seam.log.Log;
+import org.primefaces.model.LazyDataModel;
 
 import com.eugenefe.entity.Hierarchy;
 import com.eugenefe.entity.HierarchyProperty;
+import com.eugenefe.entity.MarketVariable;
 import com.eugenefe.entity.Portfolio;
 import com.eugenefe.entity.PortfolioDefine;
 import com.eugenefe.entity.Position;
@@ -35,7 +37,7 @@ import com.eugenefe.util.AnnoNavigationFilter;
 @Name("tableHierarchyInit")
 @Scope(ScopeType.CONVERSATION)
 public class TableHierarchyInit {
-	@Logger 	private Log log;
+/*	@Logger 	private Log log;
 	@In			private Session session;
 	@In			private StatusMessages statusMessages;
 	@In			private Map<String, String> messages;	
@@ -52,14 +54,18 @@ public class TableHierarchyInit {
 	private EEquation equation;
 	private String condition1;
 	private String condition2;
-
+	
+	
+	
 	private int index =0;
 
 	private List<EEquation> equationList = new ArrayList<EEquation>();
 	private Map<String, List<String>> propMap = new HashMap<String, List<String>>();
 	private Map<Method, List<Method>> propMethodMap = new HashMap<Method, List<Method>>();
-	List<Position> posList = new ArrayList<Position>();
-	
+
+	private List<Position> posList = new ArrayList<Position>();
+
+
 	public Map<String, List<String>> getPropMap() {
 		return propMap;
 	}
@@ -185,12 +191,13 @@ public class TableHierarchyInit {
 	public void create(){
 		hierarchyList = session.createCriteria(Hierarchy.class).list();
 		for(Hierarchy aa : hierarchyList){
-			if(aa.getChangeable().getValue()){
+			if(aa.getChangeable()==null || aa.getChangeable().getValue()){
 				userHierarchyList.add(aa);
 			}else{
 				sysHierarchyList.add(aa);
 			}
 		}
+		log.info("In the Create : #0", hierarchyList.size());
 		loadCombo();
 	}
 
@@ -230,11 +237,20 @@ public class TableHierarchyInit {
 	
 	public void addHierarchyDefine(){
 		int listSize =selectHierarchy.getHierDefineIndexList().size();
+		log.info("Update0 : #0, #1,#2", listSize, getLvl());
 		if(getLvl()<1){
 			statusMessages.addFromResourceBundle(Severity.WARN, "greaterThanZero");
+			log.info("Update1 : #0, #1,#2", selectHierDefine.getEquation(), selectHierDefine.getCondition1());
 		}
 		else if(getLvl()>0 && getLvl()<= listSize){
-			selectHierDefine=selectHierarchy.getHierDefineIndexList().get(getLvl()-1);
+			HierarchyProperty tempHier = (HierarchyProperty)session.get(HierarchyProperty.class, propTable+"_"+propColumn);
+			selectHierDefine.setProperty(tempHier);
+			selectHierDefine.setEquation(equation);
+			selectHierDefine.setCondition1(condition1);
+			selectHierDefine.setCondition2(condition2);
+			
+//			selectHierDefine=selectHierarchy.getHierDefineIndexList().get(getLvl()-1);
+			log.info("Update2 : #0, #1,#2", selectHierDefine.getEquation(), selectHierDefine.getCondition1());
 		}
 		else{
 			PropertyEquation tempEquation = new PropertyEquation();
@@ -247,7 +263,7 @@ public class TableHierarchyInit {
 			
 			selectHierarchy.getHierDefineIndexList().add(listSize, tempEquation);
 			selectHierDefine =tempEquation;
-			
+			log.info("Update3 : #0, #1,#2", selectHierDefine.getEquation(), selectHierDefine.getCondition1());
 		}
 	}
 
@@ -431,8 +447,6 @@ public class TableHierarchyInit {
 				setPortTree(temp1, temp);		
 			}
 		}	
-	
-
 	}
 	
 	
@@ -498,11 +512,40 @@ public class TableHierarchyInit {
 			
 		Transaction tx = session.getTransaction();
 		tx.begin();
-		for(Portfolio port : definePortMap.values()){
-			log.info("POrt: #0, #1,#2,#3", port.getPortId());
-//				log.info("POrt: #0, #1,#2,#3", port.getPortId(), port.getHierarchy().getHierarchyId(), port.getLevel1(),port.getLevel2());
-			session.saveOrUpdate(port);
+		
+		log.info("Session:#0", session.contains(selectHierarchy));
+//		Hierarchy tempHierarchy = new Hierarchy();
+//		tempHierarchy.setHierarchyId(selectHierarchy.getHierarchyId());
+//		tempHierarchy.setHierarchyName(selectHierarchy.getHierarchyName());
+//		tempHierarchy.setChangeable(selectHierarchy.getChangeable());
+//		tempHierarchy.setUseable(selectHierarchy.getUseable());
+//		tempHierarchy.setHierDefineIndexList(selectHierarchy.getHierDefineIndexList());
+//		session.delete(selectHierarchy);
+//		session.flush();
+		
+		
+		for(Portfolio zz : selectHierarchy.getPortfolioList()){
+			log.info("Session1:#0", session.contains(zz));
+			session.delete(zz);
 		}
+		selectHierarchy.getPortfolioList().clear();
+//		selectHierarchy.setChangeable(EBoolean.N);
+		session.flush();
+
+		
+		for(Portfolio port : definePortMap.values()){
+			log.info("POrt: #0, #1,#2,#3", port.getPortId(), port.getParentPortfolio()==  null ? "": port.getParentPortfolio().getPortId());
+//			tempHierarchy.getPortfolioList().add(port);
+			session.saveOrUpdate(port);
+			selectHierarchy.getPortfolioList().add(port);
+		}
+		
+//		session.save(tempHierarchy);
+		
+		log.info("POrt:aaa");
+		selectHierarchy.setChangeable(EBoolean.Y);
+		selectHierarchy.setUseable(EBoolean.Y);
+		session.saveOrUpdate(selectHierarchy);
 		session.flush();
 		tx.commit();
 	}
@@ -516,6 +559,7 @@ public class TableHierarchyInit {
 		boolean outbreak=false;
 		
 		Map<List<PropertyEquation> , Portfolio> definePortMap = new HashMap<List<PropertyEquation>, Portfolio>();
+
 		for (Position pos : posList) {
 			outbreak=false;
 			List<PropertyEquation> defineList = new ArrayList<PropertyEquation>();
@@ -525,8 +569,8 @@ public class TableHierarchyInit {
 //				if(!aa.getEquation().equals(EEquation.DISTINCT)){
 //					rootFlag = true;
 //				}
-				if(!aa.getEquation().check(
-					pos.getPropMap().get(aa.getProperty()), aa.getCondition1()	, aa.getCondition2())){
+				if(!aa.getEquation().check(pos.getPropMap().get(aa.getProperty())
+											, aa.getCondition1(), aa.getCondition2())){
 					outbreak=true;
 					break;
 				}else{
@@ -538,13 +582,11 @@ public class TableHierarchyInit {
 			}
 			
 			if(outbreak){
-				log.info("OUt");
+				log.info("OUT");
 			}else{
-				
-			
 				Portfolio port = getPortfolioFrom(definePortMap, defineList);
 				
-	//			DB or alread made Portfolio
+	//			DB or alreadY made Portfolio
 				if(port !=null){
 					if(!port.getPortDetailList().contains(pos)){
 						port.getPortDetailList().add(pos);
@@ -704,5 +746,5 @@ public class TableHierarchyInit {
 			tempName =selectHierarchy.getHierarchyName();
 		}
 		newPort.setPortName(tempName);
-	}
+	}*/
 }

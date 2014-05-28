@@ -1,0 +1,73 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+  <h:form id="formHifiveSummary1" >
+
+<!--     <p:contextMenu for="formHifiveSummary1:tableHifiveSummary">
+      <p:menuitem value="ccc" id="www">
+        <p:dataExporter type="csv" target="tableHifiveSummary" fileName="PortfolioReturn" />
+      </p:menuitem>
+    </p:contextMenu> -->
+    
+    <p:panelGrid columns="3" > 
+        <p:selectCheckboxMenu label="컬럼선택" value="#{tableHifiveSummary.matList}" >
+            <s:selectItems value="#{comboListInit.resMatList}"  var="_list" itemValue="#{_list}" label="#{_list.name}"/>
+            <s:convertEnum/>
+            <p:ajax  listener="#{tableHifiveSummary.changeColumn}" update="@parent:tableHifiveSummary"/>
+        </p:selectCheckboxMenu>
+        <p:selectOneMenu value="#{tableHifiveSummary.valueUnit}" >
+            <f:selectItem itemLabel="원" itemValue="1"/>
+            <f:selectItem itemLabel="만원" itemValue="10000"/>
+            <f:selectItem itemLabel="백만원" itemValue="1000000"/>
+            <f:selectItem itemLabel="억원" itemValue="100000000"/>
+            <!-- <p:ajax  listener="#{tableHifiveSummary.changeUnit}" update="@parent:tableHifiveSummary"/> -->
+            <p:ajax   update="@parent:tableHifiveSummary"/>
+        </p:selectOneMenu>
+        
+        <h:commandLink >
+          <p:graphicImage value="/img/primefaces/csv.png" />
+          <p:dataExporter type="csv" target="formHifiveSummary1:tableHifiveSummary" fileName="발행현황" />
+        </h:commandLink>
+    </p:panelGrid>
+    
+    <p:dataTable id="tableHifiveSummary" var="_var" value="#{tableHifiveSummary.rstList}"
+      emptyMessage="#{messages.noDataFound}"
+      resizableColumns="true" liveResize="false"    styleClass="dynamicTableId"  >
+      <p:ajax event="rowSelect" update="@(.ui-panelgrid)"/>
+
+<!--       <f:facet name="header">
+        <p:selectCheckboxMenu label="컬럼선택" value="#{tableHifiveSummary.matList}" style="float: right" filter="false">
+            <s:selectItems value="#{comboListInit.resMatList}" var="_list" itemValue="#{_list}" label="#{_list.name}"/>
+            <s:convertEnum/>
+            <p:ajax  listener="#{tableHifiveSummary.changeColumn}" update="@parent:tableHifiveSummary"/>
+        </p:selectCheckboxMenu>
+        <p:selectOneMenu value="#{tableHifiveSummary.valueUnit}" style="float:right">
+            <f:selectItem itemLabel="백만원" itemValue="1000000"/>
+            <f:selectItem itemLabel="원" itemValue="1"/>
+            <f:selectItem itemLabel="만원" itemValue="10000"/>
+            <f:selectItem itemLabel="억원" itemValue="100000000"/>
+            <p:ajax  listener="#{tableHifiveSummary.changeUnit}" update="@parent:tableHifiveSummary"/>
+        </p:selectOneMenu>
+      </f:facet> -->
+      <p:column id="colProdId"  width="200">
+        <f:facet name="header"><h:outputText value="#{messages.elsOtpType}" /> </f:facet>
+        <h:outputText value="#{_var.key.intCode}:#{_var.key}" />
+        <f:facet name="footer"><h:outputText value="전체" /> </f:facet>
+      </p:column>
+      
+      <p:columns var="column" value="#{tableHifiveSummary.matList}" >
+        <f:facet name="header"><p:outputLabel value="#{column.name}"    />  </f:facet>
+        <h:outputText value="#{_var.value[column.name]/tableHifiveSummary.valueUnit}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </h:outputText>
+        <f:facet name="footer">
+          <h:outputText value="#{tableHifiveSummary.summaryMap[column.name]/tableHifiveSummary.valueUnit}" style="float:right">
+            <f:convertNumber pattern="#,###" />
+          </h:outputText>
+         </f:facet>
+     </p:columns>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

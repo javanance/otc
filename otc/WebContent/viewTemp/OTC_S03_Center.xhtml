@@ -1,0 +1,69 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:panelGrid columns="10">
+        <p:outputLabel value="기준일자" styleClass="takionLabel" />
+      <p:selectOneMenu value="20140129" >
+              <f:selectItem itemLabel="20140129" itemValue="FRN"/>
+              <f:selectItem itemLabel="20140130" itemValue="InversFloater"/>
+     </p:selectOneMenu>                
+  
+     <p:outputLabel value="평가목적" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="공정가치평가" itemValue="FRN" />
+        <f:selectItem itemLabel="민감도 산출" itemValue="InversFloater" />
+        <f:selectItem itemLabel="......" itemValue="InversFloater" />
+      </p:selectOneMenu>
+  
+      <p:commandButton value="수정" />      
+      <p:commandButton value="저장" />
+      <p:commandButton value="조회" />
+      <p:commandButton value="시뮬레이션" />
+  </p:panelGrid>
+  
+  <p:panel>
+    <p:panelGrid columns="4">
+      <p:outputLabel value="시나리오 :" styleClass="takionLabel" />  
+      <p:outputLabel value="UD_5" />
+      <p:outputLabel value="OTC 상품:" styleClass="takionLabel" />
+      <p:outputLabel value="한국증권(DLS)367 " />
+    </p:panelGrid>
+  </p:panel>
+  <p:spacer height="10"/>
+ <p:dataTable var="_var" value="#{viewTempInit.pricingList}" emptyMessage="#{messages.noDataFound}"
+      rowKey="#{_var}" 
+      resizableColumns="true"  
+      liveResize="true" paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:columnGroup type="header">
+        <p:row>
+          <p:column headerText="선택" style="width: 3%"/>
+          <p:column headerText="평가목적" width="100" />
+          <p:column headerText="DLL 명" width="100" />
+
+          <p:column headerText="금리곡선  명" width="100" />
+          <p:column headerText="변동성 명" width="100" />
+          <p:column headerText="시뮬레이션 회수" width="100" />
+          <p:column headerText="Lattice 개수" width="100" />
+        </p:row>
+      </p:columnGroup>
+
+      <p:column selectionMode="single" style="width: 3%"/>
+      <p:column>
+        <h:outputText value="#{_var}" />
+      </p:column>
+
+      <p:column />
+
+      <p:column />
+      <p:column />
+      <p:column />
+      <p:column />
+    </p:dataTable>
+</ui:composition>

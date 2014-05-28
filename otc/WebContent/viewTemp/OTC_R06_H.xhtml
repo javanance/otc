@@ -1,0 +1,24 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:panelGrid columns="12">
+    <p:outputLabel value="기준일자" styleClass="takionLabel" />
+    <p:selectOneMenu value="20140129">
+      <f:selectItem itemLabel="20140129" itemValue="FRN" />
+      <f:selectItem itemLabel="20140130" itemValue="InversFloater" />
+    </p:selectOneMenu>
+
+      <p:outputLabel value="기초자산 유형" styleClass="takionLabel" />
+      <p:selectOneMenu value="전체">
+        <f:selectItem itemLabel="전체" itemValue="FRN" />
+        <f:selectItem itemLabel="주가지수" itemValue="FRN" />
+        <f:selectItem itemLabel="개별주식" itemValue="InversFloater" />
+      </p:selectOneMenu>
+
+    <p:commandButton value="조회" />
+    <p:commandButton value="과거 데이터 조회" onclick="PF('hisData').show()" />
+  </p:panelGrid>
+</ui:composition>

@@ -1,0 +1,86 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/primeTemplates.xhtml">
+
+  <ui:define name="layoutLeft">
+    <p:accordionPanel>
+      <p:tab title="#{messages.elsOtcType}">
+  <!--     <ui:include src="/temp/treeElsOptionType.xhtml" /> -->
+      </p:tab>
+    </p:accordionPanel>
+  </ui:define>
+  
+  <ui:define name="layoutRight">
+    <p:commandButton value="신규"/>
+    <p:commandButton value="저장"/>
+    <p:accordionPanel >
+      <p:tab title="StepDown 편집"> 
+        <ui:include src="/temp/panelStepDownMaster.xhtml" >
+          <ui:param name="selectHifive" value="#{tableHifiveNewInit.selectHifive}" />
+        </ui:include>
+  
+      </p:tab>
+      <p:tab title="기초자산 편집">
+        <ui:include src="/temp/panelStepDownUnderlying.xhtml" >
+          <ui:param name="selectUnderlying" value="#{tableHifiveNewInit.selectUnder}" />
+        </ui:include>
+      </p:tab>
+      <p:tab title="조기상환 편집">
+          <ui:include src="/temp/panelStepDownStrike.xhtml" >
+          <!-- <ui:param name="selectStrike" value="#{tableHifiveNewInit.selectStrikeEntry}" /> -->
+        </ui:include>
+      </p:tab>
+      <p:tab title="부가 옵션 편집">
+          <ui:include src="/temp/panelStepDownCondition.xhtml" >
+          <!-- <ui:param name="selectStrike" value="#{tableHifiveNewInit.selectConditionEntry}" /> -->
+        </ui:include>
+      </p:tab>
+      <p:tab title="월 쿠폰 편집">
+          <ui:include src="/temp/panelStepDownMonthCoupon.xhtml"  >
+          <!-- <ui:param name="selectStrike" value="#{tableHifiveNewInit.selectConditionEntry}" /> -->
+        </ui:include>
+      </p:tab>
+    </p:accordionPanel>
+  </ui:define>
+
+  <ui:define name="layoutInnerCenter">
+    <ui:include src="/temp/tableHifiveNew.xhtml" />
+   
+  </ui:define>
+
+    <ui:define name="layoutInnerBottom">
+       <p:tabView id="hifiveTabView" dynamic="true"  orientation="top" widgetVar="wgHifiveTabView">
+        
+      <p:tab title="#{messages.hifiveUnderlying}">
+        <p:outputLabel value="** #{messages.hifiveUnderlying}" />
+        <ui:include src="/temp/tableHifiveUnderlyingNew.xhtml" >        
+          <ui:param name="underlyingList" value="#{tableHifiveNewInit.selectHifive.hifiveUnderlyings}" />
+        </ui:include>
+        
+<!--         <p:spacer height="30px" width="0px"/>
+        <p:outputLabel value="** #{messages.hifiveStrike}" />
+        <ui:include src="/temp/tableHifiveStrikeNew.xhtml" >
+          <ui:param name="strikeList" value="#{tableHifiveNewInit.selectHifive.hifiveStrikes}" />
+          <ui:param name="isEditable" value="#{tableHifiveNewInit.selectHifive.virtual}" />
+        </ui:include> -->
+      </p:tab>      
+      
+      <p:tab title="#{messages.hifiveStrike}" >
+         <ui:include src="/temp/tableHifiveStrikeNew.xhtml" >
+          <ui:param name="strikeList" value="#{tableHifiveNewInit.selectHifive.hifiveStrikes}" /> 
+        </ui:include>
+      </p:tab> 
+
+
+     <p:tab title="#{messages.hifiveCoupon}" >
+          <ui:include src="/temp/tableHifiveCoupon.xhtml" />
+      </p:tab> 
+    </p:tabView>
+ 
+  </ui:define>
+  
+
+</ui:composition>

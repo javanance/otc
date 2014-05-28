@@ -1,0 +1,139 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveTemp">
+
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+
+<!--     <p:remoteCommand name ="rcResetSelection" action="#{tableHifiveNewInit.resetSelection}" update="@(.ui-datatable)"/> -->
+<!--     <p:contextMenu for="tableHifive1" widgetVar="hifiveCmenu">
+      <p:menuitem value="#{messages.insertHifive}" action="#{tableHifiveNewInit.addHifive}" update="growl, @(.ui-datatable)" />
+      <p:separator/>
+      <p:menuitem value="#{messages.deleteHifive}" action="#{tableHifiveNewInit.removeHifive}"
+                  update="growl, @(.ui-datatable)"  oncomplete="rcResetSelection()"/>
+    </p:contextMenu> -->
+
+        
+    <p:dataTable id="tableHifive1" var="_hifive" value="#{tableHifiveNewInit.hifiveList}" 
+      widgetVar="wgTableHifivezz1"
+      emptyMessage="#{messages.noDataFound}"
+      filteredValue="#{tableHifiveNewInit.filterHifiveList}"  filterEvent="keyup"
+      selection="#{tableHifiveNewInit.selectHifive}" selectionMode="single"
+      rowKey="#{_hifive.prodId}" 
+      rowIndexVar="rowIndex" 
+      sortMode="multiple"
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50">
+
+      <p:ajax event="rowSelect" listener="#{tableHifiveNewInit.onSelectHifive}" update="@(.ui-panelgrid) @(.takion77-tableSelector)"/>
+      <!-- <p:ajax event="rowSelect" listener="#{hifiveSimulator.onHifiveSelect}" update="@(.ui-datatable) @(.ui-panelgrid)" /> -->
+      <!-- <p:ajax  event="filter" listener="#{tableHifiveNewInit.resetSelection}"  update="tableHifive"/> -->
+<!--       <p:ajax event="filter" oncomplete="rcResetSelection()"  /> -->
+      
+      <f:facet name="header">
+          <p:commandButton id="toggler1" type="button" value="칼럼선택" style="float:right" icon="ui-icon-calculator" />
+          <p:columnToggler id="colTog" datasource="tableHifive1" trigger="toggler1" />
+        </f:facet>      
+
+      <p:column id="colIsVirtual" sortBy="#{_hifive.virtual}" 
+                filterBy="#{_hifive.virtual}" filterMatchMode="contains"  width="30">
+        <f:facet name="header"><h:outputText value="#{messages.isVirtual}" /></f:facet>
+        <h:outputText value="#{_hifive.virtual}"/>
+      </p:column>
+
+      <p:column id="colProdId" sortBy="#{_hifive.prodId}" 
+                filterBy="#{_hifive.prodId}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getProdId}" /> </f:facet>
+        <h:outputText value="#{_hifive.prodId}" />
+      </p:column>
+
+      <p:column id="colProdName" sortBy="#{_hifive.prodName}" 
+                filterBy="#{_hifive.prodName}" filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getProdName}" /> </f:facet>
+        <h:outputText value="#{_hifive.prodName}" />
+      </p:column>
+
+     <p:column id="colHifiveType" sortBy="#{_hifive.sourceTable}" 
+                filterBy="#{_hifive.sourceTable}" filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getHifiveType}" /> </f:facet>
+        <h:outputText value="#{_hifive.sourceTable}:#{_hifive.hifiveType}" />
+      </p:column>
+      
+      <p:column id="colIssueDate" sortBy="#{_hifive.issueDate}" filterBy="#{_hifive.issueDate}"
+        filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getIssueDate}" /> </f:facet>
+        <h:outputText value="#{_hifive.issueDate}"  />
+      </p:column>
+
+      <p:column id="colMaturityDate" sortBy="#{_hifive.maturityDate}" filterBy="#{_hifive.maturityDate}"
+        filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getMaturityDate}" /> </f:facet>
+        <h:outputText value="#{_hifive.maturityDate}"/>
+      </p:column>
+
+<!--       <p:column id="colCntPartyId" sortBy="#{_hifive.cpartyId}"
+        filterBy="#{_hifive.cpartyId}" filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.countPartyId}" /></f:facet>
+        <h:outputText value="#{_hifive.cpartyId}"  />        
+      </p:column> -->
+
+      <p:column id="colCntPartyName" sortBy="#{_hifive.counterparty.counterpartyName}"
+                filterBy="#{_hifive.counterparty.counterpartyName}" filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.countPartyName}" /></f:facet>
+        <h:outputText value="#{_hifive.counterparty.counterpartyName}" />
+      </p:column>      
+      
+      <p:column id="colCreditRatingCd" sortBy="#{_hifive.counterparty.creditRatingCd}" 
+                filterBy="#{_hifive.counterparty.creditRatingCd}" filterMatchMode="contains"    width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getCreditRatingCd}" /></f:facet>
+        <h:outputText value="#{_hifive.counterparty.creditRatingCd}" />
+      </p:column>
+       
+      <p:column id="colFaceAmt" sortBy="#{_hifive.faceAmt}" 
+                filterBy="#{_hifive.faceAmt}" filterMatchMode="contains" width="100">
+       <f:facet name="header"><h:outputText value="#{messages.getFaceAmt}" /></f:facet>
+        <h:outputText value="#{_hifive.faceAmt}"  />
+      </p:column>
+
+      <p:column id="colNotionalAmt" sortBy="#{_hifive.notionalAmt}" filterBy="#{_hifive.notionalAmt}"
+                filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getNotionalAmt}" /></f:facet>
+        <h:outputText value="#{_hifive.notionalAmt}" />
+      </p:column>
+
+      <p:column id="colDownBarrier" sortBy="#{_hifive.downBarrier}" filterBy="#{_hifive.downBarrier}"
+                filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getDownBarrier}" /></f:facet>
+        <h:outputText value="#{_hifive.downBarrier}"  />
+      </p:column>
+
+      <p:column id="colMaxLoss" sortBy="#{_hifive.maxLoss}" filterBy="#{_hifive.maxLoss}" 
+                filterMatchMode="contains"  width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getMaxLoss}" /></f:facet>
+        <h:outputText value="#{_hifive.maxLoss}"  />
+      </p:column>
+
+      <p:column id="colCouponRateLast" sortBy="#{_hifive.couponRateLast}" 
+                filterBy="#{_hifive.couponRateLast}"  filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getCouponRateLast}" /></f:facet>
+        <h:outputText value="#{_hifive.couponRateLast}"  />
+      </p:column>
+
+      <p:column id="colHittingType" sortBy="#{_hifive.hittingType}" filterBy="#{_hifive.hittingType}"
+                filterMatchMode="contains" width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getHittingType}" /></f:facet>
+        <h:outputText value="#{_hifive.hittingType}"  />
+      </p:column>
+      
+      <p:column width="500">
+        <f:facet name="header"><h:outputText value="#{messages.desc}" /></f:facet>
+        <h:outputText value="#{_hifive.prodDesc}"  />
+      </p:column>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

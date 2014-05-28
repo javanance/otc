@@ -9,7 +9,7 @@
     <!-- <p:remoteCommand name ="rcSelectNode" action="#{tablePortfolioInit.beforeDrag}"/> -->
     
     <p:contextMenu for="treeUserPortfolio">
-      <p:menuitem value="#{messages.copyTo}" onclick="wgDialogPortTree.show()"/>
+      <p:menuitem value="#{messages.copyTo}" onclick="PF('wgDialogPortTree').show()"/>
     </p:contextMenu>    
     
      <p:tree id="treeUserPortfolio" value="#{tablePortfolioInit.userRootNode}" var="_node" animate="true"

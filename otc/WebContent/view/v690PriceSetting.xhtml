@@ -3,48 +3,40 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
-  template="/templates/templatePrimeTLCB.xhtml">
+  template="/templates/primeTemplates.xhtml">
 
   <ui:define name="layoutLeft">
-    <!-- <ui:include src="/fragment/tableHifiveforLeft.xhtml" /> -->    
+    <p:accordionPanel>
+      <p:tab title="#{messages.otcType}">
+        <!-- <ui:include src="/treeComp/treeOtcProduct.xhtml" /> -->
+        <ui:include src="/fragment/treeMvTypeSetting.xhtml" />
+      </p:tab>
+      
+      <p:tab title="#{messages.pricingObject}">
+        <ui:include src="/treeComp/treePricingObject.xhtml" />
+      </p:tab>
+    </p:accordionPanel>
   </ui:define>
-  
-  <ui:define name="layoutCenter">
-    <!-- <ui:include src="/tableComp/tablePriceSetting.xhtml" >
+        
+  <ui:define name="layoutInnerCenter">
+  <ui:include src="/tableComp/tablePriceSetting.xhtml" />
+     
+  </ui:define> 
+
+  <ui:define name="layoutInnerBottom">
+   <p:tabView>
+    <p:tab title="#{messages.productList}">
+<!--     <ui:include src="/tableComp/tablePriceSettingSelect.xhtml" >
         <ui:param name="isEditable" value="true" />
         <ui:param name="editMode" value="cell" />
-     </ui:include> -->
-  </ui:define>
-  
-  <ui:define name="layoutBottom">
-    <p:tabView id="prSettingTabView" dynamic="true"  orientation="top" widgetVar="wgPrSettingTabView">
-    
-      <p:tab title="#{messages.underlyingPriceSetting}">
-        <p:outputLabel value="** #{messages.underlyingPriceSetting}" />
-        <ui:include src="/tableComp/tablePriceSettingUnder.xhtml" >
-          <ui:param name="prSettingUnderList" value="#{tablePriceSettingInit.selectPrSetting.prUnderlyingList}" />
-        </ui:include>
-        <p:spacer height="30px" width="0px"/>
-      </p:tab>
-<!--       <p:tab title="#{messages.hifiveUnderlying}">
-        <ui:include src="/fragment/tableHifiveUnderlyingEdit.xhtml" >
-          <ui:param name="underlyingList" value="#{tableHifiveInit.selectHifive.hifiveUnderlyings}" />
-        </ui:include>
-      </p:tab>
-      <p:tab title="#{messages.hifiveStrike}">
-        <ui:include src="/fragment/tableHifiveStrikeEdit.xhtml" >
-          <ui:param name="strikeList" value="#{tableHifiveInit.selectHifive.hifiveStrikes}" />
-        </ui:include>
-      </p:tab> -->
-<!--       <p:tab title="#{messages.hifiveStrikePivot}">
-        <ui:include src="/fragment/tableHifiveStrikePivot.xhtml" />
-        <ui:include src="/fragment/tableHifiveStrike.xhtml" >
-          <ui:param name="strikeList" value="#{tableHifiveInit.selectHifive.hifiveStrikes}" />
-        </ui:include>
-      </p:tab> -->
-      <!-- <p:tab title="#{messages.hifiveSwapIr}" rendered="#{tableHifiveInit.selectHifive.hifiveType == 'SWAP'}"> -->
+        <ui:param name="priceSettingList" value="#{tablePricerSettingNewInit.selectMappingList}" /> 
+    </ui:include> -->
+    </p:tab>
+    <p:tab title="#{messages.underlyingList}">
+<!--       <ui:include src="/tableComp/tablePriceSettingUnder.xhtml" /> -->
+    </p:tab>
+   </p:tabView>    
 
-    </p:tabView>
-    <!-- </h:form> --> 
-  </ui:define>
+  </ui:define> 
+
 </ui:composition>

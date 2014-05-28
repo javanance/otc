@@ -1,0 +1,146 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form>
+    <p:dataTable id="posZOTC" var="_var" value="#{positionList}" emptyMessage="#{messages.noDataFound}"
+      widgetVar="wgPosZOTC"
+      selection="#{elsPositionInit.selectPosition}" selectionMode="single"
+      rowKey="#{_var}"
+      filteredValue="#{elsPositionInit.filterAssetPosList}"
+      resizableColumns="true" liveResize="true" paginator="true" paginatorPosition="bottom" rows="18"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="20,25,50">
+
+      <p:ajax event="rowSelect" listener="#{elsPositionInit.select}" update="@(.ui-panelgrid) @(.ui-datascroller)"/>
+      <f:facet name="header">
+          <p:commandButton id="toggler" type="button" value="칼럼선택" style="float:right" icon="ui-icon-calculator" />
+          <p:columnToggler datasource="posZOTC" trigger="toggler" />
+<!--             <div style="clear:both" /> --> 
+        </f:facet>      
+
+      <p:column sortBy="#{_var.position.product.mvId}"  filterBy="#{_var.position.product.mvId}" 
+          filterMatchMode="contains" width="200" toggleable="false">
+        <f:facet name="header"><p:outputLabel value="종목"/></f:facet>      
+        <h:outputText value="#{_var.position.product.mvId}" />
+      </p:column>
+      <p:column sortBy="#{_var.position.product.mvName}"  filterBy="#{_var.position.product.mvName}" 
+          filterMatchMode="contains" width="200" >
+        <f:facet name="header"><p:outputLabel value="종목명"/></f:facet>      
+        <h:outputText value="#{_var.position.product.mvName}" />
+      </p:column>
+      
+      <p:column sortBy="#{_var.position.fund.orgName}"  filterBy="#{_var.position.fund.orgName}" 
+          filterMatchMode="contains" width="200">
+        <f:facet name="header"><p:outputLabel value="펀드명"/></f:facet>
+         <h:outputText value="#{_var.position.fund.orgName}" />
+      </p:column>
+
+      <p:column sortBy="#{_var.position.fund.parentOrgName}"  filterBy="#{_var.position.fund.parentOrgName}" 
+          filterMatchMode="contains"  width="100">
+        <f:facet name="header"><p:outputLabel value="부서명"/></f:facet>      
+        <h:outputText value="#{_var.position.fund.parentOrgName}" />
+      </p:column>
+
+      <p:column sortBy="#{_var.position.counterparty.counterpartyId}"  filterBy="#{_var.position.counterparty.counterpartyId}" 
+          filterMatchMode="contains"  width="100">
+        <f:facet name="header"><p:outputLabel value="거래상대방"/></f:facet>      
+        <h:outputText value="#{_var.position.counterparty.counterpartyName}" rendered="#{_var.position.counterparty !=null}"/>
+        <h:outputText value="" rendered="#{_var.position.counterparty ==null}"/>
+      </p:column>
+      <p:column sortBy="#{_var.position.txType}"  filterBy="#{_var.position.txType}" filterMatchMode="contains" width="100" > 
+      <!-- <p:column  filterBy="position.txType" -->
+        <f:facet name="header"><p:outputLabel value="거래유형"/></f:facet>
+        <!-- <f:facet name="filter" >
+          <p:selectCheckboxMenu label="선택" onchange="PF('wgPosZOTC').filter()" >
+            <f:selectItems value="#{comboListInit.elsTrDetailList}" />
+          </p:selectCheckboxMenu>
+        </f:facet> -->      
+        <h:outputText value="#{_var.position.txType}" />
+      </p:column>
+      
+      <p:column sortBy="#{_var.position.elsOptType}"  filterBy="#{_var.position.elsOptType}" 
+          filterMatchMode="contains" width="100">
+        <f:facet name="header"><p:outputLabel value="옵션유형"/></f:facet>      
+        <h:outputText value="#{_var.position.elsOptType}" />
+      </p:column>
+      <p:column sortBy="#{_var.position.posSide}"  filterBy="#{_var.position.posSide}" 
+          filterMatchMode="contains" width="100">
+        <f:facet name="header"><p:outputLabel value="매수매도구분"/></f:facet>      
+        <h:outputText value="#{_var.position.posSide}" />
+      </p:column>
+
+      <p:column width="100">
+        <f:facet name="header"><p:outputLabel value="최초거래금액"/></f:facet>      
+        <h:outputText value="#{_var.position.initTxAmt}" style="float:right">
+              <f:convertNumber pattern="#,###" />
+        </h:outputText>
+      </p:column>
+      
+      <p:column width="100">
+        <f:facet name="header"><p:outputLabel value="최초거래단가"/></f:facet>      
+        <h:outputText value="#{_var.position.initTxPrice}" style="float:right">
+              <f:convertNumber pattern="#,###" />
+        </h:outputText>
+      </p:column>
+      <p:column width="100">
+        <f:facet name="header"><p:outputLabel value="최초보유수량"/></f:facet>      
+        <h:outputText value="#{_var.position.initHoldingQty}" style="float:right">
+              <f:convertNumber pattern="#,###" />
+        </h:outputText>
+      </p:column>
+
+      <p:column width="100">
+        <f:facet name="header"><p:outputLabel value="잔존거래금액"/></f:facet>      
+        <h:outputText value="#{_var.parAmt}" style="float:right">
+              <f:convertNumber pattern="#,###" />
+        </h:outputText>
+      </p:column>
+
+      <p:column width="100">
+        <f:facet name="header"><p:outputLabel value="평가단가"/></f:facet>      
+        <h:outputText value="#{_var.unitPrice1}" style="float:right">
+              <f:convertNumber pattern="#,###" />
+        </h:outputText>
+      </p:column>
+      
+      <p:column width="100">
+        <f:facet name="header"><p:outputLabel value="보유수량"/></f:facet>      
+        <h:outputText value="#{_var.holdingQty}" style="float:right">
+              <f:convertNumber pattern="#,###" />
+        </h:outputText>
+      </p:column>
+
+      <p:column sortBy="#{_var.bookAmt}" width="100">
+        <f:facet name="header"><p:outputLabel value="장부금액"/></f:facet>      
+        <h:outputText value="#{_var.bookAmt}" style="float:right">
+          <f:convertNumber pattern="##,000" />
+        </h:outputText>  
+      </p:column>
+
+      <p:column sortBy="#{_var.presValue}" width="100">
+        <f:facet name="header"><p:outputLabel value="평가금액"/></f:facet>      
+        <h:outputText value="#{_var.presValue}" style="float:right">
+          <f:convertNumber pattern="##,000" />
+        </h:outputText>  
+      </p:column>
+      
+      <p:column sortBy="#{_var.refParAmt}" width="100">
+        <f:facet name="header"><p:outputLabel value="부채잔존금액"/></f:facet>      
+        <h:outputText value="#{_var.refParAmt}" style="float:right">
+          <f:convertNumber pattern="##,000" />
+        </h:outputText>  
+      </p:column>
+
+      <p:column sortBy="#{_var.refBookAmt}" width="100">
+        <f:facet name="header"><p:outputLabel value="부채장부금액"/></f:facet>      
+        <h:outputText value="#{_var.refBookAmt}" style="float:right">
+            <f:convertNumber pattern="#,###" />
+        </h:outputText>
+      </p:column>
+    </p:dataTable>
+      
+  </h:form>
+</ui:composition>

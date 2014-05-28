@@ -13,6 +13,14 @@
           action="#{layoutInit.setupLayout}" />
         <p:menuitem id="v620" value="#{messages.priceValidation}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v621" value="#{messages.position}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />  
+        <p:menuitem id="v622" value="#{messages.assetPosition}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v623" value="#{messages.debtPosition}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />    
+         <p:menuitem id="v624" value="#{messages.debtPositionTree}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />      
       </p:submenu>
 
       <p:submenu label="#{messages.detailView}">
@@ -31,7 +39,7 @@
       <p:submenu label="#{messages.simulation}">
         <p:menuitem id="v650" value="#{messages.productSimulation}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />
-        <p:menuitem id="v660" value="#{messages.portfolioSimulation}" actionListener="#{layoutInit.extractViewId}"
+        <p:menuitem id="v651" value="#{messages.portfolioSimulation}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />
       </p:submenu>
     </p:column>
@@ -44,21 +52,63 @@
           action="#{layoutInit.setupLayout}" />
         <p:menuitem id="v694" value="#{messages.portfolioSetting}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />
-                <p:menuitem id="v6941" value="#{messages.portfolioNewSetting}" actionListener="#{layoutInit.extractViewId}"
+        <p:menuitem id="v6941" value="#{messages.portfolioNewSetting}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />  
         <p:menuitem id="v695" value="#{messages.hierarchySetting}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />
-        
+        <p:menuitem id="vv100" value="#{messages.view}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="vv200" value="발행헤지현황" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />  
+        <p:menuitem id="vv300" value="개별상품 시뮬레이션" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="vv500" value="포트폴리오 시뮬레이션" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />  
+        <p:menuitem id="vv400" value="VaR 중간결과" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />              
       </p:submenu>
     </p:column>
+    
     <p:column>
-      <p:submenu label="#{messages.otcProductInfo}">
+      <p:submenu label="#{messages.eslDlsInfo}">
+       <p:menuitem id="v660" value="#{messages.otcProduct}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v661" value="#{messages.stepDown}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v662" value="#{messages.rangeAccrual}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v663" value="#{messages.cds}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />    
+        <p:menuitem id="v664" value="#{messages.returnSwap}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        
+      </p:submenu>
+      <p:submenu label="#{messages.otcContract}">
+        <p:menuitem id="v665" value="#{messages.otcOption}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v666" value="#{messages.fxForward}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v667" value="#{messages.cds}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v668" value="#{messages.equitySwap}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />
+        <p:menuitem id="v669" value="#{messages.swap}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />            
+      </p:submenu>
+    </p:column>
+    
+    <p:column>
+      <p:submenu label="#{messages.otcProductNewInfo}">
         <p:menuitem id="v696" value="#{messages.structuredNote}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />
+        
+
 <!--         <p:menuitem id="v6961" value="#{messages.interestOption}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />  
         <p:menuitem id="v697" value="#{messages.creditDerivatives}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" /> -->
+        <p:menuitem id="v697" value="#{messages.varianceSwap}" actionListener="#{layoutInit.extractViewId}"
+          action="#{layoutInit.setupLayout}" />          
         <p:menuitem id="v698" value="#{messages.equitySwap}" actionListener="#{layoutInit.extractViewId}"
           action="#{layoutInit.setupLayout}" />
         <p:menuitem id="v699" value="#{messages.elsDls}" actionListener="#{layoutInit.extractViewId}"

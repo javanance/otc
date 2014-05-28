@@ -1,0 +1,32 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich" xmlns:p="http://primefaces.org/ui"
+  template="/templates/primeTemplates.xhtml">
+
+    <ui:define name="layoutLeft">
+      <p:accordionPanel>
+        <p:tab title="포트폴리오">
+          <ui:include src="/viewTemp/OTC_R06_Left.xhtml" />
+        </p:tab>
+      </p:accordionPanel>
+  </ui:define>
+  
+   
+  <ui:define name="layoutInnerCenter">
+    <ui:include src="/viewTemp/OTC_S05_Center.xhtml" />
+    <!-- <p:tabView >
+    <p:tab title="Parametric VaR">
+      <ui:include src="/viewTemp/OTC_S05_Center.xhtml" />
+    </p:tab>
+    <p:tab title="Historical VaR">
+      <ui:include src="/viewTemp/OTC_S05_Center.xhtml" />
+    </p:tab>
+    </p:tabView> -->
+  </ui:define>
+  
+  <ui:define name="layoutInnerBottom">
+      <ui:include src="/viewTemp/OTC_S05_Bottom.xhtml" />
+  </ui:define>
+</ui:composition>

@@ -40,7 +40,7 @@
           <p:layoutUnit position="center" resizable="true" gutter="4" size="200">
             <ui:insert name="layoutCenter" />
             <!--             <ui:include src="/popup/dialogLogin.xhtml" /> -->
-          <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+          <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
 
           <p:dialog modal="false" widgetVar="statusDialog" header="#{messages.ajaxStatus}" draggable="false"
               closable="false">

@@ -1,0 +1,71 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <p:tooltip/>
+  <h:form id="formPanelDebtPosition" >
+      <p:panelGrid columns="2" style="background: white" >
+        
+        <p:outputLabel value="종목명" styleClass="takionLabel" />
+        <!-- <p:outputLabel value="#{elsPositionInit.selectDebtPosition.position.product.mvName}" /> -->
+        <h:commandLink actionListener="#{layoutInit.extractViewId}" action="#{layoutInit.setupLayout}"
+            id="v661" value="#{elsPositionInit.selectDebtPosition.position.product.mvName}" target="_blank" />
+        
+        <p:outputLabel value="단위금액" styleClass="takionLabel" />
+        <p:outputLabel value="10,000" style="float:right"/>
+        
+       <p:outputLabel value="최초단가" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.position.initTxPrice}"  style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+
+        <p:outputLabel value="최초거래수량" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.position.initHoldingQty}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+
+        <p:outputLabel value="최초거래금액" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.position.initTxAmt}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+       
+        <p:outputLabel value="보유수량" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.holdingQty}" style="float:right">
+            <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+        
+        <p:outputLabel value="잔존금액" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.parAmt}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+        
+        <p:outputLabel value="기초장부금액" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.fiscalBookAmt}" style="float:right">
+           <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+                
+        <p:outputLabel value="장부금액" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.bookAmt}" style="float:right">
+           <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+
+        <p:outputLabel value="평가금액" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.presValue}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+        
+        <p:outputLabel value="평가단가1" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.unitPrice1}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+        
+        <p:outputLabel value="평가단가2" styleClass="takionLabel" />
+        <p:outputLabel value="#{elsPositionInit.selectDebtPosition.unitPrice2}" style="float:right">
+          <f:convertNumber pattern="#,###" />
+        </p:outputLabel>
+      </p:panelGrid>
+
+  </h:form>
+</ui:composition>

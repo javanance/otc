@@ -14,6 +14,16 @@ public enum MarketVariableType {
 					" and a.id.bssd > #{basedateBean.stBssd} " +
 					" and a.id.bssd <=#{basedateBean.endBssd} "	
 	)
+	,IR_LEG(
+			"IR_LEG"
+			,"com.eugenefe.entity.Bond"
+			,true
+			,false
+			,"IR"
+			,"select a from  BondHis a where a.id.bondId=#{selectedMarketVariable.mvId}" +
+					" and a.id.bssd > #{basedateBean.stBssd} " +
+					" and a.id.bssd <=#{basedateBean.endBssd} "	
+	)
 	,STOCK(
 			"STOCK"
 			,"com.eugenefe.entity.Stock"
@@ -74,6 +84,16 @@ public enum MarketVariableType {
 					" and a.id.bssd > #{basedateBean.stBssd} " +
 					" and a.id.bssd <=#{basedateBean.endBssd} "	
 	)
+	,ELS_SWAP(
+			"ELS_SWAP"
+			,"com.eugenefe.entity.HiFive"
+			,true
+			,false
+			,"NONE"
+			,"select a from BondHis a where a.id.bondId=#{selectedMarketVariable.mvId}" +
+					" and a.id.bssd > #{basedateBean.stBssd} " +
+					" and a.id.bssd <=#{basedateBean.endBssd} "	
+	)
 	,SWAP(
 			"SWAP"
 			,"com.eugenefe.entity.Synthetic"
@@ -125,6 +145,22 @@ public enum MarketVariableType {
 					" and a.id.bssd > #{basedateBean.stBssd} " +
 					" and a.id.bssd <=#{basedateBean.endBssd} "	
 	)
+	,COMMODITY(
+			"COMMODITY"
+			,""
+			,true
+			,false
+			,"NONE"
+			,""
+	)
+	,SYNTHETIC( 
+			"SYNTHETIC"
+			,"com.eugenefe.entity.Synthetics"
+			,true
+			,false
+			,"NONE"
+			,"select a from Synthetic a"
+	)		
 	;
 	
 	private String type;

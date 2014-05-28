@@ -1,0 +1,61 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formPortfolioDefine">
+    <p:growl id="growl" showDetail="false" sticky="false" life="5000" />
+
+    <p:outputPanel style="padding: 0.5em 1em;" styleClass="takion77-tableSelector">
+      <p:commandButton id="btn1" value="#{messages.addOrUpdate}" update="pGridPortDefine, @(.ui-datatable)"
+        action="#{tableHierarchyNewInit.addHierarchyDefine}" />
+    </p:outputPanel>
+    <p:separator />
+
+    <p:panelGrid id="pGridPortDefine" columns="8">
+      <p:outputLabel value="#{messages.hierarchyId}" styleClass="takionLabel"/>
+      <p:outputLabel value="#{tableHierarchyNewInit.hierId}" />
+      
+      <p:outputLabel value="#{messages.hierarchyLevel}" styleClass="takionLabel"/>
+      <p:inputMask value="#{tableHierarchyNewInit.lvl}" mask="9" />
+
+      <p:outputLabel value="#{messages.propGroup}" styleClass="takionLabel" />
+      <p:selectOneMenu id="propTable" value="#{tableHierarchyNewInit.propGroup}" style=" width:100%;" styleClass="takionLabel">
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <f:selectItems value="#{tableHierarchyNewInit.columnMap.keySet()}" var="_var" itemLabel="#{_var}"/>
+        <!-- <s:selectItems value="#{tableHierarchyNewInit.columnMap.keySet()}" var="_var" label="#{messages[_var]}" /> -->
+        <p:ajax update="propName"/>
+      </p:selectOneMenu>
+
+      <p:outputLabel value="#{messages.propName}" styleClass="takionLabel"/>
+      <p:selectOneMenu id="propName" value="#{tableHierarchyNewInit.propName}" style="width:100%">
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <f:selectItems value="#{tableHierarchyNewInit.columnMap[tableHierarchyNewInit.propGroup]}" var="_var" itemLabel="#{_var}"/>
+        <!-- <s:selectItems value="#{tableHierarchyNewInit.columnMap[tableHierarchyNewInit.propGroup]}" var="#{_var}" label="#{_var}" /> -->
+        <!-- <s:selectItems value="#{tableHierarchyNewInit.columModelMap[tableHierarchyNewInit.propGroup]}" var="#{_var}" label="#{messages[_var.header]}" itemValue="#{_var.header}"/> -->
+        <!-- <s:convertEntity/> -->
+      </p:selectOneMenu>      
+
+      <p:outputLabel value=" " />      
+      <p:outputLabel value=" " />
+      
+      <p:outputLabel value="#{messages.equation}" styleClass="takionLabel"/>
+      <p:selectOneMenu value="#{tableHierarchyNewInit.equation}" height="300" >
+        <f:selectItem itemLabel="#{messages.selectOne}" itemValue="" />
+        <s:selectItems value="#{tableHierarchyNewInit.equationList}" var="_var" label="#{messages[_var.value]}" />
+        <p:ajax update="colCond1, colCond2" />
+      </p:selectOneMenu>
+
+
+      <p:outputLabel value="#{messages.condition1}" styleClass="takionLabel"/>
+      <p:inputText id="colCond1" value="#{tableHierarchyNewInit.condition1}"
+        disabled="#{tableHierarchyNewInit.equation.operandSize == 0}" />
+
+
+      <p:outputLabel value="#{messages.condition2}" styleClass="takionLabel"/>
+      <p:inputText id="colCond2" value="#{tableHierarchyNewInit.condition2}"
+        disabled="#{tableHierarchyNewInit.equation.operandSize != 2}" />
+    </p:panelGrid>
+  </h:form>
+</ui:composition>

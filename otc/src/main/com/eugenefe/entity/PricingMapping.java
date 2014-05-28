@@ -7,11 +7,15 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.eugenefe.enums.EIrCurveType;
+import com.eugenefe.enums.EVolType;
 import com.eugenefe.util.AnnoMethodTree;
 import com.eugenefe.util.AnnoNavigationFilter;
 
@@ -23,11 +27,14 @@ import com.eugenefe.util.AnnoNavigationFilter;
 @AnnoNavigationFilter
 public class PricingMapping implements java.io.Serializable {
 
-	private PricingMappingId id;
-//	private String dllId;
+//	private PricingMappingId id;
+	private PricingMappingIdNew id;
+	private String dllId;
 	private PricingDll pricingDll;
-	private String discountSetting;
-	private String volType;
+//	private String discountSetting;
+	private EIrCurveType irCurveType;
+//	private String volType;
+	private EVolType volType;
 	private String volSetting;
 	private Long simulationNum;
 	private Long latticeNum;
@@ -51,29 +58,29 @@ public class PricingMapping implements java.io.Serializable {
 //	}
 
 	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "pricingObjId", column = @Column(name = "PRICING_OBJ_ID", nullable = false, length = 20)),
-			@AttributeOverride(name = "mvType", column = @Column(name = "MV_TYPE", nullable = false, length = 20)) })
+//	@AttributeOverrides({
+//			@AttributeOverride(name = "pricingObjId", column = @Column(name = "PRICING_OBJ_ID", nullable = false, length = 20)),
+//			@AttributeOverride(name = "mvType", column = @Column(name = "MV_TYPE", nullable = false, length = 20)) })
 	@AnnoMethodTree(order=10, init=true)
-	public PricingMappingId getId() {
+	public PricingMappingIdNew getId() {
 		return this.id;
 	}
 
-	public void setId(PricingMappingId id) {
+	public void setId(PricingMappingIdNew id) {
 		this.id = id;
 	}
 
-//	@Column(name = "DLL_ID", nullable = false, length = 20)
-//	@AnnoMethodTree(order=20, init=true)
-//	public String getDllId() {
-//		return this.dllId;
-//	}
-//	public void setDllId(String dllId) {
-//		this.dllId = dllId;
-//	}
+	@Column(name = "DLL_ID", nullable = true, length = 20)
+	@AnnoMethodTree(order=20, init=true)
+	public String getDllId() {
+		return this.dllId;
+	}
+	public void setDllId(String dllId) {
+		this.dllId = dllId;
+	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DLL_ID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "DLL_ID", nullable = true, insertable=false, updatable=false)
 	@AnnoMethodTree(order=20, init=true)
 	public PricingDll getPricingDll() {
 		return pricingDll;
@@ -84,24 +91,46 @@ public class PricingMapping implements java.io.Serializable {
 
 	@Column(name = "DISCOUNT_SETTING", length = 20)
 	@AnnoMethodTree(order=30, init=true)
-	public String getDiscountSetting() {
-		return this.discountSetting;
+	@Enumerated(EnumType.STRING)
+	public EIrCurveType getIrCurveType() {
+		return irCurveType;
 	}
 
-
-	public void setDiscountSetting(String discountSetting) {
-		this.discountSetting = discountSetting;
+	public void setIrCurveType(EIrCurveType irCurveType) {
+		this.irCurveType = irCurveType;
 	}
 
 	@Column(name = "VOL_TYPE", length = 20)
 	@AnnoMethodTree(order=40, init=true)
-	public String getVolType() {
-		return this.volType;
+	@Enumerated(EnumType.STRING)
+	public EVolType getVolType() {
+		return volType;
 	}
 
-	public void setVolType(String volType) {
+	public void setVolType(EVolType volType) {
 		this.volType = volType;
 	}
+
+//	@Column(name = "DISCOUNT_SETTING", length = 20)
+//	@AnnoMethodTree(order=30, init=true)
+//	public String getDiscountSetting() {
+//		return this.discountSetting;
+//	}
+//
+//
+//	public void setDiscountSetting(String discountSetting) {
+//		this.discountSetting = discountSetting;
+//	}
+
+//	@Column(name = "VOL_TYPE", length = 20)
+//	@AnnoMethodTree(order=40, init=true)
+//	public String getVolType() {
+//		return this.volType;
+//	}
+//
+//	public void setVolType(String volType) {
+//		this.volType = volType;
+//	}
 
 	@Column(name = "VOL_SETTING", length = 20)
 	@AnnoMethodTree(order=45, init=true)
@@ -133,4 +162,19 @@ public class PricingMapping implements java.io.Serializable {
 		this.latticeNum = latticeNum;
 	}
 
+
+	@Override
+	public int hashCode() {
+
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof PricingMapping){
+			PricingMapping other = (PricingMapping)obj;
+			return this.getId().equals(other.getId());
+		}
+		return false;
+	}
 }

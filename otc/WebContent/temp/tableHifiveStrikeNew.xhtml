@@ -1,0 +1,107 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveStrike2">
+     <h4> Knock In/Out 정보    </h4>
+    <p:growl id ="growl" showDetail="false" sticky="false"  life="5000" />
+    
+    <p:dataTable id="tableHifive2" var="_condi" value="#{tableHifiveNewInit.conditionList}" 
+      emptyMessage="#{messages.noDataFoundSelectHifive}"
+      selection="#{tableHifiveNewInit.selectConditionEntry}" selectionMode="single"
+      rowKey="#{_condi.key}" 
+      rowIndexVar="rowIndex" 
+      sortMode="single"
+      resizableColumns="true" liveResize="false" styleClass="takion77-tableSelector">
+      
+        <p:ajax event="rowSelect"  update="@(.ui-panelgrid)"/>
+      <p:column id="colProdId"   width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getProdId}" /> </f:facet>
+        <h:outputText value="#{_condi.key.id.prodId}" />
+      </p:column>
+      
+      <p:column id="colseq" sortBy="#{_condi.key.id.prodCondId}"    width="100">
+        <f:facet name="header"><h:outputText value="#{messages.serialNo}" /> </f:facet>
+        <h:outputText value="#{_condi.key.id.prodCondId}" />
+      </p:column>
+      
+      <p:columns var="column" value="#{tableHifiveNewInit.selectConditionColumnList}" width="100">
+        <f:facet name="header"><p:outputLabel value="#{messages[column]}"    />  </f:facet>
+         <h:outputText value="#{_condi.value[column]}" style="float:right" />
+      </p:columns>
+    </p:dataTable>
+    
+      <h4> 조기상환 스케쥴    </h4>
+      <!-- <p:selectCheckboxMenu id="ZZZ" label="#{messages.selectColumn}" value="#{tableHifiveNewInit.selectStrikeColumnModelList}" >
+           <s:selectItems value="#{tableHifiveNewInit.strikeColumnModelList}"  var="_list" itemValue="#{_list}" label="#{messages[_list]}"/>
+           <s:convertEntity/>
+           <p:ajax  listener="#{tableHifiveNewInit.changeStirkeColumn}" update="@parent:tableHifive1"/>
+      </p:selectCheckboxMenu> -->
+     <!-- <p:selectCheckboxMenu label="#{messages.selectColumn}" value="#{tableHifiveNewInit.selectStrikeColumnList}" >
+           <s:selectItems value="#{tableHifiveNewInit.strikeColumnList}"  var="_list" itemValue="#{_list}" label="#{messages[_list]}"/>
+           <p:ajax  listener="#{tableHifiveNewInit.changeStirkeColumn}" update="@parent:tableHifive1"/>
+      </p:selectCheckboxMenu> -->
+                      
+     <p:commandButton id="colChanger" type="button" value="칼럼선택"  onclick="PF('wgColChanger').show()"/>
+    
+    <!-- <p:overlayPanel for="colChanger" appendToBody="false" style="width : 400px" widgetVar="wgColChanger" > -->
+    <p:dialog widgetVar="wgColChanger" modal="false" header="column" width="400" appendTo="@parent" closeOnEscape="true">
+
+      <p:dataTable value="#{tableHifiveNewInit.strikeColumnModelList}"  var="_var" 
+            selection="#{tableHifiveNewInit.selectStrikeColumnModelList}"
+            filteredValue="#{tableHifiveNewInit.filterStrikeColumnModelList}" 
+            rowKey="#{_var}">
+        <p:column selectionMode="multiple" width="10" />
+        <p:column headerText="headerGroup" width="100" filterBy="#{messages[_var.headerGroup]}" filterMatchMode="contains">
+          <p:outputLabel value="#{messages[_var.headerGroup]}"></p:outputLabel>
+        </p:column>
+        <p:column headerText="header" sortBy="#{messages[_var.header]}" 
+                filterBy="#{messages[_var.header]}" filterMatchMode="contains">
+          <p:outputLabel value="#{messages[_var.header]}"></p:outputLabel>
+        </p:column>
+      </p:dataTable>
+      <p:commandButton value="확인" action="#{tableHifiveNewInit.changeStirkeColumn}" onclick="PF('wgColChanger').hide()" update="@(.takion77-tableSelector)" 
+        ajax="true" style="float: right"/>  
+      </p:dialog>
+<!--     </p:overlayPanel> -->      
+    <p:dataTable id="tableHifive1" var="_strike" value="#{tableHifiveNewInit.strikeList}" 
+      emptyMessage="#{messages.noDataFoundSelectHifive}"
+      selection="#{tableHifiveNewInit.selectStrikeEntry}" selectionMode="single"
+      rowKey="#{_strike.key}" 
+      rowIndexVar="rowIndex"
+      sortMode="single"
+      resizableColumns="true" liveResize="false"
+      paginator="true" paginatorPosition="bottom" rows="10"
+      paginatorTemplate="{FirstPageLink} {PreviousPageLink} {JumpToPageDropdown} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+      rowsPerPageTemplate="10,25,50" styleClass="takion77-tableSelector">
+      
+      <p:ajax event="rowSelect"  update="@(.ui-panelgrid)"/>
+      
+      <p:column id="colProdId"   width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getProdId}" /> </f:facet>
+        <h:outputText value="#{_strike.key.id.prodId}" />
+      </p:column>
+      
+      <p:column id="colseq" sortBy="#{_strike.key.id.strikeSerial}"    width="100">
+        <f:facet name="header"><h:outputText value="#{messages.serialNo}" /> </f:facet>
+        <h:outputText value="#{_strike.key.id.strikeSerial}" />
+      </p:column>
+      
+      <p:columns var="column" value="#{tableHifiveNewInit.selectStStrikeColumnList}" width="100">
+        <f:facet name="header"><p:outputLabel value="#{messages[column]}"    />  </f:facet>
+         <h:outputText value="#{_strike.value[column]}"  />
+      </p:columns>
+      <p:columns var="column" value="#{tableHifiveNewInit.selectNoStrikeColumnList}" width="100">
+        <f:facet name="header"><p:outputLabel value="#{messages[column]}"    />  </f:facet>
+         <h:outputText value="#{_strike.value[column]}"  />
+      </p:columns>
+      
+      <!-- <p:columns var="column" value="#{tableHifiveNewInit.strikeColumnMap.entrySet()}" width="100">
+        <f:facet name="header"><p:outputLabel value="#{messages[column.key]}"    />  </f:facet>
+         <h:outputText value="#{_strike.value[column.key]}" style="float:right" />
+      </p:columns> -->
+    </p:dataTable>
+  </h:form>
+</ui:composition>

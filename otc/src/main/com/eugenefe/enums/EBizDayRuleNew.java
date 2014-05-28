@@ -3,6 +3,9 @@
  */
 package com.eugenefe.enums;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author takion77@gmail.com
  *
@@ -14,6 +17,8 @@ public enum EBizDayRuleNew {
 	,MDF_PRC	
 	,NONE ;
 	
-	
+	public static List<EBizDayRuleNew> getList(){
+		return  Arrays.asList(EBizDayRuleNew.values());
+	}	
 
 }

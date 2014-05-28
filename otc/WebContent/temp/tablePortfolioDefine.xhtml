@@ -82,16 +82,16 @@
         <h:outputText value="#{rIndex +1}"/>
       </p:column>
                  
-      <p:column id="colTableId" sortBy="#{_var.tableId}" 
+      <p:column id="colTableId" sortBy="#{_var.property.tableName}" 
                 width="30">
         <f:facet name="header"><h:outputText value="#{messages.tableId}" /></f:facet>
-        <h:outputText value="#{_var.tableId}"/>
+        <h:outputText value="#{_var.property.tableName}"/>
       </p:column>                                      
       
-      <p:column id="colColumnId" sortBy="#{_var.columnId}" 
+      <p:column id="colColumnId" sortBy="#{_var.property.columnName}" 
                 width="30">
         <f:facet name="header"><h:outputText value="#{messages.columnId}" /></f:facet>
-        <h:outputText value="#{_var.columnId}"/>
+        <h:outputText value="#{_var.property.columnName}"/>
       </p:column>                                      
       
       <p:column id="colEquation" sortBy="#{_var.equation}" 

@@ -1,0 +1,35 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://jboss.org/schema/seam/taglib"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+  <h:form id="formHifiveCoupon">
+
+    <p:dataTable id="tableHifiveCoupon" var="_cp" value="#{tableHifiveNewInit.couponList}" 
+      emptyMessage="#{messages.noDataFoundSelectHifive}"
+      selection="#{tableHifiveNewInit.selectCouponEntry}" selectionMode="single"
+      rowKey="#{_cp.key}" 
+      rowIndexVar="rowIndex" 
+      sortMode="single"
+      resizableColumns="true" liveResize="false" styleClass="takion77-tableSelector">
+      
+      <p:ajax event="rowSelect" update="@(.ui-panelgrid)"/>
+      
+      <p:column id="colProdId"   width="100">
+        <f:facet name="header"><h:outputText value="#{messages.getProdId}" /> </f:facet>
+        <h:outputText value="#{_cp.key.id.prodId}" />
+      </p:column>
+      
+      <p:column id="colseq" sortBy="#{_cp.key.id.couponPayDate}"    width="100">
+        <f:facet name="header"><h:outputText value="#{messages.couponDate}" /> </f:facet>
+        <h:outputText value="#{_cp.key.id.couponPayDate}" />
+      </p:column>
+      
+      <p:columns var="column" value="#{tableHifiveNewInit.selectCouponColumnList}" width="100">
+        <f:facet name="header"><p:outputLabel value="#{messages[column]}"    />  </f:facet>
+         <h:outputText value="#{_cp.value[column]}" style="float:right" />
+      </p:columns>
+    </p:dataTable>
+  </h:form>
+</ui:composition>

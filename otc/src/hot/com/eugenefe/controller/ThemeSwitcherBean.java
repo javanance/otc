@@ -31,7 +31,6 @@ public class ThemeSwitcherBean {
 	private GuestPreferences guestPref;
 
 	public ThemeSwitcherBean() {
-
 	}
 
 	@Create()

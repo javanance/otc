@@ -4,9 +4,9 @@
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
 
-  <p:menuitem value="#{messages.selectHierarchies}" onclick="wgDialogHierSelect.show()" icon="ui-icon-document" />
+  <p:menuitem value="#{messages.selectHierarchies}" onclick="PF('wgDialogHierSelect').show()" icon="ui-icon-document" />
   <p:separator />
-  <p:menuitem value="#{messages.createPortfolio}" onclick="wgDialogPortCreate.show()" icon="ui-icon-circle-plus" 
+  <p:menuitem value="#{messages.createPortfolio}" onclick="PF('wgDialogPortCreate').show()" icon="ui-icon-circle-plus" 
     disabled="#{not identity.loggedIn}" />
   <!-- <p:menuitem value="#{messages.changePortfolio}" rendered="#{portfolioBean.userDefined}"
     disabled="#{not identity.loggedIn}" /> -->  
